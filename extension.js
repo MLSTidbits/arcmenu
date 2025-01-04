@@ -50,12 +50,17 @@ export default class ArcMenu extends Extension {
 
         // listen to dash to panel if they are compatible and already enabled
         this._connectExtensionSignals();
+
+        this._shutdownId = global.connect('shutdown', () => {
+            Theming.deleteStylesheet();
+        });
     }
 
     disable() {
         this.searchProviderEmitter.destroy();
         delete this.searchProviderEmitter;
 
+        global.disconnect(this._shutdownId);
         Theming.deleteStylesheet();
 
         this._disconnectExtensionSignals();
