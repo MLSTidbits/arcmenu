@@ -1,5 +1,3 @@
-/* eslint-disable jsdoc/require-jsdoc */
-
 import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
@@ -24,7 +22,13 @@ import * as Utils from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-function _getFolderName(folder) {
+/**
+ * Retrieves the folder's name, optionally translating it if the folder has a 'translate' flag.
+ *
+ * @param {object} folder - The folder object containing properties.
+ * @returns {string} The folder name, translated if applicable.
+ */
+function getFolderName(folder) {
     const name = folder.get_string('name');
 
     if (folder.get_boolean('translate')) {
@@ -36,13 +40,21 @@ function _getFolderName(folder) {
     return name;
 }
 
-function _listsIntersect(a, b) {
+/**
+ * Checks whether two arrays have at least one common element.
+ *
+ * @param {Array} a - The first array to check for intersection.
+ * @param {Array} b - The second array to check for intersection.
+ * @returns {boolean} Returns `true` if the two arrays have at least one common element; otherwise, `false`.
+ */
+function listsIntersect(a, b) {
     for (const itemA of a) {
         if (b.includes(itemA))
             return true;
     }
     return false;
 }
+
 
 export const Layout = class PopLayout extends BaseMenuLayout {
     static {
@@ -166,14 +178,14 @@ export const Layout = class PopLayout extends BaseMenuLayout {
     }
 
     _redisplay() {
-        let oldFolders = this._orderedItems.slice();
-        let oldFoldersIds = oldFolders.map(icon => icon.folder_id);
+        const oldFolders = this._orderedItems.slice();
+        const oldFoldersIds = oldFolders.map(icon => icon.folder_id);
 
-        let newFolders = this._loadFolders();
-        let newFoldersIds = newFolders.map(icon => icon.folder_id);
+        const newFolders = this._loadFolders();
+        const newFoldersIds = newFolders.map(icon => icon.folder_id);
 
-        let addedFolders = newFolders.filter(icon => !oldFoldersIds.includes(icon.folder_id));
-        let removedFolders = oldFolders.filter(icon => !newFoldersIds.includes(icon.folder_id));
+        const addedFolders = newFolders.filter(icon => !oldFoldersIds.includes(icon.folder_id));
+        const removedFolders = oldFolders.filter(icon => !newFoldersIds.includes(icon.folder_id));
 
         // Remove old app icons
         removedFolders.forEach(item => {
@@ -256,9 +268,9 @@ export const Layout = class PopLayout extends BaseMenuLayout {
             return this._parentalControlsManager.shouldShowApp(appInfo);
         });
 
-        let apps = this._appInfoList.map(app => app.get_id());
+        const apps = this._appInfoList.map(app => app.get_id());
 
-        let appSys = Shell.AppSystem.get_default();
+        const appSys = Shell.AppSystem.get_default();
 
         const appsInsideFolders = new Set();
 
@@ -552,7 +564,7 @@ class HomeFolderMenuItem extends MW.DraggableMenuItem {
 
         this.appsList.forEach(addAppId);
 
-        let items = [];
+        const items = [];
         this._apps.forEach(app => {
             let icon = this._items.get(app.get_id());
             if (!icon) {
@@ -571,14 +583,14 @@ class HomeFolderMenuItem extends MW.DraggableMenuItem {
     }
 
     _redisplay() {
-        let oldApps = this._orderedItems.slice();
-        let oldAppIds = oldApps.map(icon => icon._app.id);
+        const oldApps = this._orderedItems.slice();
+        const oldAppIds = oldApps.map(icon => icon._app.id);
 
-        let newApps = this._loadApps();
-        let newAppIds = newApps.map(icon => icon._app.id);
+        const newApps = this._loadApps();
+        const newAppIds = newApps.map(icon => icon._app.id);
 
-        let addedApps = newApps.filter(icon => !oldAppIds.includes(icon._app.id));
-        let removedApps = oldApps.filter(icon => !newAppIds.includes(icon._app.id));
+        const addedApps = newApps.filter(icon => !oldAppIds.includes(icon._app.id));
+        const removedApps = oldApps.filter(icon => !newAppIds.includes(icon._app.id));
 
         // Remove old app icons
         removedApps.forEach(item => {
@@ -699,7 +711,7 @@ class GroupFolderMenuItem extends MW.DraggableMenuItem {
             return;
         }
 
-        let name = _getFolderName(this._folder);
+        const name = getFolderName(this._folder);
         if (this.folder_name === name)
             return;
 
@@ -724,39 +736,43 @@ class GroupFolderMenuItem extends MW.DraggableMenuItem {
         folderApps.push(app.id);
         this._folder.set_strv('apps', folderApps);
 
-        let excludedApps = this._folder.get_strv('excluded-apps');
-        let index = excludedApps.indexOf(app.id);
+        const excludedApps = this._folder.get_strv('excluded-apps');
+        const index = excludedApps.indexOf(app.id);
         if (index >= 0) {
             excludedApps.splice(index, 1);
             this._folder.set_strv('excluded-apps', excludedApps);
         }
     }
 
+    _removeFolder() {
+        this._deletingFolder = true;
+
+        // Resetting all keys deletes the relocatable schema
+        const keys = this._folder.settings_schema.list_keys();
+        for (const key of keys)
+            this._folder.reset(key);
+
+        const settings = new Gio.Settings({schema_id: 'org.gnome.desktop.app-folders'});
+        const folders = settings.get_strv('folder-children');
+        folders.splice(folders.indexOf(this.folder_id), 1);
+        settings.set_strv('folder-children', folders);
+
+        // if the folder is now deleted, activate the library home folder
+        this._menuLayout.activateHomeFolder();
+
+        this._deletingFolder = false;
+    }
+
     removeApp(app) {
-        let folderApps = this._folder.get_strv('apps');
-        let index = folderApps.indexOf(app.id);
+        const folderApps = this._folder.get_strv('apps');
+        const index = folderApps.indexOf(app.id);
         if (index >= 0)
             folderApps.splice(index, 1);
 
         // Remove the folder if this is the last app icon; otherwise,
         // just remove the icon
         if (folderApps.length === 0) {
-            this._deletingFolder = true;
-
-            // Resetting all keys deletes the relocatable schema
-            let keys = this._folder.settings_schema.list_keys();
-            for (const key of keys)
-                this._folder.reset(key);
-
-            let settings = new Gio.Settings({schema_id: 'org.gnome.desktop.app-folders'});
-            let folders = settings.get_strv('folder-children');
-            folders.splice(folders.indexOf(this.folder_id), 1);
-            settings.set_strv('folder-children', folders);
-
-            // if the folder is now deleted, activate the library home folder
-            this._menuLayout.activateHomeFolder();
-
-            this._deletingFolder = false;
+            this._removeFolder();
         } else {
             // If this is a categories-based folder, also add it to
             // the list of excluded apps
@@ -815,7 +831,7 @@ class GroupFolderMenuItem extends MW.DraggableMenuItem {
         dialog.addButton({
             label: _('Yes'),
             action: () => {
-                this._menuLayout.removeFolder(this);
+                this._removeFolder(this);
                 dialog.close();
             },
             default: false,
@@ -853,8 +869,8 @@ class GroupFolderMenuItem extends MW.DraggableMenuItem {
                 return;
             }
 
-            this.folderSettings.set_string('name', newFolderName);
-            this.folderSettings.set_boolean('translate', false);
+            this._folder.set_string('name', newFolderName);
+            this._folder.set_boolean('translate', false);
             dialog.close();
         };
 
@@ -1032,14 +1048,14 @@ class GroupFolderMenuItem extends MW.DraggableMenuItem {
         const folderCategories = this._folder.get_strv('categories');
         const appInfos = this._menuLayout.getAppInfos();
         appInfos.forEach(appInfo => {
-            let appCategories = Utils.getCategories(appInfo);
-            if (!_listsIntersect(folderCategories, appCategories))
+            const appCategories = Utils.getCategories(appInfo);
+            if (!listsIntersect(folderCategories, appCategories))
                 return;
 
             addAppId(appInfo.get_id());
         });
 
-        let items = [];
+        const items = [];
         this._apps.forEach(app => {
             let icon = this._items.get(app.get_id());
             if (!icon) {
@@ -1060,14 +1076,14 @@ class GroupFolderMenuItem extends MW.DraggableMenuItem {
     _redisplay() {
         if (this.new_folder)
             return;
-        let oldApps = this._orderedItems.slice();
-        let oldAppIds = oldApps.map(icon => icon._app.id);
+        const oldApps = this._orderedItems.slice();
+        const oldAppIds = oldApps.map(icon => icon._app.id);
 
-        let newApps = this._loadApps();
-        let newAppIds = newApps.map(icon => icon._app.id);
+        const newApps = this._loadApps();
+        const newAppIds = newApps.map(icon => icon._app.id);
 
-        let addedApps = newApps.filter(icon => !oldAppIds.includes(icon._app.id));
-        let removedApps = oldApps.filter(icon => !newAppIds.includes(icon._app.id));
+        const addedApps = newApps.filter(icon => !oldAppIds.includes(icon._app.id));
+        const removedApps = oldApps.filter(icon => !newAppIds.includes(icon._app.id));
 
         // Remove old app icons
         removedApps.forEach(item => {
