@@ -8,6 +8,7 @@ import {SearchProviderEmitter} from './searchProviders/searchProviderEmitter.js'
 import * as Theming from './theming.js';
 
 import * as Utils from './utils.js';
+import {UpdateNotifier} from './updateNotifier.js';
 
 export default class ArcMenu extends Extension {
     enable() {
@@ -16,6 +17,12 @@ export default class ArcMenu extends Extension {
 
         this._convertOldSettings(this.settings);
         this.searchProviderEmitter = new SearchProviderEmitter();
+
+        const showUpdateNotification = this.settings.get_boolean('show-update-notification-v64');
+        if (showUpdateNotification) {
+            this.settings.set_boolean('show-update-notification-v64', false);
+            this._updateNotifier = new UpdateNotifier(this);
+        }
 
         const hideOverviewOnStartup = this.settings.get_boolean('hide-overview-on-startup');
         if (hideOverviewOnStartup && Main.layoutManager._startingUp) {

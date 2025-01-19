@@ -19,6 +19,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         });
 
         const PAYPAL_LINK = `https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=53CWA7NR743WC&item_name=Support+${metadata.name}&source=url`;
+        const BUYMEACOFFEE_LINK = 'https://buymeacoffee.com/azaech';
         const PROJECT_DESCRIPTION = _('Application Menu Extension for GNOME');
         const PROJECT_IMAGE = 'settings-arcmenu-logo';
         const SCHEMA_PATH = '/org/gnome/shell/extensions/arcmenu/';
@@ -114,22 +115,33 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         // -----------------------------------------------------------------------
 
         // Links -----------------------------------------------------------------
-        const linksGroup = new Adw.PreferencesGroup();
-        this.add(linksGroup);
-
-        const gitlabRow = this._createLinkRow(_('Website'), `${metadata.url}`);
-        linksGroup.add(gitlabRow);
+        const gitlabRow = this._createLinkRow(_('ArcMenu on GitLab'), `${metadata.url}`);
+        infoGroup.add(gitlabRow);
 
         const reportIssueRow = this._createLinkRow(_('Report an Issue'), `${metadata.url}/-/issues`);
-        linksGroup.add(reportIssueRow);
-
-        const donateRow = this._createLinkRow(_('Donate via PayPal'), PAYPAL_LINK);
-        linksGroup.add(donateRow);
-
+        infoGroup.add(reportIssueRow);
         // -----------------------------------------------------------------------
 
+        // Donations --------------------------------------------------------------
+        const donateGroup = new Adw.PreferencesGroup({
+            title: _('Help Support This Project'),
+            description: _('Thank you for using ArcMenu! If you enjoy it and would like to help support its continued development, please consider making a donation. Your support, no matter the amount, makes a big difference.'),
+        });
+        this.add(donateGroup);
+
+        const paypalRow = this._createLinkRow(_('Donate via PayPal'), PAYPAL_LINK);
+        donateGroup.add(paypalRow);
+
+        const buyMeACoffeeRow = this._createLinkRow(_('Buy Me a Coffee'), BUYMEACOFFEE_LINK);
+        donateGroup.add(buyMeACoffeeRow);
+
+
+        // ------------------------------------------------------------------------
+
         // Save/Load Settings----------------------------------------------------------
-        const settingsGroup = new Adw.PreferencesGroup();
+        const miscGroup = new Adw.PreferencesGroup();
+        this.add(miscGroup);
+        this.add(miscGroup);
         const settingsRow = new Adw.ActionRow({
             title: _('ArcMenu Settings'),
         });
@@ -185,17 +197,13 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         });
         settingsRow.add_suffix(saveButton);
         settingsRow.add_suffix(loadButton);
-        settingsGroup.add(settingsRow);
-        this.add(settingsGroup);
+        miscGroup.add(settingsRow);
         // -----------------------------------------------------------------------
 
         // Credits / Legal ----------------------------------------------------------------
-        const creditsLegalGroup = new Adw.PreferencesGroup();
-        this.add(creditsLegalGroup);
-
         const {subpage: creditsSubPage, page: creditsPage} = this._createSubPage(_('Credits'));
         const creditsRow = this._createSubPageRow(_('Credits'), creditsSubPage);
-        creditsLegalGroup.add(creditsRow);
+        miscGroup.add(creditsRow);
 
         const codeByGroup = new Adw.PreferencesGroup({
             title: _('Brought to you by'),
@@ -246,7 +254,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
 
         const {subpage: legalSubPage, page: legalPage} = this._createSubPage(_('Legal'));
         const legalRow = this._createSubPageRow(_('Legal'), legalSubPage);
-        creditsLegalGroup.add(legalRow);
+        miscGroup.add(legalRow);
 
         const gnuSoftwareGroup = new Adw.PreferencesGroup();
         legalPage.add(gnuSoftwareGroup);

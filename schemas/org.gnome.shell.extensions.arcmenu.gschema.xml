@@ -129,6 +129,10 @@
     </key>
   </schema>
   <schema path="/org/gnome/shell/extensions/arcmenu/" id="org.gnome.shell.extensions.arcmenu">
+    <key type="b" name="show-update-notification-v64">
+      <default>true</default>
+      <summary>Show an update notification - once per new release</summary>
+    </key>
     <key type="i" name="menu-position-alignment">
       <default>50</default>
       <summary>Menu position alignment</summary>
