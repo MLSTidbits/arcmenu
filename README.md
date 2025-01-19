@@ -16,7 +16,7 @@ ArcMenu is an application menu for GNOME Shell, designed to provide a more famil
 
 ### Help Support This Project
 
-Thank you for using ArcMenu! If you enjoy it and would like to help support its continued development, please consider making a donation. Your support, no matter the amount, makes a big difference.'
+Thank you for using ArcMenu! If you enjoy it and would like to help support its continued development, please consider making a donation. Your support, no matter the amount, makes a big difference.
 
 [![Donate via Paypal](https://gitlab.com/arcmenu/arcmenu-assets/raw/master/images/paypal-badge.svg){width=170}](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=53CWA7NR743WC&item_name=Support+ArcMenu&currency_code=USD&source=url) [![Buy My a Coffee](https://gitlab.com/arcmenu/arcmenu-assets/raw/master/images/bmc-yellow.svg){width=170}](https://buymeacoffee.com/azaech)
 
