@@ -235,7 +235,7 @@ msgstr "Ekran podglądu"
 #: settings/Menu/ListPinnedPage.js:341 settings/Menu/ListPinnedPage.js:352
 #: settings/Menu/ListPinnedPage.js:364
 msgid "ArcMenu Settings"
-msgstr "Ustawienia manu aplikacji"
+msgstr "Ustawienia menu aplikacji"
 
 #: constants.js:543
 msgid "Files"
