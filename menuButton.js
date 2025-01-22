@@ -183,6 +183,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
     syncWithDashToPanel() {
         const dtp = Extension.lookupByUUID(Constants.DASH_TO_PANEL_UUID);
         this._dtpSettings = dtp.getSettings('org.gnome.shell.extensions.dash-to-panel');
+        this._dtpActive = true;
 
         const side = Utils.getDashToPanelPosition(this._dtpSettings, this._monitorIndex);
         this.updateArrowSide(side);
@@ -268,6 +269,23 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             this.setMenuPositionAlignment();
     }
 
+    _getDashToPanelHeightOffset() {
+        if (!this._dtpActive)
+            return 0;
+
+        const dtpPostion = Utils.getDashToPanelPosition(this._dtpSettings, this._monitorIndex);
+        const menuLocation = this._settings.get_enum('force-menu-location');
+        const height = this._panelParent.geom?.h ?? 0;
+
+        if (menuLocation === Constants.ForcedMenuLocation.TOP_CENTERED && dtpPostion === St.Side.TOP)
+            return height;
+
+        if (menuLocation === Constants.ForcedMenuLocation.BOTTOM_CENTERED && dtpPostion === St.Side.BOTTOM)
+            return height;
+
+        return 0;
+    }
+
     forceMenuLocation() {
         const layout = this._settings.get_enum('menu-layout');
         if (layout === Constants.MenuLayout.RUNNER ||
@@ -298,20 +316,27 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             return;
 
         this.updateArrowSide(St.Side.TOP, false);
-        const rect = Main.layoutManager.getWorkAreaForMonitor(this._monitorIndex);
-        const positionX = Math.round(rect.x + (rect.width / 2));
+        const monitor = Main.layoutManager.findMonitorForActor(this);
+        const workArea = Main.layoutManager.getWorkAreaForMonitor(this._monitorIndex);
+        const positionX = Math.round(workArea.x + (workArea.width / 2));
+        const offsetY = this._getDashToPanelHeightOffset();
         let positionY;
 
+        // Use the physical monitor dimensions when Dash to Panel is active
+        // to account for inellihide, which is not taken into account with getWorkAreaForMonitor()
+        // Manually offest ArcMenu's menu location by getting Dash to Panels panel height.
+        // In other cases, use the getWorkAreaForMonitor();
+
         if (newMenuLocation === Constants.ForcedMenuLocation.TOP_CENTERED) {
-            positionY = rect.y;
+            positionY = this._dtpActive ? monitor.y + offsetY : workArea.y;
         } else if (newMenuLocation === Constants.ForcedMenuLocation.BOTTOM_CENTERED) {
-            positionY = rect.y + rect.height - 1;
+            positionY = this._dtpActive ? monitor.y + monitor.height - 1 - offsetY
+                : workArea.y + workArea.height - 1;
+
             this.arcMenu.actor.add_style_class_name('bottomOfScreenMenu');
         } else if (newMenuLocation === Constants.ForcedMenuLocation.MONITOR_CENTERED) {
             const menuHeight = this._settings.get_int('menu-height');
-            const monitor = Main.layoutManager.findMonitorForActor(this);
             positionY = Math.round(monitor.y + (monitor.height / 2) - (menuHeight / 2));
-            Main.layoutManager.setDummyCursorGeometry(positionX, positionY, 0, 0);
         }
 
         Main.layoutManager.setDummyCursorGeometry(positionX, positionY, 0, 0);
