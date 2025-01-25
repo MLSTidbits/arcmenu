@@ -244,8 +244,10 @@ export const IconGridLayout = GObject.registerClass({
 
             [,, naturalWidth, naturalHeight] = child.get_preferred_size();
 
-            if (isSeparator || xFill)
+            if (isSeparator)
                 naturalWidth = this._width;
+            else if (xFill)
+                naturalWidth = this._width / this.columns;
 
             let x;
             if (isSeparator)
