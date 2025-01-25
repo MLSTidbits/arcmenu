@@ -2,6 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
@@ -15,7 +16,6 @@ export const Layout = class AzLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             display_type: Constants.DisplayType.GRID,
             search_display_type: Constants.DisplayType.GRID,
             search_results_spacing: 4,
@@ -112,7 +112,7 @@ export const Layout = class AzLayout extends BaseMenuLayout {
         });
         this.actionsBox.style = 'margin: 0px 10px; spacing: 10px;';
 
-        const searchBarLocation = this._settings.get_enum('searchbar-default-top-location');
+        const searchBarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');
         if (searchBarLocation === Constants.SearchbarLocation.TOP) {
             this.topBox.add_child(this.searchEntry);
             this.bottomBox.add_child(this.actionsBox);
@@ -121,7 +121,7 @@ export const Layout = class AzLayout extends BaseMenuLayout {
             this.bottomBox.add_child(this.searchEntry);
         }
 
-        this._settings.connectObject('changed::az-layout-extra-shortcuts', () => this._createExtraButtons(), this);
+        ArcMenuManager.settings.connectObject('changed::az-layout-extra-shortcuts', () => this._createExtraButtons(), this);
         this._createExtraButtons();
 
         this.updateStyle();
@@ -138,7 +138,7 @@ export const Layout = class AzLayout extends BaseMenuLayout {
         this.actionsBox.add_child(avatarMenuItem);
 
         const isContainedInCategory = false;
-        const extraButtons = this._settings.get_value('az-layout-extra-shortcuts').deep_unpack();
+        const extraButtons = ArcMenuManager.settings.get_value('az-layout-extra-shortcuts').deep_unpack();
 
         for (let i = 0; i < extraButtons.length; i++) {
             const {id} = extraButtons[i];
@@ -157,7 +157,7 @@ export const Layout = class AzLayout extends BaseMenuLayout {
             }
         }
 
-        const powerDisplayStyle = this._settings.get_enum('power-display-style');
+        const powerDisplayStyle = ArcMenuManager.settings.get_enum('power-display-style');
         let leaveButton;
         if (powerDisplayStyle === Constants.PowerDisplayStyle.IN_LINE)
             leaveButton = new MW.PowerOptionsBox(this);

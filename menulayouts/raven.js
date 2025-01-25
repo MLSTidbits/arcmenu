@@ -4,6 +4,7 @@ import St from 'gi://St';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import {IconGrid} from '../iconGrid.js';
@@ -17,12 +18,9 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
     }
 
     constructor(menuButton) {
-        const {settings} = menuButton.extension;
-
         super(menuButton, {
-            has_search: true,
             display_type: Constants.DisplayType.GRID,
-            search_display_type: settings.get_enum('raven-search-display-style'),
+            search_display_type: ArcMenuManager.settings.get_enum('raven-search-display-style'),
             search_results_spacing: 4,
             context_menu_location: Constants.ContextMenuLocation.BOTTOM_CENTERED,
             column_spacing: 10,
@@ -41,10 +39,10 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
         this.arcMenu.box.style = 'padding: 0px; margin: 0px; border-radius: 0px;';
         this.searchEntry.style = 'margin: 10px 10px 10px 10px;';
 
-        this._settings.connectObject('changed::raven-position', () => this._updatePosition(), this);
+        ArcMenuManager.settings.connectObject('changed::raven-position', () => this._updatePosition(), this);
 
-        this._settings.connectObject('changed::enable-clock-widget-raven', () => this._updateWidgets(), this);
-        this._settings.connectObject('changed::enable-weather-widget-raven', () => this._updateWidgets(), this);
+        ArcMenuManager.settings.connectObject('changed::enable-clock-widget-raven', () => this._updateWidgets(), this);
+        ArcMenuManager.settings.connectObject('changed::enable-weather-widget-raven', () => this._updateWidgets(), this);
 
         this.updateLocation();
 
@@ -59,7 +57,7 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
         this.arcMenu.close();
         this.arcMenu._boxPointer.hide();
 
-        const homeScreen = this._settings.get_boolean('enable-unity-homescreen');
+        const homeScreen = ArcMenuManager.settings.get_boolean('enable-unity-homescreen');
         this.activeCategoryName = homeScreen ? _('Pinned') : _('All Programs');
 
         this.categoriesBoxContainer = new St.BoxLayout({
@@ -140,7 +138,7 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
         });
         this.shortcutsBox.add_child(this.shortcutsGrid);
 
-        const applicationShortcuts = this._settings.get_value('application-shortcuts').deep_unpack();
+        const applicationShortcuts = ArcMenuManager.settings.get_value('application-shortcuts').deep_unpack();
         for (let i = 0; i < applicationShortcuts.length; i++) {
             const shortcutMenuItem = this.createMenuItem(applicationShortcuts[i], Constants.DisplayType.GRID, false);
             if (shortcutMenuItem.shouldShow)
@@ -160,8 +158,8 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
     }
 
     _updateWidgets() {
-        const clockWidgetEnabled = this._settings.get_boolean('enable-clock-widget-raven');
-        const weatherWidgetEnabled = this._settings.get_boolean('enable-weather-widget-raven');
+        const clockWidgetEnabled = ArcMenuManager.settings.get_boolean('enable-clock-widget-raven');
+        const weatherWidgetEnabled = ArcMenuManager.settings.get_boolean('enable-weather-widget-raven');
 
         if (clockWidgetEnabled && !this._clocksItem) {
             this._clocksItem = new MW.WorldClocksWidget(this);
@@ -191,7 +189,7 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
         if (this.contains(this.categoriesBoxContainer))
             this.remove_child(this.categoriesBoxContainer);
 
-        const ravenPosition = this._settings.get_enum('raven-position');
+        const ravenPosition = ArcMenuManager.settings.get_enum('raven-position');
         if (ravenPosition === Constants.RavenPosition.LEFT) {
             this.insert_child_at_index(this.categoriesBoxContainer, 0);
             this.categoriesBoxContainer.style = `border-right-width: 1px;${style}`;
@@ -202,7 +200,7 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
     }
 
     updateLocation() {
-        const ravenPosition = this._settings.get_enum('raven-position');
+        const ravenPosition = ArcMenuManager.settings.get_enum('raven-position');
 
         const alignment = ravenPosition === Constants.RavenPosition.LEFT ? 0 : 1;
         this.arcMenu._boxPointer.setSourceAlignment(alignment);
@@ -228,7 +226,7 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
 
     setDefaultMenuView() {
         super.setDefaultMenuView();
-        const homeScreen = this._settings.get_boolean('enable-unity-homescreen');
+        const homeScreen = ArcMenuManager.settings.get_boolean('enable-unity-homescreen');
         if (homeScreen) {
             this.activeCategoryName = _('Pinned');
             this.activeCategoryType = Constants.CategoryType.HOME_SCREEN;
@@ -251,7 +249,7 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
         this.categoryDirectories.set(Constants.CategoryType.HOME_SCREEN, categoryMenuItem);
         this.hasPinnedApps = true;
 
-        const extraCategories = this._settings.get_value('extra-categories').deep_unpack();
+        const extraCategories = ArcMenuManager.settings.get_value('extra-categories').deep_unpack();
         for (let i = 0; i < extraCategories.length; i++) {
             const [categoryEnum, shouldShow] = extraCategories[i];
             if (categoryEnum === Constants.CategoryType.PINNED_APPS || !shouldShow)
@@ -284,8 +282,8 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
             this.applicationsBox.add_child(this.shortcutsBox);
 
         this._widgetBox.hide();
-        const clockWidgetEnabled = this._settings.get_boolean('enable-clock-widget-raven');
-        const weatherWidgetEnabled = this._settings.get_boolean('enable-weather-widget-raven');
+        const clockWidgetEnabled = ArcMenuManager.settings.get_boolean('enable-clock-widget-raven');
+        const weatherWidgetEnabled = ArcMenuManager.settings.get_boolean('enable-weather-widget-raven');
 
         if (clockWidgetEnabled || weatherWidgetEnabled)
             this._widgetBox.show();

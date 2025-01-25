@@ -5,6 +5,7 @@ import St from 'gi://St';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
@@ -19,10 +20,8 @@ export const Layout = class RunnerLayout extends BaseMenuLayout {
     }
 
     constructor(menuButton, isStandalone) {
-        const {settings} = menuButton.extension;
-
         let displayType, searchDisplayType, columnSpacing, rowSpacing, defaultMenuWidth, iconGridSize;
-        const searchDisplayStyle = settings.get_enum('runner-search-display-style');
+        const searchDisplayStyle = ArcMenuManager.settings.get_enum('runner-search-display-style');
 
         if (searchDisplayStyle === Constants.DisplayType.LIST) {
             displayType = Constants.DisplayType.LIST;
@@ -36,12 +35,11 @@ export const Layout = class RunnerLayout extends BaseMenuLayout {
             searchDisplayType = Constants.DisplayType.GRID;
             columnSpacing = 15;
             rowSpacing = 15;
-            defaultMenuWidth = settings.get_int('runner-menu-width');
+            defaultMenuWidth = ArcMenuManager.settings.get_int('runner-menu-width');
             iconGridSize = Constants.GridIconSize.LARGE;
         }
 
         super(menuButton, {
-            has_search: true,
             display_type: displayType,
             search_display_type: searchDisplayType,
             column_spacing: columnSpacing,
@@ -109,7 +107,7 @@ export const Layout = class RunnerLayout extends BaseMenuLayout {
     }
 
     updateWidth(setDefaultMenuView) {
-        const width = this._settings.get_int('runner-menu-width') - padding;
+        const width = ArcMenuManager.settings.get_int('runner-menu-width') - padding;
         this.menu_width = width;
         if (setDefaultMenuView)
             this.setDefaultMenuView();
@@ -118,7 +116,7 @@ export const Layout = class RunnerLayout extends BaseMenuLayout {
     setDefaultMenuView() {
         this.activeMenuItem = null;
         super.setDefaultMenuView();
-        if (this._settings.get_boolean('runner-show-frequent-apps'))
+        if (ArcMenuManager.settings.get_boolean('runner-show-frequent-apps'))
             this.displayFrequentApps();
     }
 
@@ -159,10 +157,10 @@ export const Layout = class RunnerLayout extends BaseMenuLayout {
      */
     _getMonitorIndexForPlacement() {
         if (this.is_standalone_runner) {
-            return this._settings.get_boolean('runner-hotkey-open-primary-monitor')
+            return ArcMenuManager.settings.get_boolean('runner-hotkey-open-primary-monitor')
                 ? Main.layoutManager.primaryMonitor.index : Main.layoutManager.currentMonitor.index;
-        } else if (this._settings.get_enum('menu-button-appearance') === Constants.MenuButtonAppearance.NONE) {
-            return this._settings.get_boolean('hotkey-open-primary-monitor')
+        } else if (ArcMenuManager.settings.get_enum('menu-button-appearance') === Constants.MenuButtonAppearance.NONE) {
+            return ArcMenuManager.settings.get_boolean('hotkey-open-primary-monitor')
                 ? Main.layoutManager.primaryMonitor.index : Main.layoutManager.currentMonitor.index;
         } else {
             return Main.layoutManager.findIndexForActor(this.menuButton);
@@ -173,16 +171,16 @@ export const Layout = class RunnerLayout extends BaseMenuLayout {
         this.arcMenu._boxPointer.setSourceAlignment(0.5);
         this.arcMenu._arrowAlignment = 0.5;
 
-        const runnerHeight = this._settings.get_int('runner-menu-height');
-        const runnerWidth = this._settings.get_int('runner-menu-width');
-        const runnerFontSize = this._settings.get_int('runner-font-size');
+        const runnerHeight = ArcMenuManager.settings.get_int('runner-menu-height');
+        const runnerWidth = ArcMenuManager.settings.get_int('runner-menu-width');
+        const runnerFontSize = ArcMenuManager.settings.get_int('runner-font-size');
 
         const rect = Main.layoutManager.getWorkAreaForMonitor(this._getMonitorIndexForPlacement());
 
         // Position the runner menu in the center of the current monitor, at top of screen.
         const positionX = Math.round(rect.x + (rect.width / 2));
         let positionY = rect.y;
-        if (this._settings.get_enum('runner-position') === 1)
+        if (ArcMenuManager.settings.get_enum('runner-position') === 1)
             positionY = Math.round(rect.y + (rect.height / 2) - (runnerHeight / 2));
         Main.layoutManager.setDummyCursorGeometry(positionX, positionY, 0, 0);
 
@@ -210,6 +208,10 @@ export const Layout = class RunnerLayout extends BaseMenuLayout {
             this.arcMenu.focusActor = this.oldFocusActor;
             this.arcMenu._boxPointer.setPosition(this.oldSourceActor, this.oldArrowAlignment);
         }
+
+        this.oldSourceActor = null;
+        this.oldFocusActor = null;
+        this.oldArrowAlignment = null;
 
         super._onDestroy();
     }
@@ -239,7 +241,7 @@ class RunnerTweaksButton extends MW.ArcMenuButtonItem {
 
     activate(event) {
         super.activate(event);
-        this._settings.set_int('prefs-visible-page', Constants.SettingsPage.RUNNER_TWEAKS);
-        this._extension.openPreferences();
+        ArcMenuManager.settings.set_int('prefs-visible-page', Constants.SettingsPage.RUNNER_TWEAKS);
+        ArcMenuManager.extension.openPreferences();
     }
 }

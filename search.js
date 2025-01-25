@@ -16,6 +16,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as RemoteSearch from 'resource:///org/gnome/shell/ui/remoteSearch.js';
 
 import {ApplicationMenuItem, BaseMenuItem} from './menuWidgets.js';
+import {ArcMenuManager} from './arcmenuManager.js';
 import * as Constants from './constants.js';
 import {RecentFilesManager} from './recentFilesManager.js';
 import {OpenWindowSearchProvider} from './searchProviders/openWindows.js';
@@ -39,12 +40,12 @@ class ListSearchResult extends ApplicationMenuItem {
         this.metaInfo = metaInfo;
         this.provider = provider;
         this.resultsView = resultsView;
-        this.layout = this._settings.get_enum('menu-layout');
+        this.layout = ArcMenuManager.settings.get_enum('menu-layout');
 
         if (FILE_PROVIDERS.includes(this.provider.id))
             this.folderPath = this.metaInfo['description'];
 
-        const highlightSearchResultTerms = this._settings.get_boolean('highlight-search-result-terms');
+        const highlightSearchResultTerms = ArcMenuManager.settings.get_boolean('highlight-search-result-terms');
         if (highlightSearchResultTerms) {
             this.resultsView.connectObject('terms-changed', this._highlightTerms.bind(this), this);
             this._highlightTerms();
@@ -55,7 +56,7 @@ class ListSearchResult extends ApplicationMenuItem {
     }
 
     _highlightTerms() {
-        const showSearchResultDescriptions = this._settings.get_boolean('show-search-result-details');
+        const showSearchResultDescriptions = ArcMenuManager.settings.get_boolean('show-search-result-details');
         if (this.descriptionLabel && showSearchResultDescriptions) {
             const descriptionMarkup = this.resultsView.highlightTerms(this.metaInfo['description'].split('\n')[0]);
             this.descriptionLabel.clutter_text.set_markup(descriptionMarkup);
@@ -86,7 +87,7 @@ class AppSearchResult extends ApplicationMenuItem {
         if (!this.app && this.metaInfo['description'])
             this.description = this.metaInfo['description'].split('\n')[0];
 
-        const highlightSearchResultTerms = this._settings.get_boolean('highlight-search-result-terms');
+        const highlightSearchResultTerms = ArcMenuManager.settings.get_boolean('highlight-search-result-terms');
         if (highlightSearchResultTerms) {
             this.resultsView.connectObject('terms-changed', this._highlightTerms.bind(this), this);
             this._highlightTerms();
@@ -94,7 +95,7 @@ class AppSearchResult extends ApplicationMenuItem {
     }
 
     _highlightTerms() {
-        const showSearchResultDescriptions = this._settings.get_boolean('show-search-result-details');
+        const showSearchResultDescriptions = ArcMenuManager.settings.get_boolean('show-search-result-details');
         if (this.descriptionLabel && showSearchResultDescriptions) {
             const descriptionMarkup = this.resultsView.highlightTerms(this.descriptionLabel.text.split('\n')[0]);
             this.descriptionLabel.clutter_text.set_markup(descriptionMarkup);
@@ -139,6 +140,7 @@ class SearchResultsBase extends St.BoxLayout {
     _onDestroy() {
         this._cancellable.cancel();
         this._terms = [];
+        this._menuLayout = null;
     }
 
     _createResultDisplay(_meta) {
@@ -236,9 +238,7 @@ class ListSearchResults extends SearchResultsBase {
         this._menuLayout = resultsView._menuLayout;
         this.searchType = this._menuLayout.search_display_type;
 
-        this._settings = resultsView.settings;
-
-        this.layout = this._settings.get_enum('menu-layout');
+        this.layout = ArcMenuManager.settings.get_enum('menu-layout');
 
         const spacing = this._menuLayout.search_results_spacing;
 
@@ -277,7 +277,7 @@ class ListSearchResults extends SearchResultsBase {
     }
 
     _getMaxDisplayedResults() {
-        return this._settings.get_int('max-search-results');
+        return ArcMenuManager.settings.get_int('max-search-results');
     }
 
     _clearResultDisplay() {
@@ -313,9 +313,7 @@ class AppSearchResults extends SearchResultsBase {
         this._menuLayout = resultsView._menuLayout;
         this.searchType = this._menuLayout.search_display_type;
 
-        this._settings = resultsView.settings;
-
-        this.layout = this._settings.get_enum('menu-layout');
+        this.layout = ArcMenuManager.settings.get_enum('menu-layout');
 
         this.itemCount = 0;
         this.gridTop = -1;
@@ -352,7 +350,7 @@ class AppSearchResults extends SearchResultsBase {
             const iconWidth = this._menuLayout.getIconWidthFromSetting();
             maxDisplayedResults = this._menuLayout.getBestFitColumnsForGrid(iconWidth, this._grid);
         } else {
-            maxDisplayedResults = this._settings.get_int('max-search-results');
+            maxDisplayedResults = ArcMenuManager.settings.get_int('max-search-results');
         }
         return maxDisplayedResults;
     }
@@ -425,8 +423,7 @@ export class SearchResults extends St.BoxLayout {
         this._displayId = `display_${searchProviderDisplayId}`;
 
         this.searchType = this._menuLayout.search_display_type;
-        this._settings = menuLayout.settings;
-        this.layout = this._settings.get_enum('menu-layout');
+        this.layout = ArcMenuManager.settings.get_enum('menu-layout');
 
         this._content = new St.BoxLayout({
             vertical: true,
@@ -465,11 +462,11 @@ export class SearchResults extends St.BoxLayout {
         this._searchSettings.connectObject('changed::disable-external', this._reloadRemoteProviders.bind(this), this);
         this._searchSettings.connectObject('changed::sort-order', this._reloadRemoteProviders.bind(this), this);
 
-        const {extension} = menuLayout;
+        const {extension} = ArcMenuManager;
         extension.searchProviderEmitter.connectObject('search-provider-added',
-            (_, provider) => this._registerProvider(provider), this);
+            (_s, provider) => this._registerProvider(provider), this);
         extension.searchProviderEmitter.connectObject('search-provider-removed',
-            (_, provider) => this._unregisterProvider(provider), this);
+            (_s, provider) => this._unregisterProvider(provider), this);
 
         this._searchTimeoutId = null;
         this._cancellable = new Gio.Cancellable();
@@ -485,10 +482,6 @@ export class SearchResults extends St.BoxLayout {
 
     get terms() {
         return this._terms;
-    }
-
-    get settings() {
-        return this._settings;
     }
 
     setStyle(style) {
@@ -514,6 +507,8 @@ export class SearchResults extends St.BoxLayout {
 
         this.recentFilesManager.destroy();
         this.recentFilesManager = null;
+        this._searchSettings = null;
+        this._menuLayout = null;
     }
 
     _registerGnomeShellProviders() {
@@ -521,9 +516,9 @@ export class SearchResults extends St.BoxLayout {
         const providers = searchResults._providers.filter(p => !p.isRemoteProvider);
         providers.forEach(this._registerProvider.bind(this));
 
-        if (this._settings.get_boolean('search-provider-open-windows'))
+        if (ArcMenuManager.settings.get_boolean('search-provider-open-windows'))
             this._registerProvider(new OpenWindowSearchProvider());
-        if (this._settings.get_boolean('search-provider-recent-files'))
+        if (ArcMenuManager.settings.get_boolean('search-provider-recent-files'))
             this._registerProvider(new RecentFilesSearchProvider(this.recentFilesManager));
     }
 

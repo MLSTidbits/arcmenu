@@ -5,6 +5,7 @@ import Shell from 'gi://Shell';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
+import {ArcMenuManager} from './arcmenuManager.js';
 import * as Constants from './constants.js';
 
 const MUTTER_SCHEMA = 'org.gnome.mutter';
@@ -67,7 +68,7 @@ export const OverrideOverlayKey = class {
         this.defaultOverlayKeyID = GObject.signal_handler_find(global.display, {signalId: 'overlay-key'});
 
         if (!this.defaultOverlayKeyID) {
-            log('ArcMenu Error - Failed to set Super_L hotkey');
+            console.log('ArcMenu Error - Failed to set Super_L hotkey');
             return;
         }
 
@@ -95,12 +96,12 @@ export const OverrideOverlayKey = class {
             Main.layoutManager.disconnect(this._mainStartUpComplete);
             this._mainStartUpComplete = null;
         }
+        this._mutterSettings = null;
     }
 };
 
 export const CustomKeybinding = class {
-    constructor(settings) {
-        this._settings = settings;
+    constructor() {
         this._keybindings = new Map();
     }
 
@@ -108,7 +109,7 @@ export const CustomKeybinding = class {
         if (!this._keybindings.has(keybindingNameKey)) {
             this._keybindings.set(keybindingNameKey, keybindingValueKey);
 
-            Main.wm.addKeybinding(keybindingValueKey, this._settings,
+            Main.wm.addKeybinding(keybindingValueKey, ArcMenuManager.settings,
                 Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
                 Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW | Shell.ActionMode.POPUP,
                 keybindingHandler);
@@ -132,5 +133,6 @@ export const CustomKeybinding = class {
 
     destroy() {
         this.unbindAll();
+        this._keybindings = null;
     }
 };

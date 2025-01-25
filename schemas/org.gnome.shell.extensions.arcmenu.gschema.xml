@@ -133,6 +133,10 @@
       <default>true</default>
       <summary>Show an update notification - once per new release</summary>
     </key>
+    <key type="t" name="previous-notification-date">
+      <default>0</default>
+      <summary>The JS Date.Now() time of last date ArcMenu sent a notification.</summary>
+    </key>
     <key type="i" name="menu-position-alignment">
       <default>50</default>
       <summary>Menu position alignment</summary>
@@ -339,9 +343,13 @@
       <default>false</default>
       <summary>Show category sub menus.</summary>
     </key>
-    <key type="b" name="alphabetize-all-programs">
+    <key type="b" name="group-apps-alphabetically-list-layouts">
       <default>true</default>
-      <summary>Separate All Programs by a Character Listing</summary>
+      <summary>Group Apps Alphabetically. For "All Apps" sections on list layouts</summary>
+    </key>
+    <key type="b" name="group-apps-alphabetically-grid-layouts">
+      <default>false</default>
+      <summary>Group Apps Alphabetically. For "All Apps" sections on grid layouts</summary>
     </key>
     <key type="b" name="multi-lined-labels">
       <default>true</default>

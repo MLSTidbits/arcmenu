@@ -125,7 +125,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         // Donations --------------------------------------------------------------
         const donateGroup = new Adw.PreferencesGroup({
             title: _('Help Support This Project'),
-            description: _('Thank you for using ArcMenu! If you enjoy it and would like to help support its continued development, please consider making a donation. Your support, no matter the amount, makes a big difference.'),
+            description: _('Thank you for using %s! If you enjoy it and would like to help support its continued development, please consider making a donation. Your support, no matter the amount, makes a big difference.').format(_('ArcMenu')),
         });
         this.add(donateGroup);
 
@@ -345,7 +345,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
                 try {
                     acceptHandler(dialog.get_file().get_path());
                 } catch (e) {
-                    log(`ArcMenu - Filechooser error: ${e}`);
+                    console.log(`ArcMenu - Filechooser error: ${e}`);
                 }
             }
             dialog.destroy();

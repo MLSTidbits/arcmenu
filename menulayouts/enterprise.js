@@ -2,6 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
@@ -15,7 +16,6 @@ export const Layout = class EnterpriseLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             is_dual_panel: true,
             display_type: Constants.DisplayType.GRID,
             search_display_type: Constants.DisplayType.GRID,
@@ -96,7 +96,7 @@ export const Layout = class EnterpriseLayout extends BaseMenuLayout {
         const verticalSeparator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,
             Constants.SeparatorAlignment.VERTICAL);
 
-        const horizontalFlip = this._settings.get_boolean('enable-horizontal-flip');
+        const horizontalFlip = ArcMenuManager.settings.get_boolean('enable-horizontal-flip');
         this._mainBox.add_child(horizontalFlip ? this.rightBox : this.leftBox);
         this._mainBox.add_child(verticalSeparator);
         this._mainBox.add_child(horizontalFlip ? this.leftBox : this.rightBox);
@@ -119,7 +119,7 @@ export const Layout = class EnterpriseLayout extends BaseMenuLayout {
         this._addChildToParent(this.categoriesScrollBox, this.categoriesBox);
 
         let powerOptionsDisplay;
-        const powerDisplayStyle = this._settings.get_enum('power-display-style');
+        const powerDisplayStyle = ArcMenuManager.settings.get_enum('power-display-style');
         if (powerDisplayStyle === Constants.PowerDisplayStyle.MENU) {
             powerOptionsDisplay = new MW.LeaveButton(this, true);
         } else {
@@ -133,7 +133,7 @@ export const Layout = class EnterpriseLayout extends BaseMenuLayout {
             Constants.SeparatorAlignment.HORIZONTAL));
         this.leftBox.add_child(powerOptionsDisplay);
 
-        const searchbarLocation = this._settings.get_enum('searchbar-default-top-location');
+        const searchbarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');
         const separator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,
             Constants.SeparatorAlignment.HORIZONTAL);
 
@@ -153,10 +153,10 @@ export const Layout = class EnterpriseLayout extends BaseMenuLayout {
 
     updateWidth(setDefaultMenuView) {
         const leftPanelWidthOffset = 70;
-        const leftPanelWidth = this._settings.get_int('left-panel-width') - leftPanelWidthOffset;
+        const leftPanelWidth = ArcMenuManager.settings.get_int('left-panel-width') - leftPanelWidthOffset;
         this.leftBox.style = `width: ${leftPanelWidth}px;`;
 
-        const widthAdjustment = this._settings.get_int('menu-width-adjustment');
+        const widthAdjustment = ArcMenuManager.settings.get_int('menu-width-adjustment');
         let menuWidth = this.default_menu_width + widthAdjustment;
         // Set a 300px minimum limit for the menu width
         menuWidth = Math.max(300, menuWidth);
@@ -182,7 +182,7 @@ export const Layout = class EnterpriseLayout extends BaseMenuLayout {
         this.categoryDirectories = null;
         this.categoryDirectories = new Map();
 
-        const extraCategories = this._settings.get_value('extra-categories').deep_unpack();
+        const extraCategories = ArcMenuManager.settings.get_value('extra-categories').deep_unpack();
         for (let i = 0; i < extraCategories.length; i++) {
             const [categoryEnum, shouldShow] = extraCategories[i];
             if (shouldShow) {

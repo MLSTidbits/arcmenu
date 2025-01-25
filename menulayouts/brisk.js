@@ -2,6 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
@@ -15,7 +16,6 @@ export const Layout = class BriskLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             is_dual_panel: true,
             display_type: Constants.DisplayType.LIST,
             search_display_type: Constants.DisplayType.LIST,
@@ -62,7 +62,7 @@ export const Layout = class BriskLayout extends BaseMenuLayout {
 
         const verticalSeparator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,
             Constants.SeparatorAlignment.VERTICAL);
-        const horizontalFlip = this._settings.get_boolean('enable-horizontal-flip');
+        const horizontalFlip = ArcMenuManager.settings.get_boolean('enable-horizontal-flip');
         this._mainBox.add_child(horizontalFlip ? this.rightBox : this.leftBox);
         this._mainBox.add_child(verticalSeparator);
         this._mainBox.add_child(horizontalFlip ? this.leftBox : this.rightBox);
@@ -87,7 +87,7 @@ export const Layout = class BriskLayout extends BaseMenuLayout {
         this.leftBox.add_child(this.actionsBox);
 
         let powerOptionsItem;
-        const powerDisplayStyle = this._settings.get_enum('power-display-style');
+        const powerDisplayStyle = ArcMenuManager.settings.get_enum('power-display-style');
         if (powerDisplayStyle === Constants.PowerDisplayStyle.MENU) {
             powerOptionsItem = new MW.LeaveButton(this, true);
         } else {
@@ -98,7 +98,7 @@ export const Layout = class BriskLayout extends BaseMenuLayout {
         powerOptionsItem.y_align = Clutter.ActorAlign.END;
         this.leftBox.add_child(powerOptionsItem);
 
-        const searchBarLocation = this._settings.get_enum('searchbar-default-top-location');
+        const searchBarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');
         if (searchBarLocation === Constants.SearchbarLocation.TOP) {
             this.searchEntry.add_style_class_name('arcmenu-search-top');
             this.searchEntry.style = 'margin-bottom: 0px;';
@@ -112,7 +112,7 @@ export const Layout = class BriskLayout extends BaseMenuLayout {
             this.add_child(this.searchEntry);
         }
 
-        this._settings.connectObject('changed::brisk-layout-extra-shortcuts', () => this._createExtraShortcuts(), this);
+        ArcMenuManager.settings.connectObject('changed::brisk-layout-extra-shortcuts', () => this._createExtraShortcuts(), this);
         this._createExtraShortcuts();
 
         this.updateWidth();
@@ -124,7 +124,7 @@ export const Layout = class BriskLayout extends BaseMenuLayout {
 
     _createExtraShortcuts() {
         this.actionsBox.destroy_all_children();
-        const extraShortcuts = this._settings.get_value('brisk-layout-extra-shortcuts').deep_unpack();
+        const extraShortcuts = ArcMenuManager.settings.get_value('brisk-layout-extra-shortcuts').deep_unpack();
 
         if (extraShortcuts.length === 0)
             return;
@@ -173,7 +173,7 @@ export const Layout = class BriskLayout extends BaseMenuLayout {
         this.categoryDirectories = null;
         this.categoryDirectories = new Map();
 
-        const extraCategories = this._settings.get_value('extra-categories').deep_unpack();
+        const extraCategories = ArcMenuManager.settings.get_value('extra-categories').deep_unpack();
 
         for (let i = 0; i < extraCategories.length; i++) {
             const [categoryEnum, shouldShow] = extraCategories[i];

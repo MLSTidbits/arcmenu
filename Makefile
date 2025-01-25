@@ -2,7 +2,7 @@
 
 UUID = arcmenu@arcmenu.com
 BASE_MODULES = COPYING extension.js keybinder.js metadata.json README.md stylesheet.css theming.js
-EXTRA_MODULES = appMenu.js arcmenuManager.js constants.js controller.js iconGrid.js menuButton.js menuWidgets.js placeDisplay.js prefs.js prefsWidgets.js recentFilesManager.js search.js standaloneRunner.js updateNotifier.js utils.js
+EXTRA_MODULES = appMenu.js arcmenuManager.js constants.js iconGrid.js menuButton.js menuController.js menuWidgets.js notification.js placeDisplay.js prefs.js prefsWidgets.js recentFilesManager.js search.js standaloneRunner.js utils.js
 
 TOLOCALIZE = $(EXTRA_MODULES) menulayouts/* settings/*
 

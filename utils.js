@@ -22,6 +22,7 @@ const InterfaceXml = `<node>
 
 export const DBusService = class {
     constructor() {
+        this._exported = false;
         this.ToggleArcMenu = () => {};
 
         this._dbusExportedObject = Gio.DBusExportedObject.wrapJSObject(InterfaceXml, this);
@@ -29,8 +30,10 @@ export const DBusService = class {
         const onBusAcquired = (connection, _name) => {
             try {
                 this._dbusExportedObject.export(connection, '/com/Extensions/ArcMenu');
+                this._exported = true;
             } catch (error) {
-                console.log(`ArcMenu Error - onBusAcquired export failed: ${error}`);
+                console.console.log(`ArcMenu Error - onBusAcquired export failed: ${error}`);
+                this._exported = false;
             }
         };
 
@@ -43,52 +46,15 @@ export const DBusService = class {
     }
 
     destroy() {
-        this._dbusExportedObject.unexport();
-        Gio.bus_unown_name(this._ownerId);
+        if (this._ownerId > 0) {
+            Gio.bus_unown_name(this._ownerId);
+            this._ownerId = 0;
+        }
+
+        if (this._dbusExportedObject && this._exported)
+            this._dbusExportedObject.unexport();
     }
 };
-
-export function convertOldSetting(settings, oldSetting, newSetting) {
-    const data = settings.get_value(oldSetting).deepUnpack();
-
-    if (!data.length)
-        return;
-
-    const newDataArray = [];
-
-    if (oldSetting === 'pinned-app-list') {
-        settings.set_strv(oldSetting, []);
-
-        for (let i = 0; i < data.length; i += 3) {
-            const newData = {};
-            if (data[i])
-                newData.name = data[i];
-            if (data[i + 1])
-                newData.icon = data[i + 1];
-            if (data[i + 2])
-                newData.id = data[i + 2];
-
-            newDataArray.push(newData);
-        }
-    } else {
-        settings.set_value(oldSetting, new GLib.Variant('aas', []));
-
-        data.forEach(entry => {
-            const newData = {};
-            if (entry[0])
-                newData.name = entry[0];
-            if (entry[1])
-                newData.icon = entry[1];
-            if (entry[2])
-                newData.id = entry[2];
-
-            newDataArray.push(newData);
-        });
-    }
-
-    settings.set_value(newSetting, new GLib.Variant('aa{ss}', newDataArray));
-    console.log(`Converted ${oldSetting} to ${newSetting}`);
-}
 
 export function activateHibernateOrSleep(powerType) {
     const loginManager = getLoginManager();
@@ -143,20 +109,20 @@ export function canHibernateOrSleep(callName, asyncCallback) {
 }
 
 export const SettingsConnectionsHandler = class ArcMenuSettingsConnectionsHandler {
-    constructor(settings) {
+    constructor() {
         this._connections = new Map();
-        this._settings = settings;
     }
 
     connect(...args) {
         const callback = args.pop();
         for (const event of args)
-            this._connections.set(this._settings.connect(`changed::${event}`, callback), this._settings);
+            this._connections.set(ArcMenuManager.settings.connect(`changed::${event}`, callback), ArcMenuManager.settings);
     }
 
     destroy() {
         this._connections.forEach((object, id) => {
             object.disconnect(id);
+            object = null;
             id = null;
         });
 
@@ -365,7 +331,7 @@ export function getMenuButtonIcon(path) {
             return iconPath;
     }
 
-    log('ArcMenu Error - Failed to set menu button icon. Set to System Default.');
+    console.log('ArcMenu Error - Failed to set menu button icon. Set to System Default.');
     return 'start-here-symbolic';
 }
 
@@ -482,7 +448,7 @@ export function getDashToPanelPosition(settings, index) {
         positions = JSON.parse(settings.get_string('panel-positions'));
         side = positions[index];
     } catch (e) {
-        log(`Error parsing Dash to Panel positions: ${e.message}`);
+        console.log(`Error parsing Dash to Panel positions: ${e.message}`);
     }
 
     if (side === 'TOP')

@@ -2,6 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
@@ -15,7 +16,6 @@ export const Layout = class WhiskerLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             is_dual_panel: true,
             display_type: Constants.DisplayType.LIST,
             search_display_type: Constants.DisplayType.LIST,
@@ -56,7 +56,7 @@ export const Layout = class WhiskerLayout extends BaseMenuLayout {
             settingsButton.destroy();
 
         let powerOptionsBox;
-        const powerDisplayStyle = this._settings.get_enum('power-display-style');
+        const powerDisplayStyle = ArcMenuManager.settings.get_enum('power-display-style');
         if (powerDisplayStyle === Constants.PowerDisplayStyle.MENU)
             powerOptionsBox = new MW.LeaveButton(this);
         else
@@ -100,7 +100,7 @@ export const Layout = class WhiskerLayout extends BaseMenuLayout {
         const verticalSeparator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,
             Constants.SeparatorAlignment.VERTICAL);
 
-        const horizontalFlip = this._settings.get_boolean('enable-horizontal-flip');
+        const horizontalFlip = ArcMenuManager.settings.get_boolean('enable-horizontal-flip');
         this._mainBox.add_child(horizontalFlip ? this.rightBox : this.leftBox);
         this._mainBox.add_child(verticalSeparator);
         this._mainBox.add_child(horizontalFlip ? this.leftBox : this.rightBox);
@@ -116,7 +116,7 @@ export const Layout = class WhiskerLayout extends BaseMenuLayout {
         this.categoriesBox = new St.BoxLayout({vertical: true});
         this._addChildToParent(this.categoriesScrollBox, this.categoriesBox);
 
-        const searchbarLocation = this._settings.get_enum('searchbar-default-top-location');
+        const searchbarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');
         if (searchbarLocation === Constants.SearchbarLocation.TOP) {
             this.searchEntry.add_style_class_name('arcmenu-search-top');
             this.searchEntry.style = 'margin-top: 0px; margin-bottom: 6px;';
@@ -151,7 +151,7 @@ export const Layout = class WhiskerLayout extends BaseMenuLayout {
         this.categoryDirectories = null;
         this.categoryDirectories = new Map();
 
-        const extraCategories = this._settings.get_value('extra-categories').deep_unpack();
+        const extraCategories = ArcMenuManager.settings.get_value('extra-categories').deep_unpack();
         for (let i = 0; i < extraCategories.length; i++) {
             const [categoryEnum, shouldShow] = extraCategories[i];
             if (shouldShow) {

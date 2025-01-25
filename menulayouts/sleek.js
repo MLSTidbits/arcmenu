@@ -2,6 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
@@ -15,7 +16,6 @@ export const Layout = class RedmondLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             display_type: Constants.DisplayType.GRID,
             search_display_type: Constants.DisplayType.LIST,
             search_results_spacing: 8,
@@ -57,7 +57,7 @@ export const Layout = class RedmondLayout extends BaseMenuLayout {
         const verticalSeparator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MAX,
             Constants.SeparatorAlignment.VERTICAL);
 
-        const horizontalFlip = this._settings.get_boolean('enable-horizontal-flip');
+        const horizontalFlip = ArcMenuManager.settings.get_boolean('enable-horizontal-flip');
         this.add_child(horizontalFlip ? this.rightBox : mainBox);
         this.add_child(verticalSeparator);
         this.add_child(horizontalFlip ? mainBox : this.rightBox);
@@ -95,7 +95,7 @@ export const Layout = class RedmondLayout extends BaseMenuLayout {
         this._addChildToParent(this.applicationsScrollBox, this.applicationsBox);
         mainBox.add_child(this.applicationsScrollBox);
 
-        const searchbarLocation = this._settings.get_enum('searchbar-default-top-location');
+        const searchbarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');
         if (searchbarLocation === Constants.SearchbarLocation.TOP) {
             this.searchEntry.add_style_class_name('arcmenu-search-top');
             mainBox.insert_child_at_index(this.searchEntry, 0);
@@ -133,11 +133,11 @@ export const Layout = class RedmondLayout extends BaseMenuLayout {
         this._addChildToParent(this.shortcutsScrollBox, this.shortcutsBox);
         this.rightBox.add_child(this.shortcutsScrollBox);
 
-        this._settings.connectObject('changed::sleek-layout-extra-shortcuts', () => this._createExtraShortcuts(), this);
+        ArcMenuManager.settings.connectObject('changed::sleek-layout-extra-shortcuts', () => this._createExtraShortcuts(), this);
         this._createExtraShortcuts();
 
         let powerOptionsDisplay;
-        const powerDisplayStyle = this._settings.get_enum('power-display-style');
+        const powerDisplayStyle = ArcMenuManager.settings.get_enum('power-display-style');
         if (powerDisplayStyle === Constants.PowerDisplayStyle.IN_LINE) {
             powerOptionsDisplay = new MW.PowerOptionsBox(this);
             powerOptionsDisplay.set({
@@ -156,6 +156,7 @@ export const Layout = class RedmondLayout extends BaseMenuLayout {
 
         this.hasPinnedApps = true;
         this.updateWidth();
+
         this.loadCategories();
         this.loadPinnedApps();
         this.setDefaultMenuView();
@@ -176,7 +177,7 @@ export const Layout = class RedmondLayout extends BaseMenuLayout {
 
     _createExtraShortcuts() {
         this.shortcutsBox.destroy_all_children();
-        const extraShortcuts = this._settings.get_value('sleek-layout-extra-shortcuts').deep_unpack();
+        const extraShortcuts = ArcMenuManager.settings.get_value('sleek-layout-extra-shortcuts').deep_unpack();
 
         if (extraShortcuts.length === 0)
             return;
@@ -200,7 +201,7 @@ export const Layout = class RedmondLayout extends BaseMenuLayout {
     }
 
     updateWidth(setDefaultMenuView) {
-        const widthAdjustment = this._settings.get_int('menu-width-adjustment');
+        const widthAdjustment = ArcMenuManager.settings.get_int('menu-width-adjustment');
         let menuWidth = this.default_menu_width + widthAdjustment;
         // Set a 300px minimum limit for the menu width
         menuWidth = Math.max(300, menuWidth);
@@ -217,8 +218,8 @@ export const Layout = class RedmondLayout extends BaseMenuLayout {
         const scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
         borderRadius /= scaleFactor;
 
-        const panelWidth = this._settings.get_int('sleek-layout-panel-width');
-        const horizontalFlip = this._settings.get_boolean('enable-horizontal-flip');
+        const panelWidth = ArcMenuManager.settings.get_int('sleek-layout-panel-width');
+        const horizontalFlip = ArcMenuManager.settings.get_boolean('enable-horizontal-flip');
         const rightRoundedCorners = `border-radius: 0px ${borderRadius}px ${borderRadius}px 0px;`;
         const leftRoundedCorners = `border-radius: ${borderRadius}px 0px 0px ${borderRadius}px;`;
         const roundedCorners = horizontalFlip ? leftRoundedCorners : rightRoundedCorners;

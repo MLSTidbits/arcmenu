@@ -14,6 +14,7 @@ import * as ParentalControlsManager from 'resource:///org/gnome/shell/misc/paren
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
 import {AppContextMenu} from '../appMenu.js';
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import {IconGrid} from '../iconGrid.js';
@@ -63,7 +64,6 @@ export const Layout = class PopLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             display_type: Constants.DisplayType.GRID,
             search_display_type: Constants.DisplayType.GRID,
             search_results_spacing: 4,
@@ -128,7 +128,7 @@ export const Layout = class PopLayout extends BaseMenuLayout {
         this.placeHolderFolderItem = new GroupFolderMenuItem(this, 'New Folder', null);
         this._addItem(this.placeHolderFolderItem);
 
-        const searchBarLocation = this._settings.get_enum('searchbar-default-top-location');
+        const searchBarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');
         if (searchBarLocation === Constants.SearchbarLocation.BOTTOM) {
             this.searchEntry.style = 'margin: 10px 220px;';
             this.topBox.style = 'padding-top: 0.5em;';
@@ -171,7 +171,7 @@ export const Layout = class PopLayout extends BaseMenuLayout {
         this.setDefaultMenuView();
         this._setGridColumns(this.applicationsGrid);
 
-        this._settings.connectObject('changed::pop-default-view', () => this.setDefaultMenuView(), this);
+        ArcMenuManager.settings.connectObject('changed::pop-default-view', () => this.setDefaultMenuView(), this);
     }
 
     reloadApplications() {
@@ -238,7 +238,7 @@ export const Layout = class PopLayout extends BaseMenuLayout {
     }
 
     updateWidth(setDefaultMenuView) {
-        const widthAdjustment = this._settings.get_int('menu-width-adjustment');
+        const widthAdjustment = ArcMenuManager.settings.get_int('menu-width-adjustment');
         let menuWidth = this.default_menu_width + widthAdjustment;
         // Set a 300px minimum limit for the menu width
         menuWidth = Math.max(300, menuWidth);
@@ -298,7 +298,7 @@ export const Layout = class PopLayout extends BaseMenuLayout {
         });
 
         // Store the id and name of each folder in 'pop-folders-data'
-        this._settings.set_value('pop-folders-data', new GLib.Variant('a{ss}', foldersData));
+        ArcMenuManager.settings.set_value('pop-folders-data', new GLib.Variant('a{ss}', foldersData));
 
         // Find any remaining apps not contained within a folder.
         const remainingApps = [];
@@ -344,7 +344,7 @@ export const Layout = class PopLayout extends BaseMenuLayout {
                 path: newFolderPath,
             });
         } catch (e) {
-            log('Error creating new folder');
+            console.log('Error creating new folder');
             return;
         }
 
@@ -402,7 +402,7 @@ export const Layout = class PopLayout extends BaseMenuLayout {
 
     setDefaultMenuView() {
         super.setDefaultMenuView();
-        const defaultView = this._settings.get_string('pop-default-view');
+        const defaultView = ArcMenuManager.settings.get_string('pop-default-view');
         let category = this._folders.get(defaultView);
 
         if (!category)
@@ -1152,9 +1152,9 @@ export class ApplicationMenuItem extends MW.DraggableMenuItem {
 
         this.hasContextMenu = !!this._app;
 
-        const disableRecentAppsIndicator = this._settings.get_boolean('disable-recently-installed-apps');
+        const disableRecentAppsIndicator = ArcMenuManager.settings.get_boolean('disable-recently-installed-apps');
         if (!disableRecentAppsIndicator) {
-            const recentApps = this._settings.get_strv('recently-installed-apps');
+            const recentApps = ArcMenuManager.settings.get_strv('recently-installed-apps');
             this.isRecentlyInstalled = recentApps.some(appIter => appIter === this._app.get_id());
         }
 
@@ -1240,7 +1240,7 @@ export class ApplicationMenuItem extends MW.DraggableMenuItem {
     createIcon() {
         this._iconBin.x_align = Clutter.ActorAlign.CENTER;
 
-        const iconSizeEnum = this._settings.get_enum('menu-item-grid-icon-size');
+        const iconSizeEnum = ArcMenuManager.settings.get_enum('menu-item-grid-icon-size');
         const defaultIconSize = this._menuLayout.icon_grid_size;
         const {iconSize} = Utils.getGridIconSize(iconSizeEnum, defaultIconSize);
 
@@ -1257,12 +1257,12 @@ export class ApplicationMenuItem extends MW.DraggableMenuItem {
     removeIndicator() {
         if (this.isRecentlyInstalled) {
             this.isRecentlyInstalled = false;
-            const recentApps = this._settings.get_strv('recently-installed-apps');
+            const recentApps = ArcMenuManager.settings.get_strv('recently-installed-apps');
             const index = recentApps.indexOf(this._app.get_id());
             if (index > -1)
                 recentApps.splice(index, 1);
 
-            this._settings.set_strv('recently-installed-apps', recentApps);
+            ArcMenuManager.settings.set_strv('recently-installed-apps', recentApps);
 
             this._indicator.hide();
             this._menuLayout.setNewAppIndicator();

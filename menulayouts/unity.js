@@ -6,6 +6,7 @@ import St from 'gi://St';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import {IconGrid} from '../iconGrid.js';
@@ -21,7 +22,6 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             display_type: Constants.DisplayType.GRID,
             search_display_type: Constants.DisplayType.GRID,
             search_results_spacing: 4,
@@ -38,7 +38,7 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
             pinned_apps_icon_size: Constants.MEDIUM_ICON_SIZE,
         });
 
-        const homeScreen = this._settings.get_boolean('enable-unity-homescreen');
+        const homeScreen = ArcMenuManager.settings.get_boolean('enable-unity-homescreen');
         this.activeCategoryName = homeScreen ? _('Pinned') : _('All Programs');
 
         this.topBox = new St.BoxLayout({
@@ -112,7 +112,6 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
             row_spacing: this.row_spacing,
         });
         this.shortcutsBox.add_child(this.shortcutsGrid);
-        this.shortcutsBox.add_child(this.shortcutsGrid);
 
         this.actionsContainerBox = new St.BoxLayout({
             x_expand: true,
@@ -133,7 +132,7 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
         });
         this.actionsContainerBox.add_child(this.actionsBox);
 
-        const applicationShortcuts = this._settings.get_value('application-shortcuts').deep_unpack();
+        const applicationShortcuts = ArcMenuManager.settings.get_value('application-shortcuts').deep_unpack();
         for (let i = 0; i < applicationShortcuts.length; i++) {
             const shortcutMenuItem = this.createMenuItem(applicationShortcuts[i], Constants.DisplayType.GRID, false);
             if (shortcutMenuItem.shouldShow)
@@ -142,9 +141,9 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
                 shortcutMenuItem.destroy();
         }
 
-        this._settings.connectObject('changed::unity-layout-extra-shortcuts', () => this._createExtraButtons(), this);
-        this._settings.connectObject('changed::enable-clock-widget-unity', () => this._updateWidgets(), this);
-        this._settings.connectObject('changed::enable-weather-widget-unity', () => this._updateWidgets(), this);
+        ArcMenuManager.settings.connectObject('changed::unity-layout-extra-shortcuts', () => this._createExtraButtons(), this);
+        ArcMenuManager.settings.connectObject('changed::enable-clock-widget-unity', () => this._updateWidgets(), this);
+        ArcMenuManager.settings.connectObject('changed::enable-weather-widget-unity', () => this._updateWidgets(), this);
 
         this._createExtraButtons();
         this._updateWidgets();
@@ -159,8 +158,8 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
     }
 
     _updateWidgets() {
-        const clockWidgetEnabled = this._settings.get_boolean('enable-clock-widget-unity');
-        const weatherWidgetEnabled = this._settings.get_boolean('enable-weather-widget-unity');
+        const clockWidgetEnabled = ArcMenuManager.settings.get_boolean('enable-clock-widget-unity');
+        const weatherWidgetEnabled = ArcMenuManager.settings.get_boolean('enable-weather-widget-unity');
 
         if (clockWidgetEnabled && !this._clocksItem) {
             this._clocksItem = new MW.WorldClocksWidget(this);
@@ -181,7 +180,7 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
 
     _createExtraButtons() {
         this.actionsBox.destroy_all_children();
-        const extraButtons = this._settings.get_value('unity-layout-extra-shortcuts').deep_unpack();
+        const extraButtons = ArcMenuManager.settings.get_value('unity-layout-extra-shortcuts').deep_unpack();
 
         if (extraButtons.length === 0)
             return;
@@ -274,7 +273,7 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
 
     setDefaultMenuView() {
         super.setDefaultMenuView();
-        const homeScreen = this._settings.get_boolean('enable-unity-homescreen');
+        const homeScreen = ArcMenuManager.settings.get_boolean('enable-unity-homescreen');
         if (homeScreen) {
             this.activeCategoryName = _('Pinned');
             this.activeCategoryType = Constants.CategoryType.HOME_SCREEN;
@@ -310,7 +309,7 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
         this.categoryDirectories.set(Constants.CategoryType.HOME_SCREEN, categoryMenuItem);
         this.hasPinnedApps = true;
 
-        const extraCategories = this._settings.get_value('extra-categories').deep_unpack();
+        const extraCategories = ArcMenuManager.settings.get_value('extra-categories').deep_unpack();
         for (let i = 0; i < extraCategories.length; i++) {
             const [categoryEnum, shouldShow] = extraCategories[i];
             if (categoryEnum === Constants.CategoryType.PINNED_APPS || !shouldShow)
@@ -359,8 +358,8 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
 
         this._widgetBox.hide();
 
-        const clockWidgetEnabled = this._settings.get_boolean('enable-clock-widget-unity');
-        const weatherWidgetEnabled = this._settings.get_boolean('enable-weather-widget-unity');
+        const clockWidgetEnabled = ArcMenuManager.settings.get_boolean('enable-clock-widget-unity');
+        const weatherWidgetEnabled = ArcMenuManager.settings.get_boolean('enable-weather-widget-unity');
 
         if (clockWidgetEnabled || weatherWidgetEnabled)
             this._widgetBox.show();

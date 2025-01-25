@@ -2,6 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 
@@ -14,7 +15,6 @@ export const Layout = class ChromebookLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             display_type: Constants.DisplayType.GRID,
             search_display_type: Constants.DisplayType.GRID,
             search_results_spacing: 4,
@@ -44,7 +44,7 @@ export const Layout = class ChromebookLayout extends BaseMenuLayout {
         this._addChildToParent(this.applicationsScrollBox, this.applicationsBox);
         this.add_child(this.applicationsScrollBox);
 
-        const searchBarLocation = this._settings.get_enum('searchbar-default-top-location');
+        const searchBarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');
         if (searchBarLocation === Constants.SearchbarLocation.TOP) {
             this.searchEntry.add_style_class_name('arcmenu-search-top');
             this.insert_child_at_index(this.searchEntry, 0);

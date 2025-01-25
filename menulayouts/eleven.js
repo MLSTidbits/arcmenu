@@ -3,6 +3,7 @@ import GObject from 'gi://GObject';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import {IconGrid} from '../iconGrid.js';
@@ -17,7 +18,6 @@ export const Layout = class ElevenLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             display_type: Constants.DisplayType.GRID,
             search_display_type: Constants.DisplayType.GRID,
             search_results_spacing: 5,
@@ -144,8 +144,8 @@ export const Layout = class ElevenLayout extends BaseMenuLayout {
         });
         this.applicationsGrid.halign = Clutter.ActorAlign.FILL;
 
-        this._settings.connectObject('changed::eleven-layout-extra-shortcuts', () => this._createExtraButtons(), this);
-        this._settings.connectObject('changed::eleven-disable-frequent-apps', () => this.setDefaultMenuView(), this);
+        ArcMenuManager.settings.connectObject('changed::eleven-layout-extra-shortcuts', () => this._createExtraButtons(), this);
+        ArcMenuManager.settings.connectObject('changed::eleven-disable-frequent-apps', () => this.setDefaultMenuView(), this);
 
         this._createExtraButtons();
         this.updateStyle();
@@ -162,7 +162,7 @@ export const Layout = class ElevenLayout extends BaseMenuLayout {
         this.actionsBox.add_child(avatarMenuItem);
 
         const isContainedInCategory = false;
-        const extraButtons = this._settings.get_value('eleven-layout-extra-shortcuts').deep_unpack();
+        const extraButtons = ArcMenuManager.settings.get_value('eleven-layout-extra-shortcuts').deep_unpack();
 
         for (let i = 0; i < extraButtons.length; i++) {
             const {id} = extraButtons[i];
@@ -182,7 +182,7 @@ export const Layout = class ElevenLayout extends BaseMenuLayout {
         }
 
         let leaveButton;
-        const powerDisplayStyle = this._settings.get_enum('power-display-style');
+        const powerDisplayStyle = ArcMenuManager.settings.get_enum('power-display-style');
         if (powerDisplayStyle === Constants.PowerDisplayStyle.IN_LINE)
             leaveButton = new MW.PowerOptionsBox(this);
         else
@@ -199,7 +199,7 @@ export const Layout = class ElevenLayout extends BaseMenuLayout {
     loadFrequentApps() {
         this.frequentAppsList = [];
 
-        if (this._settings.get_boolean('eleven-disable-frequent-apps'))
+        if (ArcMenuManager.settings.get_boolean('eleven-disable-frequent-apps'))
             return;
 
         const mostUsed = Shell.AppUsage.get_default().get_most_used();
@@ -207,7 +207,7 @@ export const Layout = class ElevenLayout extends BaseMenuLayout {
         if (mostUsed.length < 1)
             return;
 
-        const pinnedApps = this._settings.get_value('pinned-apps').deepUnpack();
+        const pinnedApps = ArcMenuManager.settings.get_value('pinned-apps').deepUnpack();
         const pinnedAppsIds = pinnedApps.map(item => item.id);
 
         for (let i = 0; i < mostUsed.length; i++) {
@@ -287,7 +287,7 @@ export const Layout = class ElevenLayout extends BaseMenuLayout {
         this.loadFrequentApps();
         super.displayPinnedApps();
 
-        if (this.frequentAppsList.length > 0 && !this._settings.get_boolean('eleven-disable-frequent-apps')) {
+        if (this.frequentAppsList.length > 0 && !ArcMenuManager.settings.get_boolean('eleven-disable-frequent-apps')) {
             this._displayAppList(this.frequentAppsList, Constants.CategoryType.HOME_SCREEN, this.shortcutsGrid);
             if (!this.applicationsBox.contains(this.shortcutsBox))
                 this.applicationsBox.add_child(this.shortcutsBox);

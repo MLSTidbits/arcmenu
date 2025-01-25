@@ -2,6 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
+import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
@@ -15,7 +16,6 @@ export const Layout = class MintLayout extends BaseMenuLayout {
 
     constructor(menuButton) {
         super(menuButton, {
-            has_search: true,
             is_dual_panel: true,
             display_type: Constants.DisplayType.LIST,
             search_display_type: Constants.DisplayType.LIST,
@@ -90,7 +90,7 @@ export const Layout = class MintLayout extends BaseMenuLayout {
 
         const verticalSeparator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,
             Constants.SeparatorAlignment.VERTICAL);
-        const horizontalFlip = this._settings.get_boolean('enable-horizontal-flip');
+        const horizontalFlip = ArcMenuManager.settings.get_boolean('enable-horizontal-flip');
         this._mainBox.add_child(horizontalFlip ? this.rightBox : this.leftBox);
         this._mainBox.add_child(verticalSeparator);
         this._mainBox.add_child(horizontalFlip ? this.leftBox : this.rightBox);
@@ -106,7 +106,7 @@ export const Layout = class MintLayout extends BaseMenuLayout {
         this._addChildToParent(this.categoriesScrollBox, this.categoriesBox);
 
         this.searchEntry.style = 'margin: 0px;';
-        const searchBarLocation = this._settings.get_enum('searchbar-default-top-location');
+        const searchBarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');
         if (searchBarLocation === Constants.SearchbarLocation.TOP) {
             this.searchEntry.add_style_class_name('arcmenu-search-top');
             const separator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MAX,
@@ -123,7 +123,7 @@ export const Layout = class MintLayout extends BaseMenuLayout {
             this._parentBox.add_child(this.searchEntry);
         }
 
-        this._settings.connectObject('changed::mint-layout-extra-shortcuts', () => this._createExtraButtons(), this);
+        ArcMenuManager.settings.connectObject('changed::mint-layout-extra-shortcuts', () => this._createExtraButtons(), this);
         this._createExtraButtons();
 
         this.updateWidth();
@@ -134,7 +134,7 @@ export const Layout = class MintLayout extends BaseMenuLayout {
 
     _createExtraButtons() {
         this.actionsBox.destroy_all_children();
-        const extraButtons = this._settings.get_value('mint-layout-extra-shortcuts').deep_unpack();
+        const extraButtons = ArcMenuManager.settings.get_value('mint-layout-extra-shortcuts').deep_unpack();
 
         if (extraButtons.length === 0)
             return;
@@ -176,7 +176,7 @@ export const Layout = class MintLayout extends BaseMenuLayout {
         this.categoryDirectories = null;
         this.categoryDirectories = new Map();
 
-        const extraCategories = this._settings.get_value('extra-categories').deep_unpack();
+        const extraCategories = ArcMenuManager.settings.get_value('extra-categories').deep_unpack();
 
         for (let i = 0; i < extraCategories.length; i++) {
             const [categoryEnum, shouldShow] = extraCategories[i];
