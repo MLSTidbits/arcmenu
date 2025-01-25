@@ -528,12 +528,24 @@ class HomeFolderMenuItem extends MW.DraggableMenuItem {
         this._menuLayout.searchEntry?.clearWithoutSearchChangeEvent();
         this._grid.removeAllItems();
         this._menuLayout._setGridColumns(this._grid);
+        const groupAllAppsGridView = ArcMenuManager.settings.get_boolean('group-apps-alphabetically-grid-layouts');
+        let currentCharacter;
 
         for (let i = 0; i < this._orderedItems.length; i++) {
             const item = this._orderedItems[i];
             const parent = item.get_parent();
             if (parent)
                 parent.remove_child(item);
+
+            if (groupAllAppsGridView) {
+                const appNameFirstChar = item._app.get_name().charAt(0).toLowerCase();
+                if (currentCharacter !== appNameFirstChar) {
+                    currentCharacter = appNameFirstChar;
+
+                    const label = this._menuLayout._createLabelWithSeparator(currentCharacter.toUpperCase());
+                    this._grid.appendItem(label);
+                }
+            }
 
             this._grid.appendItem(item);
         }
