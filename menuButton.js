@@ -565,19 +565,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         const panelBoxRect = this._panelBox.get_transformed_extents();
         const cursorLocation = new Graphene.Point({x, y});
 
-        if (panelBoxRect.contains_point(cursorLocation))
-            return true;
-
-        // Check if panel or panel menus have grab actor
-        const grabActor = global.stage.get_grab_actor();
-        const sourceActor = grabActor?._sourceActor || grabActor;
-        const statusArea = this._panelParent.statusArea ?? this._panel.statusArea;
-        const quickSettingsMenu = statusArea?.quickSettings?.menu.actor;
-
-        if (sourceActor && (quickSettingsMenu?.contains(sourceActor) || this._panelParent.contains(sourceActor)))
-            return true;
-
-        return false;
+        return panelBoxRect.contains_point(cursorLocation);
     }
 
     _startTrackingMouse(callback) {
