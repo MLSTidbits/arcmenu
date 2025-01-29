@@ -160,7 +160,6 @@ export class BaseMenuItem extends St.BoxLayout {
 
         this.tooltipLocation = Constants.TooltipLocation.BOTTOM;
         this.shouldShow = true;
-        this._parent = null;
         this._active = false;
         this._activatable = params.reactive && params.activate;
         this._sensitive = true;
@@ -400,7 +399,6 @@ export class BaseMenuItem extends St.BoxLayout {
         if (this._menuButton.tooltip && this._menuButton.tooltip.sourceActor === this)
             this._menuButton.tooltip.hide(true);
 
-        this.contextMenu?.destroy();
         this.contextMenu = null;
         this.isDestroyed = true;
         this._menuButton = null;
@@ -1833,7 +1831,8 @@ export class PinnedAppsFolderMenuItem extends DraggableMenuItem {
         this.folderSettings.connectObject('changed::pinned-apps', () => {
             this._folderAppList = folderSettings.get_value('pinned-apps').deepUnpack();
             this._loadPinnedApps();
-            this._updateIcon();
+            if (this.appList)
+                this._updateIcon();
         }, this);
 
         this._loadPinnedApps();
@@ -2012,8 +2011,6 @@ export class PinnedAppsFolderMenuItem extends DraggableMenuItem {
 
         // No apps in folder, clear folder data and remove from pinned apps
         if (this._folderAppList.length === 0) {
-            if (this._subMenuPopup.isOpen)
-                this._subMenuPopup.toggle();
             const keys = this.folderSettings.settings_schema.list_keys();
             for (const key of keys)
                 this.folderSettings.reset(key);
@@ -2145,7 +2142,6 @@ export class PinnedAppsFolderMenuItem extends DraggableMenuItem {
         const parent = this.get_parent();
         const layoutManager = parent.layout_manager;
         const pinnedAppsList = ArcMenuManager.settings.get_value('pinned-apps').deepUnpack();
-
         const index = layoutManager.getItemPosition(source);
         pinnedAppsList.splice(index, 1);
         ArcMenuManager.settings.set_value('pinned-apps', new GLib.Variant('aa{ss}', pinnedAppsList));
@@ -2327,7 +2323,7 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
         try {
             folderSettings = this._menuLayout.getSettings(`${ArcMenuManager.settings.schema_id}.pinned-apps-folders`, `${ArcMenuManager.settings.path}pinned-apps-folders/${folderId}/`);
         } catch (e) {
-            console.console.log(`Error creating new pinned apps folder: ${e}`);
+            console.log(`Error creating new pinned apps folder: ${e}`);
             return false;
         }
 
@@ -2596,7 +2592,7 @@ export class FolderDialog extends PopupMenu.PopupMenu {
 
         this.actor.add_style_class_name('popup-menu arcmenu-menu');
         this.box.add_style_class_name('arcmenu-folder-dialog');
-        this.connect('open-state-changed', this._subMenuOpenStateChanged.bind(this));
+        this._openStateId = this.connect('open-state-changed', this._subMenuOpenStateChanged.bind(this));
         this._menuLayout.subMenuManager.addMenu(this);
         Main.uiGroup.add_child(this.actor);
         this.actor.hide();
@@ -2640,6 +2636,11 @@ export class FolderDialog extends PopupMenu.PopupMenu {
     }
 
     destroy() {
+        if (this._openStateId)
+            this.disconnect(this._openStateId);
+        this._arcMenu._dimEffect.enabled = false;
+        this.close();
+        this._destroyed = true;
         if (this.appList) {
             this.appList.forEach(item => {
                 if (item instanceof BaseMenuItem) {
@@ -2649,12 +2650,6 @@ export class FolderDialog extends PopupMenu.PopupMenu {
             });
             this.appList = null;
         }
-        this._sourceActor = null;
-        this._menuButton = null;
-        this._arcMenu = null;
-        this._menuLayout = null;
-        Main.uiGroup.remove_child(this.dummyCursor);
-        Main.uiGroup.remove_child(this.actor);
         this.dummyCursor.destroy();
         this.dummyCursor = null;
         super.destroy();
@@ -2709,6 +2704,8 @@ export class FolderDialog extends PopupMenu.PopupMenu {
     }
 
     _setDimmed(dim) {
+        if (this._destroyed)
+            return;
         const DIM_BRIGHTNESS = -0.4;
         const POPUP_ANIMATION_TIME = 400;
 

@@ -27,8 +27,14 @@
     <enum id='org.gnome.shell.extensions.arcmenu.forcemenulocation'>
         <value value='0' nick='Off'/>
         <value value='1' nick='TopCentered'/>
-        <value value='2' nick='BottomCentered'/>
-        <value value='3' nick='MonitorCentered'/>
+        <value value='2' nick='TopLeft'/>
+        <value value='3' nick='TopRight'/>
+        <value value='4' nick='BottomCentered'/>
+        <value value='5' nick='BottomLeft'/>
+        <value value='6' nick='BottomRight'/>
+        <value value='7' nick='LeftCentered'/>
+        <value value='8' nick='RightCentered'/>
+        <value value='9' nick='MonitorCentered'/>
     </enum>
     <enum id='org.gnome.shell.extensions.arcmenu.menu-position'>
         <value value="0" nick="Left"/>
@@ -129,13 +135,13 @@
     </key>
   </schema>
   <schema path="/org/gnome/shell/extensions/arcmenu/" id="org.gnome.shell.extensions.arcmenu">
-    <key type="b" name="show-update-notification-v64">
-      <default>true</default>
-      <summary>Show an update notification - once per new release</summary>
-    </key>
-    <key type="t" name="previous-notification-date">
+    <key type="i" name="support-notifier-project-version">
       <default>0</default>
-      <summary>The JS Date.Now() time of last date ArcMenu sent a notification.</summary>
+      <summary>The project version of when a support notification was shown</summary>
+    </key>
+    <key type="t" name="support-notifier-date-shown">
+      <default>0</default>
+      <summary>A JS Date() of when a support notification was last sent.</summary>
     </key>
     <key type="i" name="menu-position-alignment">
       <default>50</default>

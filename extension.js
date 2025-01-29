@@ -8,7 +8,7 @@ import {SearchProviderEmitter} from './searchProviders/searchProviderEmitter.js'
 import * as Theming from './theming.js';
 
 import * as Utils from './utils.js';
-import {Notification} from './notification.js';
+import {SupportNotification} from './supportNotifier.js';
 
 export default class ArcMenu extends Extension {
     enable() {
@@ -20,7 +20,7 @@ export default class ArcMenu extends Extension {
         this._azTaskbarActive = false;
         this._dtpActive = false;
 
-        this._notification = new Notification(this);
+        this._supportNotification = new SupportNotification(this);
 
         const hideOverviewOnStartup = this.settings.get_boolean('hide-overview-on-startup');
         if (hideOverviewOnStartup && Main.layoutManager._startingUp) {
@@ -81,7 +81,7 @@ export default class ArcMenu extends Extension {
         global.disconnectObject(this);
         this.settings.disconnectObject(this);
 
-        this._notification = null;
+        this._supportNotification = null;
 
         this.searchProviderEmitter.destroy();
         delete this.searchProviderEmitter;
@@ -177,7 +177,7 @@ export default class ArcMenu extends Extension {
         const panelsCount = multiMonitor ? panels.length : Math.min(panels.length, 1);
         for (var i = 0; i < panelsCount; i++) {
             if (!panels[i]) {
-                console.console.log(`ArcMenu Error: panel ${i} not found. Skipping...`);
+                console.log(`ArcMenu Error: panel ${i} not found. Skipping...`);
                 continue;
             }
 

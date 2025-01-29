@@ -204,7 +204,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
                 this.arcMenu._arrowAlignment = arrowAlignment;
                 this.arcMenuContextMenu._boxPointer.setSourceAlignment(.5);
                 this.arcMenu._boxPointer.setSourceAlignment(.5);
-            } else if (this._dtp?.state === Utils.ExtensionState.ACTIVE) {
+            } else if (this._dtpActive) {
                 const side = Utils.getDashToPanelPosition(this._dtpSettings, this._monitorIndex);
                 this.updateArrowSide(side, false);
             } else {
@@ -231,7 +231,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             menu._arrowSide = side;
             menu._boxPointer._arrowSide = side;
             menu._boxPointer._userArrowSide = side;
-            menu._boxPointer.setSourceAlignment(0.5);
+            menu._boxPointer.setSourceAlignment(arrowAlignment);
             menu._arrowAlignment = arrowAlignment;
             menu._boxPointer._border.queue_repaint();
         }
@@ -240,21 +240,39 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             this.setMenuPositionAlignment();
     }
 
-    _getDashToPanelHeightOffset() {
-        if (!this._dtpActive)
-            return 0;
+    _getDashToPanelGeom() {
+        if (!this._dtpActive || !this._panelParent.intellihide?.enabled)
+            return {width: 0, height: 0};
 
         const dtpPostion = Utils.getDashToPanelPosition(this._dtpSettings, this._monitorIndex);
         const menuLocation = ArcMenuManager.settings.get_enum('force-menu-location');
+
+        const width = this._panelParent.geom?.w ?? 0;
         const height = this._panelParent.geom?.h ?? 0;
 
-        if (menuLocation === Constants.ForcedMenuLocation.TOP_CENTERED && dtpPostion === St.Side.TOP)
-            return height;
+        const {MenuLocation} = Constants;
+        const topLocations = [MenuLocation.TOP_CENTERED, MenuLocation.TOP_LEFT, MenuLocation.TOP_RIGHT];
+        const bottomLocations = [MenuLocation.BOTTOM_CENTERED, MenuLocation.BOTTOM_LEFT, MenuLocation.BOTTOM_RIGHT];
+        const leftLocations = [MenuLocation.BOTTOM_LEFT, MenuLocation.TOP_LEFT, MenuLocation.LEFT_CENTERED];
+        const rightLocations = [MenuLocation.BOTTOM_RIGHT, MenuLocation.TOP_RIGHT, MenuLocation.RIGHT_CENTERED];
+        const xCenterLocations = [MenuLocation.BOTTOM_CENTERED, MenuLocation.TOP_CENTERED];
+        const yCenterLocations = [MenuLocation.LEFT_CENTERED, MenuLocation.RIGHT_CENTERED];
 
-        if (menuLocation === Constants.ForcedMenuLocation.BOTTOM_CENTERED && dtpPostion === St.Side.BOTTOM)
-            return height;
+        const needsTopAdjustment = topLocations.includes(menuLocation) || yCenterLocations.includes(menuLocation);
+        const needsBottomAdjustment = bottomLocations.includes(menuLocation) || yCenterLocations.includes(menuLocation);
+        const needsLeftAdjustment = leftLocations.includes(menuLocation) || xCenterLocations.includes(menuLocation);
+        const needsRightAdjustment = rightLocations.includes(menuLocation) || xCenterLocations.includes(menuLocation);
 
-        return 0;
+        if (dtpPostion === St.Side.TOP && needsTopAdjustment)
+            return {width: 0, height};
+        if (dtpPostion === St.Side.BOTTOM && needsBottomAdjustment)
+            return {width: 0, height};
+        if (dtpPostion === St.Side.LEFT && needsLeftAdjustment)
+            return {width, height: 0};
+        if (dtpPostion === St.Side.RIGHT && needsRightAdjustment)
+            return {width, height: 0};
+
+        return {width: 0, height: 0};
     }
 
     forceMenuLocation() {
@@ -270,7 +288,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         if (this._menuLocation !== newMenuLocation) {
             this._menuLocation = newMenuLocation;
 
-            if (newMenuLocation === Constants.ForcedMenuLocation.OFF) {
+            if (newMenuLocation === Constants.MenuLocation.OFF) {
                 this.arcMenu.sourceActor = this.arcMenu.focusActor = this;
                 this.arcMenu._boxPointer.setPosition(this, 0.5);
                 this.setMenuPositionAlignment();
@@ -283,34 +301,63 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             this.arcMenu._arrowAlignment = 0.5;
         }
 
-        if (newMenuLocation === Constants.ForcedMenuLocation.OFF)
+        if (newMenuLocation === Constants.MenuLocation.OFF)
             return;
 
-        this.updateArrowSide(St.Side.TOP, false);
         const monitor = Main.layoutManager.findMonitorForActor(this);
         const workArea = Main.layoutManager.getWorkAreaForMonitor(this._monitorIndex);
-        const positionX = Math.round(workArea.x + (workArea.width / 2));
-        const offsetY = this._getDashToPanelHeightOffset();
-        let positionY;
+        const menuHeight = ArcMenuManager.settings.get_int('menu-height');
 
-        // Use the physical monitor dimensions when Dash to Panel is active
-        // to account for inellihide, which is not taken into account with getWorkAreaForMonitor()
-        // Manually offest ArcMenu's menu location by getting Dash to Panels panel height.
-        // In other cases, use the getWorkAreaForMonitor();
+        // Offset width and height of DtP when intellihide is enabled.
+        const {width: dtpWidth, height: dtpHeight} = this._getDashToPanelGeom();
 
-        if (newMenuLocation === Constants.ForcedMenuLocation.TOP_CENTERED) {
-            positionY = this._dtpActive ? monitor.y + offsetY : workArea.y;
-        } else if (newMenuLocation === Constants.ForcedMenuLocation.BOTTOM_CENTERED) {
-            positionY = this._dtpActive ? monitor.y + monitor.height - 1 - offsetY
-                : workArea.y + workArea.height - 1;
+        const xLeft = workArea.x + dtpWidth;
+        const xRight = workArea.x + workArea.width - 1 - dtpWidth;
+        const yTop = workArea.y + dtpHeight;
+        const yBottom = workArea.y + workArea.height - 1 - dtpHeight;
+        const xCentered = Math.round(monitor.x + (monitor.width / 2));
+        const yCentered = Math.round(monitor.y + (monitor.height / 2) - (menuHeight / 2));
+        let x, y;
+        let side = St.Side.TOP;
 
+        if (newMenuLocation === Constants.MenuLocation.TOP_CENTERED) {
+            x = xCentered;
+            y = yTop;
+        } else if (newMenuLocation === Constants.MenuLocation.TOP_LEFT) {
+            side = St.Side.LEFT;
+            x = xLeft;
+            y = yTop;
+        } else if (newMenuLocation === Constants.MenuLocation.TOP_RIGHT) {
+            side = St.Side.RIGHT;
+            x = xRight;
+            y = yTop;
+        } else if (newMenuLocation === Constants.MenuLocation.BOTTOM_CENTERED) {
+            x = xCentered;
+            y = yBottom;
             this.arcMenu.actor.add_style_class_name('bottomOfScreenMenu');
-        } else if (newMenuLocation === Constants.ForcedMenuLocation.MONITOR_CENTERED) {
-            const menuHeight = ArcMenuManager.settings.get_int('menu-height');
-            positionY = Math.round(monitor.y + (monitor.height / 2) - (menuHeight / 2));
+        }  else if (newMenuLocation === Constants.MenuLocation.BOTTOM_LEFT) {
+            side = St.Side.LEFT;
+            x = xLeft;
+            y = yBottom;
+            this.arcMenu.actor.add_style_class_name('bottomOfScreenMenu');
+        } else if (newMenuLocation === Constants.MenuLocation.BOTTOM_RIGHT) {
+            side = St.Side.RIGHT;
+            x = xRight;
+            y = yBottom;
+            this.arcMenu.actor.add_style_class_name('bottomOfScreenMenu');
+        } else if (newMenuLocation === Constants.MenuLocation.LEFT_CENTERED) {
+            x = xLeft;
+            y = yCentered;
+        } else if (newMenuLocation === Constants.MenuLocation.RIGHT_CENTERED) {
+            x = xRight;
+            y = yCentered;
+        } else if (newMenuLocation === Constants.MenuLocation.MONITOR_CENTERED) {
+            x = xCentered;
+            y = yCentered;
         }
 
-        Main.layoutManager.setDummyCursorGeometry(positionX, positionY, 0, 0);
+        this.updateArrowSide(side, false);
+        Main.layoutManager.setDummyCursorGeometry(x, y, 0, 0);
     }
 
     vfunc_event(event) {

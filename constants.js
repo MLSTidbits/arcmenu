@@ -126,11 +126,17 @@ export const CategoryIconType = {
     SYMBOLIC: 1,
 };
 
-export const ForcedMenuLocation = {
+export const MenuLocation = {
     OFF: 0,
     TOP_CENTERED: 1,
-    BOTTOM_CENTERED: 2,
-    MONITOR_CENTERED: 3,
+    TOP_LEFT: 2,
+    TOP_RIGHT: 3,
+    BOTTOM_CENTERED: 4,
+    BOTTOM_LEFT: 5,
+    BOTTOM_RIGHT: 6,
+    LEFT_CENTERED: 7,
+    RIGHT_CENTERED: 8,
+    MONITOR_CENTERED: 9,
 };
 
 export const IconSize = {

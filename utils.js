@@ -32,7 +32,7 @@ export const DBusService = class {
                 this._dbusExportedObject.export(connection, '/com/Extensions/ArcMenu');
                 this._exported = true;
             } catch (error) {
-                console.console.log(`ArcMenu Error - onBusAcquired export failed: ${error}`);
+                console.log(`ArcMenu Error - onBusAcquired export failed: ${error}`);
                 this._exported = false;
             }
         };
