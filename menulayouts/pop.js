@@ -419,6 +419,7 @@ export const Layout = class PopLayout extends BaseMenuLayout {
     }
 
     _onDestroy() {
+        this._folderSettings.disconnectObject(this);
         if (this._folders) {
             this._folders.forEach((value, _key, _map) => {
                 value.destroy();
@@ -428,6 +429,7 @@ export const Layout = class PopLayout extends BaseMenuLayout {
 
         this._orderedItems = null;
         this._appInfoList = null;
+        this._folderSettings = null;
         super._onDestroy();
     }
 };

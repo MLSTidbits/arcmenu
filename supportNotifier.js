@@ -1,4 +1,5 @@
 import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
@@ -37,6 +38,18 @@ export class SupportNotification {
         this._whatsNewLink = `${PROJECT_GITLAB}${this._version}`;
 
         this._maybeShowNotification(settings);
+
+        this._timerId = GLib.timeout_add_seconds(GLib.PRIORITY_LOW, 300, () => {
+            this._maybeShowNotification(settings);
+            return GLib.SOURCE_CONTINUE;
+        });
+    }
+
+    destroy() {
+        if (this._timerId) {
+            GLib.source_remove(this._timerId);
+            this._timerId = null;
+        }
     }
 
     _maybeShowNotification(settings) {

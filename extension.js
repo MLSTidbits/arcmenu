@@ -42,7 +42,6 @@ export default class ArcMenu extends Extension {
 
         this._enableButtons();
 
-        // dash to panel might get enabled after ArcMenu
         Main.extensionManager.connectObject('extension-state-changed', (data, extension) => {
             const isDtp = extension.uuid === Constants.DASH_TO_PANEL_UUID;
             const isAzTaskbar = extension.uuid === Constants.AZTASKBAR_UUID;
@@ -68,7 +67,6 @@ export default class ArcMenu extends Extension {
             }
         }, this);
 
-        // listen to dash to panel if they are compatible and already enabled
         this._connectExtensionSignals();
 
         global.connectObject('shutdown', () => Theming.deleteStylesheet(), this);
@@ -81,19 +79,21 @@ export default class ArcMenu extends Extension {
         global.disconnectObject(this);
         this.settings.disconnectObject(this);
 
+        this._supportNotification.destroy();
         this._supportNotification = null;
 
         this.searchProviderEmitter.destroy();
-        delete this.searchProviderEmitter;
+        this.searchProviderEmitter = null;
 
         Theming.deleteStylesheet();
-        delete this.customStylesheet;
+        this.customStylesheet = null;
 
         this._disableButtons();
-
         this.settingsControllers = null;
+
         this._arcmenuManager.destroy();
         this._arcmenuManager = null;
+
         this.settings = null;
     }
 
@@ -209,8 +209,7 @@ export default class ArcMenu extends Extension {
 
             const settingsController = new MenuController(panelInfo, monitorIndex);
 
-            if (panelExtensionEnabled)
-                panel.connectObject('destroy', () => this._disableButton(settingsController), this);
+            panel.connectObject('destroy', () => this._disableButton(settingsController), this);
 
             settingsController.enableButton();
             settingsController.connectSettingsEvents();
@@ -231,7 +230,7 @@ export default class ArcMenu extends Extension {
 
         const index = this.settingsControllers.indexOf(controller);
         if (index !== -1)
-            this.settingsControllers.splice(this.settingsControllers.indexOf(controller), 1);
+            this.settingsControllers.splice(index, 1);
 
         controller.destroy();
         controller = null;

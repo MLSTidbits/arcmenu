@@ -126,6 +126,7 @@ export const SettingsConnectionsHandler = class ArcMenuSettingsConnectionsHandle
             id = null;
         });
 
+        this._connections.clear();
         this._connections = null;
     }
 };

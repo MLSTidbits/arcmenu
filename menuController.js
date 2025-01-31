@@ -455,8 +455,6 @@ export const MenuController = class {
     }
 
     _removeMenuButtonFromMainPanel() {
-        this.panel.menuManager.removeMenu(this._menuButton.arcMenu);
-        this.panel.menuManager.removeMenu(this._menuButton.arcMenuContextMenu);
         this.panel.statusArea['ArcMenu'] = null;
     }
 
@@ -512,7 +510,7 @@ export const MenuController = class {
             this.runnerMenu = null;
         }
 
-        this._settingsConnections.destroy();
+        this._settingsConnections?.destroy();
         this._settingsConnections = null;
 
         if (this._isButtonEnabled())

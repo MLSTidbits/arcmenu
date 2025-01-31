@@ -108,26 +108,12 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
         this.hasPinnedApps = false;
         this.activeCategoryType = -1;
         this._disableFadeEffect = ArcMenuManager.settings.get_boolean('disable-scrollview-fade-effect');
-
-        this.connect('key-press-event', this._onMainBoxKeyPress.bind(this));
-
         this.iconTheme = new St.IconTheme();
         this.appSys = Shell.AppSystem.get_default();
         this._tree = new GMenu.Tree({menu_basename: 'applications.menu'});
-        this._tree.connectObject('changed', () => this.reloadApplications(), this);
-
-        AppFavorites.getAppFavorites().connectObject('changed', () => {
-            if (this.categoryDirectories) {
-                const categoryMenuItem = this.categoryDirectories.get(Constants.CategoryType.FAVORITES);
-                if (categoryMenuItem)
-                    this._loadGnomeFavorites(categoryMenuItem);
-            }
-        }, this);
 
         this.searchResults = new SearchResults(this);
         this.searchEntry = new MW.SearchEntry(this);
-        this.searchEntry.connectObject('search-changed', this._onSearchEntryChanged.bind(this), this);
-        this.searchEntry.connectObject('entry-key-press', this._onSearchEntryKeyPress.bind(this), this);
 
         this.applicationsGrid = new IconGrid({
             halign: this.display_type === Constants.DisplayType.LIST ? Clutter.ActorAlign.FILL
@@ -145,7 +131,18 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
             accept_drop: true,
         });
 
+        this.connect('key-press-event', this._onMainBoxKeyPress.bind(this));
         this.connect('destroy', () => this._onDestroy());
+        this._tree.connectObject('changed', () => this.reloadApplications(), this);
+        this.searchEntry.connectObject('search-changed', this._onSearchEntryChanged.bind(this), this);
+        this.searchEntry.connectObject('entry-key-press', this._onSearchEntryKeyPress.bind(this), this);
+        AppFavorites.getAppFavorites().connectObject('changed', () => {
+            if (this.categoryDirectories) {
+                const categoryMenuItem = this.categoryDirectories.get(Constants.CategoryType.FAVORITES);
+                if (categoryMenuItem)
+                    this._loadGnomeFavorites(categoryMenuItem);
+            }
+        }, this);
     }
 
     get menuButton() {
@@ -588,7 +585,8 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
         case Constants.ShortcutCommands.SWITCH_USER: {
             const item = new MW.ShortcutMenuItem(this, itemData, displayType, isContainedInCategory);
             item.powerType = Utils.getPowerTypeFromShortcutCommand(id);
-            MW.bindPowerItemVisibility(item);
+            const binding = MW.bindPowerItemVisibility(item);
+            item.connect('destroy', () => binding.unbind());
             return item;
         }
         case Constants.ShortcutCommands.ARCMENU_SETTINGS:
@@ -1120,6 +1118,8 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
     _onDestroy() {
         this._disconnectReloadApps();
 
+        AppFavorites.getAppFavorites().disconnectObject(this);
+
         if (this.recentFilesManager) {
             this.recentFilesManager.destroy();
             this.recentFilesManager = null;
@@ -1180,7 +1180,7 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
         this.applicationsGrid = null;
 
         this._sortedAppsList = null;
-
+        this._delegate = null;
         this._menuButton = null;
         this.contextMenuManager = null;
         this.subMenuManager = null;
@@ -1200,6 +1200,7 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
                 menuItem = null;
                 this.pinnedAppsMap.delete(id);
             });
+            this.pinnedAppsMap.clear();
             this.pinnedAppsMap = null;
         }
         this.pinnedAppsArray = null;
@@ -1210,6 +1211,7 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
                 menuItem = null;
                 this.applicationsMap.delete(id);
             });
+            this.applicationsMap.clear();
             this.applicationsMap = null;
         }
 

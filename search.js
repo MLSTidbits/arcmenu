@@ -507,6 +507,7 @@ export class SearchResults extends St.BoxLayout {
 
         this.recentFilesManager.destroy();
         this.recentFilesManager = null;
+        this._searchSettings.disconnectObject(this);
         this._searchSettings = null;
         this._menuLayout = null;
     }

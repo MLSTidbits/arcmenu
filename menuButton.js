@@ -154,8 +154,8 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         if (this._dtp?.state === Utils.ExtensionState.ACTIVE && global.dashToPanel)
             this.syncWithDashToPanel();
 
-        this._monitorsChangedId = Main.layoutManager.connect('monitors-changed', () => this.updateHeight());
-        this._startupCompleteId = Main.layoutManager.connect('startup-complete', () => this.updateHeight());
+        Main.layoutManager.connectObject('monitors-changed', () => this.updateHeight(), this);
+        Main.layoutManager.connectObject('startup-complete', () => this.updateHeight(), this);
 
         this.setMenuPositionAlignment();
         this.createMenuLayout();
@@ -460,17 +460,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
 
     _onDestroy() {
         this._stopTrackingMouse();
-
-        if (this._monitorsChangedId) {
-            Main.layoutManager.disconnect(this._monitorsChangedId);
-            this._monitorsChangedId = null;
-        }
-
-        if (this._startupCompleteId) {
-            Main.layoutManager.disconnect(this._startupCompleteId);
-            this._startupCompleteId = null;
-        }
-
+        Main.layoutManager.disconnectObject(this);
         this._clearTooltipShowingId();
 
         if (this._dtpSettings) {
@@ -494,6 +484,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         this.contextMenuManager = null;
         this.subMenuManager = null;
 
+        this._panel.statusArea['ArcMenu'] = null;
         this._panel = null;
         this._panelBox = null;
         this._panelParent = null;
@@ -675,6 +666,8 @@ export const ArcMenu = class ArcMenuArcMenu extends PopupMenu.PopupMenu {
     }
 
     destroy() {
+        this._boxPointer.remove_effect_by_name('dim');
+        this._dimEffect = null;
         this._menuButton = null;
         if (this._menuClosedID) {
             this.disconnect(this._menuClosedID);

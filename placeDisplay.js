@@ -318,10 +318,6 @@ export const PlacesManager = class ArcMenuPlacesManager extends EventEmitter {
 
         this._volumeMonitor.disconnectObject(this);
 
-        if (this._settings)
-            this._settings.disconnect(this._showDesktopIconsChangedId);
-        this._settings = null;
-
         if (this._monitor)
             this._monitor.cancel();
         if (this._bookmarkTimeoutId)

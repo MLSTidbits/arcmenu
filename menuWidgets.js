@@ -84,35 +84,37 @@ export function bindPowerItemVisibility(powerMenuItem) {
 
     switch (powerType) {
     case Constants.PowerType.POWER_OFF:
-        systemActions.bind_property('can-power-off', powerMenuItem, 'visible',
+        return systemActions.bind_property('can-power-off', powerMenuItem, 'visible',
             GObject.BindingFlags.DEFAULT | GObject.BindingFlags.SYNC_CREATE);
-        break;
     case Constants.PowerType.RESTART:
-        systemActions.bind_property('can-restart', powerMenuItem, 'visible',
+        return systemActions.bind_property('can-restart', powerMenuItem, 'visible',
             GObject.BindingFlags.DEFAULT | GObject.BindingFlags.SYNC_CREATE);
-        break;
     case Constants.PowerType.LOCK:
-        systemActions.bind_property('can-lock-screen', powerMenuItem, 'visible',
+        return systemActions.bind_property('can-lock-screen', powerMenuItem, 'visible',
             GObject.BindingFlags.DEFAULT | GObject.BindingFlags.SYNC_CREATE);
-        break;
     case Constants.PowerType.LOGOUT:
-        systemActions.bind_property('can-logout', powerMenuItem, 'visible',
+        return systemActions.bind_property('can-logout', powerMenuItem, 'visible',
             GObject.BindingFlags.DEFAULT | GObject.BindingFlags.SYNC_CREATE);
-        break;
     case Constants.PowerType.SUSPEND:
-        systemActions.bind_property('can-suspend', powerMenuItem, 'visible',
+        return systemActions.bind_property('can-suspend', powerMenuItem, 'visible',
             GObject.BindingFlags.DEFAULT | GObject.BindingFlags.SYNC_CREATE);
-        break;
     case Constants.PowerType.SWITCH_USER:
-        systemActions.bind_property('can-switch-user', powerMenuItem, 'visible',
+        return systemActions.bind_property('can-switch-user', powerMenuItem, 'visible',
             GObject.BindingFlags.DEFAULT | GObject.BindingFlags.SYNC_CREATE);
-        break;
     case Constants.PowerType.HYBRID_SLEEP:
-        Utils.canHibernateOrSleep('CanHybridSleep', result => (powerMenuItem.visible = result));
-        break;
+        Utils.canHibernateOrSleep('CanHybridSleep', result => {
+            if (!powerMenuItem.isDestroyed)
+                powerMenuItem.visible = result;
+        });
+        return null;
     case Constants.PowerType.HIBERNATE:
-        Utils.canHibernateOrSleep('CanHibernate', result => (powerMenuItem.visible = result));
-        break;
+        Utils.canHibernateOrSleep('CanHibernate', result => {
+            if (!powerMenuItem.isDestroyed)
+                powerMenuItem.visible = result;
+        });
+        return null;
+    default:
+        return null;
     }
 }
 
@@ -426,7 +428,7 @@ export class ArcMenuSeparator extends PopupMenu.PopupBaseMenuItem {
         this.add_child(this.label);
         this.label_actor = this.label;
 
-        this.label.connect('notify::text', this._syncLabelVisibility.bind(this));
+        this.label.connectObject('notify::text', this._syncLabelVisibility.bind(this), this);
         this._syncLabelVisibility();
 
         this._separator = new St.Widget({
@@ -481,6 +483,13 @@ export class ArcMenuSeparator extends PopupMenu.PopupBaseMenuItem {
             this.y_expand = this._separator.y_expand = true;
             this.y_align = this._separator.y_align = Clutter.ActorAlign.FILL;
         }
+
+        this.connect('destroy', () => this._onDestroy());
+    }
+
+    _onDestroy() {
+        this.label.destroy();
+        this.label = null;
     }
 
     _syncLabelVisibility() {
@@ -889,6 +898,9 @@ export class LeaveButton extends BaseMenuItem {
             const [powerType, shouldShow] = powerOptions[i];
             if (shouldShow) {
                 const powerButton = new PowerMenuItem(this._menuLayout, powerType);
+                powerButton.connectObject('activate', () => {
+                    this.leaveMenu.toggle();
+                }, this);
                 if (powerType === Constants.PowerType.LOCK || powerType === Constants.PowerType.LOGOUT ||
                     powerType === Constants.PowerType.SWITCH_USER) {
                     hasSessionOption = true;
@@ -951,7 +963,9 @@ export class PowerButton extends ArcMenuButtonItem {
             Constants.PowerOptions[powerType].ICON);
         this.powerType = powerType;
 
-        bindPowerItemVisibility(this);
+        const binding = bindPowerItemVisibility(this);
+
+        this.connect('destroy', () => binding?.unbind());
     }
 
     activate() {
@@ -969,7 +983,7 @@ export class PowerMenuItem extends BaseMenuItem {
         super(menuLayout);
         this.powerType = type;
 
-        bindPowerItemVisibility(this);
+        const binding = bindPowerItemVisibility(this);
 
         this._iconBin = new St.Bin();
         this.add_child(this._iconBin);
@@ -982,6 +996,8 @@ export class PowerMenuItem extends BaseMenuItem {
         });
 
         this.add_child(this.label);
+
+        this.connect('destroy', () => binding?.unbind());
     }
 
     createIcon() {
@@ -995,7 +1011,8 @@ export class PowerMenuItem extends BaseMenuItem {
         });
     }
 
-    activate() {
+    activate(event) {
+        super.activate(event);
         this._menuLayout.arcMenu.toggle();
         activatePowerOption(this.powerType);
     }
@@ -1489,6 +1506,8 @@ export class DraggableMenuItem extends BaseMenuItem {
         if (isDraggable) {
             this.remove_action(this._panAction);
             this.remove_action(this._clickAction);
+
+            this._panAction = null;
 
             this._draggable = DND.makeDraggable(this, {timeoutThreshold: 400});
             this._draggable.addClickAction(this._clickAction);
