@@ -146,6 +146,8 @@ export class BaseMenuItem extends St.BoxLayout {
         });
         super({
             style_class: 'popup-menu-item arcmenu-menu-item',
+            x_align: Clutter.ActorAlign.FILL,
+            x_expand: true,
             reactive: params.reactive,
             track_hover: params.reactive,
             can_focus: params.can_focus,
@@ -165,9 +167,6 @@ export class BaseMenuItem extends St.BoxLayout {
         this._active = false;
         this._activatable = params.reactive && params.activate;
         this._sensitive = true;
-
-        this.x_align = Clutter.ActorAlign.FILL;
-        this.x_expand = true;
 
         if (!this._activatable)
             this.add_style_class_name('popup-inactive-menu-item');
@@ -426,7 +425,6 @@ export class ArcMenuSeparator extends PopupMenu.PopupBaseMenuItem {
             style: 'font-weight: bold',
         });
         this.add_child(this.label);
-        this.label_actor = this.label;
 
         this.label.connectObject('notify::text', this._syncLabelVisibility.bind(this), this);
         this._syncLabelVisibility();
@@ -488,6 +486,7 @@ export class ArcMenuSeparator extends PopupMenu.PopupBaseMenuItem {
     }
 
     _onDestroy() {
+        ArcMenuManager.settings.disconnectObject(this);
         this.label.destroy();
         this.label = null;
     }
@@ -1444,6 +1443,7 @@ export class AvatarMenuIcon extends St.Bin {
         this._menuButton = null;
         this._menuLayout = null;
         this._user = null;
+        this.label = null;
     }
 
     _onHover() {
@@ -1466,6 +1466,8 @@ export class AvatarMenuIcon extends St.Bin {
                 iconFile = null;
 
             if (iconFile) {
+                if (this.child)
+                    this.child.destroy();
                 this.child = null;
                 this.add_style_class_name('user-avatar');
                 this.style = `${'background-image: url("%s");'.format(iconFile)}width: ${this.iconSize}px; height: ${this.iconSize}px;`;
@@ -2464,8 +2466,6 @@ export class ApplicationMenuItem extends BaseMenuItem {
             this.add_child(this.label);
         }
 
-        this.label_actor = this.label;
-
         if (this.isRecentlyInstalled) {
             this._indicator = new St.Label({
                 text: _('New'),
@@ -2662,10 +2662,8 @@ export class FolderDialog extends PopupMenu.PopupMenu {
         this._destroyed = true;
         if (this.appList) {
             this.appList.forEach(item => {
-                if (item instanceof BaseMenuItem) {
+                if (item instanceof BaseMenuItem)
                     item.destroy();
-                    item = null;
-                }
             });
             this.appList = null;
         }
@@ -2809,8 +2807,6 @@ export class SubCategoryMenuItem extends BaseMenuItem {
         if (this._displayType === Constants.DisplayType.GRID)
             Utils.convertToGridLayout(this);
 
-        this.label_actor = this.label;
-
         this.description = parentDirectory.get_name();
 
         this._subMenuPopup = new FolderDialog(this, this._menuLayout);
@@ -2916,6 +2912,7 @@ export class SubCategoryMenuItem extends BaseMenuItem {
     }
 
     _onDestroy() {
+        this._headerLabel = null;
         this._subMenuPopup.destroy();
         this._subMenuPopup = null;
         this.appList = null;
@@ -2970,7 +2967,6 @@ export class CategoryMenuItem extends BaseMenuItem {
         if (this._displayType === Constants.DisplayType.BUTTON)
             Utils.convertToButton(this);
 
-        this.label_actor = this.label;
         this.connect('motion-event', this._onMotionEvent.bind(this));
         this.connect('enter-event', this._onEnterEvent.bind(this));
         this.connect('leave-event', this._onLeaveEvent.bind(this));
@@ -3158,6 +3154,7 @@ export class CategoryMenuItem extends BaseMenuItem {
     }
 
     _onDestroy() {
+        this.appList = null;
         this._clearLeaveEventTimeout();
         this._indicator.destroy();
         this._indicator = null;

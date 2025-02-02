@@ -710,6 +710,8 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
             ArcMenuManager.settings.set_value('pinned-apps', new GLib.Variant('aa{ss}', array));
         }, this);
 
+        pinnedAppsMenuItem.connect('destroy', () => pinnedAppsMenuItem.disconnectObject(this));
+
         return pinnedAppsMenuItem;
     }
 
@@ -1195,33 +1197,18 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
 
     _destroyMenuItems() {
         if (this.pinnedAppsMap) {
-            this.pinnedAppsMap.forEach((menuItem, id) => {
-                menuItem.destroy();
-                menuItem = null;
-                this.pinnedAppsMap.delete(id);
-            });
-            this.pinnedAppsMap.clear();
+            this.pinnedAppsMap.forEach(menuItem => menuItem.destroy());
             this.pinnedAppsMap = null;
         }
         this.pinnedAppsArray = null;
 
         if (this.applicationsMap) {
-            this.applicationsMap.forEach((menuItem, id) => {
-                menuItem.destroy();
-                menuItem = null;
-                this.applicationsMap.delete(id);
-            });
-            this.applicationsMap.clear();
+            this.applicationsMap.forEach(menuItem => menuItem.destroy());
             this.applicationsMap = null;
         }
 
         if (this.categoryDirectories) {
-            this.categoryDirectories.forEach((menuItem, id) => {
-                menuItem.appList = null;
-                menuItem.destroy();
-                menuItem = null;
-                this.categoryDirectories.delete(id);
-            });
+            this.categoryDirectories.forEach(menuItem => menuItem.destroy());
             this.categoryDirectories = null;
         }
     }

@@ -10,7 +10,7 @@ import * as Constants from './constants.js';
 
 const MUTTER_SCHEMA = 'org.gnome.mutter';
 
-export const OverrideOverlayKey = class {
+export class OverrideOverlayKey {
     constructor() {
         this.isOverrideOverlayEnabled = false;
         this._ignoreHotKeyChangedEvent = false;
@@ -19,13 +19,12 @@ export const OverrideOverlayKey = class {
 
         this._oldOverlayKey = this._mutterSettings.get_value('overlay-key');
 
-        this._overlayKeyChangedID = this._mutterSettings.connect('changed::overlay-key', () => {
+        this._mutterSettings.connectObject('changed::overlay-key', () => {
             if (!this._ignoreHotKeyChangedEvent)
                 this._oldOverlayKey = this._mutterSettings.get_value('overlay-key');
-        });
+        }, this);
 
-        this._mainStartUpComplete = Main.layoutManager.connect('startup-complete',
-            () => this._overrideOverlayKey());
+        Main.layoutManager.connectObject('startup-complete', () => this._overrideOverlayKey(), this);
     }
 
     enable(toggleMenu) {
@@ -47,10 +46,9 @@ export const OverrideOverlayKey = class {
     disable() {
         this._ignoreHotKeyChangedEvent = true;
         this._mutterSettings.set_value('overlay-key', this._oldOverlayKey);
-        if (this.overlayKeyID) {
-            global.display.disconnect(this.overlayKeyID);
-            this.overlayKeyID = null;
-        }
+
+        global.display.disconnectObject(this);
+
         if (this.defaultOverlayKeyID) {
             GObject.signal_handler_unblock(global.display, this.defaultOverlayKeyID);
             this.defaultOverlayKeyID = null;
@@ -76,31 +74,25 @@ export const OverrideOverlayKey = class {
 
         Main.wm.allowKeybinding('overlay-key', Shell.ActionMode.ALL);
 
-        this.overlayKeyID = global.display.connect('overlay-key', () => {
+        global.display.connectObject('overlay-key', () => {
             this._toggleMenu();
             // Workaround for PopShell extension conflicting with ArcMenu SUPER_L hotkey.
             // PopShell extension removes ActionMode.POPUP from 'overlay-key',
             // which prevents the use of the SUPER_L hotkey when popup menus are opened.
             // Set 'overlay-key' action mode to ActionMode.ALL when ArcMenu is opened.
             Main.wm.allowKeybinding('overlay-key', Shell.ActionMode.ALL);
-        });
+        }, this);
     }
 
     destroy() {
-        if (this._overlayKeyChangedID) {
-            this._mutterSettings.disconnect(this._overlayKeyChangedID);
-            this._overlayKeyChangedID = null;
-        }
+        this._mutterSettings.disconnectObject(this);
+        Main.layoutManager.disconnectObject(this);
         this.disable();
-        if (this._mainStartUpComplete) {
-            Main.layoutManager.disconnect(this._mainStartUpComplete);
-            this._mainStartUpComplete = null;
-        }
         this._mutterSettings = null;
     }
-};
+}
 
-export const CustomKeybinding = class {
+export class CustomKeybinding {
     constructor() {
         this._keybindings = new Map();
     }
@@ -125,9 +117,8 @@ export const CustomKeybinding = class {
     }
 
     unbindAll() {
-        this._keybindings.forEach((value, key) => {
+        this._keybindings.forEach(value => {
             Main.wm.removeKeybinding(value);
-            this._keybindings.delete(key);
         });
     }
 
@@ -135,4 +126,4 @@ export const CustomKeybinding = class {
         this.unbindAll();
         this._keybindings = null;
     }
-};
+}

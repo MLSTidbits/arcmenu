@@ -333,7 +333,7 @@ export const MenuController = class {
 
     _setButtonPosition() {
         if (this._isButtonEnabled()) {
-            this._removeMenuButtonFromMainPanel();
+            this._removeMenuButtonFromPanel();
             this._addMenuButtonToMainPanel();
             this._setMenuPositionAlignment();
         }
@@ -416,7 +416,6 @@ export const MenuController = class {
         if (children.length > 1)
             actorIndex = children.indexOf(this._menuButton);
 
-
         parent.remove_child(this._menuButton);
         parent.insert_child_at_index(this._menuButton, actorIndex);
     }
@@ -454,7 +453,7 @@ export const MenuController = class {
         this.panel.addToStatusArea('ArcMenu', this._menuButton, position, box);
     }
 
-    _removeMenuButtonFromMainPanel() {
+    _removeMenuButtonFromPanel() {
         this.panel.statusArea['ArcMenu'] = null;
     }
 
@@ -464,7 +463,7 @@ export const MenuController = class {
     }
 
     _disableButton() {
-        this._removeMenuButtonFromMainPanel();
+        this._removeMenuButtonFromPanel();
         if (this.panel.statusArea.activities)
             this.panel.statusArea.activities.visible = true;
         this._menuButton.destroy();
@@ -528,5 +527,6 @@ export const MenuController = class {
         this._menuButton = null;
         this.panelInfo = null;
         this.panel = null;
+        this.isPrimaryPanel = null;
     }
 };

@@ -46,13 +46,16 @@ export const DBusService = class {
     }
 
     destroy() {
-        if (this._ownerId > 0) {
+        if (this._ownerId) {
             Gio.bus_unown_name(this._ownerId);
-            this._ownerId = 0;
+            this._ownerId = null;
         }
 
         if (this._dbusExportedObject && this._exported)
             this._dbusExportedObject.unexport();
+        this._dbusExportedObject = null;
+        this._exported = null;
+        this.ToggleArcMenu = null;
     }
 };
 
@@ -108,28 +111,27 @@ export function canHibernateOrSleep(callName, asyncCallback) {
     });
 }
 
-export const SettingsConnectionsHandler = class ArcMenuSettingsConnectionsHandler {
+export class SettingsConnectionsHandler {
     constructor() {
-        this._connections = new Map();
+        this._connectionIds = [];
     }
 
     connect(...args) {
         const callback = args.pop();
-        for (const event of args)
-            this._connections.set(ArcMenuManager.settings.connect(`changed::${event}`, callback), ArcMenuManager.settings);
+        for (const event of args) {
+            const id = ArcMenuManager.settings.connect(`changed::${event}`, callback);
+            this._connectionIds.push(id);
+        }
     }
 
     destroy() {
-        this._connections.forEach((object, id) => {
-            object.disconnect(id);
-            object = null;
-            id = null;
+        this._connectionIds.forEach(id => {
+            ArcMenuManager.settings.disconnect(id);
         });
 
-        this._connections.clear();
-        this._connections = null;
+        this._connectionIds = null;
     }
-};
+}
 
 export function convertToButton(item) {
     item.tooltipLocation = Constants.TooltipLocation.BOTTOM_CENTERED;

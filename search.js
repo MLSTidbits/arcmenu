@@ -139,6 +139,7 @@ class SearchResultsBase extends St.BoxLayout {
 
     _onDestroy() {
         this._cancellable.cancel();
+        this._cancellable = null;
         this._terms = [];
         this._menuLayout = null;
     }
@@ -504,10 +505,16 @@ export class SearchResults extends St.BoxLayout {
                 delete provider[this._displayId];
             }
         });
+        this._providers = null;
 
         this.recentFilesManager.destroy();
         this.recentFilesManager = null;
         this._searchSettings.disconnectObject(this);
+
+        this._cancellable.cancel();
+        this._cancellable = null;
+
+        this._highlighter = null;
         this._searchSettings = null;
         this._menuLayout = null;
     }

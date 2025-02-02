@@ -138,6 +138,8 @@ export const AppContextMenu = class ArcMenuAppContextMenu extends AppMenu {
 
     destroy() {
         this.destroyed = true;
+        this._createDesktopShortcutItem = null;
+        this._arcMenuPinnedItem = null;
         this._disconnectSignals();
         if (this.desktopExtensionStateChangedId) {
             Main.extensionManager.disconnect(this.desktopExtensionStateChangedId);

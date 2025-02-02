@@ -1194,6 +1194,12 @@ export class ApplicationMenuItem extends MW.DraggableMenuItem {
         this.connect('key-focus-in', () => this.removeIndicator());
     }
 
+    _onDestroy() {
+        this._indicator.destroy();
+        this._indicator = null;
+        super._onDestroy();
+    }
+
     setFolderGroup(folderMenuItem) {
         this.folderMenuItem = folderMenuItem;
     }

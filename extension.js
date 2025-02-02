@@ -47,22 +47,17 @@ export default class ArcMenu extends Extension {
             const isAzTaskbar = extension.uuid === Constants.AZTASKBAR_UUID;
             const isActive = extension.state === Utils.ExtensionState.ACTIVE;
 
-            if ((isDtp || isAzTaskbar) && !isActive)
-                this._disconnectExtensionSignals();
-
             if (isDtp && (isActive !== this._dtpActive)) {
                 this._dtpActive = isActive;
                 this._disconnectExtensionSignals();
-                if (isActive)
-                    this._connectExtensionSignals();
+                this._connectExtensionSignals();
                 this._reload();
             }
 
             if (isAzTaskbar && (isActive !== this._azTaskbarActive)) {
                 this._azTaskbarActive = isActive;
                 this._disconnectExtensionSignals();
-                if (isActive)
-                    this._connectExtensionSignals();
+                this._connectExtensionSignals();
                 this._reload();
             }
         }, this);
@@ -174,6 +169,8 @@ export default class ArcMenu extends Extension {
             panels = [Main.panel];
         }
 
+        const primaryPanelIndex = Main.layoutManager.primaryMonitor?.index;
+
         const panelsCount = multiMonitor ? panels.length : Math.min(panels.length, 1);
         for (var i = 0; i < panelsCount; i++) {
             if (!panels[i]) {
@@ -195,8 +192,6 @@ export default class ArcMenu extends Extension {
             const isPrimaryStandalone = this._isPrimaryStandalonePanel(panelParent, panelExtensionEnabled);
             if (isPrimaryStandalone)
                 panel = Main.panel;
-
-            const primaryPanelIndex = Main.layoutManager.primaryMonitor?.index;
 
             let monitorIndex = 0;
             if (panelParent.monitor) // App Icons Taskbar 'panelParent' may be Main.panel, which doesnt have a 'monitor' property.

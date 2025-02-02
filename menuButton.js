@@ -126,10 +126,10 @@ class ArcMenuMenuButton extends PanelMenu.Button {
 
         // Create Main Menus - ArcMenu and ArcMenu's context menu
         this.arcMenu = new ArcMenu(this, 0.5, St.Side.TOP);
-        this.arcMenu.connect('open-state-changed', this._onOpenStateChanged.bind(this));
+        this.arcMenu.connectObject('open-state-changed', this._onOpenStateChanged.bind(this), this);
 
         this.arcMenuContextMenu = new ArcMenuContextMenu(this, 0.5, St.Side.TOP);
-        this.arcMenuContextMenu.connect('open-state-changed', this._onOpenStateChanged.bind(this));
+        this.arcMenuContextMenu.connectObject('open-state-changed', this._onOpenStateChanged.bind(this), this);
 
         this.menuManager = new PopupMenu.PopupMenuManager();
         this.menuManager._changeMenu = () => {};
@@ -483,6 +483,9 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         this.menuManager = null;
         this.contextMenuManager = null;
         this.subMenuManager = null;
+
+        this.menuButtonWidget.destroy();
+        this.menuButtonWidget = null;
 
         this._panel.statusArea['ArcMenu'] = null;
         this._panel = null;

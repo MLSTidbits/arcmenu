@@ -96,5 +96,6 @@ export const RecentFilesManager = class ArcMenuRecentFilesManager {
     destroy() {
         this.cancelCurrentQueries();
         this._bookmarksFile = null;
+        this._recentFile = null;
     }
 };

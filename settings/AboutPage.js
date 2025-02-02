@@ -166,10 +166,10 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
                                 null
                             );
 
+                        // TODO: Replace this with `GioUnix.OutputStream` later
                         const outputStream = new Gio.UnixOutputStream({fd: stdin, close_fd: true});
                         GLib.close(stdout);
                         GLib.close(stderr);
-
                         outputStream.splice(settingsFile.read(null),
                             Gio.OutputStreamSpliceFlags.CLOSE_SOURCE | Gio.OutputStreamSpliceFlags.CLOSE_TARGET, null);
                     }

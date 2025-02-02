@@ -40,6 +40,8 @@ export class PlaceInfo extends EventEmitter {
     }
 
     destroy() {
+        this.file = null;
+        this.icon = null;
     }
 
     isRemovable() {
@@ -313,6 +315,7 @@ export const PlacesManager = class ArcMenuPlacesManager extends EventEmitter {
     }
 
     destroy() {
+        this._places.special.forEach(p => p.destroy());
         this._settings?.disconnectObject(this);
         this._settings = null;
 
@@ -320,6 +323,7 @@ export const PlacesManager = class ArcMenuPlacesManager extends EventEmitter {
 
         if (this._monitor)
             this._monitor.cancel();
+        this._monitor = null;
         if (this._bookmarkTimeoutId)
             GLib.source_remove(this._bookmarkTimeoutId);
     }
