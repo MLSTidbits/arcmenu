@@ -128,6 +128,12 @@
         <value value="0" nick="Full_Color"/>
         <value value="1" nick="Symbolic"/>
     </enum>
+    <enum id='org.gnome.shell.extensions.arcmenu.support-notifier-recurring-interval'>
+        <value value="0" nick="Off"/>
+        <value value="1" nick="30_Days"/>
+        <value value="2" nick="60_Days"/>
+        <value value="3" nick="90_Days"/>
+    </enum>
   <schema id="org.gnome.shell.extensions.arcmenu.pinned-apps-folders">
     <key name="pinned-apps" type="aa{ss}">
       <default>[]</default>
@@ -142,6 +148,10 @@
     <key type="t" name="support-notifier-date-shown">
       <default>0</default>
       <summary>A JS Date() of when a support notification was last sent.</summary>
+    </key>
+    <key name="support-notifier-recurring-interval" enum="org.gnome.shell.extensions.arcmenu.support-notifier-recurring-interval">
+      <default>'30_Days'</default>
+      <summary>How many days until next support notification is show.</summary>
     </key>
     <key type="i" name="menu-position-alignment">
       <default>50</default>

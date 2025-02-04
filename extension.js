@@ -35,7 +35,7 @@ export default class ArcMenu extends Extension {
 
         this.settings.connectObject('changed::multi-monitor', () => this._reload(), this);
         this.settings.connectObject('changed::dash-to-panel-standalone', () => this._reload(), this);
-        this.settingsControllers = [];
+        this.menuControllers = [];
 
         this.customStylesheet = null;
         Theming.createStylesheet();
@@ -77,14 +77,14 @@ export default class ArcMenu extends Extension {
         this._supportNotification.destroy();
         this._supportNotification = null;
 
-        this.searchProviderEmitter.destroy();
-        this.searchProviderEmitter = null;
-
         Theming.deleteStylesheet();
         this.customStylesheet = null;
 
         this._disableButtons();
-        this.settingsControllers = null;
+        this.menuControllers = null;
+
+        this.searchProviderEmitter.destroy();
+        this.searchProviderEmitter = null;
 
         this._arcmenuManager.destroy();
         this._arcmenuManager = null;
@@ -156,13 +156,10 @@ export default class ArcMenu extends Extension {
         let panelExtensionEnabled = false;
         let panels;
 
-        const azTaskbarActive = this._isExtensionActive(Constants.AZTASKBAR_UUID);
-        const dtpActive = this._isExtensionActive(Constants.DASH_TO_PANEL_UUID);
-
-        if (dtpActive && global.dashToPanel?.panels) {
+        if (this._dtpActive && global.dashToPanel?.panels) {
             panels = global.dashToPanel.panels.filter(p => p);
             panelExtensionEnabled = true;
-        } else if (azTaskbarActive && global.azTaskbar?.panels) {
+        } else if (this._azTaskbarActive && global.azTaskbar?.panels) {
             panels = global.azTaskbar.panels.filter(p => p);
             panelExtensionEnabled = true;
         } else {
@@ -181,7 +178,7 @@ export default class ArcMenu extends Extension {
             let panel, panelBox, panelParent;
             if (panelExtensionEnabled) {
                 panel = panels[i].panel;
-                panelBox = dtpActive ? panels[i].panelBox : panels[i];
+                panelBox = this._dtpActive ? panels[i].panelBox : panels[i];
                 panelParent = panels[i];
             } else {
                 panel = panels[i];
@@ -202,32 +199,30 @@ export default class ArcMenu extends Extension {
             const isPrimaryPanel = monitorIndex === primaryPanelIndex;
             const panelInfo = {panel, panelBox, panelParent, isPrimaryPanel};
 
-            const settingsController = new MenuController(panelInfo, monitorIndex);
+            const menuController = new MenuController(panelInfo, monitorIndex);
 
-            panel.connectObject('destroy', () => this._disableButton(settingsController), this);
+            panel.connectObject('destroy', () => this._disableButton(menuController, panel), this);
 
-            settingsController.enableButton();
-            settingsController.connectSettingsEvents();
-            this.settingsControllers.push(settingsController);
+            menuController.enableButton();
+            menuController.connectSettingsEvents();
+            this.menuControllers.push(menuController);
         }
     }
 
     _disableButtons() {
-        for (let i = this.settingsControllers.length - 1; i >= 0; --i) {
-            const sc = this.settingsControllers[i];
-            this._disableButton(sc);
+        for (let i = this.menuControllers.length - 1; i >= 0; --i) {
+            const mc = this.menuControllers[i];
+            this._disableButton(mc, mc.panel);
         }
     }
 
-    _disableButton(controller) {
-        if (controller.panel)
-            controller.panel.disconnectObject(this);
+    _disableButton(controller, panel) {
+        panel.disconnectObject(this);
 
-        const index = this.settingsControllers.indexOf(controller);
+        const index = this.menuControllers.indexOf(controller);
         if (index !== -1)
-            this.settingsControllers.splice(index, 1);
+            this.menuControllers.splice(index, 1);
 
         controller.destroy();
-        controller = null;
     }
 }

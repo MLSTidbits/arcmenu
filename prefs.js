@@ -4,6 +4,7 @@ import Gtk from 'gi://Gtk';
 import * as Constants from './constants.js';
 
 import {AboutPage} from './settings/AboutPage.js';
+import {DonatePage} from './settings/DonatePage.js';
 import {GeneralPage} from './settings/GeneralPage.js';
 import {MenuButtonPage} from './settings/MenuButtonPage.js';
 import {MenuPage} from './settings/MenuPage.js';
@@ -83,6 +84,10 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
         window.add(menuButtonPage);
         window.pages.push(menuButtonPage);
 
+        const donatePage = new DonatePage(settings, this.metadata);
+        window.add(donatePage);
+        window.pages.push(donatePage);
+
         const aboutPage = new AboutPage(this.metadata);
         window.add(aboutPage);
         window.pages.push(aboutPage);
@@ -116,6 +121,8 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
             window.set_visible_page_name('AboutPage');
         } else if (prefsVisiblePage === Constants.SettingsPage.GENERAL) {
             window.set_visible_page_name('GeneralPage');
+        } else if (prefsVisiblePage === Constants.SettingsPage.DONATE) {
+            window.set_visible_page_name('DonatePage');
         }
 
         settings.set_int('prefs-visible-page', Constants.SettingsPage.MAIN);

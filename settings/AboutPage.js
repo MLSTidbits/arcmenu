@@ -18,8 +18,6 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
             name: 'AboutPage',
         });
 
-        const PAYPAL_LINK = `https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=53CWA7NR743WC&item_name=Support+${metadata.name}&source=url`;
-        const BUYMEACOFFEE_LINK = 'https://buymeacoffee.com/azaech';
         const PROJECT_DESCRIPTION = _('Application Menu Extension for GNOME');
         const PROJECT_IMAGE = 'settings-arcmenu-logo';
         const SCHEMA_PATH = '/org/gnome/shell/extensions/arcmenu/';
@@ -122,26 +120,10 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         infoGroup.add(reportIssueRow);
         // -----------------------------------------------------------------------
 
-        // Donations --------------------------------------------------------------
-        const donateGroup = new Adw.PreferencesGroup({
-            title: _('Help Support This Project'),
-            description: _('Thank you for using %s! If you enjoy it and would like to help support its continued development, please consider making a donation. Your support, no matter the amount, makes a big difference.').format(_('ArcMenu')),
-        });
-        this.add(donateGroup);
-
-        const paypalRow = this._createLinkRow(_('Donate via PayPal'), PAYPAL_LINK);
-        donateGroup.add(paypalRow);
-
-        const buyMeACoffeeRow = this._createLinkRow(_('Buy Me a Coffee'), BUYMEACOFFEE_LINK);
-        donateGroup.add(buyMeACoffeeRow);
-
-
-        // ------------------------------------------------------------------------
-
         // Save/Load Settings----------------------------------------------------------
         const miscGroup = new Adw.PreferencesGroup();
         this.add(miscGroup);
-        this.add(miscGroup);
+
         const settingsRow = new Adw.ActionRow({
             title: _('ArcMenu Settings'),
         });

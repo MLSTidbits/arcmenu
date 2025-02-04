@@ -59,6 +59,7 @@ export const SettingsPage = {
     POWER_OPTIONS: 12,
     EXTRA_CATEGORIES: 13,
     PINNED_APPS: 14,
+    DONATE: 15,
 };
 
 export const DefaultMenuViewTognee = {

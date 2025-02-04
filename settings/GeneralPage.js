@@ -296,7 +296,7 @@ class ArcMenuHotkeyDialog extends Adw.Window {
         this.set_content(sidebarToolBarView);
 
         const headerBar = new Adw.HeaderBar({
-            show_end_title_buttons: false,
+            show_end_title_buttons: true,
             show_start_title_buttons: false,
         });
         sidebarToolBarView.add_top_bar(headerBar);

@@ -404,6 +404,7 @@ export class BaseMenuItem extends St.BoxLayout {
         this.isDestroyed = true;
         this._menuButton = null;
         this._arcMenu = null;
+        this._menuLayout = null;
     }
 }
 
@@ -2669,6 +2670,11 @@ export class FolderDialog extends PopupMenu.PopupMenu {
         }
         this.dummyCursor.destroy();
         this.dummyCursor = null;
+
+        this._menuLayout = null;
+        this._menuButton = null;
+        this._arcMenu = null;
+        this._sourceActor = null;
         super.destroy();
     }
 

@@ -107,11 +107,10 @@ export const AppContextMenu = class ArcMenuAppContextMenu extends AppMenu {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem(), 8);
 
         ArcMenuManager.settings.connectObject('changed::pinned-apps', () => this._updateArcMenuPinnedItem(), this.actor);
-        this.desktopExtensionStateChangedId =
-            Main.extensionManager.connect('extension-state-changed', (data, changedExtension) => {
-                if (DESKTOP_ICONS_UUIDS.includes(changedExtension.uuid))
-                    this._updateDesktopShortcutItem();
-            });
+        Main.extensionManager.connectObject('extension-state-changed', (data, changedExtension) => {
+            if (DESKTOP_ICONS_UUIDS.includes(changedExtension.uuid))
+                this._updateDesktopShortcutItem();
+        });
 
         this.connect('active-changed', () => this._activeChanged());
     }
@@ -141,10 +140,8 @@ export const AppContextMenu = class ArcMenuAppContextMenu extends AppMenu {
         this._createDesktopShortcutItem = null;
         this._arcMenuPinnedItem = null;
         this._disconnectSignals();
-        if (this.desktopExtensionStateChangedId) {
-            Main.extensionManager.disconnect(this.desktopExtensionStateChangedId);
-            this.desktopExtensionStateChangedId = null;
-        }
+
+        Main.extensionManager.disconnectObject(this);
 
         this._menuButton = null;
         this._pinnedAppData = null;

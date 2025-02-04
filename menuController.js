@@ -91,8 +91,8 @@ export const MenuController = class {
 
     _getAllMenus() {
         const menus = [];
-        for (let i = 0; i < ArcMenuManager.settingsControllers.length; i++) {
-            const menuButton = ArcMenuManager.settingsControllers[i]._menuButton;
+        for (let i = 0; i < ArcMenuManager.menuControllers.length; i++) {
+            const menuButton = ArcMenuManager.menuControllers[i]._menuButton;
             menus.push(menuButton.arcMenu);
         }
         if (this.runnerMenu)
@@ -198,8 +198,8 @@ export const MenuController = class {
             ArcMenuManager.settings.set_strv('recently-installed-apps', newRecentApps);
         }
 
-        for (let i = 0; i < ArcMenuManager.settingsControllers.length; i++) {
-            const menuButton = ArcMenuManager.settingsControllers[i]._menuButton;
+        for (let i = 0; i < ArcMenuManager.menuControllers.length; i++) {
+            const menuButton = ArcMenuManager.menuControllers[i]._menuButton;
             menuButton.reloadApplications();
         }
 
@@ -243,7 +243,7 @@ export const MenuController = class {
         if (this.runnerMenu && this.runnerMenu.arcMenu.isOpen)
             this.runnerMenu.toggleMenu();
         if (global.dashToPanel || global.azTaskbar) {
-            const MultipleArcMenus = ArcMenuManager.settingsControllers.length > 1;
+            const MultipleArcMenus = ArcMenuManager.menuControllers.length > 1;
             const ShowArcMenuOnPrimaryMonitor = ArcMenuManager.settings.get_boolean('hotkey-open-primary-monitor');
             if (MultipleArcMenus && ShowArcMenuOnPrimaryMonitor)
                 this._toggleMenuOnMonitor(Main.layoutManager.primaryMonitor);
@@ -258,9 +258,9 @@ export const MenuController = class {
 
     _toggleMenuOnMonitor(monitor) {
         let currentMonitorIndex = 0;
-        for (let i = 0; i < ArcMenuManager.settingsControllers.length; i++) {
-            const menuButton = ArcMenuManager.settingsControllers[i]._menuButton;
-            const {monitorIndex} = ArcMenuManager.settingsControllers[i];
+        for (let i = 0; i < ArcMenuManager.menuControllers.length; i++) {
+            const menuButton = ArcMenuManager.menuControllers[i]._menuButton;
+            const {monitorIndex} = ArcMenuManager.menuControllers[i];
 
             if (monitor.index === monitorIndex) {
                 currentMonitorIndex = i;
@@ -272,12 +272,12 @@ export const MenuController = class {
         }
 
         // open the current monitors menu
-        ArcMenuManager.settingsControllers[currentMonitorIndex]._menuButton.toggleMenu();
+        ArcMenuManager.menuControllers[currentMonitorIndex]._menuButton.toggleMenu();
     }
 
     _closeAllArcMenus() {
-        for (let i = 0; i < ArcMenuManager.settingsControllers.length; i++) {
-            const menuButton = ArcMenuManager.settingsControllers[i]._menuButton;
+        for (let i = 0; i < ArcMenuManager.menuControllers.length; i++) {
+            const menuButton = ArcMenuManager.menuControllers[i]._menuButton;
             if (menuButton.arcMenu.isOpen)
                 menuButton.toggleMenu();
             menuButton.closeContextMenu();

@@ -463,10 +463,9 @@ export class SearchResults extends St.BoxLayout {
         this._searchSettings.connectObject('changed::disable-external', this._reloadRemoteProviders.bind(this), this);
         this._searchSettings.connectObject('changed::sort-order', this._reloadRemoteProviders.bind(this), this);
 
-        const {extension} = ArcMenuManager;
-        extension.searchProviderEmitter.connectObject('search-provider-added',
+        ArcMenuManager.extension.searchProviderEmitter.connectObject('search-provider-added',
             (_s, provider) => this._registerProvider(provider), this);
-        extension.searchProviderEmitter.connectObject('search-provider-removed',
+        ArcMenuManager.extension.searchProviderEmitter.connectObject('search-provider-removed',
             (_s, provider) => this._unregisterProvider(provider), this);
 
         this._searchTimeoutId = null;
@@ -509,6 +508,8 @@ export class SearchResults extends St.BoxLayout {
 
         this.recentFilesManager.destroy();
         this.recentFilesManager = null;
+
+        ArcMenuManager.extension.searchProviderEmitter.disconnectObject(this);
         this._searchSettings.disconnectObject(this);
 
         this._cancellable.cancel();
