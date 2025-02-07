@@ -11,27 +11,15 @@ import {SettingsPage} from './constants.js';
 const PROJECT_NAME = 'ArcMenu';
 const PROJECT_ICON = '/icons/hicolor/16x16/actions/settings-arcmenu-logo.svg';
 const PROJECT_GITLAB = 'https://gitlab.com/arcmenu/ArcMenu/-/releases/v';
-const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
+
 const [ShellVersion] = Config.PACKAGE_VERSION.split('.').map(s => Number(s));
-
-const NotifyType = {
-    NEW_VERSION: 0,
-    RECURRING: 1,
-};
-
-const RecurringInterval = {
-    OFF: 0,
-    DAYS_30: 1,
-    DAYS_60: 2,
-    DAYS_90: 3,
-};
 
 /**
  * A MessageTray notification
  *
  * Shows users what's new and displays donation options.
  *
- * Shown once per new release and/or at a user defined interval
+ * Shown once per new release/version
  * @param {*} extension
  */
 export class SupportNotification {
@@ -56,33 +44,23 @@ export class SupportNotification {
     }
 
     _maybeShowNotification() {
+        const shouldShowNotification = this._settings.get_boolean('support-notifier-enabled');
+        if (!shouldShowNotification)
+            return;
+
         const previousNotificationVersion = this._settings.get_int('support-notifier-project-version');
-        const previousNotificationDate = this._settings.get_uint64('support-notifier-date-shown');
-        const recurringInterval = this._settings.get_enum('support-notifier-recurring-interval');
+        const shouldNotifyNewVersion = previousNotificationVersion < this._version;
 
-        const dateNow = Date.now();
-
-        const isNewVersion = previousNotificationVersion < this._version;
-        const hasTimeElapsed = this._hasTimeElapsed(previousNotificationDate, dateNow, recurringInterval);
-
-        if (isNewVersion || hasTimeElapsed) {
+        if (shouldNotifyNewVersion) {
             this._settings.set_int('support-notifier-project-version', this._version);
-            this._settings.set_uint64('support-notifier-date-shown', dateNow);
+            this._showNotification();
         }
-
-        if (isNewVersion)
-            this._showNotification(NotifyType.NEW_VERSION);
-        else if (hasTimeElapsed)
-            this._showNotification(NotifyType.RECURRING);
     }
 
-    _showNotification(notifyType) {
+    _showNotification() {
         /* TRANSLATORS: This will display as "ProjectName v21 Released!" as an example.*/
-        const newVersionTitle = _('%s v%s Released!').format(PROJECT_NAME, this._version);
-        const monthlyTitle = _('Help Support %s').format(PROJECT_NAME);
-
-        const title = notifyType === NotifyType.NEW_VERSION ? newVersionTitle : monthlyTitle;
-        const body = _('Thank you for using %s! If you enjoy it and would like to help support its continued development, please consider making a donation. Your support, no matter the amount, makes a big difference.').format(PROJECT_NAME);
+        const title = _('%s v%s Released!').format(PROJECT_NAME, this._version);
+        const body = _('Thank you for using %s! If you enjoy it and would like to help support its continued development, please consider making a donation.').format(PROJECT_NAME);
         const gicon = Gio.icon_new_for_string(this._iconPath);
 
         const source = this._getSource();
@@ -92,7 +70,7 @@ export class SupportNotification {
         const notification = this._getNotification(source, title, body, gicon);
         notification.urgency = MessageTray.Urgency.CRITICAL;
         notification.resident = true;
-        this._addNotificationActions(notification, notifyType);
+        this._addNotificationActions(notification);
 
         if (ShellVersion >= 46) {
             source.addNotification(notification);
@@ -113,46 +91,15 @@ export class SupportNotification {
         return ShellVersion >= 46 ? MessageTray.getSystemSource() : new MessageTray.SystemNotificationSource();
     }
 
-    _addNotificationActions(notification, notifyType) {
-        if (notifyType === NotifyType.NEW_VERSION) {
-            notification.addAction(_("What's new?"), () => this._openUri(this._whatsNewLink));
-        } else if (notifyType === NotifyType.RECURRING) {
-            notification.addAction(_("Don't Show Again"), () => {
-                this._setDontShowAgain();
-                notification.destroy();
-            });
-        }
-        notification.addAction(_('Make a Donation'), () => this._openSettingsDonatePage());
-    }
-
-    _hasTimeElapsed(startTimestamp, endTimestamp, recurringInterval) {
-        if (recurringInterval === RecurringInterval.OFF)
-            return false;
-
-        if (startTimestamp === 0)
-            return true;
-
-        let days;
-        if (recurringInterval === RecurringInterval.DAYS_30)
-            days = 30;
-        else if (recurringInterval === RecurringInterval.DAYS_60)
-            days = 60;
-        else if (recurringInterval === RecurringInterval.DAYS_90)
-            days = 90;
-        else
-            return false;
-
-        const elapsedTime = endTimestamp - startTimestamp;
-        return elapsedTime > (days * MILLISECONDS_PER_DAY);
+    _addNotificationActions(notification) {
+        notification.addAction(_('Donate'), () => this._openSettingsDonatePage());
+        notification.addAction(_("What's new?"), () => this._openUri(this._whatsNewLink));
+        notification.addAction(_('Dismiss'), () => notification.destroy());
     }
 
     _openSettingsDonatePage() {
         this._settings.set_int('prefs-visible-page', SettingsPage.DONATE);
         this._extension.openPreferences();
-    }
-
-    _setDontShowAgain() {
-        this._settings.set_enum('support-notifier-recurring-interval', RecurringInterval.OFF);
     }
 
     _openUri(uri) {

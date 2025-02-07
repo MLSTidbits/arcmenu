@@ -21,7 +21,7 @@ class ArcMenuDonatePage extends Adw.PreferencesPage {
 
         const donateGroup = new Adw.PreferencesGroup({
             title: _('Help Support %s').format(_(PROJECT_NAME)),
-            description: _('Thank you for using %s! If you enjoy it and would like to help support its continued development, please consider making a donation. Your support, no matter the amount, makes a big difference.').format(_(PROJECT_NAME)),
+            description: _('Thank you for using %s! If you enjoy it and would like to help support its continued development, please consider making a donation.').format(_(PROJECT_NAME)),
         });
         this.add(donateGroup);
 
@@ -52,21 +52,20 @@ class ArcMenuDonatePage extends Adw.PreferencesPage {
         const recurringNotifcationGroup = new Adw.PreferencesGroup();
         this.add(recurringNotifcationGroup);
 
-        const recurringNotifcationList = new Gtk.StringList();
-        recurringNotifcationList.append(_('Off'));
-        recurringNotifcationList.append(_('30 Days'));
-        recurringNotifcationList.append(_('60 Days'));
-        recurringNotifcationList.append(_('90 Days'));
-        const recurringNotifcationRow = new Adw.ComboRow({
+        const enableNotificationsSwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+            active: this._settings.get_boolean('support-notifier-enabled'),
+        });
+        enableNotificationsSwitch.connect('notify::active', widget => {
+            this._settings.set_boolean('support-notifier-enabled', widget.get_active());
+        });
+        const enableNotificationsRow = new Adw.ActionRow({
             title: _('Message Tray Notifications'),
-            subtitle: _('Show a message tray donation notification once every x days.'),
-            model: recurringNotifcationList,
-            selected: this._settings.get_enum('support-notifier-recurring-interval'),
+            subtitle: _('Show a notification when %s receives an update.').format(_(PROJECT_NAME)),
+            activatable_widget: enableNotificationsSwitch,
         });
-        recurringNotifcationRow.connect('notify::selected', widget => {
-            this._settings.set_enum('support-notifier-recurring-interval', widget.selected);
-        });
-        recurringNotifcationGroup.add(recurringNotifcationRow);
+        enableNotificationsRow.add_suffix(enableNotificationsSwitch);
+        recurringNotifcationGroup.add(enableNotificationsRow);
     }
 
     _createLinkRow(title, iconName, uri, subtitle = null) {
