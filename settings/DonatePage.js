@@ -49,8 +49,8 @@ class ArcMenuDonatePage extends Adw.PreferencesPage {
         });
         thankYouBox.append(thankYouLabel);
 
-        const recurringNotifcationGroup = new Adw.PreferencesGroup();
-        this.add(recurringNotifcationGroup);
+        const enableNotificationsGroup = new Adw.PreferencesGroup();
+        this.add(enableNotificationsGroup);
 
         const enableNotificationsSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
@@ -65,7 +65,7 @@ class ArcMenuDonatePage extends Adw.PreferencesPage {
             activatable_widget: enableNotificationsSwitch,
         });
         enableNotificationsRow.add_suffix(enableNotificationsSwitch);
-        recurringNotifcationGroup.add(enableNotificationsRow);
+        enableNotificationsGroup.add(enableNotificationsRow);
     }
 
     _createLinkRow(title, iconName, uri, subtitle = null) {
