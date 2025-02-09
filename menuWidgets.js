@@ -969,7 +969,6 @@ export class PowerButton extends ArcMenuButtonItem {
     }
 
     activate() {
-        this._menuLayout.arcMenu.toggle();
         activatePowerOption(this.powerType);
     }
 }
@@ -2557,7 +2556,6 @@ export class ApplicationMenuItem extends BaseMenuItem {
     }
 
     activateSearchResult(provider, metaInfo, terms) {
-        this._menuLayout.arcMenu.toggle();
         if (provider.activateResult) {
             provider.activateResult(metaInfo.id, terms);
             if (metaInfo.clipboardText)
@@ -2591,9 +2589,9 @@ export class ApplicationMenuItem extends BaseMenuItem {
             this.activateSearchResult(this.provider, this.metaInfo, this.resultsView.terms, event);
         } else {
             this._app.open_new_window(-1);
-            this._menuLayout.arcMenu.toggle();
             super.activate(event);
         }
+        this._menuLayout.arcMenu.toggle();
     }
 }
 
