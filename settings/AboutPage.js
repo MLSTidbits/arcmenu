@@ -11,19 +11,23 @@ import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions
 
 export const AboutPage = GObject.registerClass(
 class ArcMenuAboutPage extends Adw.PreferencesPage {
-    _init(metadata) {
+    _init(metadata, path) {
         super._init({
             title: _('About'),
             icon_name: 'help-about-symbolic',
             name: 'AboutPage',
         });
 
+        const PROJECT_NAME = _('ArcMenu');
         const PROJECT_DESCRIPTION = _('Application Menu Extension for GNOME');
         const PROJECT_IMAGE = 'settings-arcmenu-logo';
         const SCHEMA_PATH = '/org/gnome/shell/extensions/arcmenu/';
+        const VERSION = metadata['version-name'] ? metadata['version-name'] : metadata.version.toString();
 
         // Project Logo, title, description-------------------------------------
         const projectHeaderGroup = new Adw.PreferencesGroup();
+        this.add(projectHeaderGroup);
+
         const projectHeaderBox = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL,
             hexpand: false,
@@ -37,7 +41,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         });
 
         const projectTitleLabel = new Gtk.Label({
-            label: _('ArcMenu'),
+            label: _(PROJECT_NAME),
             css_classes: ['title-1'],
             vexpand: true,
             valign: Gtk.Align.FILL,
@@ -52,8 +56,6 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         projectHeaderBox.append(projectTitleLabel);
         projectHeaderBox.append(projectDescriptionLabel);
         projectHeaderGroup.add(projectHeaderBox);
-
-        this.add(projectHeaderGroup);
         // -----------------------------------------------------------------------
 
         // Extension/OS Info------------------------------------------------
@@ -61,13 +63,48 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         this.add(infoGroup);
 
         const projectVersionRow = new Adw.ActionRow({
-            title: _('ArcMenu Version'),
+            /* TRANSLATORS: 'PROJECT_NAME' Version*/
+            title: _('%s Version').format(PROJECT_NAME),
         });
         projectVersionRow.add_suffix(new Gtk.Label({
-            label: metadata['version-name'] ? metadata['version-name'] : metadata.version.toString(),
+            label: VERSION,
             css_classes: ['dim-label'],
         }));
         infoGroup.add(projectVersionRow);
+
+        /* TRANSLATORS: 'PROJECT_NAME' - Release Notes*/
+        const {subpage: whatsNewSubPage, page: whatsNewPage} = this._createSubPage(_('%s - Release Notes').format(PROJECT_NAME));
+        this._whatsNewSubPage = whatsNewSubPage;
+        const whatsNewRow = this._createSubPageRow(_("What's New"), whatsNewSubPage);
+        infoGroup.add(whatsNewRow);
+
+        const whatsNewGroup = new Adw.PreferencesGroup();
+        whatsNewPage.add(whatsNewGroup);
+
+        let releaseNotes = '';
+        try {
+            const fileContent = GLib.file_get_contents(`${path}/RELEASENOTES`)[1];
+            const decoder = new TextDecoder('utf-8');
+            releaseNotes = decoder.decode(fileContent);
+        } catch (e) {
+            releaseNotes = "Failed to load 'What's New' content.";
+        }
+
+        const releaseNotesLabel = new Gtk.Label({
+            label: releaseNotes,
+            use_markup: true,
+            xalign: Gtk.Align.START,
+            justify: Gtk.Justification.LEFT,
+            margin_top: 14,
+            margin_bottom: 14,
+            margin_start: 14,
+            margin_end: 14,
+        });
+        const releaseNotesBox = new Gtk.Box({
+            css_classes: ['card'],
+        });
+        releaseNotesBox.append(releaseNotesLabel);
+        whatsNewGroup.add(releaseNotesBox);
 
         if (metadata.commit) {
             const commitRow = new Adw.ActionRow({
@@ -113,7 +150,8 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         // -----------------------------------------------------------------------
 
         // Links -----------------------------------------------------------------
-        const gitlabRow = this._createLinkRow(_('ArcMenu on GitLab'), `${metadata.url}`);
+        /* TRANSLATORS: 'PROJECT_NAME' on GitLab*/
+        const gitlabRow = this._createLinkRow(_('%s on GitLab').format(PROJECT_NAME), `${metadata.url}`);
         infoGroup.add(gitlabRow);
 
         const reportIssueRow = this._createLinkRow(_('Report an Issue'), `${metadata.url}/-/issues`);
@@ -121,11 +159,12 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         // -----------------------------------------------------------------------
 
         // Save/Load Settings----------------------------------------------------------
-        const miscGroup = new Adw.PreferencesGroup();
-        this.add(miscGroup);
+        const settingsGroup = new Adw.PreferencesGroup();
+        this.add(settingsGroup);
 
         const settingsRow = new Adw.ActionRow({
-            title: _('ArcMenu Settings'),
+            /* TRANSLATORS: 'PROJECT_NAME' Settings*/
+            title: _('%s Settings').format(PROJECT_NAME),
         });
         const loadButton = new Gtk.Button({
             label: _('Load'),
@@ -140,13 +179,13 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
                     if (filename && GLib.file_test(filename, GLib.FileTest.EXISTS)) {
                         const settingsFile = Gio.File.new_for_path(filename);
                         const [success_, pid_, stdin, stdout, stderr] =
-                            GLib.spawn_async_with_pipes(
-                                null,
-                                ['dconf', 'load', SCHEMA_PATH],
-                                null,
-                                GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
-                                null
-                            );
+                                   GLib.spawn_async_with_pipes(
+                                       null,
+                                       ['dconf', 'load', SCHEMA_PATH],
+                                       null,
+                                       GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+                                       null
+                                   );
 
                         // TODO: Replace this with `GioUnix.OutputStream` later
                         const outputStream = new Gio.UnixOutputStream({fd: stdin, close_fd: true});
@@ -179,10 +218,13 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         });
         settingsRow.add_suffix(saveButton);
         settingsRow.add_suffix(loadButton);
-        miscGroup.add(settingsRow);
+        settingsGroup.add(settingsRow);
         // -----------------------------------------------------------------------
 
-        // Credits / Legal ----------------------------------------------------------------
+        // What's New / Credits / Legal ----------------------------------------------------------------
+        const miscGroup = new Adw.PreferencesGroup();
+        this.add(miscGroup);
+
         const {subpage: creditsSubPage, page: creditsPage} = this._createSubPage(_('Credits'));
         const creditsRow = this._createSubPageRow(_('Credits'), creditsSubPage);
         miscGroup.add(creditsRow);
@@ -191,11 +233,11 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
             title: _('Brought to you by'),
         });
         creditsPage.add(codeByGroup);
-        const creditsRow1 =  this._createLinkRow('Andrew Zaech (2019 - current)', 'https://gitlab.com/AndrewZaech', 'ArcMenu maintainer and developer');
+        const creditsRow1 = this._createLinkRow('Andrew Zaech (2019 - current)', 'https://gitlab.com/AndrewZaech', 'ArcMenu maintainer and developer');
         codeByGroup.add(creditsRow1);
-        const creditsRow2 =  this._createLinkRow('Andy C (2017 - 2020)', 'https://gitlab.com/LinxGem33', 'ArcMenu founder, maintainer, and digital art designer');
+        const creditsRow2 = this._createLinkRow('Andy C (2017 - 2020)', 'https://gitlab.com/LinxGem33', 'ArcMenu founder, maintainer, and digital art designer');
         codeByGroup.add(creditsRow2);
-        const creditsRow3 =  this._createLinkRow('Alexander Rüedlinger (2017)', 'https://github.com/lexruee', 'Developer');
+        const creditsRow3 = this._createLinkRow('Alexander Rüedlinger (2017)', 'https://github.com/lexruee', 'Developer');
         codeByGroup.add(creditsRow3);
 
         const historyGroup = new Adw.PreferencesGroup({
@@ -252,6 +294,10 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         });
         gnuSoftwareGroup.add(gnuSofwareLabel);
         // -----------------------------------------------------------------------
+    }
+
+    showWhatsNewPage() {
+        this.get_root().push_subpage(this._whatsNewSubPage);
     }
 
     _createSubPage(title) {

@@ -14,7 +14,7 @@ import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js'
 
 const padding = 10;
 
-export const Layout = class RunnerLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -104,6 +104,7 @@ export const Layout = class RunnerLayout extends BaseMenuLayout {
 
         this.setDefaultMenuView();
         this.updateWidth();
+        this._connectAppChangedEvents();
     }
 
     updateWidth(setDefaultMenuView) {
@@ -215,7 +216,7 @@ export const Layout = class RunnerLayout extends BaseMenuLayout {
 
         super._onDestroy();
     }
-};
+}
 
 class RunnerTweaksButton extends MW.ArcMenuButtonItem {
     static {

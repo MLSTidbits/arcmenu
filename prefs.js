@@ -26,7 +26,6 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
 
         window.set_search_enabled(true);
         window.set_default_size(settings.get_int('settings-width'), settings.get_int('settings-height'));
-        window.set_title(_('ArcMenu Settings'));
 
         let pageChangedId = settings.connect('changed::prefs-visible-page', () => {
             if (settings.get_int('prefs-visible-page') !== Constants.SettingsPage.MAIN)
@@ -88,7 +87,7 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
         window.add(donatePage);
         window.pages.push(donatePage);
 
-        const aboutPage = new AboutPage(this.metadata);
+        const aboutPage = new AboutPage(this.metadata, this.path);
         window.add(aboutPage);
         window.pages.push(aboutPage);
 
@@ -123,6 +122,10 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
             window.set_visible_page_name('GeneralPage');
         } else if (prefsVisiblePage === Constants.SettingsPage.DONATE) {
             window.set_visible_page_name('DonatePage');
+        } else if (prefsVisiblePage === Constants.SettingsPage.WHATS_NEW) {
+            window.set_visible_page_name('AboutPage');
+            const page = window.get_visible_page();
+            page.showWhatsNewPage();
         }
 
         settings.set_int('prefs-visible-page', Constants.SettingsPage.MAIN);

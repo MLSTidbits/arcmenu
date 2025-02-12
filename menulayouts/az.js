@@ -9,7 +9,7 @@ import * as MW from '../menuWidgets.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-export const Layout = class AzLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -129,6 +129,7 @@ export const Layout = class AzLayout extends BaseMenuLayout {
         this.loadCategories();
         this.loadPinnedApps();
         this.setDefaultMenuView();
+        this._connectAppChangedEvents();
     }
 
     _createExtraButtons() {
@@ -269,4 +270,4 @@ export const Layout = class AzLayout extends BaseMenuLayout {
         this.allAppsButton.destroy();
         super._onDestroy();
     }
-};
+}

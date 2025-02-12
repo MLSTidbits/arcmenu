@@ -13,7 +13,7 @@ import * as Utils from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-export const Layout = class InsiderLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -109,6 +109,7 @@ export const Layout = class InsiderLayout extends BaseMenuLayout {
         this._createPinnedAppsMenu();
         this.setDefaultMenuView();
         this.activeCategoryType = Constants.CategoryType.HOME_SCREEN;
+        this._connectAppChangedEvents();
     }
 
     _createExtraButtons() {
@@ -269,7 +270,7 @@ export const Layout = class InsiderLayout extends BaseMenuLayout {
 
         this._pinnedAppsGrid.setColumns(1);
     }
-};
+}
 
 class PinnedAppsButton extends MW.ArcMenuButtonItem {
     static {
@@ -278,7 +279,7 @@ class PinnedAppsButton extends MW.ArcMenuButtonItem {
 
     constructor(menuLayout) {
         super(menuLayout, _('Pinned Apps'), 'open-menu-symbolic');
-        this.toggleMenuOnClick = false;
+        this._closeMenuOnActivate = false;
     }
 
     activate(event) {

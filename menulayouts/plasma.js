@@ -17,7 +17,7 @@ import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js'
 
 const [ShellVersion] = Config.PACKAGE_VERSION.split('.').map(s => Number(s));
 
-export const Layout = class PlasmaLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -219,6 +219,7 @@ export const Layout = class PlasmaLayout extends BaseMenuLayout {
         this.loadCategories();
         this.loadPinnedApps();
         this.setDefaultMenuView();
+        this._connectAppChangedEvents();
     }
 
     populateFrequentAppsList(categoryMenuItem) {
@@ -440,7 +441,7 @@ export const Layout = class PlasmaLayout extends BaseMenuLayout {
 
         super._onDestroy();
     }
-};
+}
 
 class PlasmaMenuItem extends MW.BaseMenuItem {
     static {

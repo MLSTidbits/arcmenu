@@ -12,7 +12,7 @@ import * as MW from '../menuWidgets.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-export const Layout = class RavenLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -155,6 +155,7 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
         this.loadPinnedApps();
 
         this.setDefaultMenuView();
+        this._connectAppChangedEvents();
     }
 
     _updateWidgets() {
@@ -339,4 +340,4 @@ export const Layout = class RavenLayout extends BaseMenuLayout {
 
         super._onDestroy();
     }
-};
+}

@@ -31,7 +31,6 @@ export const MenuController = class {
             };
         }
 
-        this._settingsConnections = new Utils.SettingsConnectionsHandler();
         this._menuButton = new MenuButton(panelInfo, this.monitorIndex);
 
         if (this.isPrimaryPanel) {
@@ -101,56 +100,63 @@ export const MenuController = class {
         return menus;
     }
 
+    _connectSettings(settings, callback) {
+        ArcMenuManager.settings.connectObject(
+            ...settings.flatMap(setting => [`changed::${setting}`, callback]),
+            this
+        );
+    }
+
     connectSettingsEvents() {
-        this._settingsConnections.connect('override-menu-theme', 'menu-background-color', 'menu-foreground-color',
-            'menu-border-color', 'menu-border-width', 'menu-border-radius', 'menu-font-size', 'menu-separator-color',
-            'menu-item-hover-bg-color', 'menu-item-hover-fg-color', 'menu-item-active-bg-color',
-            'menu-item-active-fg-color', 'menu-button-fg-color', 'menu-button-bg-color',
-            'menu-button-hover-bg-color', 'menu-button-hover-fg-color', 'menu-button-active-bg-color',
-            'menu-button-active-fg-color', 'menu-button-border-radius', 'menu-button-border-width',
-            'menu-button-border-color', 'menu-arrow-rise', 'search-entry-border-radius',
+        this._connectSettings(
+            ['override-menu-theme', 'menu-background-color', 'menu-foreground-color', 'search-entry-border-radius',
+                'menu-border-color', 'menu-border-width', 'menu-border-radius', 'menu-font-size', 'menu-separator-color',
+                'menu-item-hover-bg-color', 'menu-item-hover-fg-color', 'menu-item-active-bg-color', 'menu-button-border-color',
+                'menu-item-active-fg-color', 'menu-button-fg-color', 'menu-button-bg-color', 'menu-arrow-rise',
+                'menu-button-hover-bg-color', 'menu-button-hover-fg-color', 'menu-button-active-bg-color',
+                'menu-button-active-fg-color', 'menu-button-border-radius', 'menu-button-border-width'],
             this._overrideMenuTheme.bind(this));
 
-        this._settingsConnections.connect('arcmenu-hotkey', 'runner-hotkey', this._updateHotKeyBinder.bind(this));
+        this._connectSettings(['arcmenu-hotkey', 'runner-hotkey'], this._updateHotKeyBinder.bind(this));
 
-        this._settingsConnections.connect('position-in-panel', 'menu-button-position-offset',
+        this._connectSettings(['position-in-panel', 'menu-button-position-offset'],
             this._setButtonPosition.bind(this));
 
-        this._settingsConnections.connect('menu-button-icon', 'distro-icon', 'arc-menu-icon', 'custom-menu-button-icon',
+        this._connectSettings(['menu-button-icon', 'distro-icon', 'arc-menu-icon', 'custom-menu-button-icon'],
             this._setButtonIcon.bind(this));
 
-        this._settingsConnections.connect('directory-shortcuts', 'application-shortcuts', 'extra-categories',
-            'power-options', 'show-external-devices', 'show-bookmarks', 'disable-user-avatar',
-            'avatar-style', 'enable-activities-shortcut', 'enable-horizontal-flip', 'power-display-style',
-            'searchbar-default-bottom-location', 'searchbar-default-top-location', 'multi-lined-labels',
-            'apps-show-extra-details', 'show-search-result-details', 'search-provider-open-windows',
-            'search-provider-recent-files', 'misc-item-icon-size', 'windows-disable-pinned-apps',
-            'disable-scrollview-fade-effect', 'windows-disable-frequent-apps', 'default-menu-view',
-            'default-menu-view-tognee', 'group-apps-alphabetically-list-layouts', 'group-apps-alphabetically-grid-layouts',
-            'menu-item-grid-icon-size', 'menu-item-icon-size', 'button-item-icon-size', 'quicklinks-item-icon-size',
-            'menu-item-category-icon-size', 'category-icon-type', 'shortcut-icon-type',
-            'arcmenu-extra-categories-links', 'arcmenu-extra-categories-links-location',
-            'runner-show-frequent-apps', 'default-menu-view-redmond', 'disable-recently-installed-apps',
-            'runner-search-display-style', 'raven-search-display-style', 'custom-grid-icon-size', 'show-category-sub-menus',
+        this._connectSettings(
+            ['directory-shortcuts', 'application-shortcuts', 'extra-categories', 'custom-grid-icon-size',
+                'power-options', 'show-external-devices', 'show-bookmarks', 'disable-user-avatar', 'runner-search-display-style',
+                'avatar-style', 'enable-activities-shortcut', 'enable-horizontal-flip', 'power-display-style',
+                'searchbar-default-bottom-location', 'searchbar-default-top-location', 'multi-lined-labels',
+                'apps-show-extra-details', 'show-search-result-details', 'search-provider-open-windows',
+                'search-provider-recent-files', 'misc-item-icon-size', 'windows-disable-pinned-apps',
+                'disable-scrollview-fade-effect', 'windows-disable-frequent-apps', 'default-menu-view',
+                'default-menu-view-tognee', 'group-apps-alphabetically-list-layouts', 'group-apps-alphabetically-grid-layouts',
+                'menu-item-grid-icon-size', 'menu-item-icon-size', 'button-item-icon-size', 'quicklinks-item-icon-size',
+                'menu-item-category-icon-size', 'category-icon-type', 'shortcut-icon-type', 'show-category-sub-menus',
+                'arcmenu-extra-categories-links', 'arcmenu-extra-categories-links-location', 'raven-search-display-style',
+                'runner-show-frequent-apps', 'default-menu-view-redmond', 'disable-recently-installed-apps'],
             this._recreateMenuLayout.bind(this));
 
-        this._settingsConnections.connect('left-panel-width', 'right-panel-width', 'menu-width-adjustment',
+        this._connectSettings(['left-panel-width', 'right-panel-width', 'menu-width-adjustment'],
             this._updateMenuWidth.bind(this));
 
-        this._settingsConnections.connect('pinned-apps', 'enable-weather-widget-unity', 'enable-clock-widget-unity',
-            'enable-weather-widget-raven', 'enable-clock-widget-raven', this._updatePinnedApps.bind(this));
+        this._connectSettings(['pinned-apps', 'enable-weather-widget-unity', 'enable-clock-widget-unity',
+            'enable-weather-widget-raven', 'enable-clock-widget-raven'], this._updatePinnedApps.bind(this));
 
-        this._settingsConnections.connect('menu-position-alignment', this._setMenuPositionAlignment.bind(this));
-        this._settingsConnections.connect('menu-button-appearance', this._setButtonAppearance.bind(this));
-        this._settingsConnections.connect('custom-menu-button-text', this._setButtonText.bind(this));
-        this._settingsConnections.connect('custom-menu-button-icon-size', this._setButtonIconSize.bind(this));
-        this._settingsConnections.connect('button-padding', this._setButtonIconPadding.bind(this));
-        this._settingsConnections.connect('menu-height', this._updateMenuHeight.bind(this));
-        this._settingsConnections.connect('enable-unity-homescreen', this._setDefaultMenuView.bind(this));
-        this._settingsConnections.connect('menu-layout', this._changeMenuLayout.bind(this));
-        this._settingsConnections.connect('runner-position', this._updateLocation.bind(this));
-        this._settingsConnections.connect('show-activities-button', this._configureActivitiesButton.bind(this));
-        this._settingsConnections.connect('force-menu-location', this._forceMenuLocation.bind(this));
+        this._connectSettings(['menu-position-alignment'], this._setMenuPositionAlignment.bind(this));
+        this._connectSettings(['menu-button-appearance'], this._setButtonAppearance.bind(this));
+        this._connectSettings(['custom-menu-button-text'], this._setButtonText.bind(this));
+        this._connectSettings(['custom-menu-button-icon-size'], this._setButtonIconSize.bind(this));
+        this._connectSettings(['button-padding'], this._setButtonIconPadding.bind(this));
+        this._connectSettings(['menu-height'], this._updateMenuHeight.bind(this));
+        this._connectSettings(['enable-unity-homescreen'], this._setDefaultMenuView.bind(this));
+        this._connectSettings(['menu-layout'], this._changeMenuLayout.bind(this));
+        this._connectSettings(['runner-position'], this._updateLocation.bind(this));
+        this._connectSettings(['show-activities-button'], this._configureActivitiesButton.bind(this));
+        this._connectSettings(['force-menu-location'], this._forceMenuLocation.bind(this));
     }
 
     _overrideMenuTheme() {
@@ -179,32 +185,26 @@ export const MenuController = class {
 
     _initRecentAppsTracker() {
         this._appList = this._listAllApps();
-
-        this._appSystem.connectObject('installed-changed', () => this._reloadApplications(), this);
+        this._appSystem.connectObject('installed-changed', () => this._setRecentlyInstalledApps(), this);
     }
 
-    _reloadApplications() {
+    _setRecentlyInstalledApps() {
         const isDisabled = ArcMenuManager.settings.get_boolean('disable-recently-installed-apps');
+        if (isDisabled)
+            return;
+
         const appList = this._listAllApps();
 
         // Filter to find if a new application has been installed
         const newAppsList = appList.filter(app => !this._appList.includes(app));
         this._appList = appList;
 
-        if (newAppsList.length && !isDisabled) {
+        if (newAppsList.length) {
             // A new app has been installed, Save it in settings
             const recentApps = ArcMenuManager.settings.get_strv('recently-installed-apps');
             const newRecentApps = [...new Set(recentApps.concat(newAppsList))];
             ArcMenuManager.settings.set_strv('recently-installed-apps', newRecentApps);
         }
-
-        for (let i = 0; i < ArcMenuManager.menuControllers.length; i++) {
-            const menuButton = ArcMenuManager.menuControllers[i]._menuButton;
-            menuButton.reloadApplications();
-        }
-
-        if (this.runnerMenu)
-            this.runnerMenu.reloadApplications();
     }
 
     _listAllApps() {
@@ -509,8 +509,7 @@ export const MenuController = class {
             this.runnerMenu = null;
         }
 
-        this._settingsConnections?.destroy();
-        this._settingsConnections = null;
+        ArcMenuManager.settings.disconnectObject(this);
 
         if (this._isButtonEnabled())
             this._disableButton();

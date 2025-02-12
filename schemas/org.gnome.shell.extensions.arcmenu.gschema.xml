@@ -598,7 +598,7 @@
       <summary>Menu button position offset for main panel</summary>
     </key>
     <key name="extra-categories" type="a(ib)">
-      <default>[(0, true), (1, true), (2, false), (3, false), (4, false)]</default>
+      <default>[(3, true), (2, true), (0, false), (1, false), (4, false)]</default>
       <summary>Array of extra categories. See Constants.js - Categories</summary>
     </key>
     <key name="arcmenu-extra-categories-links" type="a(ib)">

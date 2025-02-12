@@ -111,28 +111,6 @@ export function canHibernateOrSleep(callName, asyncCallback) {
     });
 }
 
-export class SettingsConnectionsHandler {
-    constructor() {
-        this._connectionIds = [];
-    }
-
-    connect(...args) {
-        const callback = args.pop();
-        for (const event of args) {
-            const id = ArcMenuManager.settings.connect(`changed::${event}`, callback);
-            this._connectionIds.push(id);
-        }
-    }
-
-    destroy() {
-        this._connectionIds.forEach(id => {
-            ArcMenuManager.settings.disconnect(id);
-        });
-
-        this._connectionIds = null;
-    }
-}
-
 export function convertToButton(item) {
     item.tooltipLocation = Constants.TooltipLocation.BOTTOM_CENTERED;
     item.remove_child(item.label);

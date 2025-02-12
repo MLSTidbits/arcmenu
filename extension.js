@@ -225,4 +225,27 @@ export default class ArcMenu extends Extension {
 
         controller.destroy();
     }
+
+    openPreferences() {
+        // Find if an extension preferences window is already open
+        const prefsWindow = global.get_window_actors().map(wa => wa.meta_window).find(w => w.wm_class === 'org.gnome.Shell.Extensions');
+
+        if (!prefsWindow) {
+            super.openPreferences();
+            return;
+        }
+
+        // The current prefsWindow belongs to this extension, activate it
+        if (prefsWindow.title === this.metadata.name) {
+            Main.activateWindow(prefsWindow);
+            return;
+        }
+
+        // If another extension's preferences are open, close it and open this extension's preferences
+        prefsWindow.connectObject('unmanaged', () => {
+            super.openPreferences();
+            prefsWindow.disconnectObject(this);
+        }, this);
+        prefsWindow.delete(global.get_current_time());
+    }
 }

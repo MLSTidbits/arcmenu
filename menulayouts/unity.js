@@ -15,7 +15,7 @@ import * as Utils from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-export const Layout = class UnityLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -155,6 +155,7 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
         this.loadPinnedApps();
 
         this.setDefaultMenuView();
+        this._connectAppChangedEvents();
     }
 
     _updateWidgets() {
@@ -407,7 +408,7 @@ export const Layout = class UnityLayout extends BaseMenuLayout {
 
         super._onDestroy();
     }
-};
+}
 
 export class CategoriesButton extends MW.ArcMenuButtonItem {
     static {
@@ -416,7 +417,7 @@ export class CategoriesButton extends MW.ArcMenuButtonItem {
 
     constructor(menuLayout) {
         super(menuLayout, _('Categories'), 'open-menu-symbolic');
-        this.toggleMenuOnClick = false;
+        this._closeMenuOnActivate = false;
     }
 
     activate(event) {

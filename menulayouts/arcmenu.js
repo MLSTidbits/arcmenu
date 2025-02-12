@@ -11,7 +11,7 @@ import * as PlaceDisplay from '../placeDisplay.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-export const Layout = class ArcMenuLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -191,6 +191,7 @@ export const Layout = class ArcMenuLayout extends BaseMenuLayout {
         this.loadCategories();
         this.loadPinnedApps();
         this.setDefaultMenuView();
+        this._connectAppChangedEvents();
     }
 
     _createExtraCategoriesLinks() {
@@ -394,4 +395,4 @@ export const Layout = class ArcMenuLayout extends BaseMenuLayout {
             this.activeCategoryType = Constants.CategoryType.SEARCH_RESULTS;
         }
     }
-};
+}

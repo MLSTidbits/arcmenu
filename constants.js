@@ -60,6 +60,7 @@ export const SettingsPage = {
     EXTRA_CATEGORIES: 13,
     PINNED_APPS: 14,
     DONATE: 15,
+    WHATS_NEW: 16,
 };
 
 export const DefaultMenuViewTognee = {

@@ -734,7 +734,7 @@ export class ArcMenuButtonItem extends BaseMenuItem {
         this.tooltipText = tooltipText;
         this.iconName = iconName;
         this.gicon = gicon;
-        this.toggleMenuOnClick = true;
+        this._closeMenuOnActivate = true;
         this._displayType = Constants.DisplayType.BUTTON;
 
         if (this.iconName !== null) {
@@ -764,7 +764,7 @@ export class ArcMenuButtonItem extends BaseMenuItem {
     }
 
     activate(event) {
-        if (this.toggleMenuOnClick)
+        if (this._closeMenuOnActivate)
             this._menuLayout.arcMenu.toggle();
         super.activate(event);
     }
@@ -818,7 +818,7 @@ export class LeaveButton extends BaseMenuItem {
     constructor(menuLayout, showLabel) {
         super(menuLayout);
 
-        this.toggleMenuOnClick = false;
+        this._closeMenuOnActivate = false;
         this.iconName = 'system-shutdown-symbolic';
         this.showLabel = showLabel;
 
@@ -846,7 +846,7 @@ export class LeaveButton extends BaseMenuItem {
                 y_align: Clutter.ActorAlign.CENTER,
             });
 
-            this.toggleMenuOnClick = true;
+            this._closeMenuOnActivate = true;
             this._displayType = Constants.DisplayType.BUTTON;
             this.tooltipText = _('Power Off / Log Out');
         }
@@ -1032,7 +1032,7 @@ export class NavigationButton extends ArcMenuButtonItem {
             x_align: Clutter.ActorAlign.END,
         });
 
-        this.toggleMenuOnClick = false;
+        this._closeMenuOnActivate = false;
 
         this._label = new St.Label({
             text: _(text),
@@ -2956,7 +2956,7 @@ export class CategoryMenuItem extends BaseMenuItem {
         this._updateIcon();
 
         this._indicator = new St.Icon({
-            icon_name: 'message-indicator-symbolic',
+            icon_name: 'starred-symbolic',
             style_class: 'arcmenu-indicator',
             icon_size: INDICATOR_ICON_SIZE,
             x_expand: true,

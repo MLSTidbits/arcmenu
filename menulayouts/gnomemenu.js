@@ -9,7 +9,7 @@ import * as MW from '../menuWidgets.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-export const Layout = class GnomeMenuLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -115,6 +115,7 @@ export const Layout = class GnomeMenuLayout extends BaseMenuLayout {
         this.loadCategories();
         this.loadPinnedApps();
         this.setDefaultMenuView();
+        this._connectAppChangedEvents();
     }
 
     updateWidth(setDefaultMenuView) {
@@ -152,4 +153,4 @@ export const Layout = class GnomeMenuLayout extends BaseMenuLayout {
     displayCategories() {
         super.displayCategories(this.categoriesBox);
     }
-};
+}

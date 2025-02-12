@@ -9,7 +9,7 @@ import * as MW from '../menuWidgets.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-export const Layout = class MintLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -123,13 +123,14 @@ export const Layout = class MintLayout extends BaseMenuLayout {
             this._parentBox.add_child(this.searchEntry);
         }
 
-        ArcMenuManager.settings.connectObject('changed::mint-layout-extra-shortcuts', () => this._createExtraButtons(), this);
         this._createExtraButtons();
 
         this.updateWidth();
         this.loadCategories();
         this.loadPinnedApps();
         this.setDefaultMenuView();
+        this._connectAppChangedEvents();
+        ArcMenuManager.settings.connectObject('changed::mint-layout-extra-shortcuts', () => this._createExtraButtons(), this);
     }
 
     _createExtraButtons() {
@@ -192,4 +193,4 @@ export const Layout = class MintLayout extends BaseMenuLayout {
     displayCategories() {
         super.displayCategories(this.categoriesBox);
     }
-};
+}

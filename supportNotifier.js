@@ -10,7 +10,6 @@ import {SettingsPage} from './constants.js';
 
 const PROJECT_NAME = 'ArcMenu';
 const PROJECT_ICON = '/icons/hicolor/16x16/actions/settings-arcmenu-logo.svg';
-const PROJECT_GITLAB = 'https://gitlab.com/arcmenu/ArcMenu/-/releases/v';
 
 const [ShellVersion] = Config.PACKAGE_VERSION.split('.').map(s => Number(s));
 
@@ -30,7 +29,6 @@ export class SupportNotification {
 
         this._version = metadata.version;
         this._iconPath = `${extension.path}/${PROJECT_ICON}`;
-        this._whatsNewLink = `${PROJECT_GITLAB}${this._version}`;
 
         this._maybeShowNotification();
     }
@@ -40,7 +38,6 @@ export class SupportNotification {
         this._extension = null;
         this._version = null;
         this._iconPath = null;
-        this._whatsNewLink = null;
     }
 
     _maybeShowNotification() {
@@ -92,17 +89,13 @@ export class SupportNotification {
     }
 
     _addNotificationActions(notification) {
-        notification.addAction(_('Donate'), () => this._openSettingsDonatePage());
-        notification.addAction(_("What's new?"), () => this._openUri(this._whatsNewLink));
+        notification.addAction(_('Donate'), () => this._openSettingsPage(SettingsPage.DONATE));
+        notification.addAction(_("What's new?"), () => this._openSettingsPage(SettingsPage.WHATS_NEW));
         notification.addAction(_('Dismiss'), () => notification.destroy());
     }
 
-    _openSettingsDonatePage() {
-        this._settings.set_int('prefs-visible-page', SettingsPage.DONATE);
+    _openSettingsPage(page) {
+        this._settings.set_int('prefs-visible-page', page);
         this._extension.openPreferences();
-    }
-
-    _openUri(uri) {
-        Gio.app_info_launch_default_for_uri(uri, global.create_app_launch_context(0, -1));
     }
 }

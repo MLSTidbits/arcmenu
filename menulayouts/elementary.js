@@ -8,7 +8,7 @@ import * as Constants from '../constants.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-export const Layout = class ElementaryLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -56,6 +56,7 @@ export const Layout = class ElementaryLayout extends BaseMenuLayout {
         this.updateWidth();
         this.loadCategories();
         this.setDefaultMenuView();
+        this._connectAppChangedEvents();
     }
 
     setDefaultMenuView() {
@@ -68,4 +69,4 @@ export const Layout = class ElementaryLayout extends BaseMenuLayout {
         this.categoryDirectories = new Map();
         super.loadCategories();
     }
-};
+}

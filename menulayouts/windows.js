@@ -15,7 +15,7 @@ import * as Utils from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-export const Layout = class WindowsLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -136,6 +136,7 @@ export const Layout = class WindowsLayout extends BaseMenuLayout {
 
         this._createExtrasMenu();
         this.setDefaultMenuView();
+        this._connectAppChangedEvents();
     }
 
     _createExtraButtons() {
@@ -422,7 +423,7 @@ export const Layout = class WindowsLayout extends BaseMenuLayout {
         if (!this.pinnedAppsBox.contains(this._pinnedAppsGrid))
             this.pinnedAppsBox.add_child(this._pinnedAppsGrid);
     }
-};
+}
 
 export class ExtrasButton extends MW.ArcMenuButtonItem {
     static {
@@ -431,7 +432,7 @@ export class ExtrasButton extends MW.ArcMenuButtonItem {
 
     constructor(menuLayout) {
         super(menuLayout, _('Extras'), 'open-menu-symbolic');
-        this.toggleMenuOnClick = false;
+        this._closeMenuOnActivate = false;
     }
 
     activate(event) {

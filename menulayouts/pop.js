@@ -56,8 +56,7 @@ function listsIntersect(a, b) {
     return false;
 }
 
-
-export const Layout = class PopLayout extends BaseMenuLayout {
+export class Layout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
@@ -78,8 +77,6 @@ export const Layout = class PopLayout extends BaseMenuLayout {
             buttons_icon_size: Constants.LARGE_ICON_SIZE,
             pinned_apps_icon_size: Constants.MEDIUM_ICON_SIZE,
         });
-
-        this._tree.disconnectObject(this);
 
         this._folders = new Map();
         this._orderedItems = [];
@@ -172,6 +169,10 @@ export const Layout = class PopLayout extends BaseMenuLayout {
         this._setGridColumns(this.applicationsGrid);
 
         ArcMenuManager.settings.connectObject('changed::pop-default-view', () => this.setDefaultMenuView(), this);
+        this._connectAppChangedEvents();
+
+        // We don't use GMenu tree for Pop layout
+        this._tree.disconnectObject(this);
     }
 
     reloadApplications() {
@@ -432,7 +433,7 @@ export const Layout = class PopLayout extends BaseMenuLayout {
         this._folderSettings = null;
         super._onDestroy();
     }
-};
+}
 
 class HomeFolderMenuItem extends MW.DraggableMenuItem {
     static [GObject.properties] = {
@@ -1184,7 +1185,7 @@ export class ApplicationMenuItem extends MW.DraggableMenuItem {
                 text: _('New'),
                 style_class: 'arcmenu-text-indicator',
                 x_expand: true,
-                x_align: Clutter.ActorAlign.END,
+                x_align: Clutter.ActorAlign.CENTER,
                 y_align: Clutter.ActorAlign.CENTER,
             });
             this.add_child(this._indicator);
@@ -1195,7 +1196,7 @@ export class ApplicationMenuItem extends MW.DraggableMenuItem {
     }
 
     _onDestroy() {
-        this._indicator.destroy();
+        this._indicator?.destroy();
         this._indicator = null;
         super._onDestroy();
     }

@@ -1,0 +1,7 @@
+<b><span size="large">Version 64 (2025-01-20)</span></b>
+
+• Delete stylesheet on GNOME shutdown.
+• Pop Layout: fix issues with renaming/deleting folder and clean up code.
+• Add GNOME 48 support.
+• Add BuyMeACoffee donation link.
+• Show notification when ArcMenu is updated.

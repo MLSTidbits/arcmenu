@@ -24,7 +24,7 @@ const MAX_RECENT_FILES = 25;
 
 // This class handles the core functionality of all the menu layouts.
 // Each menu layout extends this class.
-export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
+export class BaseMenuLayout extends St.BoxLayout {
     static [GObject.properties] = {
         'display-type': GObject.ParamSpec.uint(
             'display-type', 'display-type', 'display-type',
@@ -133,9 +133,13 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
 
         this.connect('key-press-event', this._onMainBoxKeyPress.bind(this));
         this.connect('destroy', () => this._onDestroy());
-        this._tree.connectObject('changed', () => this.reloadApplications(), this);
         this.searchEntry.connectObject('search-changed', this._onSearchEntryChanged.bind(this), this);
         this.searchEntry.connectObject('entry-key-press', this._onSearchEntryKeyPress.bind(this), this);
+    }
+
+    _connectAppChangedEvents() {
+        this._tree.connectObject('changed', () => this.reloadApplications(), this);
+        ArcMenuManager.settings.connectObject('changed::recently-installed-apps', () => this.reloadApplications(), this);
         AppFavorites.getAppFavorites().connectObject('changed', () => {
             if (this.categoryDirectories) {
                 const categoryMenuItem = this.categoryDirectories.get(Constants.CategoryType.FAVORITES);
@@ -225,9 +229,9 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
         }
     }
 
-    reloadApplications(forceReload = false) {
+    reloadApplications() {
         // Only reload applications if the menu is closed.
-        if (!forceReload && this.arcMenu.isOpen) {
+        if (this.arcMenu.isOpen) {
             this.reloadQueued = true;
             if (!this._reloadAppsOnMenuClosedID) {
                 this._reloadAppsOnMenuClosedID = this.arcMenu.connect('menu-closed', () => {
@@ -1118,6 +1122,7 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
     }
 
     _onDestroy() {
+        ArcMenuManager.settings.disconnectObject(this);
         this._disconnectReloadApps();
 
         AppFavorites.getAppFavorites().disconnectObject(this);
@@ -1308,4 +1313,4 @@ export const BaseMenuLayout = class ArcMenuBaseMenuLayout extends St.BoxLayout {
         this._focusChild = actor;
         Utils.ensureActorVisibleInScrollView(actor);
     }
-};
+}
