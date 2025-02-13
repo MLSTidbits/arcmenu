@@ -178,7 +178,7 @@ msgstr "Chromebook"
 
 #: constants.js:494
 msgid "Runner"
-msgstr "Runner"
+msgstr "Wyzwalacz"
 
 #: constants.js:499
 msgid "GNOME Overview"
@@ -407,10 +407,9 @@ msgstr "Skróty"
 # Nie mogę znaleźć gdzie występuje ten tekst. Być może chodzi o plik .desktop w Linux Mincie bodajże jest on przetłumaczony jako "wyzwalacz"
 # Can't find where that text appears. Is this for configure .desktop files? In Linux Mint(probalby, not sure, where i saw it) "Runner" is called "wyzwalacz"
 #: menulayouts/runner.js:217
-#, fuzzy
 #| msgid "Configure"
 msgid "Configure Runner"
-msgstr "Konfiguruj"
+msgstr "Konfiguruj wyzwalacz"
 
 #: menulayouts/unity.js:417
 msgid "Categories"
@@ -630,7 +629,7 @@ msgstr "Pozycja w panelu"
 
 #: settings/GeneralPage.js:95
 msgid "Menu Alignment"
-msgstr "Wyrówanie menu"
+msgstr "Wyrównanie menu"
 
 #: settings/GeneralPage.js:114
 msgid "Display ArcMenu on all Panels"
@@ -648,7 +647,6 @@ msgstr "Zawsze preferuj górny panel"
 # Updated Dash To Panel Polish strings, so translation was updated
 # Need update after Dash to Panel translation
 #: settings/GeneralPage.js:132
-#, fuzzy
 msgid "Useful with Dash to Panel setting 'Keep original gnome-shell top panel'"
 msgstr "Przydatne z ustawieniem Dash to Panel 'Zachowaj oryginalny panel (podgląd)"
 
@@ -663,9 +661,8 @@ msgstr "Skrót klawiszowy menu aplikacji"
 # Przydałoby się lepsze tłumaczenie
 # Can't find good traslation
 #: settings/GeneralPage.js:151
-#, fuzzy
 msgid "Standalone Runner Menu"
-msgstr "Samodzielne menu Runner"
+msgstr "Samodzielne menu wyzwalacza"
 
 #: settings/GeneralPage.js:164
 msgid "Hide Overview on Startup"
@@ -696,9 +693,8 @@ msgstr "Wprowadź nowy skrót, aby zmienić <b>%s</b>"
 # Przydałoby się lepsze tłumaczenie
 # Can't find good traslation
 #: settings/GeneralPage.js:337
-#, fuzzy
 msgid "Standalone Runner Hotkey"
-msgstr "Samodzielne menu Runner"
+msgstr "Samodzielne menu wyzwalacza"
 
 #: settings/GeneralPage.js:367
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
@@ -712,9 +708,8 @@ msgstr "Konflikt ze skrótem klawiszowym <b>%s</b>"
 # Przydałoby się lepsze tłumaczenie
 # Can't find good traslation
 #: settings/GeneralPage.js:520
-#, fuzzy
 msgid "Standlone Runner"
-msgstr "Samodzielne menu Runner"
+msgstr "Samodzielne menu wyzwalacza"
 
 #: settings/Menu/FineTunePage.js:32
 msgid "Show Category Sub Menus"
@@ -1256,9 +1251,8 @@ msgstr "Stylizacja pozycji menu"
 # Can't find better translation
 #: settings/Menu/ThemePage.js:179 settings/Menu/ThemePage.js:182
 #: settings/MenuButtonPage.js:214 settings/MenuButtonPage.js:217
-#, fuzzy
 msgid "Hover"
-msgstr "Unosić się"
+msgstr "Unoszenie się"
 
 #: settings/Menu/ThemePage.js:185 settings/Menu/ThemePage.js:188
 #: settings/MenuButtonPage.js:220 settings/MenuButtonPage.js:223
@@ -1338,9 +1332,8 @@ msgstr "Nadpisz lokalizację menu"
 # Przydałoby się lepsze tłumaczenia
 # Can't find better translation
 #: settings/Menu/VisualSettings.js:156
-#, fuzzy
 msgid "Override Menu Rise"
-msgstr "Nadpisz początek menu"
+msgstr "Nadpisz podnoszenie menu"
 
 #: settings/Menu/VisualSettings.js:157
 msgid "Menu Distance from Panel and Screen Edge"
@@ -1465,7 +1458,6 @@ msgstr "Styl wyświetlania"
 # Przydałoby się lepsze tłumaczenia
 # Can't find better translation
 #: settings/MenuButtonPage.js:102
-#, fuzzy
 msgid "Padding"
 msgstr "Wypełnienie"
 
@@ -1668,15 +1660,13 @@ msgstr "Zmodyfikuj menu kontekstowe menu aplikacji"
 
 # Przydałoby się lepsze tłumaczenie
 # Can't find good traslation
-#, fuzzy
 #~ msgid "Enable a standalone Runner menu"
-#~ msgstr "Włącz samodzielne menu Runner"
+#~ msgstr "Włącz samodzielne menu wyzwalacza"
 
 # Przydałoby się lepsze tłumaczenie
 # Can't find good traslation
-#, fuzzy
 #~ msgid "Runner Hotkey"
-#~ msgstr "Klawisz skrótu Runner"
+#~ msgstr "Klawisz skrótu wyzwalacza"
 
 #~ msgid "Brisk Menu Shortcuts"
 #~ msgstr "Skróty menu Brisk"
@@ -1819,7 +1809,6 @@ msgstr "Zmodyfikuj menu kontekstowe menu aplikacji"
 #~ msgid "Select Apps to add to Pinned Apps List"
 #~ msgstr "Wybierz programy, które chcesz przypiąć"
 
-#, fuzzy
 #~ msgid "Icon Path/Icon Symbolic:"
 #~ msgstr "Ścieżka do ikony:"
 
