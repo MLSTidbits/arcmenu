@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arc Menu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-29 12:58-0500\n"
-"PO-Revision-Date: 2025-01-30 19:52+1000\n"
+"POT-Creation-Date: 2025-02-12 08:19-0500\n"
+"PO-Revision-Date: 2025-02-14 00:27+1000\n"
 "Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -21,293 +21,292 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: appMenu.js:60 appMenu.js:285
+#: appMenu.js:60 appMenu.js:284
 msgid "Pin to ArcMenu"
 msgstr "Закрепить в ArcMenu"
 
-#: appMenu.js:89 appMenu.js:240
+#: appMenu.js:89 appMenu.js:239
 msgid "Create Desktop Shortcut"
 msgstr "Создать ярлык на рабочем столе"
 
-#: appMenu.js:239
+#: appMenu.js:238
 msgid "Delete Desktop Shortcut"
 msgstr "Удалить ярлык с рабочего стола"
 
-#: appMenu.js:248 appMenu.js:285
+#: appMenu.js:247 appMenu.js:284
 msgid "Unpin from ArcMenu"
 msgstr "Открепить из ArcMenu"
 
-#: appMenu.js:324
+#: appMenu.js:323
 msgid "Open Folder Location"
 msgstr "Открыть расположение папки"
 
-#: constants.js:84
+#: constants.js:86
 msgid "Favorites"
 msgstr "Избранное"
 
-#: constants.js:85 menulayouts/runner.js:128 menulayouts/windows.js:336
+#: constants.js:87 menulayouts/runner.js:129 menulayouts/windows.js:337
 #: settings/Menu/LayoutTweaksPage.js:824
 msgid "Frequent Apps"
 msgstr "Часто используемые"
 
-#: constants.js:86 menuWidgets.js:1139 menulayouts/az.js:62
+#: constants.js:88 menuWidgets.js:1155 menulayouts/az.js:62
 #: menulayouts/az.js:71 menulayouts/eleven.js:54 menulayouts/eleven.js:63
 #: menulayouts/redmond.js:73 menulayouts/redmond.js:76
 #: menulayouts/redmond.js:80 menulayouts/sleek.js:73 menulayouts/sleek.js:76
 msgid "All Apps"
 msgstr "Все приложения"
 
-#: constants.js:87 menulayouts/insider.js:280
+#: constants.js:89 menulayouts/insider.js:281
 #: settings/Menu/LayoutTweaksPage.js:710 settings/Menu/LayoutTweaksPage.js:822
 #: settings/MenuPage.js:101
 msgid "Pinned Apps"
 msgstr "Закреплённые приложения"
 
-#: constants.js:88 menulayouts/raven.js:294 menulayouts/unity.js:370
+#: constants.js:90 menulayouts/raven.js:295 menulayouts/unity.js:371
 #: searchProviders/recentFiles.js:29 searchProviders/recentFiles.js:30
 msgid "Recent Files"
 msgstr "Недавние файлы"
 
-#: constants.js:257 menuButton.js:794 settings/Menu/ListPinnedPage.js:388
+#: constants.js:259 menuButton.js:790 settings/Menu/ListPinnedPage.js:388
 msgid "Log Out..."
 msgstr "Завершить сеанс..."
 
-#: constants.js:258 menuButton.js:793 settings/Menu/ListPinnedPage.js:387
+#: constants.js:260 menuButton.js:789 settings/Menu/ListPinnedPage.js:387
 msgid "Lock"
 msgstr "Заблокировать экран"
 
-#: constants.js:259 menuButton.js:788 settings/Menu/ListPinnedPage.js:390
+#: constants.js:261 menuButton.js:784 settings/Menu/ListPinnedPage.js:390
 msgid "Restart..."
 msgstr "Перезагрузить..."
 
-#: constants.js:260 menuButton.js:789 settings/Menu/ListPinnedPage.js:389
+#: constants.js:262 menuButton.js:785 settings/Menu/ListPinnedPage.js:389
 msgid "Power Off..."
 msgstr "Выключить..."
 
-#: constants.js:261 menuButton.js:785 settings/Menu/ListPinnedPage.js:391
+#: constants.js:263 menuButton.js:781 settings/Menu/ListPinnedPage.js:391
 msgid "Suspend"
 msgstr "Ждущий режим"
 
-#: constants.js:262 settings/Menu/ListPinnedPage.js:392
+#: constants.js:264 settings/Menu/ListPinnedPage.js:392
 msgid "Hybrid Sleep"
 msgstr "Гибридный спящий режим"
 
-#: constants.js:263 settings/Menu/ListPinnedPage.js:394
+#: constants.js:265 settings/Menu/ListPinnedPage.js:394
 msgid "Hibernate"
 msgstr "Спящий режим"
 
-#: constants.js:264 menuButton.js:795 settings/Menu/ListPinnedPage.js:395
+#: constants.js:266 menuButton.js:791 settings/Menu/ListPinnedPage.js:395
 msgid "Switch User"
 msgstr "Сменить пользователя"
 
-#: constants.js:409 settings/AboutPage.js:42 settings/AboutPage.js:128
+#: constants.js:411 settings/AboutPage.js:21 settings/DonatePage.js:18
 #: settings/GeneralPage.js:519 settings/MenuButtonPage.js:211
 msgid "ArcMenu"
 msgstr "ArcMenu"
 
-#: constants.js:414
+#: constants.js:416
 msgid "Brisk"
 msgstr "Brisk"
 
-#: constants.js:419
+#: constants.js:421
 msgid "Whisker"
 msgstr "Whisker"
 
-#: constants.js:424
+#: constants.js:426
 msgid "GNOME Menu"
 msgstr "Меню GNOME"
 
-#: constants.js:429
+#: constants.js:431
 msgid "Mint"
 msgstr "Mint"
 
-#: constants.js:434
+#: constants.js:436
 msgid "Budgie"
 msgstr "Budgie"
 
-#: constants.js:442
+#: constants.js:444
 msgid "Unity"
 msgstr "Unity"
 
-#: constants.js:447
+#: constants.js:449
 msgid "Plasma"
 msgstr "Plasma"
 
-#: constants.js:452
+#: constants.js:454
 msgid "tognee"
 msgstr "tognee"
 
-#: constants.js:457
+#: constants.js:459
 msgid "Insider"
 msgstr "Insider"
 
-#: constants.js:462
+#: constants.js:464
 msgid "Redmond"
 msgstr "Redmond"
 
-#: constants.js:467
+#: constants.js:469
 msgid "Windows"
 msgstr "Windows"
 
-#: constants.js:472
+#: constants.js:474
 msgid "11"
 msgstr "11"
 
-#: constants.js:477
+#: constants.js:479
 msgid "a.z."
 msgstr "a.z."
 
-#: constants.js:482
+#: constants.js:484
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: constants.js:487
+#: constants.js:489
 msgid "Pop"
 msgstr "Pop"
 
-#: constants.js:492
+#: constants.js:494
 msgid "Sleek"
 msgstr "Sleek"
 
-#: constants.js:500
+#: constants.js:502
 msgid "Elementary"
 msgstr "Elementary"
 
-#: constants.js:505
+#: constants.js:507
 msgid "Chromebook"
 msgstr "Chromebook"
 
-#: constants.js:513
+#: constants.js:515
 msgid "Runner"
 msgstr "Runner"
 
-#: constants.js:518
+#: constants.js:520
 msgid "GNOME Overview"
 msgstr "Обзор GNOME"
 
-#: constants.js:526
+#: constants.js:528
 msgid "Raven"
 msgstr "Raven"
 
-#: constants.js:534
+#: constants.js:536
 msgid "Traditional"
 msgstr "Традиционные"
 
-#: constants.js:539
+#: constants.js:541
 msgid "Modern"
 msgstr "Современные"
 
-#: constants.js:544
+#: constants.js:546
 msgid "Touch"
 msgstr "Сенсорные"
 
-#: constants.js:549
+#: constants.js:551
 msgid "Launcher"
 msgstr "Launcher"
 
-#: constants.js:554
+#: constants.js:556
 msgid "Alternative"
 msgstr "Альтернативные"
 
-#: constants.js:561
+#: constants.js:563
 msgid "Settings"
 msgstr "Настройки"
 
-#: constants.js:561
+#: constants.js:563
 msgid "Software"
 msgstr "Программное обеспечение"
 
-#: constants.js:561
+#: constants.js:563
 msgid "Terminal"
 msgstr "Терминал"
 
-#: constants.js:561
+#: constants.js:563
 msgid "Tweaks"
 msgstr "Доп. настройки GNOME"
 
-#: constants.js:562 menuButton.js:738 menuWidgets.js:509
+#: constants.js:564 menuButton.js:734 menuWidgets.js:518
 #: settings/Menu/ListPinnedPage.js:355 settings/Menu/ListPinnedPage.js:377
 msgid "Activities Overview"
 msgstr "«Обзор»"
 
-#: constants.js:562 menuButton.js:724 prefs.js:28 settings/AboutPage.js:146
-#: settings/Menu/ListPinnedPage.js:341 settings/Menu/ListPinnedPage.js:352
-#: settings/Menu/ListPinnedPage.js:364
+#: constants.js:564 menuButton.js:720 settings/Menu/ListPinnedPage.js:341
+#: settings/Menu/ListPinnedPage.js:352 settings/Menu/ListPinnedPage.js:364
 msgid "ArcMenu Settings"
 msgstr "Настройки ArcMenu"
 
-#: constants.js:562
+#: constants.js:564
 msgid "Files"
 msgstr "Файлы"
 
-#: menuButton.js:38 menulayouts/plasma.js:126 menulayouts/plasma.js:572
+#: menuButton.js:38 menulayouts/plasma.js:126 menulayouts/plasma.js:573
 msgid "Apps"
 msgstr "Приложения"
 
-#: menuButton.js:769 settings/Menu/ListPinnedPage.js:380
+#: menuButton.js:765 settings/Menu/ListPinnedPage.js:380
 msgid "Show Desktop"
 msgstr "Показать рабочий стол"
 
-#: menuButton.js:783 menuWidgets.js:825 menuWidgets.js:842
+#: menuButton.js:779 menuWidgets.js:834 menuWidgets.js:851
 msgid "Power Off / Log Out"
 msgstr "Выключить / Завершить сеанс"
 
-#: menuButton.js:824
+#: menuButton.js:820
 msgid "Dash to Panel Settings"
 msgstr "Настройки «Dash to Panel»"
 
-#: menuButton.js:828
+#: menuButton.js:824
 msgid "App Icons Taskbar Settings"
 msgstr "Настройки «App Icons Taskbar»"
 
-#: menuWidgets.js:879 menulayouts/plasma.js:325
+#: menuWidgets.js:888 menulayouts/plasma.js:326
 msgid "Session"
 msgstr "Сессии"
 
-#: menuWidgets.js:883 menulayouts/plasma.js:329
+#: menuWidgets.js:892 menulayouts/plasma.js:330
 msgid "System"
 msgstr "Система"
 
-#: menuWidgets.js:1069 menuWidgets.js:1090 menulayouts/az.js:63
+#: menuWidgets.js:1085 menuWidgets.js:1106 menulayouts/az.js:63
 #: menulayouts/eleven.js:55 menulayouts/redmond.js:74 menulayouts/redmond.js:79
 #: menulayouts/sleek.js:74
 msgid "Back"
 msgstr "Назад"
 
-#: menuWidgets.js:2350 menulayouts/pop.js:354
+#: menuWidgets.js:2371 menulayouts/pop.js:355
 msgid "Unnamed Folder"
 msgstr "Папка без названия"
 
-#: menuWidgets.js:2452 menulayouts/pop.js:1182
+#: menuWidgets.js:2471 menulayouts/pop.js:1185
 msgid "New"
 msgstr "Новое"
 
-#: menuWidgets.js:3017 menulayouts/az.js:70 menulayouts/eleven.js:62
-#: menulayouts/insider.js:184 menulayouts/plasma.js:121 menulayouts/raven.js:61
-#: menulayouts/raven.js:231 menulayouts/raven.js:272 menulayouts/redmond.js:75
+#: menuWidgets.js:3036 menulayouts/az.js:70 menulayouts/eleven.js:62
+#: menulayouts/insider.js:185 menulayouts/plasma.js:121 menulayouts/raven.js:61
+#: menulayouts/raven.js:232 menulayouts/raven.js:273 menulayouts/redmond.js:75
 #: menulayouts/redmond.js:78 menulayouts/redmond.js:81 menulayouts/sleek.js:75
-#: menulayouts/unity.js:42 menulayouts/unity.js:278 menulayouts/unity.js:348
-#: menulayouts/windows.js:414
+#: menulayouts/unity.js:42 menulayouts/unity.js:279 menulayouts/unity.js:349
+#: menulayouts/windows.js:415
 msgid "Pinned"
 msgstr "Закреплённые"
 
-#: menuWidgets.js:3186
+#: menuWidgets.js:3206
 msgid "Unmount Drive"
 msgstr "Отмонтировать диск"
 
-#: menuWidgets.js:3188
+#: menuWidgets.js:3208
 msgid "Eject Drive"
 msgstr "Извлечь диск"
 
-#: menuWidgets.js:3232
+#: menuWidgets.js:3252
 msgid "Remove from Recent"
 msgstr "Убрать из «Недавние»"
 
-#: menuWidgets.js:3315
+#: menuWidgets.js:3335
 msgid "Search…"
 msgstr "Поиск…"
 
-#: menulayouts/baseMenuLayout.js:489
+#: menulayouts/baseMenuLayout.js:490
 msgid "More Recent Files..."
 msgstr "Ещё больше недавних файлов..."
 
@@ -315,7 +314,7 @@ msgstr "Ещё больше недавних файлов..."
 msgid "Frequent"
 msgstr "Часто используемые"
 
-#: menulayouts/plasma.js:130 placeDisplay.js:131 placeDisplay.js:154
+#: menulayouts/plasma.js:130 placeDisplay.js:133 placeDisplay.js:156
 #: settings/Menu/ListPinnedPage.js:411
 msgid "Computer"
 msgstr "Компьютер"
@@ -324,115 +323,115 @@ msgstr "Компьютер"
 msgid "Leave"
 msgstr "Выключение"
 
-#: menulayouts/plasma.js:273 menulayouts/windows.js:271
+#: menulayouts/plasma.js:274 menulayouts/windows.js:272
 #: settings/MenuPage.js:123
 msgid "Application Shortcuts"
 msgstr "Ярлыки приложений"
 
-#: menulayouts/plasma.js:278 menulayouts/windows.js:275
+#: menulayouts/plasma.js:279 menulayouts/windows.js:276
 msgid "Places"
 msgstr "Точки входа"
 
-#: menulayouts/plasma.js:293 menulayouts/windows.js:207
+#: menulayouts/plasma.js:294 menulayouts/windows.js:208
 #: settings/Menu/LayoutTweaksPage.js:757 settings/Menu/LayoutTweaksPage.js:885
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: menulayouts/plasma.js:295 menulayouts/windows.js:209
+#: menulayouts/plasma.js:296 menulayouts/windows.js:210
 msgid "Devices"
 msgstr "Внешние устройства"
 
-#: menulayouts/plasma.js:297 menulayouts/windows.js:211
+#: menulayouts/plasma.js:298 menulayouts/windows.js:212
 #: settings/Menu/ListPinnedPage.js:412
 msgid "Network"
 msgstr "Сеть"
 
-#: menulayouts/pop.js:257 menulayouts/pop.js:458 menulayouts/pop.js:471
+#: menulayouts/pop.js:258 menulayouts/pop.js:461 menulayouts/pop.js:474
 msgid "Library Home"
 msgstr "Домашняя библиотека"
 
-#: menulayouts/pop.js:721
+#: menulayouts/pop.js:724
 msgid "New Folder"
 msgstr "Новая папка"
 
-#: menulayouts/pop.js:820
+#: menulayouts/pop.js:823
 msgid "Rename Folder"
 msgstr "Переименовать папку"
 
-#: menulayouts/pop.js:821
+#: menulayouts/pop.js:824
 msgid "Delete Folder"
 msgstr "Удалить папку"
 
-#: menulayouts/pop.js:831
+#: menulayouts/pop.js:834
 #, javascript-format
 msgid "Permanently delete %s folder?"
 msgstr "Удалить папку %s безвозвратно?"
 
-#: menulayouts/pop.js:836
+#: menulayouts/pop.js:839
 msgid "No"
 msgstr "Нет"
 
-#: menulayouts/pop.js:844
+#: menulayouts/pop.js:847
 msgid "Yes"
 msgstr "Да"
 
-#: menulayouts/pop.js:859
+#: menulayouts/pop.js:862
 #, javascript-format
 msgid "Rename %s folder"
 msgstr "Переименовать папку %s"
 
-#: menulayouts/pop.js:893 settings/GeneralPage.js:317
+#: menulayouts/pop.js:896 settings/GeneralPage.js:317
 #: settings/MenuButtonPage.js:532
 msgid "Cancel"
 msgstr "Отменить"
 
-#: menulayouts/pop.js:901 settings/GeneralPage.js:305
+#: menulayouts/pop.js:904 settings/GeneralPage.js:305
 #: settings/Menu/ListPinnedPage.js:653 settings/Menu/VisualSettings.js:372
 msgid "Apply"
 msgstr "Применить"
 
-#: menulayouts/raven.js:61 menulayouts/raven.js:237 menulayouts/unity.js:42
-#: menulayouts/unity.js:282 settings/Menu/LayoutTweaksPage.js:576
+#: menulayouts/raven.js:61 menulayouts/raven.js:238 menulayouts/unity.js:42
+#: menulayouts/unity.js:283 settings/Menu/LayoutTweaksPage.js:576
 #: settings/Menu/LayoutTweaksPage.js:603 settings/Menu/LayoutTweaksPage.js:709
 #: settings/Menu/LayoutTweaksPage.js:800 settings/Menu/LayoutTweaksPage.js:825
 #: settings/Menu/LayoutTweaksPage.js:839
 msgid "All Programs"
 msgstr "Все приложения"
 
-#: menulayouts/raven.js:278 menulayouts/unity.js:353
+#: menulayouts/raven.js:279 menulayouts/unity.js:354
 #: settings/Menu/VisualSettings.js:231
 msgid "Shortcuts"
 msgstr "Ярлыки"
 
-#: menulayouts/runner.js:226
+#: menulayouts/runner.js:227
 msgid "Configure Runner"
 msgstr "Конфигурация Runner"
 
-#: menulayouts/unity.js:418
+#: menulayouts/unity.js:419
 msgid "Categories"
 msgstr "Категории"
 
-#: menulayouts/windows.js:433
+#: menulayouts/windows.js:434
 msgid "Extras"
 msgstr "Дополнительно"
 
-#: placeDisplay.js:54
+#: placeDisplay.js:56
 #, javascript-format
 msgid "Failed to launch “%s”"
 msgstr "Не удалось запустить «%s»"
 
-#: placeDisplay.js:69
+#: placeDisplay.js:71
 #, javascript-format
 msgid "Failed to mount volume for “%s”"
 msgstr "Не удалось подключить раздел для «%s»"
 
-#: placeDisplay.js:117 placeDisplay.js:340
+#: placeDisplay.js:119 placeDisplay.js:340
 #: settings/Menu/LayoutTweaksPage.js:575 settings/Menu/LayoutTweaksPage.js:602
-#: settings/Menu/ListPinnedPage.js:403 utils.js:250
+#: settings/Menu/ListPinnedPage.js:403 utils.js:231
 msgid "Home"
 msgstr "Домашняя папка"
 
-#: placeDisplay.js:221
+#: placeDisplay.js:223
 #, javascript-format
 msgid "Ejecting drive “%s” failed:"
 msgstr "Не удалось извлечь раздел «%s»:"
@@ -453,15 +452,15 @@ msgstr "Переместить вниз"
 msgid "Remove"
 msgstr "Удалить"
 
-#: search.js:721
+#: search.js:730
 msgid "Searching..."
 msgstr "Поиск..."
 
-#: search.js:723
+#: search.js:732
 msgid "No results."
 msgstr "Нет результатов."
 
-#: search.js:806
+#: search.js:815
 #, javascript-format
 msgid "+ %d more"
 msgstr "+ ещё %d"
@@ -488,124 +487,165 @@ msgstr "Не удалось открыть «%s»"
 msgid "About"
 msgstr "О расширении"
 
-#: settings/AboutPage.js:23
+#: settings/AboutPage.js:22
 msgid "Application Menu Extension for GNOME"
 msgstr "Приложение для замены стандартного меню GNOME"
 
-#: settings/AboutPage.js:66
-msgid "ArcMenu Version"
-msgstr "Версия ArcMenu"
+#. TRANSLATORS: 'PROJECT_NAME' Version
+#: settings/AboutPage.js:67
+#, javascript-format
+msgid "%s Version"
+msgstr "Версия %s"
 
+#. TRANSLATORS: 'PROJECT_NAME' - Release Notes
 #: settings/AboutPage.js:76
+#, javascript-format
+msgid "%s - Release Notes"
+msgstr "%s - Примечания к выпуску"
+
+#: settings/AboutPage.js:78
+msgid "What's New"
+msgstr "Что нового"
+
+#: settings/AboutPage.js:111
 msgid "Git Commit"
 msgstr "Git Commit"
 
-#: settings/AboutPage.js:86
+#: settings/AboutPage.js:121
 msgid "GNOME Version"
 msgstr "Версия GNOME"
 
-#: settings/AboutPage.js:95
+#: settings/AboutPage.js:130
 msgid "OS Name"
 msgstr "Название ОС"
 
-#: settings/AboutPage.js:108
+#: settings/AboutPage.js:143
 msgid "Windowing System"
 msgstr "Оконный интерфейс"
 
-#: settings/AboutPage.js:118
-msgid "ArcMenu on GitLab"
-msgstr "ArcMenu на GitLab"
+#. TRANSLATORS: 'PROJECT_NAME' on GitLab
+#: settings/AboutPage.js:154
+#, javascript-format
+msgid "%s on GitLab"
+msgstr "%s на GitLab"
 
-#: settings/AboutPage.js:121
+#: settings/AboutPage.js:157
 msgid "Report an Issue"
 msgstr "Сообщить о проблеме"
 
-#: settings/AboutPage.js:127
-msgid "Help Support This Project"
-msgstr "Помогите поддержать этот проект"
-
-#: settings/AboutPage.js:128 supportNotifier.js:70
+#. TRANSLATORS: 'PROJECT_NAME' Settings
+#: settings/AboutPage.js:167
 #, javascript-format
-msgid ""
-"Thank you for using %s! If you enjoy it and would like to help support its "
-"continued development, please consider making a donation. Your support, no "
-"matter the amount, makes a big difference."
-msgstr ""
-"Благодарим вас за использование %s! Если вам нравится приложение и вы хотели "
-"бы поддержать его дальнейшее развитие, пожалуйста, подумайте о "
-"пожертвовании. Независимо от суммы, ваша поддержка имеет большое значение."
+msgid "%s Settings"
+msgstr "Настройки %s"
 
-#: settings/AboutPage.js:132 supportNotifier.js:107
-msgid "Donate via PayPal"
-msgstr "Пожертвовать через PayPal"
-
-#: settings/AboutPage.js:135 supportNotifier.js:108
-msgid "Buy Me a Coffee"
-msgstr "Buy Me a Coffee"
-
-#: settings/AboutPage.js:149 settings/Menu/ThemingDialog.js:70
+#: settings/AboutPage.js:170 settings/Menu/ThemingDialog.js:70
 #: settings/Menu/ThemingDialog.js:75
 msgid "Load"
 msgstr "Загрузить"
 
-#: settings/AboutPage.js:154
+#: settings/AboutPage.js:175
 msgid "Load Settings"
 msgstr "Загрузить настройки"
 
-#: settings/AboutPage.js:180 settings/Menu/ThemingDialog.js:128
+#: settings/AboutPage.js:201 settings/Menu/ThemingDialog.js:128
 #: settings/Menu/ThemingDialog.js:141
 msgid "Save"
 msgstr "Сохранить"
 
-#: settings/AboutPage.js:185
+#: settings/AboutPage.js:206
 msgid "Save Settings"
 msgstr "Сохранить настройки"
 
-#: settings/AboutPage.js:204 settings/AboutPage.js:205
+#: settings/AboutPage.js:228 settings/AboutPage.js:229
 msgid "Credits"
 msgstr "Сведения об авторах"
 
-#: settings/AboutPage.js:209
+#: settings/AboutPage.js:233
 msgid "Brought to you by"
 msgstr "Для вас работали"
 
-#: settings/AboutPage.js:220
+#: settings/AboutPage.js:244
 msgid "History"
 msgstr "История"
 
-#: settings/AboutPage.js:238
+#: settings/AboutPage.js:262
 msgid "Contributions by"
 msgstr "Внесли вклад"
 
-#: settings/AboutPage.js:241
+#: settings/AboutPage.js:265
 msgid "Contributors"
 msgstr "Участники"
 
-#: settings/AboutPage.js:243
+#: settings/AboutPage.js:267
 msgid "Translators"
 msgstr "Переводчики"
 
-#: settings/AboutPage.js:247
+#: settings/AboutPage.js:271
 msgid "Artwork by"
 msgstr "Художественное оформление"
 
-#: settings/AboutPage.js:255 settings/AboutPage.js:256
+#: settings/AboutPage.js:279 settings/AboutPage.js:280
 msgid "Legal"
 msgstr "Правовая оговорка"
 
-#: settings/AboutPage.js:262
+#: settings/AboutPage.js:286
 msgid "This program comes with absolutely no warranty."
 msgstr "Эта программа поставляется без каких-либо гарантий."
 
-#: settings/AboutPage.js:264
+#: settings/AboutPage.js:288
 msgid "GNU General Public License, version 2 or later"
 msgstr "Универсальная общественная лицензия GNU версии 2 или новее"
 
 #. TRANSLATORS: this is the program license url; the string contains the name of the license as link text.
-#: settings/AboutPage.js:264
+#: settings/AboutPage.js:288
 #, javascript-format
 msgid "See the <a href=\"%s\">%s</a> for details."
 msgstr "Подробнее смотрите <a href=\"%s\">%s</a>."
+
+#: settings/DonatePage.js:12 supportNotifier.js:92
+msgid "Donate"
+msgstr "Пожертвовать"
+
+#: settings/DonatePage.js:23
+#, javascript-format
+msgid "Help Support %s"
+msgstr "Помогите поддержать %s"
+
+#: settings/DonatePage.js:24 supportNotifier.js:60
+#, javascript-format
+msgid ""
+"Thank you for using %s! If you enjoy it and would like to help support its "
+"continued development, please consider making a donation."
+msgstr ""
+"Благодарим вас за использование %s! Если вам нравится приложение и вы хотели "
+"бы поддержать его дальнейшее развитие, пожалуйста, подумайте о пожертвовании."
+
+#: settings/DonatePage.js:28
+msgid "Donate via PayPal"
+msgstr "Пожертвовать через PayPal"
+
+#: settings/DonatePage.js:31
+msgid "Donate via Buy Me a Coffee"
+msgstr "Пожертвовать через «Buy Me a Coffee»"
+
+#: settings/DonatePage.js:43
+#, javascript-format
+msgid ""
+"A huge thank you to everyone who has supported %s! Your support helps keep "
+"%s going. It is truly appreciated!"
+msgstr ""
+"Огромное спасибо всем, кто поддерживал %s! Ваша поддержка помогает %s "
+"развиваться. Мы очень ценим это!"
+
+#: settings/DonatePage.js:63
+msgid "Message Tray Notifications"
+msgstr "Сообщения в области уведомлений"
+
+#: settings/DonatePage.js:64
+#, javascript-format
+msgid "Show a notification when %s receives an update."
+msgstr "Показывать уведомление при появлении обновления %s."
 
 #: settings/GeneralPage.js:32
 msgid "General"
@@ -1663,19 +1703,25 @@ msgid "Modify ArcMenu Context Menu"
 msgstr "Изменение контекстного меню ArcMenu"
 
 #. TRANSLATORS: This will display as "ProjectName v21 Released!" as an example.
-#: supportNotifier.js:66
+#: supportNotifier.js:59
 #, javascript-format
 msgid "%s v%s Released!"
-msgstr "Выпущено ArcMenu %s v%s!"
+msgstr "Выпущено %s v%s!"
 
-#: supportNotifier.js:67
-#, javascript-format
-msgid "Message from %s"
-msgstr "Сообщение от %s"
-
-#: supportNotifier.js:106
+#: supportNotifier.js:93
 msgid "What's new?"
 msgstr "Что нового?"
+
+#: supportNotifier.js:94
+msgid "Dismiss"
+msgstr "Отклонить"
+
+#~ msgid "ArcMenu Version"
+#~ msgstr "Версия ArcMenu"
+
+#, javascript-format
+#~ msgid "Message from %s"
+#~ msgstr "Сообщение от %s"
 
 #~ msgid "Alphabetize 'All Programs' Category"
 #~ msgstr "Сортировать «Все программы» по алфавиту"
@@ -1791,9 +1837,6 @@ msgstr "Что нового?"
 #, javascript-format
 #~ msgid "%s has been unpinned from ArcMenu"
 #~ msgstr "«%s» - откреплено от ArcMenu"
-
-#~ msgid "Version"
-#~ msgstr "Версия"
 
 #~ msgid "GitLab"
 #~ msgstr "GitLab"
