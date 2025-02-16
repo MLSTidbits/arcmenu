@@ -60,21 +60,22 @@ export class SupportNotification {
         const body = _('Thank you for using %s! If you enjoy it and would like to help support its continued development, please consider making a donation.').format(PROJECT_NAME);
         const gicon = Gio.icon_new_for_string(this._iconPath);
 
-        const source = this._getSource();
+        const source = new MessageTray.Source();
         source.title = PROJECT_NAME;
         source.iconName = 'application-x-addon-symbolic';
+        Main.messageTray.add(source);
 
         const notification = this._getNotification(source, title, body, gicon);
         notification.urgency = MessageTray.Urgency.CRITICAL;
         notification.resident = true;
-        this._addNotificationActions(notification);
+        notification.addAction(_('Donate'), () => this._openSettingsPage(SettingsPage.DONATE));
+        notification.addAction(_("What's new?"), () => this._openSettingsPage(SettingsPage.WHATS_NEW));
+        notification.addAction(_('Dismiss'), () => notification.destroy());
 
-        if (ShellVersion >= 46) {
+        if (ShellVersion >= 46)
             source.addNotification(notification);
-        } else {
-            Main.messageTray.add(source);
+        else
             source.showNotification(notification);
-        }
     }
 
     _getNotification(source, title, body, gicon) {
@@ -82,16 +83,6 @@ export class SupportNotification {
             return new MessageTray.Notification({source, title, body, gicon});
         else
             return new MessageTray.Notification(source, title, body, {gicon});
-    }
-
-    _getSource() {
-        return ShellVersion >= 46 ? MessageTray.getSystemSource() : new MessageTray.SystemNotificationSource();
-    }
-
-    _addNotificationActions(notification) {
-        notification.addAction(_('Donate'), () => this._openSettingsPage(SettingsPage.DONATE));
-        notification.addAction(_("What's new?"), () => this._openSettingsPage(SettingsPage.WHATS_NEW));
-        notification.addAction(_('Dismiss'), () => notification.destroy());
     }
 
     _openSettingsPage(page) {

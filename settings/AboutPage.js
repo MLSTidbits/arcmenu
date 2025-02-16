@@ -221,7 +221,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         settingsGroup.add(settingsRow);
         // -----------------------------------------------------------------------
 
-        // What's New / Credits / Legal ----------------------------------------------------------------
+        // Credits / Legal ----------------------------------------------------------------
         const miscGroup = new Adw.PreferencesGroup();
         this.add(miscGroup);
 

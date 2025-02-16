@@ -663,20 +663,20 @@ export const ArcMenu = class ArcMenuArcMenu extends PopupMenu.PopupMenu {
 
     close(animate) {
         if (this.isOpen)
-            this._menuButton.closeOtherMenus();
+            this._menuButton?.closeOtherMenus();
 
         super.close(animate);
     }
 
     destroy() {
         this._boxPointer.remove_effect_by_name('dim');
-        this._dimEffect = null;
-        this._menuButton = null;
         if (this._menuClosedID) {
             this.disconnect(this._menuClosedID);
             this._menuClosedID = null;
         }
         super.destroy();
+        this._dimEffect = null;
+        this._menuButton = null;
     }
 };
 

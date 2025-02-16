@@ -138,6 +138,13 @@ class SearchResultsBase extends St.BoxLayout {
     }
 
     _onDestroy() {
+        for (const resultId in this._resultDisplays) {
+            if (Object.hasOwn(this._resultDisplays, resultId)) {
+                this._resultDisplays[resultId].destroy();
+                delete this._resultDisplays[resultId];
+            }
+        }
+        this._resultDisplays = null;
         this._cancellable.cancel();
         this._cancellable = null;
         this._terms = [];
@@ -150,10 +157,11 @@ class SearchResultsBase extends St.BoxLayout {
     clear() {
         this._cancellable.cancel();
         for (const resultId in this._resultDisplays) {
-            if (Object.hasOwn(this._resultDisplays, resultId))
+            if (Object.hasOwn(this._resultDisplays, resultId)) {
                 this._resultDisplays[resultId].destroy();
+                delete this._resultDisplays[resultId];
+            }
         }
-
         this._resultDisplays = {};
         this._clearResultDisplay();
         this.hide();
@@ -490,6 +498,10 @@ export class SearchResults extends St.BoxLayout {
     }
 
     _onDestroy() {
+        ArcMenuManager.extension.searchProviderEmitter.disconnectObject(this);
+        this._searchSettings.disconnectObject(this);
+        Shell.AppSystem.get_default().disconnectObject(this);
+
         this._clearSearchTimeout();
 
         this._terms = [];
@@ -508,9 +520,6 @@ export class SearchResults extends St.BoxLayout {
 
         this.recentFilesManager.destroy();
         this.recentFilesManager = null;
-
-        ArcMenuManager.extension.searchProviderEmitter.disconnectObject(this);
-        this._searchSettings.disconnectObject(this);
 
         this._cancellable.cancel();
         this._cancellable = null;
