@@ -134,10 +134,13 @@ class SearchResultsBase extends St.BoxLayout {
         this._clipboard = St.Clipboard.get_default();
 
         this._cancellable = new Gio.Cancellable();
-        this.connect('destroy', this._onDestroy.bind(this));
+        this.connect('destroy', () => this._onDestroy());
     }
 
     _onDestroy() {
+        this._cancellable.cancel();
+        this._cancellable = null;
+
         for (const resultId in this._resultDisplays) {
             if (Object.hasOwn(this._resultDisplays, resultId)) {
                 this._resultDisplays[resultId].destroy();
@@ -145,8 +148,7 @@ class SearchResultsBase extends St.BoxLayout {
             }
         }
         this._resultDisplays = null;
-        this._cancellable.cancel();
-        this._cancellable = null;
+
         this._terms = [];
         this._menuLayout = null;
     }
@@ -498,6 +500,9 @@ export class SearchResults extends St.BoxLayout {
     }
 
     _onDestroy() {
+        this._cancellable.cancel();
+        this._cancellable = null;
+
         ArcMenuManager.extension.searchProviderEmitter.disconnectObject(this);
         this._searchSettings.disconnectObject(this);
         Shell.AppSystem.get_default().disconnectObject(this);
@@ -520,9 +525,6 @@ export class SearchResults extends St.BoxLayout {
 
         this.recentFilesManager.destroy();
         this.recentFilesManager = null;
-
-        this._cancellable.cancel();
-        this._cancellable = null;
 
         this._highlighter = null;
         this._searchSettings = null;

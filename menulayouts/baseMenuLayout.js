@@ -1242,8 +1242,6 @@ export class BaseMenuLayout extends St.BoxLayout {
             overlay_scrollbars: true,
         });
 
-        scrollBox.get_vscroll_bar().z_position = 1;
-
         const panAction = new Clutter.PanAction({interpolate: true});
         panAction.connect('pan', action => this._onPan(action, scrollBox));
         this.add_action(panAction);

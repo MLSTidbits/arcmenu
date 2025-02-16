@@ -61,6 +61,7 @@ export function createMenuLayout(menuButton, layoutEnum, isStandaloneRunner) {
     try {
         return new LayoutClass(menuButton, isStandaloneRunner);
     } catch (e) {
+        console.log(`ArcMenu error creating MenuLayout: ${e}`);
         return null;
     }
 }
