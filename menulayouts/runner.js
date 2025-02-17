@@ -9,7 +9,7 @@ import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
-import {getVerticalProperty} from '../utils.js';
+import {getOrientationProp} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -45,7 +45,7 @@ export class Layout extends BaseMenuLayout {
             search_display_type: searchDisplayType,
             column_spacing: columnSpacing,
             row_spacing: rowSpacing,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             default_menu_width: defaultMenuWidth,
             icon_grid_size: iconGridSize,
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
@@ -72,7 +72,7 @@ export class Layout extends BaseMenuLayout {
         this.topBox = new St.BoxLayout({
             x_expand: true,
             y_expand: true,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
             style: `margin: ${padding}px ${padding}px 0px 0px; spacing: ${padding}px;`,
         });
         this.runnerTweaksButton = new RunnerTweaksButton(this);
@@ -98,7 +98,7 @@ export class Layout extends BaseMenuLayout {
 
         this.add_child(this.applicationsScrollBox);
         this.applicationsBox = new St.BoxLayout({
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             style: `padding: 0px ${padding}px 0px 0px;`,
         });
         this._addChildToParent(this.applicationsScrollBox, this.applicationsBox);

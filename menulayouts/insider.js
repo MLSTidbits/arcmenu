@@ -9,7 +9,7 @@ import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
-import {getScrollViewAdjustments, getVerticalProperty} from '../utils.js';
+import {getScrollViewAdjustments, getOrientationProp} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -28,7 +28,7 @@ export class Layout extends BaseMenuLayout {
             row_spacing: 10,
             default_menu_width: 525,
             icon_grid_size: Constants.GridIconSize.SMALL,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
             apps_icon_size: Constants.LARGE_ICON_SIZE,
             quicklinks_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
@@ -41,7 +41,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.START,
             y_align: Clutter.ActorAlign.FILL,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             style: 'spacing: 6px;',
         });
         this.add_child(this.actionsBox);
@@ -54,7 +54,7 @@ export class Layout extends BaseMenuLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.START,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
         });
         this.add_child(this._mainBox);
 
@@ -65,7 +65,7 @@ export class Layout extends BaseMenuLayout {
                 y_expand: true,
                 x_align: Clutter.ActorAlign.CENTER,
                 y_align: Clutter.ActorAlign.START,
-                ...getVerticalProperty(true),
+                ...getOrientationProp(true),
                 style: 'padding-bottom: 6px;',
             });
             const avatarMenuIcon = new MW.AvatarMenuIcon(this, 75, true);
@@ -82,7 +82,7 @@ export class Layout extends BaseMenuLayout {
         this.searchEntry.style = 'margin: 0px 10px 10px 10px;';
         this._mainBox.add_child(this.searchEntry);
 
-        this.applicationsBox = new St.BoxLayout({...getVerticalProperty(true)});
+        this.applicationsBox = new St.BoxLayout({...getOrientationProp(true)});
         this.applicationsScrollBox = this._createScrollBox({
             x_expand: false,
             y_expand: false,
@@ -162,7 +162,7 @@ export class Layout extends BaseMenuLayout {
         const section = new PopupMenu.PopupMenuSection();
         this.pinnedAppsMenu.addMenuItem(section);
 
-        const pinnedAppsPopupBox = new St.BoxLayout({...getVerticalProperty(true)});
+        const pinnedAppsPopupBox = new St.BoxLayout({...getOrientationProp(true)});
         pinnedAppsPopupBox._delegate = pinnedAppsPopupBox;
         section.actor.add_child(pinnedAppsPopupBox);
 
@@ -171,7 +171,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: false,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
         });
         pinnedAppsPopupBox.add_child(headerBox);
 
@@ -192,7 +192,7 @@ export class Layout extends BaseMenuLayout {
         });
         pinnedAppsPopupBox.add_child(this.pinnedAppsScrollBox);
 
-        this.pinnedAppsBox = new St.BoxLayout({...getVerticalProperty(true)});
+        this.pinnedAppsBox = new St.BoxLayout({...getOrientationProp(true)});
         this._addChildToParent(this.pinnedAppsScrollBox, this.pinnedAppsBox);
 
         this.displayPinnedApps();

@@ -6,7 +6,7 @@ import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
-import {getVerticalProperty} from '../utils.js';
+import {getOrientationProp} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -25,7 +25,7 @@ export class Layout extends BaseMenuLayout {
             supports_category_hover_activation: true,
             column_spacing: 4,
             row_spacing: 4,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             default_menu_width: 450,
             icon_grid_size: Constants.GridIconSize.LARGE_RECT,
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
@@ -40,12 +40,12 @@ export class Layout extends BaseMenuLayout {
             y_expand: false,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
             style: 'spacing: 6px; margin: 0px 6px; padding: 3px 0px;',
         });
 
         this.userMenuBox = new St.BoxLayout({
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
             x_expand: true,
         });
         this.avatarMenuIcon = new MW.AvatarMenuIcon(this, 36, true);
@@ -68,7 +68,7 @@ export class Layout extends BaseMenuLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
         });
         this.add_child(this._mainBox);
 
@@ -76,10 +76,10 @@ export class Layout extends BaseMenuLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
         });
 
-        this.applicationsBox = new St.BoxLayout({...getVerticalProperty(true)});
+        this.applicationsBox = new St.BoxLayout({...getOrientationProp(true)});
         this.applicationsScrollBox = this._createScrollBox({
             y_align: Clutter.ActorAlign.START,
             style_class: this._disableFadeEffect ? '' : 'small-vfade',
@@ -91,7 +91,7 @@ export class Layout extends BaseMenuLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
         });
 
         const verticalSeparator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,
@@ -116,7 +116,7 @@ export class Layout extends BaseMenuLayout {
         });
 
         this.leftBox.add_child(this.categoriesScrollBox);
-        this.categoriesBox = new St.BoxLayout({...getVerticalProperty(true)});
+        this.categoriesBox = new St.BoxLayout({...getOrientationProp(true)});
         this._addChildToParent(this.categoriesScrollBox, this.categoriesBox);
 
         let powerOptionsDisplay;

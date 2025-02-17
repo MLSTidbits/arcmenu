@@ -590,7 +590,7 @@ export class BaseMenuLayout extends St.BoxLayout {
             const item = new MW.ShortcutMenuItem(this, itemData, displayType, isContainedInCategory);
             item.powerType = Utils.getPowerTypeFromShortcutCommand(id);
             const binding = MW.bindPowerItemVisibility(item);
-            item.connect('destroy', () => binding.unbind());
+            item.connect('destroy', () => binding?.unbind());
             return item;
         }
         case Constants.ShortcutCommands.ARCMENU_SETTINGS:

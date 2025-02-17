@@ -6,7 +6,7 @@ import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
-import {getVerticalProperty} from '../utils.js';
+import {getOrientationProp} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -23,7 +23,7 @@ export class Layout extends BaseMenuLayout {
             column_spacing: 0,
             row_spacing: 0,
             default_menu_width: 290,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
             apps_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
             quicklinks_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
@@ -37,7 +37,7 @@ export class Layout extends BaseMenuLayout {
         });
 
         this._mainBox = new St.BoxLayout({
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
@@ -48,7 +48,7 @@ export class Layout extends BaseMenuLayout {
         this.appBox = new St.BoxLayout({
             x_expand: true,
             y_expand: true,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             y_align: Clutter.ActorAlign.FILL,
         });
         this.applicationsScrollBox = this._createScrollBox({
@@ -58,11 +58,11 @@ export class Layout extends BaseMenuLayout {
             style_class: this._disableFadeEffect ? '' : 'small-vfade',
         });
         this.appBox.add_child(this.applicationsScrollBox);
-        this.applicationsBox = new St.BoxLayout({...getVerticalProperty(true)});
+        this.applicationsBox = new St.BoxLayout({...getOrientationProp(true)});
         this._addChildToParent(this.applicationsScrollBox, this.applicationsBox);
 
         this.navigateBox = new St.BoxLayout({
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.END,
@@ -84,7 +84,7 @@ export class Layout extends BaseMenuLayout {
 
         // Contains shortcutsBox and power buttons
         this.quickBox = new St.BoxLayout({
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
             style: 'spacing: 6px;',
@@ -99,7 +99,7 @@ export class Layout extends BaseMenuLayout {
         this._mainBox.add_child(horizontalFlip ? this.quickBox : this.appBox);
 
         this.shortcutsBox = new St.BoxLayout({
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             x_expand: false,
             y_expand: true,
             x_align: Clutter.ActorAlign.START,

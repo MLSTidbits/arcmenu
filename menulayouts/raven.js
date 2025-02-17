@@ -9,7 +9,7 @@ import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import {IconGrid} from '../iconGrid.js';
 import * as MW from '../menuWidgets.js';
-import {getVerticalProperty} from '../utils.js';
+import {getOrientationProp} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -28,7 +28,7 @@ export class Layout extends BaseMenuLayout {
             row_spacing: 10,
             default_menu_width: 415,
             icon_grid_size: Constants.GridIconSize.SMALL,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
             supports_category_hover_activation: true,
             category_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
             apps_icon_size: Constants.LARGE_ICON_SIZE,
@@ -66,7 +66,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.START,
             y_align: Clutter.ActorAlign.FILL,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
         });
 
         this.categoriesBox = new St.BoxLayout({
@@ -74,7 +74,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.START,
             y_align: Clutter.ActorAlign.CENTER,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             style: 'spacing: 5px;',
         });
         this.categoriesBoxContainer.add_child(this.categoriesBox);
@@ -84,7 +84,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: false,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
         });
         this.topBox.add_child(this.searchEntry);
 
@@ -92,14 +92,14 @@ export class Layout extends BaseMenuLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
         });
         this._mainBox.add_child(this.topBox);
         this.add_child(this._mainBox);
 
         this.applicationsBox = new St.BoxLayout({
             x_align: Clutter.ActorAlign.FILL,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             style: 'padding-bottom: 10px;',
             style_class: 'arcmenu-margin-box',
         });
@@ -118,7 +118,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.END,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             style: 'margin: 0px 10px 10px 10px; spacing: 10px;',
         });
         this._mainBox.add_child(this._widgetBox);
@@ -129,7 +129,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.CENTER,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
         });
 
         this.shortcutsGrid = new IconGrid({

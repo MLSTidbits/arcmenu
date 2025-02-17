@@ -69,7 +69,7 @@ export class Layout extends BaseMenuLayout {
             column_spacing: 12,
             row_spacing: 12,
             default_menu_width: 1050,
-            ...Utils.getVerticalProperty(true),
+            ...Utils.getOrientationProp(true),
             icon_grid_size: Constants.GridIconSize.EXTRA_LARGE,
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
             apps_icon_size: Constants.EXTRA_LARGE_ICON_SIZE,
@@ -85,7 +85,7 @@ export class Layout extends BaseMenuLayout {
         this.topBox = new St.BoxLayout({
             x_expand: true,
             y_expand: false,
-            ...Utils.getVerticalProperty(false),
+            ...Utils.getOrientationProp(false),
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
         });
@@ -99,14 +99,14 @@ export class Layout extends BaseMenuLayout {
             style_class: this._disableFadeEffect ? '' : 'small-vfade',
         });
         this.applicationsBox = new St.BoxLayout({
-            ...Utils.getVerticalProperty(true),
+            ...Utils.getOrientationProp(true),
             y_expand: true,
             y_align: Clutter.ActorAlign.START,
         });
         this._addChildToParent(this.applicationsScrollBox, this.applicationsBox);
 
         this.foldersContainer = new St.BoxLayout({
-            ...Utils.getVerticalProperty(true),
+            ...Utils.getOrientationProp(true),
             x_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_expand: true,
@@ -476,7 +476,7 @@ class HomeFolderMenuItem extends MW.DraggableMenuItem {
         this._updateIcon();
 
         this.set({
-            ...Utils.getVerticalProperty(true),
+            ...Utils.getOrientationProp(true),
             x_expand: false,
             tooltipLocation: Constants.TooltipLocation.BOTTOM_CENTERED,
             style: `width: ${110}px; height: ${72}px;`,
@@ -698,7 +698,7 @@ class GroupFolderMenuItem extends MW.DraggableMenuItem {
 
         this.add_style_class_name('ArcMenuIconGrid ArcMenuGroupFolder');
         this.set({
-            ...Utils.getVerticalProperty(true),
+            ...Utils.getOrientationProp(true),
             x_expand: false,
             tooltipLocation: Constants.TooltipLocation.BOTTOM_CENTERED,
             style: `width: ${110}px; height: ${72}px;`,

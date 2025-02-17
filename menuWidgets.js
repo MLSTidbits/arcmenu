@@ -790,7 +790,7 @@ export class PowerOptionsBox extends St.ScrollView {
         this._orientation = vertical ? Clutter.Orientation.VERTICAL : Clutter.Orientation.HORIZONTAL;
 
         const box = new St.BoxLayout({
-            ...Utils.getVerticalProperty(vertical),
+            ...Utils.getOrientationProp(vertical),
             style: 'spacing: 6px;',
         });
         Utils.addChildToParent(this, box);
@@ -880,15 +880,15 @@ export class LeaveButton extends BaseMenuItem {
         const section = new PopupMenu.PopupMenuSection();
         this.leaveMenu.addMenuItem(section);
 
-        const box = new St.BoxLayout({...Utils.getVerticalProperty(true)});
+        const box = new St.BoxLayout({...Utils.getOrientationProp(true)});
         box._delegate = box;
         section.actor.add_child(box);
 
-        const sessionBox = new St.BoxLayout({...Utils.getVerticalProperty(true)});
+        const sessionBox = new St.BoxLayout({...Utils.getOrientationProp(true)});
         sessionBox.add_child(this._menuLayout.createLabelRow(_('Session')));
         box.add_child(sessionBox);
 
-        const systemBox = new St.BoxLayout({...Utils.getVerticalProperty(true)});
+        const systemBox = new St.BoxLayout({...Utils.getOrientationProp(true)});
         systemBox.add_child(this._menuLayout.createLabelRow(_('System')));
         box.add_child(systemBox);
 
@@ -1252,7 +1252,7 @@ export class ShortcutMenuItem extends BaseMenuItem {
         if (layout === Constants.MenuLayout.PLASMA &&
             ArcMenuManager.settings.get_boolean('apps-show-extra-details') && this._app) {
             const labelBox = new St.BoxLayout({
-                ...Utils.getVerticalProperty(true),
+                ...Utils.getOrientationProp(true),
             });
             const descriptionLabel = new St.Label({
                 text: this._app.get_description(),
@@ -2229,7 +2229,7 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
         const showExtraDetails = ArcMenuManager.settings.get_boolean('apps-show-extra-details');
         if (this._displayType === Constants.DisplayType.LIST && showExtraDetails &&
             this._app && this._app.get_description()) {
-            const labelBox = new St.BoxLayout({...Utils.getVerticalProperty(true)});
+            const labelBox = new St.BoxLayout({...Utils.getOrientationProp(true)});
             const descriptionLabel = new St.Label({
                 text: this._app.get_description(),
                 y_expand: true,
@@ -2448,7 +2448,7 @@ export class ApplicationMenuItem extends BaseMenuItem {
         if (this._displayType === Constants.DisplayType.LIST && this.description &&
             (showSearchDescriptions || showAppDescriptions || isCalculatorProvider)) {
             const labelBox = new St.BoxLayout({
-                ...Utils.getVerticalProperty(true),
+                ...Utils.getOrientationProp(true),
                 x_expand: true,
                 x_align: Clutter.ActorAlign.FILL,
             });

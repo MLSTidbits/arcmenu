@@ -21,7 +21,7 @@ import * as Constants from './constants.js';
 import {RecentFilesManager} from './recentFilesManager.js';
 import {OpenWindowSearchProvider} from './searchProviders/openWindows.js';
 import {RecentFilesSearchProvider} from './searchProviders/recentFiles.js';
-import {getVerticalProperty} from './utils.js';
+import {getOrientationProp} from './utils.js';
 
 const SEARCH_PROVIDERS_SCHEMA = 'org.gnome.desktop.search-providers';
 const FILE_PROVIDERS = ['org.gnome.Nautilus.desktop', 'arcmenu.recent-files', 'nemo.desktop'];
@@ -118,7 +118,7 @@ class SearchResultsBase extends St.BoxLayout {
     }
 
     constructor(provider, resultsView) {
-        super({...getVerticalProperty(true)});
+        super({...getOrientationProp(true)});
         this.provider = provider;
         this.resultsView = resultsView;
         this._menuLayout = resultsView._menuLayout;
@@ -255,7 +255,7 @@ class ListSearchResults extends SearchResultsBase {
         const spacing = this._menuLayout.search_results_spacing;
 
         this._container = new St.BoxLayout({
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.FILL,
             x_expand: true,
@@ -273,7 +273,7 @@ class ListSearchResults extends SearchResultsBase {
         this._container.add_child(this.providerInfo);
 
         this._content = new St.BoxLayout({
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             x_expand: true,
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
@@ -424,7 +424,7 @@ export class SearchResults extends St.BoxLayout {
 
     constructor(menuLayout) {
         super({
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             y_expand: true,
             x_expand: true,
             x_align: Clutter.ActorAlign.FILL,
@@ -438,7 +438,7 @@ export class SearchResults extends St.BoxLayout {
         this.layout = ArcMenuManager.settings.get_enum('menu-layout');
 
         this._content = new St.BoxLayout({
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             x_align: Clutter.ActorAlign.FILL,
         });
 

@@ -11,7 +11,7 @@ import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import {IconGrid} from '../iconGrid.js';
 import * as MW from '../menuWidgets.js';
-import {getScrollViewAdjustments, getVerticalProperty} from '../utils.js';
+import {getScrollViewAdjustments, getOrientationProp} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -28,7 +28,7 @@ export class Layout extends BaseMenuLayout {
             context_menu_location: Constants.ContextMenuLocation.BOTTOM_CENTERED,
             column_spacing: 15,
             row_spacing: 15,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             default_menu_width: 750,
             icon_grid_size: Constants.GridIconSize.LARGE,
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
@@ -46,7 +46,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: false,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
             style: 'padding-bottom: 10px; padding-right: 15px;',
         });
         this.add_child(this.topBox);
@@ -56,7 +56,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.FILL,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
         });
         this.add_child(this._mainBox);
 
@@ -71,7 +71,7 @@ export class Layout extends BaseMenuLayout {
         this.topBox.add_child(this.categoriesButton);
 
         this.applicationsBox = new St.BoxLayout({
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
             style_class: 'arcmenu-margin-box',
             y_align: Clutter.ActorAlign.START,
         });
@@ -90,7 +90,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: false,
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.END,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
             style_class: 'datemenu-displays-box',
             style: 'margin: 0px; spacing: 10px; padding-bottom: 6px;',
         });
@@ -103,7 +103,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.CENTER,
-            ...getVerticalProperty(true),
+            ...getOrientationProp(true),
         });
 
         this.shortcutsGrid = new IconGrid({
@@ -118,7 +118,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.END,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
         });
         this._mainBox.add_child(this.actionsContainerBox);
 
@@ -127,7 +127,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.CENTER,
-            ...getVerticalProperty(false),
+            ...getOrientationProp(false),
             style: 'spacing: 10px;',
         });
         this.actionsContainerBox.add_child(this.actionsBox);
@@ -240,7 +240,7 @@ export class Layout extends BaseMenuLayout {
         const section = new PopupMenu.PopupMenuSection();
         this.categoriesMenu.addMenuItem(section);
 
-        const categoriesPopupBox = new St.BoxLayout({...getVerticalProperty(true)});
+        const categoriesPopupBox = new St.BoxLayout({...getOrientationProp(true)});
         section.actor.add_child(categoriesPopupBox);
         categoriesPopupBox._delegate = categoriesPopupBox;
 
@@ -252,7 +252,7 @@ export class Layout extends BaseMenuLayout {
         });
         categoriesPopupBox.add_child(this.categoriesScrollBox);
 
-        this.categoriesBox = new St.BoxLayout({...getVerticalProperty(true)});
+        this.categoriesBox = new St.BoxLayout({...getOrientationProp(true)});
         this._addChildToParent(this.categoriesScrollBox, this.categoriesBox);
 
         const scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;

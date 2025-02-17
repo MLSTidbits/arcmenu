@@ -138,7 +138,7 @@ export function convertToGridLayout(item) {
 
     item.add_style_class_name('ArcMenuIconGrid');
     item.set({
-        ...getVerticalProperty(true),
+        ...getOrientationProp(true),
         x_align: Clutter.ActorAlign.CENTER,
         tooltipLocation: Constants.TooltipLocation.BOTTOM_CENTERED,
         style: `width: ${width}px; height: ${height}px;`,
@@ -490,9 +490,9 @@ export function getScrollViewAdjustments(scrollView) {
 /**
  *
  * @param {boolean} vertical
- * @description GNOME 48 uses 'orientation' instead of 'vertical'
+ * @description GNOME 48 - St.BoxLayout uses 'orientation' instead of 'vertical'
  */
-export function getVerticalProperty(vertical) {
+export function getOrientationProp(vertical) {
     if (ShellVersion >= 48)
         return {orientation: vertical ? Clutter.Orientation.VERTICAL : Clutter.Orientation.HORIZONTAL};
     else
