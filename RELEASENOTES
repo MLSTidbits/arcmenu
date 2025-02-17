@@ -1,7 +1,17 @@
-<b><span size="large">Version 64 (2025-01-20)</span></b>
+<b><span size="large">Version 65 (2025-02-18)</span></b>
 
-• Delete stylesheet on GNOME shutdown.
-• Pop Layout: fix issues with renaming/deleting folder and clean up code.
-• Add GNOME 48 support.
-• Add BuyMeACoffee donation link.
-• Show notification when ArcMenu is updated.
+• Rework integration with Dash to Panel and App Icons Taskbar.
+• Add alphabetical grouping of All Apps for grid views.
+• Plasma Layout: use new style for active buttons.
+• GNOME Menu Layout: add search.
+• Fix unexport() calls on dbus object that hasn't been exported
+• MenuButton: fix issue with hiding Dash to Panel when intellihide is enabled.
+• Add more options for Override Menu Locations.
+• Settings: add new Donate Page.
+• Add option to turn off new release notifications.
+• GNOME 48 Fixes:
+    - Remove St.ScrollView.get_vscroll_bar().
+    - Fix vertical property for St.BoxLayout.
+• Various code clean ups.
+• Properly unbind power menu items signals on destroy.
+• Search: disconnect all signals first on destroy, ensure resultDisplays destroyed.
