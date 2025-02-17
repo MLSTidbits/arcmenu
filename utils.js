@@ -6,6 +6,7 @@ import Pango from 'gi://Pango';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
 
+import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import {getLoginManager} from 'resource:///org/gnome/shell/misc/loginManager.js';
 
@@ -13,6 +14,8 @@ import * as Constants from './constants.js';
 import {ArcMenuManager} from './arcmenuManager.js';
 
 import {Extension, gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
+
+const [ShellVersion] = Config.PACKAGE_VERSION.split('.').map(s => Number(s));
 
 const InterfaceXml = `<node>
   <interface name="com.Extensions.ArcMenu">
@@ -135,7 +138,7 @@ export function convertToGridLayout(item) {
 
     item.add_style_class_name('ArcMenuIconGrid');
     item.set({
-        vertical: true,
+        ...getVerticalProperty(true),
         x_align: Clutter.ActorAlign.CENTER,
         tooltipLocation: Constants.TooltipLocation.BOTTOM_CENTERED,
         style: `width: ${width}px; height: ${height}px;`,
@@ -482,4 +485,16 @@ export function getScrollViewAdjustments(scrollView) {
         hadjustment,
         vadjustment,
     };
+}
+
+/**
+ *
+ * @param {boolean} vertical
+ * @description GNOME 48 uses 'orientation' instead of 'vertical'
+ */
+export function getVerticalProperty(vertical) {
+    if (ShellVersion >= 48)
+        return {orientation: vertical ? Clutter.Orientation.VERTICAL : Clutter.Orientation.HORIZONTAL};
+    else
+        return {vertical};
 }

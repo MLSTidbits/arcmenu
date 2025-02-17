@@ -8,6 +8,7 @@ import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
 import * as PlaceDisplay from '../placeDisplay.js';
+import {getVerticalProperty} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -23,7 +24,7 @@ export class Layout extends BaseMenuLayout {
             search_display_type: Constants.DisplayType.LIST,
             column_spacing: 0,
             row_spacing: 0,
-            vertical: true,
+            ...getVerticalProperty(true),
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
             apps_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
             quicklinks_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
@@ -38,7 +39,7 @@ export class Layout extends BaseMenuLayout {
 
         // mainBox stores left and right box
         const mainBox = new St.BoxLayout({
-            vertical: false,
+            ...getVerticalProperty(false),
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
@@ -48,11 +49,11 @@ export class Layout extends BaseMenuLayout {
         this.leftBox = new St.BoxLayout({
             x_expand: true,
             y_expand: true,
-            vertical: true,
+            ...getVerticalProperty(true),
             y_align: Clutter.ActorAlign.FILL,
         });
 
-        this.rightBox = new St.BoxLayout({vertical: true});
+        this.rightBox = new St.BoxLayout({...getVerticalProperty(true)});
 
         // Applications Box - Contains Favorites, Categories or programs
         this.applicationsScrollBox = this._createScrollBox({
@@ -65,7 +66,7 @@ export class Layout extends BaseMenuLayout {
         this.leftBox.add_child(this.applicationsScrollBox);
 
         this.applicationsBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             x_expand: true,
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
@@ -74,7 +75,7 @@ export class Layout extends BaseMenuLayout {
         this._addChildToParent(this.applicationsScrollBox, this.applicationsBox);
 
         this.navigateBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             x_expand: false,
             y_expand: false,
             y_align: Clutter.ActorAlign.END,
@@ -117,7 +118,7 @@ export class Layout extends BaseMenuLayout {
             this.rightBox.add_child(userAvatarSeparator);
         }
 
-        this.shortcutsBox = new St.BoxLayout({vertical: true});
+        this.shortcutsBox = new St.BoxLayout({...getVerticalProperty(true)});
         this.shortcutsScrollBox = this._createScrollBox({
             y_align: Clutter.ActorAlign.START,
             style_class: this._disableFadeEffect ? '' : 'small-vfade',
@@ -143,7 +144,7 @@ export class Layout extends BaseMenuLayout {
 
         // External Devices and Bookmarks Shortcuts
         const externalDevicesBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             x_expand: true,
             y_expand: true,
         });
@@ -153,7 +154,7 @@ export class Layout extends BaseMenuLayout {
         this.placesManager = new PlaceDisplay.PlacesManager();
         for (let i = 0; i < Constants.SECTIONS.length; i++) {
             const id = Constants.SECTIONS[i];
-            this._placesSections[id] = new St.BoxLayout({vertical: true});
+            this._placesSections[id] = new St.BoxLayout({...getVerticalProperty(true)});
             this.placesManager.connectObject(`${id}-updated`, () => this._redisplayPlaces(id), this);
 
             this._createPlaces(id);
@@ -195,7 +196,7 @@ export class Layout extends BaseMenuLayout {
     }
 
     _createExtraCategoriesLinks() {
-        this.extraCategoriesLinksBox = new St.BoxLayout({vertical: true});
+        this.extraCategoriesLinksBox = new St.BoxLayout({...getVerticalProperty(true)});
         this.extraCategoriesLinksBox.visible = false;
 
         const separator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,

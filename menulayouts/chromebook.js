@@ -5,6 +5,7 @@ import St from 'gi://St';
 import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
+import {getVerticalProperty} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -22,7 +23,7 @@ export class Layout extends BaseMenuLayout {
             row_spacing: 10,
             default_menu_width: 415,
             icon_grid_size: Constants.GridIconSize.SMALL,
-            vertical: true,
+            ...getVerticalProperty(true),
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
             apps_icon_size: Constants.LARGE_ICON_SIZE,
             quicklinks_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
@@ -31,7 +32,7 @@ export class Layout extends BaseMenuLayout {
         });
 
         this.applicationsBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             style: 'padding: 8px 0px;',
         });
         this.applicationsScrollBox = this._createScrollBox({

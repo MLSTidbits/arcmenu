@@ -12,6 +12,7 @@ import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
 import * as PlaceDisplay from '../placeDisplay.js';
+import {getVerticalProperty} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -29,7 +30,7 @@ export class Layout extends BaseMenuLayout {
             column_spacing: 0,
             row_spacing: 0,
             default_menu_width: 450,
-            vertical: true,
+            ...getVerticalProperty(true),
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
             apps_icon_size: Constants.MEDIUM_ICON_SIZE,
             quicklinks_icon_size: Constants.MEDIUM_ICON_SIZE,
@@ -44,21 +45,21 @@ export class Layout extends BaseMenuLayout {
         this.topBox = new St.BoxLayout({
             x_expand: true,
             y_expand: false,
-            vertical: false,
+            ...getVerticalProperty(false),
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
         });
         this.leftTopBox = new St.BoxLayout({
             x_expand: false,
             y_expand: false,
-            vertical: false,
+            ...getVerticalProperty(false),
             y_align: Clutter.ActorAlign.CENTER,
             style: 'padding-left: 10px; margin-left: 0.4em',
         });
         this.rightTopBox = new St.BoxLayout({
             x_expand: true,
             y_expand: false,
-            vertical: true,
+            ...getVerticalProperty(true),
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
             style_class: 'popup-menu-item',
@@ -92,13 +93,13 @@ export class Layout extends BaseMenuLayout {
             y_align: Clutter.ActorAlign.START,
             style_class: this._disableFadeEffect ? '' : 'small-vfade',
         });
-        this.applicationsBox = new St.BoxLayout({vertical: true});
+        this.applicationsBox = new St.BoxLayout({...getVerticalProperty(true)});
         this._addChildToParent(this.applicationsScrollBox, this.applicationsBox);
 
         this.navigateBoxContainer = new St.BoxLayout({
             x_expand: true,
             y_expand: false,
-            vertical: true,
+            ...getVerticalProperty(true),
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
         });
@@ -198,7 +199,7 @@ export class Layout extends BaseMenuLayout {
         this._loadPlaces(directoryShortcutsList);
 
         this.externalDevicesBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             x_expand: true,
             y_expand: true,
         });
@@ -207,7 +208,7 @@ export class Layout extends BaseMenuLayout {
         this.placesManager = new PlaceDisplay.PlacesManager();
         for (let i = 0; i < Constants.SECTIONS.length; i++) {
             const id = Constants.SECTIONS[i];
-            this._placesSections[id] = new St.BoxLayout({vertical: true});
+            this._placesSections[id] = new St.BoxLayout({...getVerticalProperty(true)});
             this.placesManager.connectObject(`${id}-updated`, () => this._redisplayPlaces(id), this);
 
             this._createPlaces(id);
@@ -321,11 +322,11 @@ export class Layout extends BaseMenuLayout {
     }
 
     _createPowerItems() {
-        this.sessionBox = new St.BoxLayout({vertical: true});
+        this.sessionBox = new St.BoxLayout({...getVerticalProperty(true)});
         this._destroyableObjects.push(this.sessionBox);
         this.sessionBox.add_child(this.createLabelRow(_('Session')));
 
-        this.systemBox = new St.BoxLayout({vertical: true});
+        this.systemBox = new St.BoxLayout({...getVerticalProperty(true)});
         this._destroyableObjects.push(this.systemBox);
         this.systemBox.add_child(this.createLabelRow(_('System')));
 
@@ -454,6 +455,7 @@ class PlasmaMenuItem extends MW.BaseMenuItem {
 
         this.tooltipLocation = Constants.TooltipLocation.BOTTOM_CENTERED;
         this.vertical = true;
+        this.orientation = Clutter.Orientation.VERTICAL;
 
         this.add_style_class_name('arcmenu-plasma-button');
 

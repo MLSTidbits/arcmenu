@@ -11,7 +11,7 @@ import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
 import * as PlaceDisplay from '../placeDisplay.js';
-import * as Utils from '../utils.js';
+import {getScrollViewAdjustments, getVerticalProperty} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -29,7 +29,7 @@ export class Layout extends BaseMenuLayout {
             row_spacing: 0,
             default_menu_width: 315,
             icon_grid_size: Constants.GridIconSize.SMALL,
-            vertical: false,
+            ...getVerticalProperty(false),
             category_icon_size: Constants.LARGE_ICON_SIZE,
             apps_icon_size: Constants.LARGE_ICON_SIZE,
             quicklinks_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
@@ -50,7 +50,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.START,
             y_align: Clutter.ActorAlign.FILL,
-            vertical: true,
+            ...getVerticalProperty(true),
             style: 'spacing: 6px;',
         });
         this.add_child(this.actionsBox);
@@ -63,7 +63,7 @@ export class Layout extends BaseMenuLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
-            vertical: true,
+            ...getVerticalProperty(true),
             style: 'spacing: 6px;',
         });
         this.add_child(this.subMainBox);
@@ -75,7 +75,7 @@ export class Layout extends BaseMenuLayout {
             style_class: this._disableFadeEffect ? '' : 'vfade',
         });
         this.pinnedAppsBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             x_expand: true,
             x_align: Clutter.ActorAlign.FILL,
         });
@@ -84,7 +84,7 @@ export class Layout extends BaseMenuLayout {
         this.pinnedAppsVerticalSeparator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,
             Constants.SeparatorAlignment.VERTICAL);
 
-        this.applicationsBox = new St.BoxLayout({vertical: true});
+        this.applicationsBox = new St.BoxLayout({...getVerticalProperty(true)});
         this.applicationsScrollBox = this._createScrollBox({
             x_expand: false,
             y_expand: true,
@@ -112,7 +112,7 @@ export class Layout extends BaseMenuLayout {
         this._loadPlaces(directoryShortcutsList);
 
         this.externalDevicesBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             x_expand: true,
             y_expand: true,
         });
@@ -120,7 +120,7 @@ export class Layout extends BaseMenuLayout {
         this.placesManager = new PlaceDisplay.PlacesManager();
         for (let i = 0; i < Constants.SECTIONS.length; i++) {
             const id = Constants.SECTIONS[i];
-            this._placesSections[id] = new St.BoxLayout({vertical: true});
+            this._placesSections[id] = new St.BoxLayout({...getVerticalProperty(true)});
             this.placesManager.connectObject(`${id}-updated`, () => this._redisplayPlaces(id), this);
 
             this._createPlaces(id);
@@ -236,7 +236,7 @@ export class Layout extends BaseMenuLayout {
         const section = new PopupMenu.PopupMenuSection();
         this.extrasMenu.addMenuItem(section);
 
-        const extrasMenuPopupBox = new St.BoxLayout({vertical: true});
+        const extrasMenuPopupBox = new St.BoxLayout({...getVerticalProperty(true)});
         extrasMenuPopupBox._delegate = extrasMenuPopupBox;
         section.actor.add_child(extrasMenuPopupBox);
 
@@ -245,7 +245,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: false,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
-            vertical: true,
+            ...getVerticalProperty(true),
         });
         extrasMenuPopupBox.add_child(headerBox);
 
@@ -266,7 +266,7 @@ export class Layout extends BaseMenuLayout {
 
         extrasMenuPopupBox.add_child(this.computerScrollBox);
 
-        const computerBox = new St.BoxLayout({vertical: true});
+        const computerBox = new St.BoxLayout({...getVerticalProperty(true)});
         this._addChildToParent(this.computerScrollBox, computerBox);
 
         computerBox.add_child(this.createLabelRow(_('Application Shortcuts')));
@@ -292,7 +292,7 @@ export class Layout extends BaseMenuLayout {
     }
 
     toggleExtrasMenu() {
-        const {vadjustment} = Utils.getScrollViewAdjustments(this.computerScrollBox);
+        const {vadjustment} = getScrollViewAdjustments(this.computerScrollBox);
         vadjustment.set_value(0);
 
         const themeNode = this.arcMenu.actor.get_theme_node();
@@ -324,7 +324,7 @@ export class Layout extends BaseMenuLayout {
         if (!ArcMenuManager.settings.get_boolean('windows-disable-pinned-apps'))
             this.displayPinnedApps();
 
-        const {vadjustment} = Utils.getScrollViewAdjustments(this.pinnedAppsScrollBox);
+        const {vadjustment} = getScrollViewAdjustments(this.pinnedAppsScrollBox);
         vadjustment.set_value(0);
     }
 

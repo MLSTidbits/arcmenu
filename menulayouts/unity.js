@@ -11,7 +11,7 @@ import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import {IconGrid} from '../iconGrid.js';
 import * as MW from '../menuWidgets.js';
-import * as Utils from '../utils.js';
+import {getScrollViewAdjustments, getVerticalProperty} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -28,7 +28,7 @@ export class Layout extends BaseMenuLayout {
             context_menu_location: Constants.ContextMenuLocation.BOTTOM_CENTERED,
             column_spacing: 15,
             row_spacing: 15,
-            vertical: true,
+            ...getVerticalProperty(true),
             default_menu_width: 750,
             icon_grid_size: Constants.GridIconSize.LARGE,
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
@@ -46,7 +46,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: false,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
-            vertical: false,
+            ...getVerticalProperty(false),
             style: 'padding-bottom: 10px; padding-right: 15px;',
         });
         this.add_child(this.topBox);
@@ -56,7 +56,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.FILL,
-            vertical: true,
+            ...getVerticalProperty(true),
         });
         this.add_child(this._mainBox);
 
@@ -71,7 +71,7 @@ export class Layout extends BaseMenuLayout {
         this.topBox.add_child(this.categoriesButton);
 
         this.applicationsBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             style_class: 'arcmenu-margin-box',
             y_align: Clutter.ActorAlign.START,
         });
@@ -90,7 +90,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: false,
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.END,
-            vertical: false,
+            ...getVerticalProperty(false),
             style_class: 'datemenu-displays-box',
             style: 'margin: 0px; spacing: 10px; padding-bottom: 6px;',
         });
@@ -103,7 +103,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.CENTER,
-            vertical: true,
+            ...getVerticalProperty(true),
         });
 
         this.shortcutsGrid = new IconGrid({
@@ -118,7 +118,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.END,
-            vertical: false,
+            ...getVerticalProperty(false),
         });
         this._mainBox.add_child(this.actionsContainerBox);
 
@@ -127,7 +127,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.CENTER,
-            vertical: false,
+            ...getVerticalProperty(false),
             style: 'spacing: 10px;',
         });
         this.actionsContainerBox.add_child(this.actionsBox);
@@ -240,7 +240,7 @@ export class Layout extends BaseMenuLayout {
         const section = new PopupMenu.PopupMenuSection();
         this.categoriesMenu.addMenuItem(section);
 
-        const categoriesPopupBox = new St.BoxLayout({vertical: true});
+        const categoriesPopupBox = new St.BoxLayout({...getVerticalProperty(true)});
         section.actor.add_child(categoriesPopupBox);
         categoriesPopupBox._delegate = categoriesPopupBox;
 
@@ -252,7 +252,7 @@ export class Layout extends BaseMenuLayout {
         });
         categoriesPopupBox.add_child(this.categoriesScrollBox);
 
-        this.categoriesBox = new St.BoxLayout({vertical: true});
+        this.categoriesBox = new St.BoxLayout({...getVerticalProperty(true)});
         this._addChildToParent(this.categoriesScrollBox, this.categoriesBox);
 
         const scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
@@ -266,7 +266,7 @@ export class Layout extends BaseMenuLayout {
     }
 
     toggleCategoriesMenu() {
-        const {vadjustment} = Utils.getScrollViewAdjustments(this.categoriesScrollBox);
+        const {vadjustment} = getScrollViewAdjustments(this.categoriesScrollBox);
         vadjustment.set_value(0);
 
         this.categoriesMenu.toggle();

@@ -6,6 +6,7 @@ import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
+import {getVerticalProperty} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -23,7 +24,7 @@ export class Layout extends BaseMenuLayout {
             column_spacing: 0,
             row_spacing: 0,
             supports_category_hover_activation: true,
-            vertical: true,
+            ...getVerticalProperty(true),
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
             apps_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
             quicklinks_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
@@ -36,7 +37,7 @@ export class Layout extends BaseMenuLayout {
             y_expand: false,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.START,
-            vertical: false,
+            ...getVerticalProperty(false),
             style: 'spacing: 6px; margin: 0px 10px;',
         });
         this.add_child(this.actionsBox);
@@ -71,7 +72,7 @@ export class Layout extends BaseMenuLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
-            vertical: false,
+            ...getVerticalProperty(false),
         });
         this.add_child(this._mainBox);
 
@@ -79,10 +80,10 @@ export class Layout extends BaseMenuLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
-            vertical: true,
+            ...getVerticalProperty(true),
         });
 
-        this.applicationsBox = new St.BoxLayout({vertical: true});
+        this.applicationsBox = new St.BoxLayout({...getVerticalProperty(true)});
         this.applicationsScrollBox = this._createScrollBox({
             y_align: Clutter.ActorAlign.START,
             style_class: this._disableFadeEffect ? '' : 'small-vfade',
@@ -94,7 +95,7 @@ export class Layout extends BaseMenuLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
-            vertical: true,
+            ...getVerticalProperty(true),
         });
 
         const verticalSeparator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,
@@ -113,7 +114,7 @@ export class Layout extends BaseMenuLayout {
         });
 
         this.leftBox.add_child(this.categoriesScrollBox);
-        this.categoriesBox = new St.BoxLayout({vertical: true});
+        this.categoriesBox = new St.BoxLayout({...getVerticalProperty(true)});
         this._addChildToParent(this.categoriesScrollBox, this.categoriesBox);
 
         const searchbarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');

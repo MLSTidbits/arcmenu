@@ -6,6 +6,7 @@ import {ArcMenuManager} from '../arcmenuManager.js';
 import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
+import {getVerticalProperty} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -22,7 +23,7 @@ export class Layout extends BaseMenuLayout {
             column_spacing: 0,
             row_spacing: 0,
             supports_category_hover_activation: true,
-            vertical: true,
+            ...getVerticalProperty(true),
             category_icon_size: Constants.ICON_HIDDEN,
             apps_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
             quicklinks_icon_size: Constants.SMALL_ICON_SIZE,
@@ -31,7 +32,7 @@ export class Layout extends BaseMenuLayout {
         });
 
         this._mainBox = new St.BoxLayout({
-            vertical: false,
+            ...getVerticalProperty(false),
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
@@ -39,13 +40,13 @@ export class Layout extends BaseMenuLayout {
         this.add_child(this._mainBox);
 
         this.rightBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
         });
 
-        this.applicationsBox = new St.BoxLayout({vertical: true});
+        this.applicationsBox = new St.BoxLayout({...getVerticalProperty(true)});
         this.applicationsScrollBox = this._createScrollBox({
             y_align: Clutter.ActorAlign.START,
             style_class: this._disableFadeEffect ? '' : 'small-vfade',
@@ -55,7 +56,7 @@ export class Layout extends BaseMenuLayout {
         this.rightBox.add_child(this.applicationsScrollBox);
 
         this.leftBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.FILL,
@@ -76,12 +77,12 @@ export class Layout extends BaseMenuLayout {
         });
         this.leftBox.add_child(this.categoriesScrollBox);
 
-        this.categoriesBox = new St.BoxLayout({vertical: true});
+        this.categoriesBox = new St.BoxLayout({...getVerticalProperty(true)});
         this._addChildToParent(this.categoriesScrollBox, this.categoriesBox);
 
         if (ArcMenuManager.settings.get_boolean('enable-activities-shortcut')) {
             this.activitiesBox = new St.BoxLayout({
-                vertical: true,
+                ...getVerticalProperty(true),
                 x_expand: true,
                 y_expand: true,
                 y_align: Clutter.ActorAlign.END,

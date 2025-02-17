@@ -7,6 +7,7 @@ import {BaseMenuLayout} from './baseMenuLayout.js';
 import * as Constants from '../constants.js';
 import * as MW from '../menuWidgets.js';
 import * as PlaceDisplay from '../placeDisplay.js';
+import {getVerticalProperty} from '../utils.js';
 
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -24,7 +25,7 @@ export class Layout extends BaseMenuLayout {
             row_spacing: 10,
             default_menu_width: 415,
             icon_grid_size: Constants.GridIconSize.SMALL,
-            vertical: false,
+            ...getVerticalProperty(false),
             category_icon_size: Constants.MEDIUM_ICON_SIZE,
             apps_icon_size: Constants.LARGE_ICON_SIZE,
             quicklinks_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
@@ -42,13 +43,13 @@ export class Layout extends BaseMenuLayout {
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.FILL,
-            vertical: true,
+            ...getVerticalProperty(true),
         });
 
         this.rightBox = new St.BoxLayout({
             y_align: Clutter.ActorAlign.FILL,
             y_expand: true,
-            vertical: true,
+            ...getVerticalProperty(true),
         });
 
         const verticalSeparator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MEDIUM,
@@ -63,7 +64,7 @@ export class Layout extends BaseMenuLayout {
         this.navBox = new St.BoxLayout({
             x_expand: true,
             x_align: Clutter.ActorAlign.FILL,
-            vertical: true,
+            ...getVerticalProperty(true),
             style: 'padding-bottom: 5px;',
         });
         mainBox.add_child(this.navBox);
@@ -88,7 +89,7 @@ export class Layout extends BaseMenuLayout {
         this.navBox.add_child(this._viewAllAppsButton);
 
         this.applicationsBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             style: 'margin: 2px 0px;',
         });
         this.applicationsScrollBox = this._createScrollBox({
@@ -119,7 +120,7 @@ export class Layout extends BaseMenuLayout {
             this.rightBox.add_child(separator);
         }
 
-        this.shortcutsBox = new St.BoxLayout({vertical: true});
+        this.shortcutsBox = new St.BoxLayout({...getVerticalProperty(true)});
         this.shortcutsScrollBox = this._createScrollBox({
             y_align: Clutter.ActorAlign.START,
             style_class: this._disableFadeEffect ? '' : 'small-vfade',
@@ -145,7 +146,7 @@ export class Layout extends BaseMenuLayout {
 
         // External Devices and Bookmarks Shortcuts
         const externalDevicesBox = new St.BoxLayout({
-            vertical: true,
+            ...getVerticalProperty(true),
             x_expand: true,
             y_expand: true,
         });
@@ -155,7 +156,7 @@ export class Layout extends BaseMenuLayout {
         this.placesManager = new PlaceDisplay.PlacesManager();
         for (let i = 0; i < Constants.SECTIONS.length; i++) {
             const id = Constants.SECTIONS[i];
-            this._placesSections[id] = new St.BoxLayout({vertical: true});
+            this._placesSections[id] = new St.BoxLayout({...getVerticalProperty(true)});
             this.placesManager.connectObject(`${id}-updated`, () => this._redisplayPlaces(id), this);
 
             this._createPlaces(id);
