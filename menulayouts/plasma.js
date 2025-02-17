@@ -454,8 +454,9 @@ class PlasmaMenuItem extends MW.BaseMenuItem {
         this.iconPath = iconPath;
 
         this.tooltipLocation = Constants.TooltipLocation.BOTTOM_CENTERED;
-        this.vertical = true;
-        this.orientation = Clutter.Orientation.VERTICAL;
+        this.set({
+            ...getVerticalProperty(true),
+        });
 
         this.add_style_class_name('arcmenu-plasma-button');
 
