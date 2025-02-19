@@ -104,7 +104,6 @@ export class BaseMenuLayout extends St.BoxLayout {
         if (this.arcMenu === null)
             throw new Error('ArcMenu null');
 
-        this._focusChild = null;
         this.hasPinnedApps = false;
         this.activeCategoryType = -1;
         this._disableFadeEffect = ArcMenuManager.settings.get_boolean('disable-scrollview-fade-effect');
@@ -1196,7 +1195,6 @@ export class BaseMenuLayout extends St.BoxLayout {
         this.appSys = null;
         this.activeCategoryItem = null;
         this.activeMenuItem = null;
-        this._focusChild = null;
         this._futureActiveItem = null;
     }
 
@@ -1240,6 +1238,13 @@ export class BaseMenuLayout extends St.BoxLayout {
             hscrollbar_policy: St.PolicyType.NEVER,
             vscrollbar_policy: St.PolicyType.AUTOMATIC,
             overlay_scrollbars: true,
+        });
+
+        // With overlay_scrollbars = true, the scrollbar appears behind the menu items
+        // Maybe a bug in GNOME? Fix it with this.
+        scrollBox.get_children().forEach(child => {
+            if (child instanceof St.ScrollBar)
+                child.z_position = 1;
         });
 
         const panAction = new Clutter.PanAction({interpolate: true});
@@ -1303,12 +1308,5 @@ export class BaseMenuLayout extends St.BoxLayout {
         navButton.activate = event => button.activate(event);
         navButton.add_child(button);
         return navButton;
-    }
-
-    _keyFocusIn(actor) {
-        if (this._focusChild === actor)
-            return;
-        this._focusChild = actor;
-        Utils.ensureActorVisibleInScrollView(actor);
     }
 }

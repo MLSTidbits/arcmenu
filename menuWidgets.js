@@ -286,8 +286,13 @@ export class BaseMenuItem extends St.BoxLayout {
                     topSearchResult.remove_style_pseudo_class('active');
 
                 // track the active menu item for keyboard navigation
-                if (this._menuLayout.activeMenuItem !== this)
+                if (this._menuLayout.activeMenuItem !== this) {
                     this._menuLayout.activeMenuItem = this;
+                    // Ensure the new activeMenuItem is visible in scroll view, only when not hovered.
+                    // We don't want to mouse to adjust the scrollview.
+                    if (!this.hover)
+                        Utils.ensureActorVisibleInScrollView(this);
+                }
 
                 this._setSelectedStyle();
                 if (this.can_focus)
@@ -346,8 +351,6 @@ export class BaseMenuItem extends St.BoxLayout {
 
     vfunc_key_focus_in() {
         super.vfunc_key_focus_in();
-        if (!this.hover)
-            this._menuLayout._keyFocusIn(this);
         this.active = true;
     }
 
