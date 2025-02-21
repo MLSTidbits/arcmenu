@@ -60,9 +60,7 @@ export class SupportNotification {
         const body = _('Thank you for using %s! If you enjoy it and would like to help support its continued development, please consider making a donation.').format(PROJECT_NAME);
         const gicon = Gio.icon_new_for_string(this._iconPath);
 
-        const source = new MessageTray.Source();
-        source.title = PROJECT_NAME;
-        source.iconName = 'application-x-addon-symbolic';
+        const source = this._getSource(PROJECT_NAME, 'application-x-addon-symbolic');
         Main.messageTray.add(source);
 
         const notification = this._getNotification(source, title, body, gicon);
@@ -76,6 +74,13 @@ export class SupportNotification {
             source.addNotification(notification);
         else
             source.showNotification(notification);
+    }
+
+    _getSource(title, iconName) {
+        if (ShellVersion >= 46)
+            return new MessageTray.Source({title, iconName});
+        else
+            return new MessageTray.Source(title, iconName);
     }
 
     _getNotification(source, title, body, gicon) {
