@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 08:19-0500\n"
+"POT-Creation-Date: 2025-02-27 08:58-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,15 +41,15 @@ msgstr ""
 msgid "Favorites"
 msgstr ""
 
-#: constants.js:87 menulayouts/runner.js:129 menulayouts/windows.js:337
+#: constants.js:87 menulayouts/runner.js:130 menulayouts/windows.js:337
 #: settings/Menu/LayoutTweaksPage.js:824
 msgid "Frequent Apps"
 msgstr ""
 
-#: constants.js:88 menuWidgets.js:1155 menulayouts/az.js:62
-#: menulayouts/az.js:71 menulayouts/eleven.js:54 menulayouts/eleven.js:63
-#: menulayouts/redmond.js:73 menulayouts/redmond.js:76
-#: menulayouts/redmond.js:80 menulayouts/sleek.js:73 menulayouts/sleek.js:76
+#: constants.js:88 menuWidgets.js:1158 menulayouts/az.js:63
+#: menulayouts/az.js:72 menulayouts/eleven.js:55 menulayouts/eleven.js:64
+#: menulayouts/redmond.js:74 menulayouts/redmond.js:77
+#: menulayouts/redmond.js:81 menulayouts/sleek.js:74 menulayouts/sleek.js:77
 msgid "All Apps"
 msgstr ""
 
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Pinned Apps"
 msgstr ""
 
-#: constants.js:90 menulayouts/raven.js:295 menulayouts/unity.js:371
+#: constants.js:90 menulayouts/raven.js:296 menulayouts/unity.js:371
 #: searchProviders/recentFiles.js:29 searchProviders/recentFiles.js:30
 msgid "Recent Files"
 msgstr ""
@@ -96,7 +96,7 @@ msgstr ""
 msgid "Switch User"
 msgstr ""
 
-#: constants.js:411 settings/AboutPage.js:21 settings/DonatePage.js:18
+#: constants.js:411 settings/AboutPage.js:21 settings/DonatePage.js:17
 #: settings/GeneralPage.js:519 settings/MenuButtonPage.js:211
 msgid "ArcMenu"
 msgstr ""
@@ -221,7 +221,7 @@ msgstr ""
 msgid "Tweaks"
 msgstr ""
 
-#: constants.js:564 menuButton.js:734 menuWidgets.js:518
+#: constants.js:564 menuButton.js:734 menuWidgets.js:521
 #: settings/Menu/ListPinnedPage.js:355 settings/Menu/ListPinnedPage.js:377
 msgid "Activities Overview"
 msgstr ""
@@ -235,7 +235,7 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: menuButton.js:38 menulayouts/plasma.js:126 menulayouts/plasma.js:573
+#: menuButton.js:38 menulayouts/plasma.js:127 menulayouts/plasma.js:576
 msgid "Apps"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Show Desktop"
 msgstr ""
 
-#: menuButton.js:779 menuWidgets.js:834 menuWidgets.js:851
+#: menuButton.js:779 menuWidgets.js:837 menuWidgets.js:854
 msgid "Power Off / Log Out"
 msgstr ""
 
@@ -255,89 +255,89 @@ msgstr ""
 msgid "App Icons Taskbar Settings"
 msgstr ""
 
-#: menuWidgets.js:888 menulayouts/plasma.js:326
+#: menuWidgets.js:891 menulayouts/plasma.js:327
 msgid "Session"
 msgstr ""
 
-#: menuWidgets.js:892 menulayouts/plasma.js:330
+#: menuWidgets.js:895 menulayouts/plasma.js:331
 msgid "System"
 msgstr ""
 
-#: menuWidgets.js:1085 menuWidgets.js:1106 menulayouts/az.js:63
-#: menulayouts/eleven.js:55 menulayouts/redmond.js:74 menulayouts/redmond.js:79
-#: menulayouts/sleek.js:74
+#: menuWidgets.js:1088 menuWidgets.js:1109 menulayouts/az.js:64
+#: menulayouts/eleven.js:56 menulayouts/redmond.js:75 menulayouts/redmond.js:80
+#: menulayouts/sleek.js:75
 msgid "Back"
 msgstr ""
 
-#: menuWidgets.js:2371 menulayouts/pop.js:355
+#: menuWidgets.js:2374 menulayouts/pop.js:355
 msgid "Unnamed Folder"
 msgstr ""
 
-#: menuWidgets.js:2471 menulayouts/pop.js:1185
+#: menuWidgets.js:2474 menulayouts/pop.js:1185
 msgid "New"
 msgstr ""
 
-#: menuWidgets.js:3036 menulayouts/az.js:70 menulayouts/eleven.js:62
-#: menulayouts/insider.js:185 menulayouts/plasma.js:121 menulayouts/raven.js:61
-#: menulayouts/raven.js:232 menulayouts/raven.js:273 menulayouts/redmond.js:75
-#: menulayouts/redmond.js:78 menulayouts/redmond.js:81 menulayouts/sleek.js:75
+#: menuWidgets.js:3039 menulayouts/az.js:71 menulayouts/eleven.js:63
+#: menulayouts/insider.js:185 menulayouts/plasma.js:122 menulayouts/raven.js:62
+#: menulayouts/raven.js:233 menulayouts/raven.js:274 menulayouts/redmond.js:76
+#: menulayouts/redmond.js:79 menulayouts/redmond.js:82 menulayouts/sleek.js:76
 #: menulayouts/unity.js:42 menulayouts/unity.js:279 menulayouts/unity.js:349
 #: menulayouts/windows.js:415
 msgid "Pinned"
 msgstr ""
 
-#: menuWidgets.js:3206
+#: menuWidgets.js:3209
 msgid "Unmount Drive"
 msgstr ""
 
-#: menuWidgets.js:3208
+#: menuWidgets.js:3211
 msgid "Eject Drive"
 msgstr ""
 
-#: menuWidgets.js:3252
+#: menuWidgets.js:3255
 msgid "Remove from Recent"
 msgstr ""
 
-#: menuWidgets.js:3335
+#: menuWidgets.js:3338
 msgid "Search…"
 msgstr ""
 
-#: menulayouts/baseMenuLayout.js:490
+#: menulayouts/baseMenuLayout.js:489
 msgid "More Recent Files..."
 msgstr ""
 
-#: menulayouts/eleven.js:70
+#: menulayouts/eleven.js:71
 msgid "Frequent"
 msgstr ""
 
-#: menulayouts/plasma.js:130 placeDisplay.js:133 placeDisplay.js:156
+#: menulayouts/plasma.js:131 placeDisplay.js:133 placeDisplay.js:156
 #: settings/Menu/ListPinnedPage.js:411
 msgid "Computer"
 msgstr ""
 
-#: menulayouts/plasma.js:134
+#: menulayouts/plasma.js:135
 msgid "Leave"
 msgstr ""
 
-#: menulayouts/plasma.js:274 menulayouts/windows.js:272
+#: menulayouts/plasma.js:275 menulayouts/windows.js:272
 #: settings/MenuPage.js:123
 msgid "Application Shortcuts"
 msgstr ""
 
-#: menulayouts/plasma.js:279 menulayouts/windows.js:276
+#: menulayouts/plasma.js:280 menulayouts/windows.js:276
 msgid "Places"
 msgstr ""
 
-#: menulayouts/plasma.js:294 menulayouts/windows.js:208
+#: menulayouts/plasma.js:295 menulayouts/windows.js:208
 #: settings/Menu/LayoutTweaksPage.js:757 settings/Menu/LayoutTweaksPage.js:885
 msgid "Bookmarks"
 msgstr ""
 
-#: menulayouts/plasma.js:296 menulayouts/windows.js:210
+#: menulayouts/plasma.js:297 menulayouts/windows.js:210
 msgid "Devices"
 msgstr ""
 
-#: menulayouts/plasma.js:298 menulayouts/windows.js:212
+#: menulayouts/plasma.js:299 menulayouts/windows.js:212
 #: settings/Menu/ListPinnedPage.js:412
 msgid "Network"
 msgstr ""
@@ -386,7 +386,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: menulayouts/raven.js:61 menulayouts/raven.js:238 menulayouts/unity.js:42
+#: menulayouts/raven.js:62 menulayouts/raven.js:239 menulayouts/unity.js:42
 #: menulayouts/unity.js:283 settings/Menu/LayoutTweaksPage.js:576
 #: settings/Menu/LayoutTweaksPage.js:603 settings/Menu/LayoutTweaksPage.js:709
 #: settings/Menu/LayoutTweaksPage.js:800 settings/Menu/LayoutTweaksPage.js:825
@@ -394,12 +394,12 @@ msgstr ""
 msgid "All Programs"
 msgstr ""
 
-#: menulayouts/raven.js:279 menulayouts/unity.js:354
+#: menulayouts/raven.js:280 menulayouts/unity.js:354
 #: settings/Menu/VisualSettings.js:231
 msgid "Shortcuts"
 msgstr ""
 
-#: menulayouts/runner.js:227
+#: menulayouts/runner.js:228
 msgid "Configure Runner"
 msgstr ""
 
@@ -423,7 +423,7 @@ msgstr ""
 
 #: placeDisplay.js:119 placeDisplay.js:340
 #: settings/Menu/LayoutTweaksPage.js:575 settings/Menu/LayoutTweaksPage.js:602
-#: settings/Menu/ListPinnedPage.js:403 utils.js:231
+#: settings/Menu/ListPinnedPage.js:403 utils.js:234
 msgid "Home"
 msgstr ""
 
@@ -448,15 +448,15 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: search.js:730
+#: search.js:742
 msgid "Searching..."
 msgstr ""
 
-#: search.js:732
+#: search.js:744
 msgid "No results."
 msgstr ""
 
-#: search.js:815
+#: search.js:827
 #, javascript-format
 msgid "+ %d more"
 msgstr ""
@@ -503,140 +503,140 @@ msgstr ""
 msgid "What's New"
 msgstr ""
 
-#: settings/AboutPage.js:111
+#: settings/AboutPage.js:123
+msgid "Message Tray Update Notification"
+msgstr ""
+
+#: settings/AboutPage.js:124
+#, javascript-format
+msgid "Show a notification when %s receives an update."
+msgstr ""
+
+#: settings/AboutPage.js:132
 msgid "Git Commit"
 msgstr ""
 
-#: settings/AboutPage.js:121
+#: settings/AboutPage.js:142
 msgid "GNOME Version"
 msgstr ""
 
-#: settings/AboutPage.js:130
+#: settings/AboutPage.js:151
 msgid "OS Name"
 msgstr ""
 
-#: settings/AboutPage.js:143
+#: settings/AboutPage.js:164
 msgid "Windowing System"
 msgstr ""
 
 #. TRANSLATORS: 'PROJECT_NAME' on GitLab
-#: settings/AboutPage.js:154
+#: settings/AboutPage.js:175
 #, javascript-format
 msgid "%s on GitLab"
 msgstr ""
 
-#: settings/AboutPage.js:157
+#: settings/AboutPage.js:178
 msgid "Report an Issue"
 msgstr ""
 
 #. TRANSLATORS: 'PROJECT_NAME' Settings
-#: settings/AboutPage.js:167
+#: settings/AboutPage.js:188
 #, javascript-format
 msgid "%s Settings"
 msgstr ""
 
-#: settings/AboutPage.js:170 settings/Menu/ThemingDialog.js:70
+#: settings/AboutPage.js:191 settings/Menu/ThemingDialog.js:70
 #: settings/Menu/ThemingDialog.js:75
 msgid "Load"
 msgstr ""
 
-#: settings/AboutPage.js:175
+#: settings/AboutPage.js:196
 msgid "Load Settings"
 msgstr ""
 
-#: settings/AboutPage.js:201 settings/Menu/ThemingDialog.js:128
+#: settings/AboutPage.js:222 settings/Menu/ThemingDialog.js:128
 #: settings/Menu/ThemingDialog.js:141
 msgid "Save"
 msgstr ""
 
-#: settings/AboutPage.js:206
+#: settings/AboutPage.js:227
 msgid "Save Settings"
 msgstr ""
 
-#: settings/AboutPage.js:228 settings/AboutPage.js:229
+#: settings/AboutPage.js:249 settings/AboutPage.js:250
 msgid "Credits"
 msgstr ""
 
-#: settings/AboutPage.js:233
+#: settings/AboutPage.js:254
 msgid "Brought to you by"
 msgstr ""
 
-#: settings/AboutPage.js:244
+#: settings/AboutPage.js:265
 msgid "History"
 msgstr ""
 
-#: settings/AboutPage.js:262
+#: settings/AboutPage.js:283
 msgid "Contributions by"
 msgstr ""
 
-#: settings/AboutPage.js:265
+#: settings/AboutPage.js:286
 msgid "Contributors"
 msgstr ""
 
-#: settings/AboutPage.js:267
+#: settings/AboutPage.js:288
 msgid "Translators"
 msgstr ""
 
-#: settings/AboutPage.js:271
+#: settings/AboutPage.js:292
 msgid "Artwork by"
 msgstr ""
 
-#: settings/AboutPage.js:279 settings/AboutPage.js:280
+#: settings/AboutPage.js:300 settings/AboutPage.js:301
 msgid "Legal"
 msgstr ""
 
-#: settings/AboutPage.js:286
+#: settings/AboutPage.js:307
 msgid "This program comes with absolutely no warranty."
 msgstr ""
 
-#: settings/AboutPage.js:288
+#: settings/AboutPage.js:309
 msgid "GNU General Public License, version 2 or later"
 msgstr ""
 
 #. TRANSLATORS: this is the program license url; the string contains the name of the license as link text.
-#: settings/AboutPage.js:288
+#: settings/AboutPage.js:309
 #, javascript-format
 msgid "See the <a href=\"%s\">%s</a> for details."
 msgstr ""
 
-#: settings/DonatePage.js:12 supportNotifier.js:92
+#: settings/DonatePage.js:12 updateNotifier.js:68
 msgid "Donate"
 msgstr ""
 
-#: settings/DonatePage.js:23
+#: settings/DonatePage.js:22
 #, javascript-format
 msgid "Help Support %s"
 msgstr ""
 
-#: settings/DonatePage.js:24 supportNotifier.js:60
+#: settings/DonatePage.js:23 updateNotifier.js:59
 #, javascript-format
 msgid ""
 "Thank you for using %s! If you enjoy it and would like to help support its "
 "continued development, please consider making a donation."
 msgstr ""
 
-#: settings/DonatePage.js:28
+#: settings/DonatePage.js:27
 msgid "Donate via PayPal"
 msgstr ""
 
-#: settings/DonatePage.js:31
+#: settings/DonatePage.js:30
 msgid "Donate via Buy Me a Coffee"
 msgstr ""
 
-#: settings/DonatePage.js:43
+#: settings/DonatePage.js:42
 #, javascript-format
 msgid ""
 "A huge thank you to everyone who has supported %s! Your support helps keep "
 "%s going. It is truly appreciated!"
-msgstr ""
-
-#: settings/DonatePage.js:63
-msgid "Message Tray Notifications"
-msgstr ""
-
-#: settings/DonatePage.js:64
-#, javascript-format
-msgid "Show a notification when %s receives an update."
 msgstr ""
 
 #: settings/GeneralPage.js:32
@@ -1687,15 +1687,15 @@ msgid "Modify ArcMenu Context Menu"
 msgstr ""
 
 #. TRANSLATORS: This will display as "ProjectName v21 Released!" as an example.
-#: supportNotifier.js:59
+#: updateNotifier.js:58
 #, javascript-format
 msgid "%s v%s Released!"
 msgstr ""
 
-#: supportNotifier.js:93
+#: updateNotifier.js:69
 msgid "What's new?"
 msgstr ""
 
-#: supportNotifier.js:94
+#: updateNotifier.js:70
 msgid "Dismiss"
 msgstr ""
