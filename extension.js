@@ -8,7 +8,7 @@ import {SearchProviderEmitter} from './searchProviders/searchProviderEmitter.js'
 import * as Theming from './theming.js';
 
 import * as Utils from './utils.js';
-import {SupportNotification} from './supportNotifier.js';
+import {UpdateNotification} from './updateNotifier.js';
 
 export default class ArcMenu extends Extension {
     enable() {
@@ -20,7 +20,7 @@ export default class ArcMenu extends Extension {
         this._azTaskbarActive = false;
         this._dtpActive = false;
 
-        this._supportNotification = new SupportNotification(this);
+        this._updateNotification = new UpdateNotification(this);
 
         const hideOverviewOnStartup = this.settings.get_boolean('hide-overview-on-startup');
         if (hideOverviewOnStartup && Main.layoutManager._startingUp) {
@@ -74,8 +74,8 @@ export default class ArcMenu extends Extension {
         global.disconnectObject(this);
         this.settings.disconnectObject(this);
 
-        this._supportNotification.destroy();
-        this._supportNotification = null;
+        this._updateNotification.destroy();
+        this._updateNotification = null;
 
         Theming.deleteStylesheet();
         this.customStylesheet = null;

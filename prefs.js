@@ -83,11 +83,11 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
         window.add(menuButtonPage);
         window.pages.push(menuButtonPage);
 
-        const donatePage = new DonatePage(settings, this.metadata);
+        const donatePage = new DonatePage(this.metadata);
         window.add(donatePage);
         window.pages.push(donatePage);
 
-        const aboutPage = new AboutPage(this.metadata, this.path);
+        const aboutPage = new AboutPage(settings, this.metadata, this.path);
         window.add(aboutPage);
         window.pages.push(aboutPage);
 

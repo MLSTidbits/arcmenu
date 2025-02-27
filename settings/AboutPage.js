@@ -11,7 +11,7 @@ import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions
 
 export const AboutPage = GObject.registerClass(
 class ArcMenuAboutPage extends Adw.PreferencesPage {
-    _init(metadata, path) {
+    _init(settings, metadata, path) {
         super._init({
             title: _('About'),
             icon_name: 'help-about-symbolic',
@@ -105,6 +105,27 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         });
         releaseNotesBox.append(releaseNotesLabel);
         whatsNewGroup.add(releaseNotesBox);
+
+        const enableNotificationsGroup = new Adw.PreferencesGroup({
+            vexpand: true,
+            valign: Gtk.Align.END,
+        });
+        whatsNewGroup.add(enableNotificationsGroup);
+
+        const enableNotificationsSwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+            active: settings.get_boolean('update-notifier-enabled'),
+        });
+        enableNotificationsSwitch.connect('notify::active', widget => {
+            settings.set_boolean('update-notifier-enabled', widget.get_active());
+        });
+        const enableNotificationsRow = new Adw.ActionRow({
+            title: _('Message Tray Update Notification'),
+            subtitle: _('Show a notification when %s receives an update.').format(_(PROJECT_NAME)),
+            activatable_widget: enableNotificationsSwitch,
+        });
+        enableNotificationsRow.add_suffix(enableNotificationsSwitch);
+        enableNotificationsGroup.add(enableNotificationsRow);
 
         if (metadata.commit) {
             const commitRow = new Adw.ActionRow({

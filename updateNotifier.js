@@ -14,14 +14,13 @@ const PROJECT_ICON = '/icons/hicolor/16x16/actions/settings-arcmenu-logo.svg';
 const [ShellVersion] = Config.PACKAGE_VERSION.split('.').map(s => Number(s));
 
 /**
- * A MessageTray notification
+ * A MessageTray notification, shown once per new release/version
  *
  * Shows users what's new and displays donation options.
  *
- * Shown once per new release/version
  * @param {*} extension
  */
-export class SupportNotification {
+export class UpdateNotification {
     constructor(extension) {
         const {metadata} = extension;
         this._extension = extension;
@@ -41,15 +40,15 @@ export class SupportNotification {
     }
 
     _maybeShowNotification() {
-        const shouldShowNotification = this._settings.get_boolean('support-notifier-enabled');
+        const shouldShowNotification = this._settings.get_boolean('update-notifier-enabled');
         if (!shouldShowNotification)
             return;
 
-        const previousNotificationVersion = this._settings.get_int('support-notifier-project-version');
+        const previousNotificationVersion = this._settings.get_int('update-notifier-project-version');
         const shouldNotifyNewVersion = previousNotificationVersion < this._version;
 
         if (shouldNotifyNewVersion) {
-            this._settings.set_int('support-notifier-project-version', this._version);
+            this._settings.set_int('update-notifier-project-version', this._version);
             this._showNotification();
         }
     }
