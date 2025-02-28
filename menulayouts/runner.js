@@ -225,7 +225,7 @@ class RunnerTweaksButton extends MW.ArcMenuButtonItem {
     }
 
     constructor(menuLayout) {
-        super(menuLayout, _('Configure Runner'), 'emblem-system-symbolic');
+        super(menuLayout, _('Configure Runner'), 'applications-system-symbolic');
         this.style_class = 'button arcmenu-button';
         this.tooltipLocation = Constants.TooltipLocation.BOTTOM_CENTERED;
     }

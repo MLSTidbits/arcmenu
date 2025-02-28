@@ -202,7 +202,7 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
         });
 
         const customizeButton = new Gtk.Button({
-            icon_name: 'emblem-system-symbolic',
+            icon_name: 'applications-system-symbolic',
             css_classes: ['flat'],
             valign: Gtk.Align.CENTER,
             visible: isMenuHotkey ? this._settings.get_boolean('multi-monitor') : true,

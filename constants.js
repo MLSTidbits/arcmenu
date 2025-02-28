@@ -83,7 +83,7 @@ export const SoftwareManagerIDs = ['org.manjaro.pamac.manager.desktop', 'pamac-m
     'org.gnome.Software.desktop', 'tr.org.pardus.software.desktop'];
 
 export const Categories = [
-    {CATEGORY: CategoryType.FAVORITES, NAME: _('Favorites'), ICON: 'emblem-favorite-symbolic'},
+    {CATEGORY: CategoryType.FAVORITES, NAME: _('Favorites'), ICON: 'emote-love-symbolic'},
     {CATEGORY: CategoryType.FREQUENT_APPS, NAME: _('Frequent Apps'), ICON: 'user-bookmarks-symbolic'},
     {CATEGORY: CategoryType.ALL_PROGRAMS, NAME: _('All Apps'), ICON: 'view-app-grid-symbolic'},
     {CATEGORY: CategoryType.PINNED_APPS, NAME: _('Pinned Apps'), ICON: 'view-pin-symbolic'},
