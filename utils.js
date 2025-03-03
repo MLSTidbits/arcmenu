@@ -424,29 +424,6 @@ export function openPrefs(uuid) {
         extension.openPreferences();
 }
 
-export function getDashToPanelPosition(settings, index) {
-    var positions = null;
-    var side = 'NONE';
-
-    try {
-        positions = JSON.parse(settings.get_string('panel-positions'));
-        side = positions[index];
-    } catch (e) {
-        console.log(`Error parsing Dash to Panel positions: ${e.message}`);
-    }
-
-    if (side === 'TOP')
-        return St.Side.TOP;
-    else if (side === 'RIGHT')
-        return St.Side.RIGHT;
-    else if (side === 'BOTTOM')
-        return St.Side.BOTTOM;
-    else if (side === 'LEFT')
-        return St.Side.LEFT;
-    else
-        return St.Side.BOTTOM;
-}
-
 /**
  *
  * @param {Clutter.Actor} parent

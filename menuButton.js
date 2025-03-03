@@ -166,11 +166,11 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         this._dtpSettings = dtp.getSettings('org.gnome.shell.extensions.dash-to-panel');
         this._dtpActive = true;
 
-        const side = Utils.getDashToPanelPosition(this._dtpSettings, this._monitorIndex);
+        const side = this._panelParent.getPosition();
         this.updateArrowSide(side);
 
         this._dtpSettings.connectObject('changed::panel-positions', () => {
-            const newSide = Utils.getDashToPanelPosition(this._dtpSettings, this._monitorIndex);
+            const newSide = this._panelParent.getPosition();
             this.updateArrowSide(newSide);
         }, this);
     }
@@ -205,7 +205,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
                 this.arcMenuContextMenu._boxPointer.setSourceAlignment(.5);
                 this.arcMenu._boxPointer.setSourceAlignment(.5);
             } else if (this._dtpActive) {
-                const side = Utils.getDashToPanelPosition(this._dtpSettings, this._monitorIndex);
+                const side = this._panelParent.getPosition();
                 this.updateArrowSide(side, false);
             } else {
                 this.updateArrowSide(St.Side.TOP, false);
@@ -244,7 +244,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         if (!this._dtpActive || !this._panelParent.intellihide?.enabled)
             return {width: 0, height: 0};
 
-        const dtpPostion = Utils.getDashToPanelPosition(this._dtpSettings, this._monitorIndex);
+        const dtpPostion = this._panelParent.getPosition();
         const menuLocation = ArcMenuManager.settings.get_enum('force-menu-location');
 
         const width = this._panelParent.geom?.w ?? 0;
@@ -399,8 +399,6 @@ class ArcMenuMenuButton extends PanelMenu.Button {
     toggleMenu() {
         this.closeOtherMenus();
 
-        this.forceMenuLocation();
-
         const layout = ArcMenuManager.settings.get_enum('menu-layout');
         if (layout === Constants.MenuLayout.GNOME_OVERVIEW) {
             if (ArcMenuManager.settings.get_boolean('gnome-dash-show-applications'))
@@ -416,12 +414,16 @@ class ArcMenuMenuButton extends PanelMenu.Button {
 
             if (this._menuLayout?.updateStyle)
                 this._menuLayout.updateStyle();
+
+            this._maybeShowPanel();
         }
 
         this.arcMenu.toggle();
 
-        if (this.arcMenu.isOpen)
+        if (this.arcMenu.isOpen) {
             this._menuLayout?.grab_key_focus();
+            this.forceMenuLocation();
+        }
     }
 
     updateHeight() {
@@ -533,7 +535,6 @@ class ArcMenuMenuButton extends PanelMenu.Button {
 
     _onOpenStateChanged(_menu, open) {
         if (open) {
-            this._maybeShowPanel();
             this.menuButtonWidget.addStylePseudoClass('active');
             this.add_style_pseudo_class('active');
 
