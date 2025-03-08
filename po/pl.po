@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Arc Menu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-27 08:58-0500\n"
-"PO-Revision-Date: 2025-03-07 13:43+0100\n"
+"PO-Revision-Date: 2025-03-08 16:00+0100\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -184,7 +184,7 @@ msgstr "Runner"
 
 #: constants.js:520
 msgid "GNOME Overview"
-msgstr "GNOME Overview"
+msgstr "Przegląd GNOME"
 
 #: constants.js:528
 msgid "Raven"
@@ -231,7 +231,7 @@ msgstr "Dostrajanie"
 #: constants.js:564 menuButton.js:734 menuWidgets.js:521
 #: settings/Menu/ListPinnedPage.js:355 settings/Menu/ListPinnedPage.js:377
 msgid "Activities Overview"
-msgstr "Podgląd"
+msgstr "Przegląd aktywności"
 
 #: constants.js:564 menuButton.js:720 settings/Menu/ListPinnedPage.js:341
 #: settings/Menu/ListPinnedPage.js:352 settings/Menu/ListPinnedPage.js:364
@@ -256,7 +256,7 @@ msgstr "Wyłącz komputer / Wyloguj"
 
 #: menuButton.js:820
 msgid "Dash to Panel Settings"
-msgstr "Ustawienia panela"
+msgstr "Ustawienia panelu"
 
 #: menuButton.js:824
 msgid "App Icons Taskbar Settings"
@@ -729,7 +729,7 @@ msgstr "Samodzielne menu układu Runner"
 
 #: settings/GeneralPage.js:164
 msgid "Hide Overview on Startup"
-msgstr "Ukryj podgląd podczas uruchamiania"
+msgstr "Ukryj przegląd podczas uruchamiania"
 
 #: settings/GeneralPage.js:213
 msgid "Hotkey Options"
@@ -934,7 +934,7 @@ msgstr "Aktywuj po najechaniu"
 
 #: settings/Menu/LayoutTweaksPage.js:444
 msgid "Enable Activities Overview Shortcut"
-msgstr "Włącz skrót ekran podglądu"
+msgstr "Włącz skrót ekranu przeglądu"
 
 #: settings/Menu/LayoutTweaksPage.js:457
 msgid "Centered"
@@ -1043,7 +1043,7 @@ msgstr "Układy menu %s"
 #: settings/Menu/ListOtherPage.js:34
 msgid "Actions will be hidden from ArcMenu if not available on your system."
 msgstr ""
-"Akcje będą ukryte w menu aplikacji, jeśli nie będą dostępne w Twoim systemie."
+"Akcje będą ukryte w menu programów, jeśli nie będą dostępne w Twoim systemie."
 
 #: settings/Menu/ListOtherPage.js:38
 msgid "Power Off / Log Out Buttons"
@@ -1335,7 +1335,7 @@ msgstr "Stylizacja pozycji menu"
 #: settings/Menu/ThemePage.js:208 settings/Menu/ThemePage.js:211
 #: settings/MenuButtonPage.js:259 settings/MenuButtonPage.js:262
 msgid "Hover"
-msgstr "Nakładanie"
+msgstr "Najechanie"
 
 #: settings/Menu/ThemePage.js:214 settings/Menu/ThemePage.js:217
 #: settings/MenuButtonPage.js:265 settings/MenuButtonPage.js:268
@@ -1723,7 +1723,7 @@ msgstr "Menu kontekstowe"
 
 #: settings/MenuPage.js:173
 msgid "Modify ArcMenu Context Menu"
-msgstr "Zmodyfikuj menu kontekstowe menu aplikacji"
+msgstr "Zmodyfikuj menu kontekstowe menu programów"
 
 #. TRANSLATORS: This will display as "ProjectName v21 Released!" as an example.
 #: updateNotifier.js:58
@@ -1738,290 +1738,3 @@ msgstr "Co nowego?"
 #: updateNotifier.js:70
 msgid "Dismiss"
 msgstr "Odrzuć"
-
-#~ msgid "ArcMenu Version"
-#~ msgstr "Wersja"
-
-#~ msgid "Website"
-#~ msgstr "Strona internetowa"
-
-#~ msgid "Alphabetize 'All Programs' Category"
-#~ msgstr "Ułóż alfabetycznie kategorię 'Wszystkie programy'"
-
-#~ msgid "Menu Button Appearance"
-#~ msgstr "Wygląd przycisku menu"
-
-#~ msgid "Menu Button Icon"
-#~ msgstr "Ikona przycisku menu"
-
-#~ msgid "Menu Button Styling"
-#~ msgstr "Styl przycisków menu"
-
-#~ msgid "Left Super Key"
-#~ msgstr "Lewy klawisz Super"
-
-#~ msgid "Custom Hotkey"
-#~ msgstr "Własny klawisz skrótu"
-
-#~ msgid "Hotkey"
-#~ msgstr "Klawisz skrótu"
-
-#~ msgid "Current Hotkey"
-#~ msgstr "Obecny klawisz skrótu"
-
-#~ msgid "Set Custom Hotkey"
-#~ msgstr "Ustaw własny klawisz skrótu"
-
-#~ msgid "Choose Modifiers"
-#~ msgstr "Wybierz modyfikatory"
-
-#~ msgid "Ctrl"
-#~ msgstr "Ctrl"
-
-#~ msgid "Super"
-#~ msgstr "Super"
-
-#~ msgid "Shift"
-#~ msgstr "Shift"
-
-#~ msgid "Alt"
-#~ msgstr "Alt"
-
-#~ msgid "Press any key"
-#~ msgstr "Wciśnij dowolny klawisz"
-
-#~ msgid "Enable/Disable multi-lined labels on large application icon layouts."
-#~ msgstr ""
-#~ "Włącz/wyłącz etykiety wielowierszowe w dużych układach ikon aplikacji."
-
-#~ msgid "Button Shortcuts"
-#~ msgstr "Skróty przycisków"
-
-#~ msgid "ArcMenu Icons"
-#~ msgstr "Ikona menu aplikacji"
-
-#~ msgid "Layout Tweaks"
-#~ msgstr "Dostrajanie układu"
-
-#~ msgid "Customize Menu"
-#~ msgstr "Spersonalizuj menu aplikacji"
-
-#~ msgid "OS"
-#~ msgstr "System operacyjny"
-
-# W ustawieniach Gnome jest przetłumaczone jako "System okien" więc żeby było bardziej spójnie w systemie tak będzie lepiej
-# In Gnome Settings its translated as "System windows" instead of "Session Type" i think this is more coherent
-#~ msgid "Session Type"
-#~ msgstr "System okien"
-
-# Przydałoby się lepsze tłumaczenie
-# Can't find good traslation
-#~ msgid "Enable a standalone Runner menu"
-#~ msgstr "Włącz samodzielne menu Runner"
-
-# Przydałoby się lepsze tłumaczenie
-# Can't find good traslation
-#~ msgid "Runner Hotkey"
-#~ msgstr "Klawisz skrótu menu Runner"
-
-#~ msgid "Brisk Menu Shortcuts"
-#~ msgstr "Skróty menu Brisk"
-
-#~ msgid "Unity Layout Buttons"
-#~ msgstr "Układ przycisków Unity"
-
-#~ msgid "Button Separator Position"
-#~ msgstr "Pozycja separatora przycisków"
-
-#~ msgid "Adjust the position of the separator in the button panel"
-#~ msgstr "Dostosuj położenie separatora w panelu przycisków"
-
-#~ msgid "Separator Position"
-#~ msgstr "Pozycja separatora"
-
-#~ msgid "Mint Layout Shortcuts"
-#~ msgstr "Układ przycisków Mint"
-
-#~ msgid "Shortcut Separator Position"
-#~ msgstr "Pozycja separatora skrótów"
-
-#~ msgid "Layouts"
-#~ msgstr "Układy"
-
-#~ msgid "Available Menu Layouts"
-#~ msgstr "Dostępne układy menu"
-
-#~ msgid "View Sidebar"
-#~ msgstr "Wyświetl boczny pasek"
-
-#, javascript-format
-#~ msgid "Reset all %s?"
-#~ msgstr "Zresetować wszystkie %s?"
-
-#, javascript-format
-#~ msgid "All %s will be reset to the default value."
-#~ msgstr "Wszystkie %s zostaną zresetowane do wartości domyślnej."
-
-#~ msgid "Next Page"
-#~ msgstr "Następna strona"
-
-#~ msgid "Previous Page"
-#~ msgstr "Poprzednia strona"
-
-#~ msgid "Icon Sizes"
-#~ msgstr "Rozmiary ikon"
-
-#~ msgid "Default"
-#~ msgstr "Domyślny"
-
-#~ msgid "Grid Icons"
-#~ msgstr "Ikony siatki"
-
-#~ msgid "Buttons"
-#~ msgstr "Przyciski"
-
-#~ msgid "Quick Links"
-#~ msgstr "Szybkie skróty"
-
-#~ msgid "Misc"
-#~ msgstr "Różne"
-
-#~ msgid "In-Line"
-#~ msgstr "W linii"
-
-#~ msgid "Sub Menu"
-#~ msgstr "Podmenu"
-
-#~ msgid "Change Selected Pinned App"
-#~ msgstr "Zmień przypięte aplikacje"
-
-#, javascript-format
-#~ msgid "%s has been unpinned from ArcMenu"
-#~ msgstr "%s został odpięty z menu aplikacji"
-
-#~ msgid "Shortcut Path"
-#~ msgstr "Scieżka skrótu"
-
-#~ msgid "Show descriptions of search results"
-#~ msgstr "Pokaż opisy wyników wyszukiwania"
-
-#~ msgid "Export or Import Settings"
-#~ msgstr "Eksport lub import ustawień"
-
-#~ msgid "Export or Import ArcMenu Settings"
-#~ msgstr "Eksport lub import ustawień menu aplikacji"
-
-#~ msgid "Importing will overwrite current settings."
-#~ msgstr "Import nadpisze bieżące ustawienia."
-
-#~ msgid "Import"
-#~ msgstr "Import"
-
-#~ msgid "Import settings"
-#~ msgstr "Import ustawień"
-
-#~ msgid "Export"
-#~ msgstr "Eksport"
-
-#~ msgid "Export settings"
-#~ msgstr "Eksport ustawień"
-
-#~ msgid "ArcMenu Settings Window Size"
-#~ msgstr "Rozmiar okna ustawień menu aplikacji"
-
-#~ msgid "Window Width"
-#~ msgstr "Szerokość okna"
-
-#~ msgid "Reset all ArcMenu Settings"
-#~ msgstr "Reset wszystkich ustawień menu aplikacji"
-
-#~ msgid "Reset all Settings"
-#~ msgstr "Reset wszystkich ustawień"
-
-#~ msgid "Theme"
-#~ msgstr "Motyw"
-
-#~ msgid "ArcMenu - Hibernate Error!"
-#~ msgstr "Menu aplikacji - Błąd hibernacji!"
-
-#~ msgid "System unable to hibernate."
-#~ msgstr "System nie może przejść w stan hibernacji."
-
-#~ msgid "ArcMenu - Hybrid Sleep Error!"
-#~ msgstr "Menu aplikacji - Błąd hybrydowego uśwpienia!"
-
-#~ msgid "System unable to hybrid sleep."
-#~ msgstr "System nie może przejść w stan hybrydowego uśpienia."
-
-#~ msgid "Current Windows:"
-#~ msgstr "Otwarte okna:"
-
-#~ msgid "Launch using Dedicated Graphics Card"
-#~ msgstr "Uruchom używając dedykowanej karty graficznej"
-
-#~ msgid "Select Apps to add to Pinned Apps List"
-#~ msgstr "Wybierz programy, które chcesz przypiąć"
-
-#~ msgid "Icon Path/Icon Symbolic:"
-#~ msgstr "Ścieżka do ikony:"
-
-#~ msgid "Terminal Command:"
-#~ msgstr "Polecenie konsoli:"
-
-#~ msgid "Display on all monitors when using Dash to Panel"
-#~ msgstr ""
-#~ "Wyświetlaj na wszystkich monitorach, kiedy Dash to Panel jest włączony"
-
-#~ msgid "Disable activities hot corner"
-#~ msgstr "Wyłącz aktywny narożnik podglądu"
-
-#~ msgid "Choose Arc Menus Default View"
-#~ msgstr "Wybierz domyślny widok menu aplikacji"
-
-#~ msgid "Right Super Key"
-#~ msgstr "Prawy klawisz Super"
-
-#~ msgid "Text for the menu button"
-#~ msgstr "Tekst dla przycisku menu"
-
-#~ msgid "Set custom text for the menu button"
-#~ msgstr "Ustaw własny tekst dla przycisku menu"
-
-#~ msgid "Enable the arrow icon beside the button text"
-#~ msgstr "Włącz ikonę strzałki obok tekstu przycisku"
-
-#~ msgid "Select icon for the menu button"
-#~ msgstr "Wybierz ikone dla przycisku menu"
-
-#~ msgid "Please select an image icon"
-#~ msgstr "Wybierz obraz ikony"
-
-#~ msgid "Circular"
-#~ msgstr "Okrągły"
-
-#~ msgid "Reset"
-#~ msgstr "Resetuj"
-
-#~ msgid "Highlighted Item Color"
-#~ msgstr "Kolor podświetlonych przedmiotów"
-
-#~ msgid "About Arc Menu"
-#~ msgstr "O programie"
-
-#~ msgid "Behaviour"
-#~ msgstr "Zachowanie"
-
-#~ msgid "Undefined"
-#~ msgstr "Nieokreślony"
-
-#~ msgid "Enable custom menu keybinding"
-#~ msgstr "Włącz własny skrót klawiszowy"
-
-#~ msgid "Syntax: <Shift>, <Ctrl>, <Alt>, <Super>"
-#~ msgstr "Składnia: <Shift>, <Ctrl>, <Alt>, <Super>"
-
-#~ msgid "Tweak Tool"
-#~ msgstr "Dostrajanie"
-
-#~ msgid "Webpage"
-#~ msgstr "Strona internetowa"
