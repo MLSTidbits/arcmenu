@@ -79,6 +79,9 @@ export class BaseMenuLayout extends St.BoxLayout {
         'pinned-apps-icon-size': GObject.ParamSpec.uint(
             'pinned-apps-icon-size', 'pinned-apps-icon-size', 'pinned-apps-icon-size',
             GObject.ParamFlags.READWRITE, 0, GLib.MAXINT32, 0),
+        'can_hide_search': GObject.ParamSpec.boolean(
+            'can_hide_search', 'can_hide_search', 'can_hide_search',
+            GObject.ParamFlags.READWRITE, true),
     };
 
     static {
@@ -134,6 +137,7 @@ export class BaseMenuLayout extends St.BoxLayout {
         this.connect('destroy', () => this._onDestroy());
         this.searchEntry.connectObject('search-changed', this._onSearchEntryChanged.bind(this), this);
         this.searchEntry.connectObject('entry-key-press', this._onSearchEntryKeyPress.bind(this), this);
+        ArcMenuManager.settings.connectObject('changed::search-hidden', () => this._onSearchHiddenChanged(), this);
     }
 
     _connectAppChangedEvents() {
@@ -148,12 +152,19 @@ export class BaseMenuLayout extends St.BoxLayout {
         }, this);
     }
 
+    _onSearchHiddenChanged() {
+        this.searchEntry.visible = !this._shouldHideSearchEntry();
+    }
+
     get menuButton() {
         return this._menuButton;
     }
 
     setDefaultMenuView() {
         this.searchEntry.clearWithoutSearchChangeEvent();
+        if (this._shouldHideSearchEntry())
+            this.searchEntry.hide();
+
         this.searchResults.setTerms([]);
         // Search results have been cleared, set category box active if needed.
         this._setCategoriesBoxInactive(false);
@@ -957,10 +968,20 @@ export class BaseMenuLayout extends St.BoxLayout {
             this._activeMenuItem = item;
     }
 
+    _shouldHideSearchEntry() {
+        const searchHidden = ArcMenuManager.settings.get_boolean('search-hidden');
+        return searchHidden && this.can_hide_search;
+    }
+
     _onSearchEntryChanged(searchEntry, searchString) {
         if (searchEntry.isEmpty()) {
             if (this.applicationsBox.contains(this.searchResults))
                 this.applicationsBox.remove_child(this.searchResults);
+
+            if (this._shouldHideSearchEntry()) {
+                this.grab_key_focus();
+                this.searchEntry.hide();
+            }
 
             this.setDefaultMenuView();
         } else {
@@ -973,6 +994,9 @@ export class BaseMenuLayout extends St.BoxLayout {
                 this._clearActorsFromBox();
                 this.applicationsBox.add_child(this.searchResults);
             }
+
+            if (this._shouldHideSearchEntry())
+                this.searchEntry.show();
 
             this.activeCategoryType = Constants.CategoryType.SEARCH_RESULTS;
 

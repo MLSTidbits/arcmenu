@@ -33,6 +33,7 @@ export class Layout extends BaseMenuLayout {
             quicklinks_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
             buttons_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
             pinned_apps_icon_size: Constants.MEDIUM_ICON_SIZE,
+            can_hide_search: false,
         });
 
         this.topBox = new St.BoxLayout({

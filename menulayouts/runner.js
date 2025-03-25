@@ -54,6 +54,7 @@ export class Layout extends BaseMenuLayout {
             buttons_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
             pinned_apps_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
             is_standalone_runner: !!isStandalone,
+            can_hide_search: false,
         });
 
         this.activeMenuItem = null;

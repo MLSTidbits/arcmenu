@@ -41,6 +41,7 @@ export const DefaultMenuView = {
     CATEGORIES_LIST: 1,
     FREQUENT_APPS: 2,
     ALL_PROGRAMS: 3,
+    PINNED_AND_FREQUENT_APPS: 4,
 };
 
 export const SettingsPage = {

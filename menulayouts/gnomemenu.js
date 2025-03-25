@@ -89,10 +89,12 @@ export class Layout extends BaseMenuLayout {
         this.activitiesBox.add_child(activities);
         this.leftBox.add_child(this.activitiesBox);
 
+        const separator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MAX,
+            Constants.SeparatorAlignment.HORIZONTAL);
+        this.searchEntry.bind_property('visible', separator, 'visible', GObject.BindingFlags.SYNC_CREATE);
+
         const searchBarLocation = ArcMenuManager.settings.get_enum('searchbar-default-top-location');
         if (searchBarLocation === Constants.SearchbarLocation.TOP) {
-            const separator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MAX,
-                Constants.SeparatorAlignment.HORIZONTAL);
             separator.style += 'margin-bottom: 6px;';
 
             this.searchEntry.add_style_class_name('arcmenu-search-top');
@@ -101,8 +103,6 @@ export class Layout extends BaseMenuLayout {
             this.insert_child_at_index(this.searchEntry, 0);
             this.insert_child_at_index(separator, 1);
         } else if (searchBarLocation === Constants.SearchbarLocation.BOTTOM) {
-            const separator = new MW.ArcMenuSeparator(this, Constants.SeparatorStyle.MAX,
-                Constants.SeparatorAlignment.HORIZONTAL);
             separator.style += 'margin-top: 6px;';
 
             this.searchEntry.add_style_class_name('arcmenu-search-bottom');

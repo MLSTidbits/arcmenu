@@ -48,14 +48,9 @@ export function setVisibleRows(rows, menuLayout) {
         rows[Constants.SettingsPage.DIRECTORY_SHORTCUTS].visible = false;
         rows[Constants.SettingsPage.APPLICATION_SHORTCUTS].visible = false;
         break;
-    case Constants.MenuLayout.GNOME_MENU:
-        rows[Constants.SettingsPage.DIRECTORY_SHORTCUTS].visible = false;
-        rows[Constants.SettingsPage.APPLICATION_SHORTCUTS].visible = false;
-        rows[Constants.SettingsPage.SEARCH_OPTIONS].visible = false;
-        rows[Constants.SettingsPage.POWER_OPTIONS].visible = false;
-        break;
     case Constants.MenuLayout.MINT:
     case Constants.MenuLayout.BUDGIE:
+    case Constants.MenuLayout.GNOME_MENU:
         rows[Constants.SettingsPage.DIRECTORY_SHORTCUTS].visible = false;
         rows[Constants.SettingsPage.APPLICATION_SHORTCUTS].visible = false;
         rows[Constants.SettingsPage.POWER_OPTIONS].visible = false;

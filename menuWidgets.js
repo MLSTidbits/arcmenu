@@ -1193,7 +1193,8 @@ export class ViewAllAppsButton extends BaseMenuItem {
 
         const defaultMenuView = ArcMenuManager.settings.get_enum('default-menu-view');
         if (defaultMenuView === Constants.DefaultMenuView.PINNED_APPS ||
-            defaultMenuView === Constants.DefaultMenuView.FREQUENT_APPS)
+            defaultMenuView === Constants.DefaultMenuView.FREQUENT_APPS ||
+            defaultMenuView === Constants.DefaultMenuView.PINNED_AND_FREQUENT_APPS)
             this._menuLayout.displayCategories();
         else
             this._menuLayout.displayAllApps();

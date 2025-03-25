@@ -71,6 +71,7 @@
         <value value="1" nick="Categories_List"/>
         <value value="2" nick="Frequent_Apps"/>
         <value value="3" nick="All_Programs"/>
+        <value value="4" nick="Pinned_And_Frequent_Apps"/>
     </enum>
     <enum id='org.gnome.shell.extensions.arcmenu.all-apps-button-action'>
         <value value="0" nick="Categories_List"/>
@@ -304,6 +305,10 @@
     <key type="b" name="apps-show-extra-details">
       <default>false</default>
       <summary>Show a larger icon and extra app details</summary>
+    </key>
+    <key type="b" name="search-hidden">
+      <default>false</default>
+      <summary>Hide search entry in ArcMenu. Search entry will be hidden when empty.</summary>
     </key>
     <key type="i" name="max-search-results">
       <default>5</default>
@@ -604,6 +609,10 @@
     <key name="arcmenu-extra-categories-links" type="a(ib)">
       <default>[(0, false), (1, false), (2, false), (3, false), (4, false)]</default>
       <summary>Array of extra categories links for ArcMenu layout. See Constants.js - Categories</summary>
+    </key>
+    <key type="i" name="arcmenu-layout-max-frequent-apps">
+      <default>8</default>
+      <summary>The max frequent apps to show when default view set to Pinned And Frequent Apps</summary>
     </key>
     <key enum="org.gnome.shell.extensions.arcmenu.menuitem-location" name="arcmenu-extra-categories-links-location">
       <default>'Bottom'</default>
