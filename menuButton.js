@@ -595,12 +595,20 @@ class ArcMenuMenuButton extends PanelMenu.Button {
 
     _isMouseOnPanel() {
         const [x, y] = global.get_pointer();
+        return this._panelHasMousePointer(x, y);
+    }
 
-        const mouseOnPanel = this._panelHasMousePointer(x, y);
-        if (mouseOnPanel)
-            return true;
+    _panelChildHasGrab() {
+        const grabActor = global.stage.get_grab_actor();
+        if (!grabActor)
+            return false;
 
-        return false;
+        const statusArea = this._panelParent.statusArea ?? this._panel.statusArea;
+        const quickSettingsMenu = statusArea?.quickSettings?.menu.actor;
+
+        const sourceActor = grabActor._sourceActor || grabActor;
+
+        return this._panelParent.contains(sourceActor) || quickSettingsMenu?.contains(sourceActor);
     }
 
     _panelHasMousePointer(x, y) {
@@ -615,7 +623,8 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             return;
 
         this._pointerWatch = PointerWatcher.getPointerWatcher().addWatch(500, (pX, pY) => {
-            if (!this._panelHasMousePointer(pX, pY)) {
+            const panelChildHasGrab = this._panelChildHasGrab();
+            if (!this._panelHasMousePointer(pX, pY) && !panelChildHasGrab) {
                 callback();
                 this._stopTrackingMouse();
             }
