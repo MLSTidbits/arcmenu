@@ -40,17 +40,15 @@ export class UpdateNotification {
     }
 
     _maybeShowNotification() {
-        const shouldShowNotification = this._settings.get_boolean('update-notifier-enabled');
-        if (!shouldShowNotification)
+        const isNewVersion = this._settings.get_int('update-notifier-project-version') < this._version;
+        if (!isNewVersion)
             return;
 
-        const previousNotificationVersion = this._settings.get_int('update-notifier-project-version');
-        const shouldNotifyNewVersion = previousNotificationVersion < this._version;
+        this._settings.set_int('update-notifier-project-version', this._version);
 
-        if (shouldNotifyNewVersion) {
-            this._settings.set_int('update-notifier-project-version', this._version);
+        const showNotification = this._settings.get_boolean('update-notifier-enabled');
+        if (showNotification)
             this._showNotification();
-        }
     }
 
     _showNotification() {
