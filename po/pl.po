@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arc Menu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 08:58-0500\n"
-"PO-Revision-Date: 2025-03-08 16:00+0100\n"
+"POT-Creation-Date: 2025-03-24 21:23-0400\n"
+"PO-Revision-Date: 2025-03-25 20:32+0100\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -42,231 +42,231 @@ msgstr "Odepnij z menu"
 msgid "Open Folder Location"
 msgstr "Otwórz lokalizację katalogu"
 
-#: constants.js:86
+#: constants.js:87
 msgid "Favorites"
 msgstr "Ulubione"
 
-#: constants.js:87 menulayouts/runner.js:130 menulayouts/windows.js:337
+#: constants.js:88 menulayouts/runner.js:131 menulayouts/windows.js:337
 #: settings/Menu/LayoutTweaksPage.js:824
 msgid "Frequent Apps"
 msgstr "Często używane"
 
-#: constants.js:88 menuWidgets.js:1158 menulayouts/az.js:63
+#: constants.js:89 menuWidgets.js:1158 menulayouts/az.js:63
 #: menulayouts/az.js:72 menulayouts/eleven.js:55 menulayouts/eleven.js:64
 #: menulayouts/redmond.js:74 menulayouts/redmond.js:77
 #: menulayouts/redmond.js:81 menulayouts/sleek.js:74 menulayouts/sleek.js:77
 msgid "All Apps"
 msgstr "Wszystkie programy"
 
-#: constants.js:89 menulayouts/insider.js:281
+#: constants.js:90 menulayouts/insider.js:281
 #: settings/Menu/LayoutTweaksPage.js:710 settings/Menu/LayoutTweaksPage.js:822
 #: settings/MenuPage.js:101
 msgid "Pinned Apps"
 msgstr "Przypięte programy"
 
-#: constants.js:90 menulayouts/raven.js:296 menulayouts/unity.js:371
+#: constants.js:91 menulayouts/raven.js:296 menulayouts/unity.js:371
 #: searchProviders/recentFiles.js:29 searchProviders/recentFiles.js:30
 msgid "Recent Files"
 msgstr "Ostatnie pliki"
 
-#: constants.js:259 menuButton.js:790 settings/Menu/ListPinnedPage.js:388
+#: constants.js:260 menuButton.js:800 settings/Menu/ListPinnedPage.js:388
 msgid "Log Out..."
-msgstr "Wyloguj się"
+msgstr "Wyloguj się..."
 
-#: constants.js:260 menuButton.js:789 settings/Menu/ListPinnedPage.js:387
+#: constants.js:261 menuButton.js:799 settings/Menu/ListPinnedPage.js:387
 msgid "Lock"
 msgstr "Zablokuj ekran"
 
-#: constants.js:261 menuButton.js:784 settings/Menu/ListPinnedPage.js:390
+#: constants.js:262 menuButton.js:794 settings/Menu/ListPinnedPage.js:390
 msgid "Restart..."
-msgstr "Uruchom ponownie"
+msgstr "Uruchom ponownie..."
 
-#: constants.js:262 menuButton.js:785 settings/Menu/ListPinnedPage.js:389
+#: constants.js:263 menuButton.js:795 settings/Menu/ListPinnedPage.js:389
 msgid "Power Off..."
-msgstr "Wyłącz"
+msgstr "Wyłącz..."
 
-#: constants.js:263 menuButton.js:781 settings/Menu/ListPinnedPage.js:391
+#: constants.js:264 menuButton.js:791 settings/Menu/ListPinnedPage.js:391
 msgid "Suspend"
 msgstr "Wstrzymaj"
 
-#: constants.js:264 settings/Menu/ListPinnedPage.js:392
+#: constants.js:265 settings/Menu/ListPinnedPage.js:392
 msgid "Hybrid Sleep"
 msgstr "Hybrydowe uśpienie"
 
-#: constants.js:265 settings/Menu/ListPinnedPage.js:394
+#: constants.js:266 settings/Menu/ListPinnedPage.js:394
 msgid "Hibernate"
 msgstr "Hibernacja"
 
-#: constants.js:266 menuButton.js:791 settings/Menu/ListPinnedPage.js:395
+#: constants.js:267 menuButton.js:801 settings/Menu/ListPinnedPage.js:395
 msgid "Switch User"
 msgstr "Przełącz użytkownika"
 
-#: constants.js:411 settings/AboutPage.js:21 settings/DonatePage.js:17
+#: constants.js:412 settings/AboutPage.js:21 settings/DonatePage.js:17
 #: settings/GeneralPage.js:519 settings/MenuButtonPage.js:211
 msgid "ArcMenu"
 msgstr "Menu aplikacji"
 
-#: constants.js:416
+#: constants.js:417
 msgid "Brisk"
 msgstr "Brisk"
 
-#: constants.js:421
+#: constants.js:422
 msgid "Whisker"
 msgstr "Whisker"
 
-#: constants.js:426
+#: constants.js:427
 msgid "GNOME Menu"
 msgstr "GNOME Menu"
 
-#: constants.js:431
+#: constants.js:432
 msgid "Mint"
 msgstr "Mint"
 
-#: constants.js:436
+#: constants.js:437
 msgid "Budgie"
 msgstr "Budgie"
 
-#: constants.js:444
+#: constants.js:445
 msgid "Unity"
 msgstr "Unity"
 
-#: constants.js:449
+#: constants.js:450
 msgid "Plasma"
 msgstr "Plasma"
 
-#: constants.js:454
+#: constants.js:455
 msgid "tognee"
-msgstr "Tognee"
+msgstr "tognee"
 
-#: constants.js:459
+#: constants.js:460
 msgid "Insider"
 msgstr "Insider"
 
-#: constants.js:464
+#: constants.js:465
 msgid "Redmond"
 msgstr "Redmond"
 
-#: constants.js:469
+#: constants.js:470
 msgid "Windows"
 msgstr "Windows 10"
 
-#: constants.js:474
+#: constants.js:475
 msgid "11"
 msgstr "Windows 11"
 
-#: constants.js:479
+#: constants.js:480
 msgid "a.z."
 msgstr "a.z."
 
-#: constants.js:484
+#: constants.js:485
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: constants.js:489
+#: constants.js:490
 msgid "Pop"
 msgstr "Pop"
 
-#: constants.js:494
+#: constants.js:495
 msgid "Sleek"
 msgstr "Sleek"
 
-#: constants.js:502
+#: constants.js:503
 msgid "Elementary"
 msgstr "Elementary"
 
-#: constants.js:507
+#: constants.js:508
 msgid "Chromebook"
 msgstr "Chromebook"
 
-#: constants.js:515
+#: constants.js:516
 msgid "Runner"
 msgstr "Runner"
 
-#: constants.js:520
+#: constants.js:521
 msgid "GNOME Overview"
 msgstr "Przegląd GNOME"
 
-#: constants.js:528
+#: constants.js:529
 msgid "Raven"
 msgstr "Raven"
 
-#: constants.js:536
+#: constants.js:537
 msgid "Traditional"
 msgstr "Tradycyjny"
 
-#: constants.js:541
+#: constants.js:542
 msgid "Modern"
 msgstr "Nowoczesny"
 
-#: constants.js:546
+#: constants.js:547
 msgid "Touch"
 msgstr "Dotykowy"
 
 # Lepsze tłumaczenie by się przydało
 # Can't find Polish translation that can be good
-#: constants.js:551
+#: constants.js:552
 msgid "Launcher"
 msgstr "Aktywator"
 
-#: constants.js:556
+#: constants.js:557
 msgid "Alternative"
 msgstr "Alternatywny"
 
-#: constants.js:563
+#: constants.js:564
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: constants.js:563
+#: constants.js:564
 msgid "Software"
 msgstr "Oprogramowanie"
 
-#: constants.js:563
+#: constants.js:564
 msgid "Terminal"
 msgstr "Konsola"
 
-#: constants.js:563
+#: constants.js:564
 msgid "Tweaks"
 msgstr "Dostrajanie"
 
-#: constants.js:564 menuButton.js:734 menuWidgets.js:521
+#: constants.js:565 menuButton.js:744 menuWidgets.js:521
 #: settings/Menu/ListPinnedPage.js:355 settings/Menu/ListPinnedPage.js:377
 msgid "Activities Overview"
 msgstr "Przegląd aktywności"
 
-#: constants.js:564 menuButton.js:720 settings/Menu/ListPinnedPage.js:341
+#: constants.js:565 menuButton.js:730 settings/Menu/ListPinnedPage.js:341
 #: settings/Menu/ListPinnedPage.js:352 settings/Menu/ListPinnedPage.js:364
 msgid "ArcMenu Settings"
 msgstr "Ustawienia menu"
 
-#: constants.js:564
+#: constants.js:565
 msgid "Files"
 msgstr "Pliki"
 
-#: menuButton.js:38 menulayouts/plasma.js:127 menulayouts/plasma.js:576
+#: menuButton.js:38 menulayouts/plasma.js:128 menulayouts/plasma.js:577
 msgid "Apps"
 msgstr "Programy"
 
-#: menuButton.js:765 settings/Menu/ListPinnedPage.js:380
+#: menuButton.js:775 settings/Menu/ListPinnedPage.js:380
 msgid "Show Desktop"
 msgstr "Pokaż pulpit"
 
-#: menuButton.js:779 menuWidgets.js:837 menuWidgets.js:854
+#: menuButton.js:789 menuWidgets.js:837 menuWidgets.js:854
 msgid "Power Off / Log Out"
 msgstr "Wyłącz komputer / Wyloguj"
 
-#: menuButton.js:820
+#: menuButton.js:830
 msgid "Dash to Panel Settings"
 msgstr "Ustawienia panelu"
 
-#: menuButton.js:824
+#: menuButton.js:834
 msgid "App Icons Taskbar Settings"
 msgstr "Ustawienia ikon paska zadań"
 
-#: menuWidgets.js:891 menulayouts/plasma.js:327
+#: menuWidgets.js:891 menulayouts/plasma.js:328
 msgid "Session"
 msgstr "Sesja"
 
-#: menuWidgets.js:895 menulayouts/plasma.js:331
+#: menuWidgets.js:895 menulayouts/plasma.js:332
 msgid "System"
 msgstr "System"
 
@@ -276,16 +276,16 @@ msgstr "System"
 msgid "Back"
 msgstr "Wstecz"
 
-#: menuWidgets.js:2374 menulayouts/pop.js:355
+#: menuWidgets.js:2375 menulayouts/pop.js:355
 msgid "Unnamed Folder"
 msgstr "Nienazwany katalog"
 
-#: menuWidgets.js:2474 menulayouts/pop.js:1185
+#: menuWidgets.js:2475 menulayouts/pop.js:1185
 msgid "New"
 msgstr "Nowy"
 
-#: menuWidgets.js:3039 menulayouts/az.js:71 menulayouts/eleven.js:63
-#: menulayouts/insider.js:185 menulayouts/plasma.js:122 menulayouts/raven.js:62
+#: menuWidgets.js:3040 menulayouts/az.js:71 menulayouts/eleven.js:63
+#: menulayouts/insider.js:185 menulayouts/plasma.js:123 menulayouts/raven.js:62
 #: menulayouts/raven.js:233 menulayouts/raven.js:274 menulayouts/redmond.js:76
 #: menulayouts/redmond.js:79 menulayouts/redmond.js:82 menulayouts/sleek.js:76
 #: menulayouts/unity.js:42 menulayouts/unity.js:279 menulayouts/unity.js:349
@@ -293,58 +293,58 @@ msgstr "Nowy"
 msgid "Pinned"
 msgstr "Przypięte"
 
-#: menuWidgets.js:3209
+#: menuWidgets.js:3210
 msgid "Unmount Drive"
 msgstr "Odmontuj dysk"
 
-#: menuWidgets.js:3211
+#: menuWidgets.js:3212
 msgid "Eject Drive"
 msgstr "Wysuń dysk"
 
-#: menuWidgets.js:3255
+#: menuWidgets.js:3256
 msgid "Remove from Recent"
 msgstr "Usuń z ostatnich"
 
-#: menuWidgets.js:3338
+#: menuWidgets.js:3339
 msgid "Search…"
-msgstr "Wyszukaj"
+msgstr "Wyszukaj…"
 
-#: menulayouts/baseMenuLayout.js:489
+#: menulayouts/baseMenuLayout.js:500
 msgid "More Recent Files..."
-msgstr "Więcej ostatnich plików"
+msgstr "Więcej ostatnich plików..."
 
 #: menulayouts/eleven.js:71
 msgid "Frequent"
 msgstr "Często używane"
 
-#: menulayouts/plasma.js:131 placeDisplay.js:133 placeDisplay.js:156
+#: menulayouts/plasma.js:132 placeDisplay.js:133 placeDisplay.js:156
 #: settings/Menu/ListPinnedPage.js:411
 msgid "Computer"
 msgstr "Komputer"
 
-#: menulayouts/plasma.js:135
+#: menulayouts/plasma.js:136
 msgid "Leave"
 msgstr "Opuść"
 
-#: menulayouts/plasma.js:275 menulayouts/windows.js:272
+#: menulayouts/plasma.js:276 menulayouts/windows.js:272
 #: settings/MenuPage.js:123
 msgid "Application Shortcuts"
 msgstr "Skróty programów"
 
-#: menulayouts/plasma.js:280 menulayouts/windows.js:276
+#: menulayouts/plasma.js:281 menulayouts/windows.js:276
 msgid "Places"
 msgstr "Miejsca"
 
-#: menulayouts/plasma.js:295 menulayouts/windows.js:208
-#: settings/Menu/LayoutTweaksPage.js:757 settings/Menu/LayoutTweaksPage.js:885
+#: menulayouts/plasma.js:296 menulayouts/windows.js:208
+#: settings/Menu/LayoutTweaksPage.js:757 settings/Menu/LayoutTweaksPage.js:911
 msgid "Bookmarks"
 msgstr "Ulubione"
 
-#: menulayouts/plasma.js:297 menulayouts/windows.js:210
+#: menulayouts/plasma.js:298 menulayouts/windows.js:210
 msgid "Devices"
 msgstr "Urządzenia"
 
-#: menulayouts/plasma.js:299 menulayouts/windows.js:212
+#: menulayouts/plasma.js:300 menulayouts/windows.js:212
 #: settings/Menu/ListPinnedPage.js:412
 msgid "Network"
 msgstr "Sieć"
@@ -397,7 +397,7 @@ msgstr "Zastosuj"
 #: menulayouts/unity.js:283 settings/Menu/LayoutTweaksPage.js:576
 #: settings/Menu/LayoutTweaksPage.js:603 settings/Menu/LayoutTweaksPage.js:709
 #: settings/Menu/LayoutTweaksPage.js:800 settings/Menu/LayoutTweaksPage.js:825
-#: settings/Menu/LayoutTweaksPage.js:839
+#: settings/Menu/LayoutTweaksPage.js:865
 msgid "All Programs"
 msgstr "Wszystkie programy"
 
@@ -408,7 +408,7 @@ msgstr "Skróty"
 
 # Nie mogę znaleźć gdzie występuje ten tekst. Być może chodzi o plik .desktop w Linux Mincie bodajże jest on przetłumaczony jako "wyzwalacz"
 # Can't find where that text appears. Is this for configure .desktop files? In Linux Mint(probalby, not sure, where i saw it) "Runner" is called "wyzwalacz"
-#: menulayouts/runner.js:228
+#: menulayouts/runner.js:229
 msgid "Configure Runner"
 msgstr "Konfiguruj układ Runner"
 
@@ -459,7 +459,7 @@ msgstr "Usuń"
 
 #: search.js:742
 msgid "Searching..."
-msgstr "Wyszukiwanie"
+msgstr "Wyszukiwanie..."
 
 #: search.js:744
 msgid "No results."
@@ -519,7 +519,7 @@ msgstr "Powiadomienie po aktualizacji"
 #: settings/AboutPage.js:124
 #, javascript-format
 msgid "Show a notification when %s receives an update."
-msgstr "Pokaż powiadomienie po aktualizacji %s"
+msgstr "Pokaż powiadomienie po aktualizacji %s."
 
 # Myślę że to nie wymaga tłumaczenia
 # I dont think this should be trasnlated
@@ -619,7 +619,7 @@ msgstr "Powszechna Licencja Publiczna GNU, wersja 2 lub nowsza"
 msgid "See the <a href=\"%s\">%s</a> for details."
 msgstr "Zobacz <a href=\"%s\">%s</a>, aby uzyskać szczegółowe informacje."
 
-#: settings/DonatePage.js:12 updateNotifier.js:68
+#: settings/DonatePage.js:12 updateNotifier.js:66
 msgid "Donate"
 msgstr "Darowizna"
 
@@ -628,7 +628,7 @@ msgstr "Darowizna"
 msgid "Help Support %s"
 msgstr "Wsparcie %s"
 
-#: settings/DonatePage.js:23 updateNotifier.js:59
+#: settings/DonatePage.js:23 updateNotifier.js:57
 #, javascript-format
 msgid ""
 "Thank you for using %s! If you enjoy it and would like to help support its "
@@ -856,7 +856,7 @@ msgid "%s Layout Tweaks"
 msgstr "Dostrajanie układu %s"
 
 #: settings/Menu/LayoutTweaksPage.js:113 settings/Menu/LayoutTweaksPage.js:118
-#: settings/Menu/LayoutTweaksPage.js:731 settings/Menu/LayoutTweaksPage.js:860
+#: settings/Menu/LayoutTweaksPage.js:731 settings/Menu/LayoutTweaksPage.js:886
 msgid "Extra Shortcuts"
 msgstr "Dodatkowe skróty"
 
@@ -889,12 +889,12 @@ msgstr "Kwadratowy"
 msgid "Avatar Icon Shape"
 msgstr "Kształt ikony awatara"
 
-#: settings/Menu/LayoutTweaksPage.js:193 settings/Menu/LayoutTweaksPage.js:906
+#: settings/Menu/LayoutTweaksPage.js:193 settings/Menu/LayoutTweaksPage.js:932
 msgid "Bottom"
 msgstr "U dołu"
 
 #: settings/Menu/LayoutTweaksPage.js:194 settings/Menu/LayoutTweaksPage.js:456
-#: settings/Menu/LayoutTweaksPage.js:907
+#: settings/Menu/LayoutTweaksPage.js:933
 msgid "Top"
 msgstr "U góry"
 
@@ -912,7 +912,7 @@ msgstr "Wyłącz awatar użytkownika"
 
 #: settings/Menu/LayoutTweaksPage.js:274 settings/Menu/LayoutTweaksPage.js:578
 #: settings/Menu/LayoutTweaksPage.js:605 settings/Menu/LayoutTweaksPage.js:713
-#: settings/Menu/LayoutTweaksPage.js:802 settings/Menu/LayoutTweaksPage.js:827
+#: settings/Menu/LayoutTweaksPage.js:802 settings/Menu/LayoutTweaksPage.js:828
 msgid "Default View"
 msgstr "Widok domyślny"
 
@@ -986,7 +986,7 @@ msgstr "Pozycja na monitorze"
 msgid "Right-Panel Width"
 msgstr "Szerokość prawego panelu"
 
-#: settings/Menu/LayoutTweaksPage.js:743 settings/Menu/LayoutTweaksPage.js:871
+#: settings/Menu/LayoutTweaksPage.js:743 settings/Menu/LayoutTweaksPage.js:897
 msgid "External Devices"
 msgstr "Zewnętrzne urządzenia"
 
@@ -995,19 +995,27 @@ msgid "Nothing Yet!"
 msgstr "Jeszcze nic nie ma!"
 
 #: settings/Menu/LayoutTweaksPage.js:799 settings/Menu/LayoutTweaksPage.js:823
-#: settings/Menu/LayoutTweaksPage.js:838
+#: settings/Menu/LayoutTweaksPage.js:864
 msgid "Categories List"
 msgstr "Lista kategorii"
 
-#: settings/Menu/LayoutTweaksPage.js:842
+#: settings/Menu/LayoutTweaksPage.js:826
+msgid "Pinned and Frequent Apps"
+msgstr "Przypięte i często używane programy"
+
+#: settings/Menu/LayoutTweaksPage.js:855
+msgid "Max Frequent Apps"
+msgstr "Maks. ilość często używanych programów"
+
+#: settings/Menu/LayoutTweaksPage.js:868
 msgid "'All Apps' Button Action"
 msgstr "Akcja przycisku 'Wszystkie programy'"
 
-#: settings/Menu/LayoutTweaksPage.js:893
+#: settings/Menu/LayoutTweaksPage.js:919
 msgid "Category Quick Links"
 msgstr "Szybkie skróty kategorii"
 
-#: settings/Menu/LayoutTweaksPage.js:894
+#: settings/Menu/LayoutTweaksPage.js:920
 msgid ""
 "Display quick links of extra categories on the home page\n"
 "Must also be enabled in 'Menu -> Extra Categories' section"
@@ -1015,15 +1023,15 @@ msgstr ""
 "Wyświetlaj szybkie skróty dodatkowych kategorii na stronie głównej\n"
 "Musi również być włączone w 'Menu -> Dodatkowe kategorie'"
 
-#: settings/Menu/LayoutTweaksPage.js:909
+#: settings/Menu/LayoutTweaksPage.js:935
 msgid "Quick Links Location"
 msgstr "Lokalizacja szybkich skrótów"
 
-#: settings/Menu/LayoutTweaksPage.js:941
+#: settings/Menu/LayoutTweaksPage.js:967
 msgid "Enable Weather Widget"
 msgstr "Włącz widżet pogody"
 
-#: settings/Menu/LayoutTweaksPage.js:955
+#: settings/Menu/LayoutTweaksPage.js:981
 msgid "Enable Clock Widget"
 msgstr "Włącz widżet zegara"
 
@@ -1118,7 +1126,7 @@ msgstr "Odstęp"
 
 #: settings/Menu/ListPinnedPage.js:354
 msgid "Run Command..."
-msgstr "Uruchom polecenie"
+msgstr "Uruchom polecenie..."
 
 #: settings/Menu/ListPinnedPage.js:357
 msgid "Show All Apps"
@@ -1209,7 +1217,7 @@ msgstr "Ikona"
 
 #: settings/Menu/ListPinnedPage.js:605 settings/MenuButtonPage.js:159
 msgid "Browse..."
-msgstr "Przeglądaj"
+msgstr "Przeglądaj..."
 
 #: settings/Menu/ListPinnedPage.js:611 settings/MenuButtonPage.js:617
 msgid "Select an Icon"
@@ -1227,37 +1235,47 @@ msgstr "Katalog"
 msgid "Add"
 msgstr "Dodaj"
 
-#: settings/Menu/SearchOptionsPage.js:22
-msgid "Extra Search Providers"
-msgstr "Dodatkowi dostawcy wyszukiwania"
-
-#: settings/Menu/SearchOptionsPage.js:33
-msgid "Search for open windows across all workspaces"
-msgstr "Wyszukaj otwarte okna we wszystkich obszarach roboczych"
-
-#: settings/Menu/SearchOptionsPage.js:47
-msgid "Search for recent files"
-msgstr "Wyszukaj ostatnie pliki"
-
-#: settings/Menu/SearchOptionsPage.js:55 settings/MenuPage.js:134
+#: settings/Menu/SearchOptionsPage.js:16 settings/MenuPage.js:134
 msgid "Search Options"
 msgstr "Opcje wyszukiwania"
 
-#: settings/Menu/SearchOptionsPage.js:66
+#: settings/Menu/SearchOptionsPage.js:27
+msgid "Hide Search Bar"
+msgstr "Ukryj pasek wyszukiwania"
+
+#: settings/Menu/SearchOptionsPage.js:28
+msgid "The search bar hides when empty and appears when typing."
+msgstr ""
+"Pasek wyszukiwania będzie ukrywany, jeśli brak w nim teksu, oraz pokazywany, "
+"podczas wpisywania."
+
+#: settings/Menu/SearchOptionsPage.js:42
 msgid "Show Search Result Descriptions"
 msgstr "Pokaż opisy wyników wyszukiwania"
 
-#: settings/Menu/SearchOptionsPage.js:81
+#: settings/Menu/SearchOptionsPage.js:57
 msgid "Highlight search result terms"
 msgstr "Wyróżnij wyniki wyszukiwania"
 
-#: settings/Menu/SearchOptionsPage.js:100
+#: settings/Menu/SearchOptionsPage.js:76
 msgid "Max Search Results"
 msgstr "Maksymalna liczba wyników wyszukiwania"
 
-#: settings/Menu/SearchOptionsPage.js:144
+#: settings/Menu/SearchOptionsPage.js:120
 msgid "Search Box Border Radius"
 msgstr "Promień ramki pola wyszukiwania"
+
+#: settings/Menu/SearchOptionsPage.js:134
+msgid "Extra Search Providers"
+msgstr "Dodatkowi dostawcy wyszukiwania"
+
+#: settings/Menu/SearchOptionsPage.js:145
+msgid "Search for open windows across all workspaces"
+msgstr "Wyszukaj otwarte okna we wszystkich obszarach roboczych"
+
+#: settings/Menu/SearchOptionsPage.js:159
+msgid "Search for recent files"
+msgstr "Wyszukaj ostatnie pliki"
 
 #: settings/Menu/SubPage.js:44 settings/MenuButtonPage.js:29
 msgid "Reset settings"
@@ -1344,7 +1362,7 @@ msgstr "Aktywny"
 
 #: settings/Menu/ThemingDialog.js:15
 msgid "Save Theme As..."
-msgstr "Zapisz motyw jako"
+msgstr "Zapisz motyw jako..."
 
 #: settings/Menu/ThemingDialog.js:27
 msgid "Theme Name"
@@ -1627,7 +1645,7 @@ msgstr "Zastrzeżenie prawne"
 
 #: settings/MenuButtonPage.js:520
 msgid "Browse Files..."
-msgstr "Przeglądaj pliki"
+msgstr "Przeglądaj pliki..."
 
 #: settings/MenuButtonPage.js:525
 msgid "Select an Image File"
@@ -1639,7 +1657,7 @@ msgstr "Wybierz"
 
 #: settings/MenuButtonPage.js:552
 msgid "Browse Icons..."
-msgstr "Przeglądaj ikony"
+msgstr "Przeglądaj ikony..."
 
 #: settings/MenuButtonPage.js:622
 msgid "System Icons"
@@ -1647,7 +1665,7 @@ msgstr "Ikony systemowe"
 
 #: settings/MenuButtonPage.js:626
 msgid "Search..."
-msgstr "Wyszukaj"
+msgstr "Wyszukaj..."
 
 #: settings/MenuButtonPage.js:735
 msgid "Legal Disclaimer for Distro Icons"
@@ -1726,15 +1744,15 @@ msgid "Modify ArcMenu Context Menu"
 msgstr "Zmodyfikuj menu kontekstowe menu programów"
 
 #. TRANSLATORS: This will display as "ProjectName v21 Released!" as an example.
-#: updateNotifier.js:58
+#: updateNotifier.js:56
 #, javascript-format
 msgid "%s v%s Released!"
 msgstr "Wydano %s v%s!"
 
-#: updateNotifier.js:69
+#: updateNotifier.js:67
 msgid "What's new?"
 msgstr "Co nowego?"
 
-#: updateNotifier.js:70
+#: updateNotifier.js:68
 msgid "Dismiss"
 msgstr "Odrzuć"
