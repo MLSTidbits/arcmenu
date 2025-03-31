@@ -118,6 +118,18 @@ export function bindPowerItemVisibility(powerMenuItem) {
     }
 }
 
+export function openNewWindow(app, event) {
+    const activateOnLaunch = ArcMenuManager.settings.get_boolean('activate-on-launch');
+    const button = event.get_button();
+    const modifiers = event ? event.get_state() : 0;
+    const isMiddleButton = button && button === Clutter.BUTTON_MIDDLE;
+    const isCtrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK) !== 0;
+
+    return app.can_open_new_window() &&
+           app.state === Shell.AppState.RUNNING &&
+           (!activateOnLaunch || isCtrlPressed || isMiddleButton);
+}
+
 export class BaseMenuItem extends St.BoxLayout {
     static [GObject.properties] = {
         'active': GObject.ParamSpec.boolean('active', 'active', 'active',
@@ -214,7 +226,8 @@ export class BaseMenuItem extends St.BoxLayout {
 
     _onClicked(action) {
         const isPrimaryOrTouch = action.get_button() === Clutter.BUTTON_PRIMARY || action.get_button() === 0;
-        if (isPrimaryOrTouch) {
+        const isMiddleButton = action.get_button() === Clutter.BUTTON_MIDDLE || action.get_button() === 2;
+        if (isPrimaryOrTouch || isMiddleButton) {
             this.active = false;
             this._menuLayout.grab_key_focus();
             this.remove_style_pseudo_class('active');
@@ -377,8 +390,9 @@ export class BaseMenuItem extends St.BoxLayout {
 
         let state = event.get_state();
 
-        // if user has a modifier down (except capslock and numlock)
+        // if user has a modifier down (except control, capslock and numlock)
         // then don't handle the key press here
+        state &= ~Clutter.ModifierType.CONTROL_MASK;
         state &= ~Clutter.ModifierType.LOCK_MASK;
         state &= ~Clutter.ModifierType.MOD2_MASK;
         state &= Clutter.ModifierType.MODIFIER_MASK;
@@ -1331,7 +1345,7 @@ export class ShortcutMenuItem extends BaseMenuItem {
         }
     }
 
-    activate() {
+    activate(event) {
         switch (this._command) {
         case Constants.ShortcutCommands.LOG_OUT:
         case Constants.ShortcutCommands.LOCK:
@@ -1356,7 +1370,10 @@ export class ShortcutMenuItem extends BaseMenuItem {
             break;
         default: {
             if (this._app)
-                this._app.open_new_window(-1);
+                if (openNewWindow(this._app, event))
+                    this._app.open_new_window(-1);
+                else
+                    this._app.activate();
             else
                 Util.spawnCommandLine(this._command);
         }
@@ -2385,7 +2402,10 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
 
     activate(event) {
         if (this._app)
-            this._app.open_new_window(-1);
+            if (openNewWindow(this._app, event))
+                this._app.open_new_window(-1);
+            else
+                this._app.activate();
         else if (this._command === Constants.ShortcutCommands.SHOW_APPS)
             Main.overview._overview._controls._toggleAppsPage();
         else
@@ -2560,14 +2580,14 @@ export class ApplicationMenuItem extends BaseMenuItem {
         this.contextMenu.open(BoxPointer.PopupAnimation.FULL);
     }
 
-    activateSearchResult(provider, metaInfo, terms) {
+    activateSearchResult(provider, metaInfo, terms, event) {
         if (provider.activateResult) {
             provider.activateResult(metaInfo.id, terms);
             if (metaInfo.clipboardText)
                 St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, metaInfo.clipboardText);
         } else if (metaInfo.id.endsWith('.desktop')) {
             const app = this._menuLayout.appSys.lookup_app(metaInfo.id);
-            if (app.can_open_new_window())
+            if (openNewWindow(app, event))
                 app.open_new_window(-1);
             else
                 app.activate();
@@ -2593,7 +2613,10 @@ export class ApplicationMenuItem extends BaseMenuItem {
         if (this.isSearchResult) {
             this.activateSearchResult(this.provider, this.metaInfo, this.resultsView.terms, event);
         } else {
-            this._app.open_new_window(-1);
+            if (openNewWindow(this._app, event))
+                this._app.open_new_window(-1);
+            else
+                this._app.activate();
             super.activate(event);
         }
         this._menuLayout.arcMenu.toggle();

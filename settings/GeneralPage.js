@@ -166,6 +166,21 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
         });
         hideOverviewRow.add_suffix(hideOverviewSwitch);
         generalGroup.add(hideOverviewRow);
+
+        const activateOnLaunchSwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+            active: this._settings.get_boolean('activate-on-launch'),
+        });
+        activateOnLaunchSwitch.connect('notify::active', widget => {
+            this._settings.set_boolean('activate-on-launch', widget.get_active());
+        });
+        const activateOnLaunchRow = new Adw.ActionRow({
+            title: _('Activate on Launch'),
+            subtitle: _('Activate existing window instead of opening new one on application launch.'),
+            activatable_widget: activateOnLaunchSwitch,
+        });
+        activateOnLaunchRow.add_suffix(activateOnLaunchSwitch);
+        generalGroup.add(activateOnLaunchRow);
     }
 
     _createExpanderRow(title, isMenuHotkey) {
