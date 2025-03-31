@@ -1392,7 +1392,8 @@ export class AvatarMenuItem extends BaseMenuItem {
     }
 
     activate(event) {
-        Util.spawnCommandLine('gnome-control-center user-accounts');
+        const userSettingsCommand = ShellVersion >= 46 ? 'system users' : 'user-accounts';
+        Util.spawnCommandLine(`gnome-control-center ${userSettingsCommand}`);
         this._menuLayout.arcMenu.toggle();
         super.activate(event);
     }
