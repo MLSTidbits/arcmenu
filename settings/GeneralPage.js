@@ -166,21 +166,6 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
         });
         hideOverviewRow.add_suffix(hideOverviewSwitch);
         generalGroup.add(hideOverviewRow);
-
-        const activateOnLaunchSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean('activate-on-launch'),
-        });
-        activateOnLaunchSwitch.connect('notify::active', widget => {
-            this._settings.set_boolean('activate-on-launch', widget.get_active());
-        });
-        const activateOnLaunchRow = new Adw.ActionRow({
-            title: _('Activate on Launch'),
-            subtitle: _('Activate existing window instead of opening new one on application launch.'),
-            activatable_widget: activateOnLaunchSwitch,
-        });
-        activateOnLaunchRow.add_suffix(activateOnLaunchSwitch);
-        generalGroup.add(activateOnLaunchRow);
     }
 
     _createExpanderRow(title, isMenuHotkey) {
@@ -403,6 +388,7 @@ class ArcMenuHotkeyDialog extends Adw.Window {
 
             // Backspace deletes
             if (!isModifier && modmask === 0 && keyvalLower === Gdk.KEY_BackSpace) {
+                this.resultsText = null;
                 shortcutLabel.accelerator = null;
                 shortcutLabel.visible = true;
                 cancelButton.visible = true;
@@ -427,6 +413,7 @@ class ArcMenuHotkeyDialog extends Adw.Window {
             cancelButton.visible = true;
             keyboardImage.visible = false;
             if (conflicts) {
+                this.resultsText = null;
                 applyButton.visible = false;
                 conflictLabel.css_classes = ['error'];
                 conflictLabel.visible = true;
@@ -477,15 +464,24 @@ class ArcMenuHotkeyDialog extends Adw.Window {
 
     getConflictSettings() {
         if (!this._conflictSettings) {
-            this._conflictSettings = [
-                new Gio.Settings({schema_id: 'org.gnome.mutter.keybindings'}),
-                new Gio.Settings({schema_id: 'org.gnome.mutter.wayland.keybindings'}),
-                new Gio.Settings({schema_id: 'org.gnome.shell.keybindings'}),
-                new Gio.Settings({schema_id: 'org.gnome.desktop.wm.keybindings'}),
-            ];
+            this._conflictSettings = [];
+            this._addConflictSettings('org.gnome.mutter.keybindings');
+            this._addConflictSettings('org.gnome.mutter.wayland.keybindings');
+            this._addConflictSettings('org.gnome.shell.keybindings');
+            this._addConflictSettings('org.gnome.desktop.wm.keybindings');
+            this._addConflictSettings('org.gnome.settings-daemon.plugins.media-keys');
         }
 
         return this._conflictSettings;
+    }
+
+    _addConflictSettings(schemaId) {
+        try {
+            const settings = new Gio.Settings({schema_id: schemaId});
+            this._conflictSettings.push(settings);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     generateKeycomboMap(settings) {

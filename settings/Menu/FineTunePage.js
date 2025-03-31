@@ -137,6 +137,21 @@ class ArcMenuFineTunePage extends SubPage {
         multiLinedLabelRow.add_suffix(multiLinedLabelSwitch);
         miscGroup.add(multiLinedLabelRow);
 
+        const activateOnLaunchSwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+            active: this._settings.get_boolean('activate-on-launch'),
+        });
+        activateOnLaunchSwitch.connect('notify::active', widget => {
+            this._settings.set_boolean('activate-on-launch', widget.get_active());
+        });
+        const activateOnLaunchRow = new Adw.ActionRow({
+            title: _('Activate App Window on Launch'),
+            subtitle: _('Launching an app activates its existing window if one is open; otherwise, it launches a new instance.\nHold Ctrl while launching or middle-click to open a new window.'),
+            activatable_widget: activateOnLaunchSwitch,
+        });
+        activateOnLaunchRow.add_suffix(activateOnLaunchSwitch);
+        miscGroup.add(activateOnLaunchRow);
+
         const iconStyleGroup = new Adw.PreferencesGroup();
         this.add(iconStyleGroup);
 

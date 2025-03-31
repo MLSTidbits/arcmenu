@@ -122,7 +122,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         this.tooltipShowingID = null;
         this.tooltip = new MW.Tooltip(this);
 
-        this._dtpNeedsRelease = false;
+        this._intellihideRelease = false;
 
         // Create Main Menus - ArcMenu and ArcMenu's context menu
         this.arcMenu = new ArcMenu(this, 0.5, St.Side.TOP);
@@ -541,8 +541,8 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             if (Main.panel.menuManager && Main.panel.menuManager.activeMenu)
                 Main.panel.menuManager.activeMenu.toggle();
 
-            if (!this._dtpNeedsRelease && this._panelParent.intellihide?.enabled)
-                this._dtpNeedsRelease = true;
+            if (!this._intellihideRelease && this._panelParent.intellihide?.enabled)
+                this._intellihideRelease = true;
         } else {
             if (!this.arcMenu.isOpen) {
                 this._clearTooltipShowingId();
@@ -553,8 +553,8 @@ class ArcMenuMenuButton extends PanelMenu.Button {
                 this.menuButtonWidget.removeStylePseudoClass('active');
                 this.remove_style_pseudo_class('active');
 
-                if (this._dtpNeedsRelease && !this._panelNeedsHiding) {
-                    this._dtpNeedsRelease = false;
+                if (this._intellihideRelease && !this._panelNeedsHiding) {
+                    this._intellihideRelease = false;
                     const hidePanel = () => this._panelParent.intellihide?.release(1);
 
                     const isMouseOnPanel = this._isMouseOnPanel();

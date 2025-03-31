@@ -73,7 +73,7 @@ class ArcMenuMenuPage extends Adw.PreferencesPage {
 
         const fineTuneRow = new PW.SettingRow({
             title: _('Fine Tune'),
-            subtitle: _('Adjust less commonly used visual settings'),
+            subtitle: _('Adjust less commonly used settings'),
             icon_name: 'settings-finetune-symbolic',
         });
         this._addSubPageToRow(fineTuneRow, {

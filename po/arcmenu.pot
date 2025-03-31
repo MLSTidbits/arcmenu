@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-24 21:23-0400\n"
+"POT-Creation-Date: 2025-03-31 16:01-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "Frequent Apps"
 msgstr ""
 
-#: constants.js:89 menuWidgets.js:1158 menulayouts/az.js:63
+#: constants.js:89 menuWidgets.js:1181 menulayouts/az.js:63
 #: menulayouts/az.js:72 menulayouts/eleven.js:55 menulayouts/eleven.js:64
 #: menulayouts/redmond.js:74 menulayouts/redmond.js:77
 #: menulayouts/redmond.js:81 menulayouts/sleek.js:74 menulayouts/sleek.js:77
@@ -97,7 +97,7 @@ msgid "Switch User"
 msgstr ""
 
 #: constants.js:412 settings/AboutPage.js:21 settings/DonatePage.js:17
-#: settings/GeneralPage.js:519 settings/MenuButtonPage.js:211
+#: settings/GeneralPage.js:530 settings/MenuButtonPage.js:211
 msgid "ArcMenu"
 msgstr ""
 
@@ -221,7 +221,7 @@ msgstr ""
 msgid "Tweaks"
 msgstr ""
 
-#: constants.js:565 menuButton.js:744 menuWidgets.js:521
+#: constants.js:565 menuButton.js:744 menuWidgets.js:544
 #: settings/Menu/ListPinnedPage.js:355 settings/Menu/ListPinnedPage.js:377
 msgid "Activities Overview"
 msgstr ""
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Show Desktop"
 msgstr ""
 
-#: menuButton.js:789 menuWidgets.js:837 menuWidgets.js:854
+#: menuButton.js:789 menuWidgets.js:860 menuWidgets.js:877
 msgid "Power Off / Log Out"
 msgstr ""
 
@@ -255,29 +255,29 @@ msgstr ""
 msgid "App Icons Taskbar Settings"
 msgstr ""
 
-#: menuWidgets.js:891 menulayouts/plasma.js:328
+#: menuWidgets.js:914 menulayouts/plasma.js:328
 msgid "Session"
 msgstr ""
 
-#: menuWidgets.js:895 menulayouts/plasma.js:332
+#: menuWidgets.js:918 menulayouts/plasma.js:332
 msgid "System"
 msgstr ""
 
-#: menuWidgets.js:1088 menuWidgets.js:1109 menulayouts/az.js:64
+#: menuWidgets.js:1111 menuWidgets.js:1132 menulayouts/az.js:64
 #: menulayouts/eleven.js:56 menulayouts/redmond.js:75 menulayouts/redmond.js:80
 #: menulayouts/sleek.js:75
 msgid "Back"
 msgstr ""
 
-#: menuWidgets.js:2375 menulayouts/pop.js:355
+#: menuWidgets.js:2399 menulayouts/pop.js:355
 msgid "Unnamed Folder"
 msgstr ""
 
-#: menuWidgets.js:2475 menulayouts/pop.js:1185
+#: menuWidgets.js:2499 menulayouts/pop.js:1185
 msgid "New"
 msgstr ""
 
-#: menuWidgets.js:3040 menulayouts/az.js:71 menulayouts/eleven.js:63
+#: menuWidgets.js:3061 menulayouts/az.js:71 menulayouts/eleven.js:63
 #: menulayouts/insider.js:185 menulayouts/plasma.js:123 menulayouts/raven.js:62
 #: menulayouts/raven.js:233 menulayouts/raven.js:274 menulayouts/redmond.js:76
 #: menulayouts/redmond.js:79 menulayouts/redmond.js:82 menulayouts/sleek.js:76
@@ -286,19 +286,19 @@ msgstr ""
 msgid "Pinned"
 msgstr ""
 
-#: menuWidgets.js:3210
+#: menuWidgets.js:3231
 msgid "Unmount Drive"
 msgstr ""
 
-#: menuWidgets.js:3212
+#: menuWidgets.js:3233
 msgid "Eject Drive"
 msgstr ""
 
-#: menuWidgets.js:3256
+#: menuWidgets.js:3277
 msgid "Remove from Recent"
 msgstr ""
 
-#: menuWidgets.js:3339
+#: menuWidgets.js:3360
 msgid "Search…"
 msgstr ""
 
@@ -739,12 +739,12 @@ msgstr ""
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr ""
 
-#: settings/GeneralPage.js:418
+#: settings/GeneralPage.js:420
 #, javascript-format
 msgid "Conflict with <b>%s</b> hotkey"
 msgstr ""
 
-#: settings/GeneralPage.js:520
+#: settings/GeneralPage.js:531
 msgid "Standlone Runner"
 msgstr ""
 
@@ -788,35 +788,46 @@ msgstr ""
 msgid "Allow application labels to span multiple lines on grid style layouts"
 msgstr ""
 
-#: settings/Menu/FineTunePage.js:144
+#: settings/Menu/FineTunePage.js:148
+msgid "Activate App Window on Launch"
+msgstr ""
+
+#: settings/Menu/FineTunePage.js:149
+msgid ""
+"Launching an app activates its existing window if one is open; otherwise, it "
+"launches a new instance.\n"
+"Hold Ctrl while launching or middle-click to open a new window."
+msgstr ""
+
+#: settings/Menu/FineTunePage.js:159
 msgid "Full Color"
 msgstr ""
 
-#: settings/Menu/FineTunePage.js:145
+#: settings/Menu/FineTunePage.js:160
 msgid "Symbolic"
 msgstr ""
 
-#: settings/Menu/FineTunePage.js:147
+#: settings/Menu/FineTunePage.js:162
 msgid "Category Icon Type"
 msgstr ""
 
-#: settings/Menu/FineTunePage.js:148 settings/Menu/FineTunePage.js:159
+#: settings/Menu/FineTunePage.js:163 settings/Menu/FineTunePage.js:174
 msgid "Some icon themes may not include selected icon type"
 msgstr ""
 
-#: settings/Menu/FineTunePage.js:158
+#: settings/Menu/FineTunePage.js:173
 msgid "Shortcuts Icon Type"
 msgstr ""
 
-#: settings/Menu/FineTunePage.js:182
+#: settings/Menu/FineTunePage.js:197
 msgid "Disable New Apps Tracker"
 msgstr ""
 
-#: settings/Menu/FineTunePage.js:191
+#: settings/Menu/FineTunePage.js:206
 msgid "Clear All"
 msgstr ""
 
-#: settings/Menu/FineTunePage.js:200
+#: settings/Menu/FineTunePage.js:215
 msgid "Clear Apps Marked 'New'"
 msgstr ""
 
@@ -1667,7 +1678,7 @@ msgid "Fine Tune"
 msgstr ""
 
 #: settings/MenuPage.js:76
-msgid "Adjust less commonly used visual settings"
+msgid "Adjust less commonly used settings"
 msgstr ""
 
 #: settings/MenuPage.js:85

@@ -118,16 +118,25 @@ export function bindPowerItemVisibility(powerMenuItem) {
     }
 }
 
-export function openNewWindow(app, event) {
+/**
+ *
+ * @param {Shell.App} app
+ * @param {Clutter.Event} event
+ */
+export function launchApp(app, event) {
     const activateOnLaunch = ArcMenuManager.settings.get_boolean('activate-on-launch');
     const button = event.get_button();
     const modifiers = event ? event.get_state() : 0;
     const isMiddleButton = button && button === Clutter.BUTTON_MIDDLE;
     const isCtrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK) !== 0;
+    const shouldOpenNewWindow = app.can_open_new_window() &&
+                                app.state === Shell.AppState.RUNNING &&
+                                (!activateOnLaunch || isCtrlPressed || isMiddleButton);
 
-    return app.can_open_new_window() &&
-           app.state === Shell.AppState.RUNNING &&
-           (!activateOnLaunch || isCtrlPressed || isMiddleButton);
+    if (shouldOpenNewWindow)
+        app.open_new_window(-1);
+    else
+        app.activate();
 }
 
 export class BaseMenuItem extends St.BoxLayout {
@@ -1370,10 +1379,7 @@ export class ShortcutMenuItem extends BaseMenuItem {
             break;
         default: {
             if (this._app)
-                if (openNewWindow(this._app, event))
-                    this._app.open_new_window(-1);
-                else
-                    this._app.activate();
+                launchApp(this._app, event);
             else
                 Util.spawnCommandLine(this._command);
         }
@@ -2402,10 +2408,7 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
 
     activate(event) {
         if (this._app)
-            if (openNewWindow(this._app, event))
-                this._app.open_new_window(-1);
-            else
-                this._app.activate();
+            launchApp(this._app, event);
         else if (this._command === Constants.ShortcutCommands.SHOW_APPS)
             Main.overview._overview._controls._toggleAppsPage();
         else
@@ -2587,10 +2590,7 @@ export class ApplicationMenuItem extends BaseMenuItem {
                 St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, metaInfo.clipboardText);
         } else if (metaInfo.id.endsWith('.desktop')) {
             const app = this._menuLayout.appSys.lookup_app(metaInfo.id);
-            if (openNewWindow(app, event))
-                app.open_new_window(-1);
-            else
-                app.activate();
+            launchApp(app, event);
         } else {
             this._menuLayout.arcMenu.itemActivated(BoxPointer.PopupAnimation.NONE);
             const systemActions = SystemActions.getDefault();
@@ -2613,10 +2613,7 @@ export class ApplicationMenuItem extends BaseMenuItem {
         if (this.isSearchResult) {
             this.activateSearchResult(this.provider, this.metaInfo, this.resultsView.terms, event);
         } else {
-            if (openNewWindow(this._app, event))
-                this._app.open_new_window(-1);
-            else
-                this._app.activate();
+            launchApp(this._app, event);
             super.activate(event);
         }
         this._menuLayout.arcMenu.toggle();

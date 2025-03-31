@@ -1310,10 +1310,8 @@ export class ApplicationMenuItem extends MW.DraggableMenuItem {
     activate(event) {
         this.removeIndicator();
 
-        if (MW.openNewWindow(this._app, event))
-            this._app.open_new_window(-1);
-        else
-            this._app.activate();
+        MW.launchApp(this._app, event);
+
         this._menuLayout.arcMenu.toggle();
         super.activate(event);
     }
