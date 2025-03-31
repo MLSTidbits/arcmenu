@@ -1074,17 +1074,6 @@ export class BaseMenuLayout extends St.BoxLayout {
         const symbol = event.get_key_symbol();
         const unicode = Clutter.keysym_to_unicode(symbol);
 
-        /*
-        * Pass ctrl key event to searchEntry.
-        * Useful for paste event (ctrl+v),
-        * if searchEntry entry doesn't have key focus
-        */
-        if (this.searchEntry && (symbol === Clutter.KEY_Control_L || symbol === Clutter.KEY_Control_R)) {
-            global.stage.set_key_focus(this.searchEntry.clutter_text);
-            this.searchEntry.clutter_text.event(event, false);
-            return Clutter.EVENT_PROPAGATE;
-        }
-
         switch (symbol) {
         case Clutter.KEY_BackSpace:
             if (this.searchEntry && !this.searchEntry.hasKeyFocus() && !this.searchEntry.isEmpty()) {
