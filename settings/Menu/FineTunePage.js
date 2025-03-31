@@ -146,7 +146,7 @@ class ArcMenuFineTunePage extends SubPage {
         });
         const activateOnLaunchRow = new Adw.ActionRow({
             title: _('Activate App Window on Launch'),
-            subtitle: _('Launching an app activates its existing window if one is open; otherwise, it launches a new instance.\nHold Ctrl while launching or middle-click to open a new window.'),
+            subtitle: _('Launching an app activates its existing window if one is open; otherwise, it launches a new instance. Hold Ctrl while launching or middle-click to open a new window.'),
             activatable_widget: activateOnLaunchSwitch,
         });
         activateOnLaunchRow.add_suffix(activateOnLaunchSwitch);
