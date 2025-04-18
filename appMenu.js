@@ -12,6 +12,9 @@ import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import {ArcMenuManager} from './arcmenuManager.js';
 import * as Utils from './utils.js';
 
+Gio._promisify(Gio._LocalFilePrototype, 'query_info_async', 'query_info_finish');
+Gio._promisify(Gio._LocalFilePrototype, 'set_attributes_async', 'set_attributes_finish');
+
 const DESKTOP_ICONS_UUIDS = [
     'ding@rastersoft.com', 'gtk4-ding@smedius.gitlab.com',
     'desktopicons-neo@darkdemon',
@@ -97,6 +100,12 @@ export const AppContextMenu = class ArcMenuAppContextMenu extends AppMenu {
             } else if (src && dst) {
                 try {
                     src.copy(dst, Gio.FileCopyFlags.OVERWRITE, null, null);
+                    const info = new Gio.FileInfo();
+                    info.set_attribute_string('metadata::trusted', 'true');
+                    dst.set_attributes_from_info(info,
+                        Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
+                    dst.set_attribute_uint32(Gio.FILE_ATTRIBUTE_UNIX_MODE, 0o0755,
+                        Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
                 } catch (e) {
                     console.log(`Failed to copy to desktop: ${e.message}`);
                 }
@@ -130,6 +139,7 @@ export const AppContextMenu = class ArcMenuAppContextMenu extends AppMenu {
             this.sourceActor.tooltip.hide();
             this._menuButton.tooltipShowing = false;
         }
+        this._updateDesktopShortcutItem();
 
         super.open(animate);
         this.sourceActor.add_style_pseudo_class('active');
@@ -217,9 +227,9 @@ export const AppContextMenu = class ArcMenuAppContextMenu extends AppMenu {
         if (!this._app)
             return [false, null, null];
 
-        const fileDestination = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP);
+        const desktop = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP);
         const src = Gio.File.new_for_path(this._app.get_app_info().get_filename());
-        const dst = Gio.File.new_for_path(GLib.build_filenamev([fileDestination, src.get_basename()]));
+        const dst = Gio.File.new_for_path(GLib.build_filenamev([desktop, src.get_basename()]));
         const exists = dst.query_exists(null);
         return [exists, src, dst];
     }
@@ -233,7 +243,7 @@ export const AppContextMenu = class ArcMenuAppContextMenu extends AppMenu {
         }
         this._createDesktopShortcutItem.visible = true;
 
-        const [exists, src_, dst_] = this.getDesktopShortcut();
+        const [exists] = this.getDesktopShortcut();
 
         this._createDesktopShortcutItem.label.text = exists ?  _('Delete Desktop Shortcut')
             : _('Create Desktop Shortcut');
