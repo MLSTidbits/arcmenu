@@ -182,6 +182,10 @@ rules:
   no-useless-return: error
   no-whitespace-before-property: error
   no-with: error
+  no-warning-comments:
+  - warn
+  - terms: ['DEPRECATED', 'TODO']
+    location: start
   nonblock-statement-body-position:
     - error
     - below
@@ -265,3 +269,4 @@ globals:
   clearInterval: readonly
 parserOptions:
   ecmaVersion: 2022
+

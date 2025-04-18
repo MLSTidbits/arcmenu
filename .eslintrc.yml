@@ -3,3 +3,4 @@ extends:
  - ./lint/eslintrc-shell.yml
 parserOptions:
     sourceType: module
+
