@@ -364,18 +364,19 @@ export class BaseMenuLayout extends St.BoxLayout {
                 if (!appInfo.should_show())
                     continue;
 
-                let item = this.applicationsMap.get(app);
-
                 if (categoryMenuItem instanceof MW.SubCategoryMenuItem) {
                     const subMenuItem = new MW.ApplicationMenuItem(this, app, Constants.DisplayType.GRID, null, true);
                     categoryMenuItem.appList.push(subMenuItem);
                     continue;
-                } else if (!item) {
+                }
+
+                let item = this.applicationsMap.get(app);
+                if (!item) {
                     const isContainedInCategory = true;
                     item = new MW.ApplicationMenuItem(this, app, this.display_type, null, isContainedInCategory);
-                    categoryMenuItem.appList.push(app);
                     this.applicationsMap.set(app, item);
                 }
+                categoryMenuItem.appList.push(app);
 
                 if (showNewAppsIndicator && item.isRecentlyInstalled)
                     categoryMenuItem.setNewAppIndicator(true);
