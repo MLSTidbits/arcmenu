@@ -411,6 +411,7 @@ export class BaseMenuLayout extends St.BoxLayout {
                 return nameA.localeCompare(nameB);
             });
         }
+        categoryMenuItem.visible = categoryMenuItem.appList.length > 0;
     }
 
     setNewAppIndicator() {
