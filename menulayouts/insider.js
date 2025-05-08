@@ -156,7 +156,10 @@ export class Layout extends BaseMenuLayout {
     }
 
     _createPinnedAppsMenu() {
-        this.pinnedAppsMenu = new PopupMenu.PopupMenu(Main.layoutManager.dummyCursor, 0, St.Side.TOP);
+        this._dummyCursor = new St.Widget({width: 0, height: 0, opacity: 0});
+        Main.uiGroup.add_child(this._dummyCursor);
+
+        this.pinnedAppsMenu = new PopupMenu.PopupMenu(this._dummyCursor, 0, St.Side.TOP);
         this.pinnedAppsMenu.actor.add_style_class_name('popup-menu arcmenu-menu');
 
         const section = new PopupMenu.PopupMenuSection();
@@ -223,7 +226,7 @@ export class Layout extends BaseMenuLayout {
         if (this.arcMenu._arrowSide === St.Side.LEFT)
             x += rise;
 
-        Main.layoutManager.setDummyCursorGeometry(x, y, 0, 0);
+        this._dummyCursor.set_position(Math.round(x), Math.round(y));
 
         const height = ArcMenuManager.settings.get_int('menu-height');
         this.pinnedAppsMenu.box.style = `height: ${height}px; min-width: 250px;`;
@@ -269,6 +272,12 @@ export class Layout extends BaseMenuLayout {
             this.pinnedAppsBox.add_child(this._pinnedAppsGrid);
 
         this._pinnedAppsGrid.setColumns(1);
+    }
+
+    _onDestroy() {
+        super._onDestroy();
+        this._dummyCursor.destroy();
+        this._dummyCursor = null;
     }
 }
 
