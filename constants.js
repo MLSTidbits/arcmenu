@@ -64,6 +64,11 @@ export const SettingsPage = {
     WHATS_NEW: 16,
 };
 
+export const DefaultMenuViewAz = {
+    PINNED_APPS: 0,
+    FREQUENT_APPS: 1,
+};
+
 export const DefaultMenuViewTognee = {
     CATEGORIES_LIST: 0,
     ALL_PROGRAMS: 1,

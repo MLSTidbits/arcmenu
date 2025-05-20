@@ -85,6 +85,10 @@
         <value value="0" nick="All_Programs"/>
         <value value="1" nick="Pinned_Apps"/>
     </enum>
+    <enum id='org.gnome.shell.extensions.arcmenu.default-menu-view-az'>
+        <value value="0" nick="Pinned_Apps"/>
+        <value value="1" nick="Frequent Apps"/>
+    </enum>
     <enum id='org.gnome.shell.extensions.arcmenu.runner-position'>
         <value value="0" nick="Top"/>
         <value value="1" nick="Centered"/>
@@ -629,6 +633,14 @@
     <key type="i" name="sleek-layout-panel-width">
       <default>225</default>
       <summary>Sleek layout right panel width.</summary>
+    </key>
+    <key type="b" name="az-layout-merge-panels">
+      <default>false</default>
+      <summary>Merge the top and bottom panel into one. AZ Layout</summary>
+    </key>
+    <key enum="org.gnome.shell.extensions.arcmenu.default-menu-view-az" name="default-menu-view-az">
+      <default>'Pinned_Apps'</default>
+      <summary>Set AZ Layout Default View</summary>
     </key>
     <child name='pinned-apps-folders' schema='org.gnome.shell.extensions.arcmenu.pinned-apps-folders'/>
     <key name="pinned-apps" type="aa{ss}">

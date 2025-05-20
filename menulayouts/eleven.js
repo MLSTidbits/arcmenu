@@ -199,6 +199,9 @@ export class Layout extends BaseMenuLayout {
     }
 
     loadFrequentApps() {
+        this.frequentAppsList?.forEach(item => {
+            item.destroy();
+        });
         this.frequentAppsList = [];
 
         if (ArcMenuManager.settings.get_boolean('eleven-disable-frequent-apps'))
@@ -326,6 +329,10 @@ export class Layout extends BaseMenuLayout {
     _onDestroy() {
         if (this.arcMenu)
             this.arcMenu.box.style = null;
+
+        this.frequentAppsList?.forEach(item => {
+            item.destroy();
+        });
         this.backButton.destroy();
         this.allAppsButton.destroy();
 

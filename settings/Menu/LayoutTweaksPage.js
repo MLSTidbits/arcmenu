@@ -313,8 +313,36 @@ class ArcMenuLayoutTweaksPage extends SubPage {
 
     _loadAZTweaks() {
         const tweaksGroup = new Adw.PreferencesGroup();
-        tweaksGroup.add(this._createSearchBarLocationRow());
         this.add(tweaksGroup);
+
+        tweaksGroup.add(this._createSearchBarLocationRow());
+        const mergePanelsSwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+        });
+        mergePanelsSwitch.set_active(this._settings.get_boolean('az-layout-merge-panels'));
+        mergePanelsSwitch.connect('notify::active', widget => {
+            this._settings.set_boolean('az-layout-merge-panels', widget.get_active());
+        });
+        const mergePanelsRow = new Adw.ActionRow({
+            title: _('Merge Top and Bottom Panels'),
+            activatable_widget: mergePanelsSwitch,
+        });
+        mergePanelsRow.add_suffix(mergePanelsSwitch);
+        tweaksGroup.add(mergePanelsRow);
+
+        const defaulViews = new Gtk.StringList();
+        defaulViews.append(_('Pinned Apps'));
+        defaulViews.append(_('Frequent Apps'));
+
+        const defaultViewRow = new Adw.ComboRow({
+            title: _('Default View'),
+            model: defaulViews,
+            selected: this._settings.get_enum('default-menu-view-az'),
+        });
+        defaultViewRow.connect('notify::selected', widget => {
+            this._settings.set_enum('default-menu-view-az', widget.selected);
+        });
+        tweaksGroup.add(defaultViewRow);
 
         const extraShortcutsGroup = new Adw.PreferencesGroup();
         const extraShortcutsRow = this._createExtraShortcutsRow('az-layout-extra-shortcuts');
