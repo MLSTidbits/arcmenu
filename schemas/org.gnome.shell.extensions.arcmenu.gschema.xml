@@ -636,7 +636,11 @@
     </key>
     <key type="b" name="az-layout-merge-panels">
       <default>false</default>
-      <summary>Merge the top and bottom panel into one. AZ Layout</summary>
+      <summary>AZ Layout - Merge the top and bottom panel into one.</summary>
+    </key>
+    <key type="i" name="az-layout-max-frequent-apps">
+      <default>20</default>
+      <summary>AZ Layout - max frequent apps to show when 'default-menu-view-az' set to 'Frequent_Apps'</summary>
     </key>
     <key enum="org.gnome.shell.extensions.arcmenu.default-menu-view-az" name="default-menu-view-az">
       <default>'Pinned_Apps'</default>

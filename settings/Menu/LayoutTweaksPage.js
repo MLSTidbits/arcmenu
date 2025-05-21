@@ -341,8 +341,33 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         });
         defaultViewRow.connect('notify::selected', widget => {
             this._settings.set_enum('default-menu-view-az', widget.selected);
+            frequentAppsRow.visible = widget.selected === 1;
         });
         tweaksGroup.add(defaultViewRow);
+
+        const frequentAppsSpinner = new Gtk.SpinButton({
+            orientation: Gtk.Orientation.HORIZONTAL,
+            adjustment: new Gtk.Adjustment({
+                lower: 1,
+                upper: 40,
+                step_increment: 1,
+                page_increment: 1,
+                page_size: 0,
+            }),
+            digits: 0,
+            valign: Gtk.Align.CENTER,
+            value: this._settings.get_int('az-layout-max-frequent-apps'),
+        });
+        frequentAppsSpinner.connect('value-changed', widget => {
+            this._settings.set_int('az-layout-max-frequent-apps', widget.get_value());
+        });
+        const frequentAppsRow = new Adw.ActionRow({
+            title: _('Max Frequent Apps'),
+            activatable_widget: frequentAppsSpinner,
+            visible: this._settings.get_enum('default-menu-view-az') === 1,
+        });
+        frequentAppsRow.add_suffix(frequentAppsSpinner);
+        tweaksGroup.add(frequentAppsRow);
 
         const extraShortcutsGroup = new Adw.PreferencesGroup();
         const extraShortcutsRow = this._createExtraShortcutsRow('az-layout-extra-shortcuts');

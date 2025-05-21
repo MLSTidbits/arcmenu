@@ -42,6 +42,15 @@ export class Layout extends BaseMenuLayout {
         this.searchEntry.style = 'margin: 5px 10px;';
         this.arcMenu.box.style = 'padding: 0px; margin: 0px;';
 
+        this._mainBox = new St.BoxLayout({
+            x_expand: true,
+            y_expand: true,
+            x_align: Clutter.ActorAlign.FILL,
+            y_align: Clutter.ActorAlign.FILL,
+            ...getOrientationProp(true),
+        });
+        this.add_child(this._mainBox);
+
         this.topBox = new St.BoxLayout({
             x_expand: false,
             y_expand: false,
@@ -49,7 +58,7 @@ export class Layout extends BaseMenuLayout {
             y_align: Clutter.ActorAlign.START,
             ...getOrientationProp(true),
         });
-        this.add_child(this.topBox);
+        this._mainBox.add_child(this.topBox);
 
         const navButtonsStyle = 'padding: 0px 10px 10px 15px;';
         this.backButton = this._createNavigationRow(_('All Apps'), Constants.Direction.GO_PREVIOUS,
@@ -58,7 +67,7 @@ export class Layout extends BaseMenuLayout {
             style: navButtonsStyle,
             visible: false,
         });
-        this.add_child(this.backButton);
+        this._mainBox.add_child(this.backButton);
 
         this.allAppsButton = this._createNavigationRow(_('Pinned'), Constants.Direction.GO_NEXT,
             _('All Apps'), () => this.displayAllApps());
@@ -66,7 +75,7 @@ export class Layout extends BaseMenuLayout {
             style: navButtonsStyle,
             visible: false,
         });
-        this.add_child(this.allAppsButton);
+        this._mainBox.add_child(this.allAppsButton);
 
         this.applicationsBox = new St.BoxLayout({
             ...getOrientationProp(true),
@@ -85,7 +94,7 @@ export class Layout extends BaseMenuLayout {
             style_class: this._disableFadeEffect ? '' : 'vfade',
         });
         this._addChildToParent(this.applicationsScrollBox, this.applicationsBox);
-        this.add_child(this.applicationsScrollBox);
+        this._mainBox.add_child(this.applicationsScrollBox);
 
         this.bottomBox = new St.BoxLayout({
             x_expand: true,
@@ -94,7 +103,7 @@ export class Layout extends BaseMenuLayout {
             y_align: Clutter.ActorAlign.END,
             ...getOrientationProp(true),
         });
-        this.add_child(this.bottomBox);
+        this._mainBox.add_child(this.bottomBox);
 
         this.actionsBox = new St.BoxLayout({
             x_expand: true,
@@ -112,6 +121,8 @@ export class Layout extends BaseMenuLayout {
                 this.topBox.add_child(this.actionsBox);
                 this.topBox.add_child(this.searchEntry);
                 this.bottomBox.hide();
+                this._mainBox.style = 'padding-bottom: 10px;';
+                this.applicationsBox.style = null;
             } else {
                 this.topBox.add_child(this.searchEntry);
                 this.bottomBox.add_child(this.actionsBox);
@@ -120,6 +131,7 @@ export class Layout extends BaseMenuLayout {
             this.bottomBox.add_child(this.actionsBox);
             this.bottomBox.add_child(this.searchEntry);
             this.topBox.hide();
+            this._mainBox.style = 'padding-top: 10px;';
         } else {
             this.topBox.add_child(this.actionsBox);
             this.bottomBox.add_child(this.searchEntry);
@@ -200,9 +212,9 @@ export class Layout extends BaseMenuLayout {
             }
         }
 
-        const MaxItems = 20;
-        if (this.frequentAppsList.length > MaxItems)
-            this.frequentAppsList.splice(MaxItems);
+        const maxItems = ArcMenuManager.settings.get_int('az-layout-max-frequent-apps');
+        if (this.frequentAppsList.length > maxItems)
+            this.frequentAppsList.splice(maxItems);
     }
 
     setDefaultMenuView() {
