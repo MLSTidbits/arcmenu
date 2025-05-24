@@ -228,6 +228,7 @@ export const IconGridLayout = GObject.registerClass({
         let rowHeight = 0;
         let y = 0;
         let column = 0;
+        let rtlColumn;
         let naturalWidth = 0;
         let naturalHeight = 0;
 
@@ -238,7 +239,7 @@ export const IconGridLayout = GObject.registerClass({
             const xFill = child.x_align === Clutter.ActorAlign.FILL;
 
             if (isRtl)
-                column = swap(column, this.columns);
+                rtlColumn = swap(column, this.columns);
 
             const newRow = column % this.columns === 0;
 
@@ -249,11 +250,12 @@ export const IconGridLayout = GObject.registerClass({
             else if (xFill)
                 naturalWidth = this._width / this.columns;
 
+            const adjustedColumn = rtlColumn ?? column;
             let x;
             if (isSeparator)
                 x = 0;
             else
-                x = xOffset + column * (naturalWidth + this.columnSpacing);
+                x = xOffset + adjustedColumn * (naturalWidth + this.columnSpacing);
 
             // The first item in a row will determine the row height
             // add previous child naturalHeight offset
