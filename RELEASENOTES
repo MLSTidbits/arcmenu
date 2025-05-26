@@ -1,18 +1,17 @@
-<b><span size="large">Version 65 (2025-03-04)</span></b>
+<b><span size="large">Version 66 (2025-05-26)</span></b>
 
-• Rework integration with Dash to Panel and App Icons Taskbar.
-• Add alphabetical grouping of All Apps for grid views.
-• Plasma Layout: use new style for active buttons.
-• GNOME Menu Layout: add search.
-• Fix unexport() calls on dbus object that hasn't been exported.
-• Fix scrollbars jumping back to previously selected menu item.
-• MenuButton: fix issue with hiding Dash to Panel when intellihide is enabled.
-• Add more options for Override Menu Locations.
-• Settings: add new Donate Page.
-• Add option to turn off new release notifications.
-• GNOME 48 Fixes:
-    - Remove St.ScrollView.get_vscroll_bar().
-    - Fix vertical property for St.BoxLayout.
-• Various code clean ups.
-• Properly unbind power menu items signals on destroy.
-• Search: disconnect all signals first on destroy, ensure resultDisplays destroyed.
+• Add ArcMenu Layout default view tweak 'Pinned and Frequent Apps'.
+• Add AZ Layout default view tweaks. Pinned or Frequent Apps.
+• Add option to hide search bar when empty.
+• Update command to launch User Settings for GNOME Shell versions >= 46.
+• Add option to activate app on launch.
+• Set 'metadata::trusted: true' when creating desktop shortcuts.
+    - Allows launching the app from desktop without any further modifications.
+
+Bug Fixes: 
+
+• Fix bug where apps assigned to multiple categories only appeared in the first category loaded.
+• Hide category menu item if it contains no apps.
+• Fix bug with Dash to Panel incorrectly hiding when revealed from ArcMenu hotkey when intellihide is enabled.
+• Insider, Windows layouts: fix buggy interaction with sidebar menu and ArcMenu when Override Menu Location enabled.
+• iconGrid: fix app icon position bug when using a RTL Cutter.TextDirection
