@@ -6,7 +6,7 @@ EXTRA_MODULES = appMenu.js arcmenuManager.js constants.js iconGrid.js menuButton
 		menuWidgets.js placeDisplay.js prefs.js prefsWidgets.js recentFilesManager.js search.js \
 		standaloneRunner.js updateNotifier.js utils.js
 
-TOLOCALIZE = $(EXTRA_MODULES) menulayouts/* settings/*
+TOLOCALIZE = $(EXTRA_MODULES) $(wildcard menulayouts/*.js) $(wildcard settings/*.js)
 
 EXTRA_DIRECTORIES = icons menulayouts searchProviders settings
 
