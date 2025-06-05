@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-24 18:21+0300\n"
+"POT-Creation-Date: 2025-06-05 10:41-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,13 +53,14 @@ msgstr ""
 msgid "All Apps"
 msgstr ""
 
-#: constants.js:95 menulayouts/insider.js:290 settings/MenuPage.js:101
+#: constants.js:95 menulayouts/insider.js:290
 #: settings/Menu/LayoutTweaksPage.js:334 settings/Menu/LayoutTweaksPage.js:763
-#: settings/Menu/LayoutTweaksPage.js:875
+#: settings/Menu/LayoutTweaksPage.js:875 settings/MenuPage.js:101
 msgid "Pinned Apps"
 msgstr ""
 
 #: constants.js:96 menulayouts/raven.js:296 menulayouts/unity.js:371
+#: searchProviders/recentFiles.js:29 searchProviders/recentFiles.js:30
 msgid "Recent Files"
 msgstr ""
 
@@ -205,19 +206,19 @@ msgid "Alternative"
 msgstr ""
 
 #: constants.js:569
-msgid "Software"
-msgstr ""
-
-#: constants.js:569
 msgid "Settings"
 msgstr ""
 
 #: constants.js:569
-msgid "Tweaks"
+msgid "Software"
 msgstr ""
 
 #: constants.js:569
 msgid "Terminal"
+msgstr ""
+
+#: constants.js:569
+msgid "Tweaks"
 msgstr ""
 
 #: constants.js:570 menuButton.js:744 menuWidgets.js:544
@@ -301,91 +302,17 @@ msgstr ""
 msgid "Search…"
 msgstr ""
 
-#: placeDisplay.js:56
-#, javascript-format
-msgid "Failed to launch “%s”"
-msgstr ""
-
-#: placeDisplay.js:71
-#, javascript-format
-msgid "Failed to mount volume for “%s”"
-msgstr ""
-
-#: placeDisplay.js:119 placeDisplay.js:340 utils.js:234
-#: settings/Menu/LayoutTweaksPage.js:628 settings/Menu/LayoutTweaksPage.js:655
-#: settings/Menu/ListPinnedPage.js:403
-msgid "Home"
-msgstr ""
-
-#: placeDisplay.js:133 placeDisplay.js:156 menulayouts/plasma.js:132
-#: settings/Menu/ListPinnedPage.js:411
-msgid "Computer"
-msgstr ""
-
-#: placeDisplay.js:223
-#, javascript-format
-msgid "Ejecting drive “%s” failed:"
-msgstr ""
-
-#: prefsWidgets.js:266
-msgid "Modify"
-msgstr ""
-
-#: prefsWidgets.js:281
-msgid "Move Up"
-msgstr ""
-
-#: prefsWidgets.js:288
-msgid "Move Down"
-msgstr ""
-
-#: prefsWidgets.js:295
-msgid "Remove"
-msgstr ""
-
-#: search.js:742
-msgid "Searching..."
-msgstr ""
-
-#: search.js:744
-msgid "No results."
-msgstr ""
-
-#: search.js:827
-#, javascript-format
-msgid "+ %d more"
-msgstr ""
-
-#: updateNotifier.js:56
-#, javascript-format
-msgid "%s v%s Released!"
-msgstr ""
-
-#: updateNotifier.js:57 settings/DonatePage.js:23
-#, javascript-format
-msgid ""
-"Thank you for using %s! If you enjoy it and would like to help support its "
-"continued development, please consider making a donation."
-msgstr ""
-
-#: updateNotifier.js:66 settings/DonatePage.js:12
-msgid "Donate"
-msgstr ""
-
-#: updateNotifier.js:67
-msgid "What's new?"
-msgstr ""
-
-#: updateNotifier.js:68
-msgid "Dismiss"
-msgstr ""
-
 #: menulayouts/az.js:229 menulayouts/eleven.js:71
 msgid "Frequent"
 msgstr ""
 
 #: menulayouts/baseMenuLayout.js:502
 msgid "More Recent Files..."
+msgstr ""
+
+#: menulayouts/plasma.js:132 placeDisplay.js:133 placeDisplay.js:156
+#: settings/Menu/ListPinnedPage.js:411
+msgid "Computer"
 msgstr ""
 
 #: menulayouts/plasma.js:136
@@ -484,6 +411,74 @@ msgstr ""
 msgid "Extras"
 msgstr ""
 
+#: placeDisplay.js:56
+#, javascript-format
+msgid "Failed to launch “%s”"
+msgstr ""
+
+#: placeDisplay.js:71
+#, javascript-format
+msgid "Failed to mount volume for “%s”"
+msgstr ""
+
+#: placeDisplay.js:119 placeDisplay.js:340
+#: settings/Menu/LayoutTweaksPage.js:628 settings/Menu/LayoutTweaksPage.js:655
+#: settings/Menu/ListPinnedPage.js:403 utils.js:234
+msgid "Home"
+msgstr ""
+
+#: placeDisplay.js:223
+#, javascript-format
+msgid "Ejecting drive “%s” failed:"
+msgstr ""
+
+#: prefsWidgets.js:266
+msgid "Modify"
+msgstr ""
+
+#: prefsWidgets.js:281
+msgid "Move Up"
+msgstr ""
+
+#: prefsWidgets.js:288
+msgid "Move Down"
+msgstr ""
+
+#: prefsWidgets.js:295
+msgid "Remove"
+msgstr ""
+
+#: search.js:742
+msgid "Searching..."
+msgstr ""
+
+#: search.js:744
+msgid "No results."
+msgstr ""
+
+#: search.js:827
+#, javascript-format
+msgid "+ %d more"
+msgstr ""
+
+#: searchProviders/openWindows.js:31
+msgid "List of open windows across all workspaces"
+msgstr ""
+
+#: searchProviders/openWindows.js:32
+msgid "Open Windows"
+msgstr ""
+
+#: searchProviders/openWindows.js:46
+#, javascript-format
+msgid "'%s' on Workspace %d"
+msgstr ""
+
+#: searchProviders/recentFiles.js:90
+#, javascript-format
+msgid "Failed to open “%s”"
+msgstr ""
+
 #: settings/AboutPage.js:16 settings/Menu/ListPinnedPage.js:374
 msgid "About"
 msgstr ""
@@ -492,11 +487,13 @@ msgstr ""
 msgid "Application Menu Extension for GNOME"
 msgstr ""
 
+#. TRANSLATORS: 'PROJECT_NAME' Version
 #: settings/AboutPage.js:67
 #, javascript-format
 msgid "%s Version"
 msgstr ""
 
+#. TRANSLATORS: 'PROJECT_NAME' - Release Notes
 #: settings/AboutPage.js:76
 #, javascript-format
 msgid "%s - Release Notes"
@@ -531,6 +528,7 @@ msgstr ""
 msgid "Windowing System"
 msgstr ""
 
+#. TRANSLATORS: 'PROJECT_NAME' on GitLab
 #: settings/AboutPage.js:176
 #, javascript-format
 msgid "%s on GitLab"
@@ -540,6 +538,7 @@ msgstr ""
 msgid "Report an Issue"
 msgstr ""
 
+#. TRANSLATORS: 'PROJECT_NAME' Settings
 #: settings/AboutPage.js:189
 #, javascript-format
 msgid "%s Settings"
@@ -600,17 +599,29 @@ msgid "This program comes with absolutely no warranty."
 msgstr ""
 
 #: settings/AboutPage.js:310
+msgid "GNU General Public License, version 2 or later"
+msgstr ""
+
+#. TRANSLATORS: this is the program license url; the string contains the name of the license as link text.
+#: settings/AboutPage.js:310
 #, javascript-format
 msgid "See the <a href=\"%s\">%s</a> for details."
 msgstr ""
 
-#: settings/AboutPage.js:310
-msgid "GNU General Public License, version 2 or later"
+#: settings/DonatePage.js:12 updateNotifier.js:66
+msgid "Donate"
 msgstr ""
 
 #: settings/DonatePage.js:22
 #, javascript-format
 msgid "Help Support %s"
+msgstr ""
+
+#: settings/DonatePage.js:23 updateNotifier.js:57
+#, javascript-format
+msgid ""
+"Thank you for using %s! If you enjoy it and would like to help support its "
+"continued development, please consider making a donation."
 msgstr ""
 
 #: settings/DonatePage.js:27
@@ -714,6 +725,7 @@ msgstr ""
 msgid "Modify Hotkey"
 msgstr ""
 
+#. TRANSLATORS: %s is replaced with a description of the keyboard shortcut, don't translate/transliterate <b>%s</b>
 #: settings/GeneralPage.js:337
 #, javascript-format
 msgid "Enter a new shortcut to change <b>%s</b>"
@@ -734,282 +746,6 @@ msgstr ""
 
 #: settings/GeneralPage.js:531
 msgid "Standlone Runner"
-msgstr ""
-
-#: settings/MenuButtonPage.js:18
-msgid "Menu Button"
-msgstr ""
-
-#: settings/MenuButtonPage.js:29 settings/Menu/SubPage.js:44
-msgid "Reset settings"
-msgstr ""
-
-#: settings/MenuButtonPage.js:37 settings/Menu/SubPage.js:49
-#, javascript-format
-msgid "Reset all %s settings?"
-msgstr ""
-
-#: settings/MenuButtonPage.js:38 settings/Menu/SubPage.js:50
-#, javascript-format
-msgid "All %s settings will be reset to the default value."
-msgstr ""
-
-#: settings/MenuButtonPage.js:54
-msgid "Appearance"
-msgstr ""
-
-#: settings/MenuButtonPage.js:59 settings/MenuButtonPage.js:156
-#: settings/Menu/ListPinnedPage.js:592
-msgid "Icon"
-msgstr ""
-
-#: settings/MenuButtonPage.js:60 settings/MenuButtonPage.js:143
-msgid "Text"
-msgstr ""
-
-#: settings/MenuButtonPage.js:61
-msgid "Icon and Text"
-msgstr ""
-
-#: settings/MenuButtonPage.js:62
-msgid "Text and Icon"
-msgstr ""
-
-#: settings/MenuButtonPage.js:63 settings/Menu/VisualSettings.js:286
-msgid "Hidden"
-msgstr ""
-
-#: settings/MenuButtonPage.js:65
-msgid "Display Style"
-msgstr ""
-
-#: settings/MenuButtonPage.js:102
-msgid "Padding"
-msgstr ""
-
-#: settings/MenuButtonPage.js:103 settings/Menu/LayoutTweaksPage.js:600
-#, javascript-format
-msgid "%d Default Theme Value"
-msgstr ""
-
-#: settings/MenuButtonPage.js:159 settings/Menu/ListPinnedPage.js:605
-msgid "Browse..."
-msgstr ""
-
-#: settings/MenuButtonPage.js:170
-msgid "Choose a New Icon"
-msgstr ""
-
-#: settings/MenuButtonPage.js:193 settings/Menu/VisualSettings.js:353
-msgid "Icon Size"
-msgstr ""
-
-#: settings/MenuButtonPage.js:206
-msgid "Click Options"
-msgstr ""
-
-#: settings/MenuButtonPage.js:212
-msgid "Context Menu"
-msgstr ""
-
-#: settings/MenuButtonPage.js:213
-msgid "None"
-msgstr ""
-
-#: settings/MenuButtonPage.js:216
-msgid "Left Click"
-msgstr ""
-
-#: settings/MenuButtonPage.js:226
-msgid "Right Click"
-msgstr ""
-
-#: settings/MenuButtonPage.js:236
-msgid "Middle Click"
-msgstr ""
-
-#: settings/MenuButtonPage.js:248
-msgid "Styling"
-msgstr ""
-
-#: settings/MenuButtonPage.js:249 settings/Menu/ThemePage.js:40
-msgid "Results may vary with third party themes"
-msgstr ""
-
-#: settings/MenuButtonPage.js:253 settings/MenuButtonPage.js:262
-#: settings/MenuButtonPage.js:268 settings/Menu/ThemePage.js:185
-#: settings/Menu/ThemePage.js:211 settings/Menu/ThemePage.js:217
-msgid "Foreground Color"
-msgstr ""
-
-#: settings/MenuButtonPage.js:256 settings/MenuButtonPage.js:259
-#: settings/MenuButtonPage.js:265 settings/Menu/ThemePage.js:182
-#: settings/Menu/ThemePage.js:208 settings/Menu/ThemePage.js:214
-msgid "Background Color"
-msgstr ""
-
-#: settings/MenuButtonPage.js:259 settings/MenuButtonPage.js:262
-#: settings/Menu/ThemePage.js:208 settings/Menu/ThemePage.js:211
-msgid "Hover"
-msgstr ""
-
-#: settings/MenuButtonPage.js:265 settings/MenuButtonPage.js:268
-#: settings/Menu/ThemePage.js:214 settings/Menu/ThemePage.js:217
-msgid "Active"
-msgstr ""
-
-#: settings/MenuButtonPage.js:271 settings/Menu/ThemePage.js:194
-msgid "Border Radius"
-msgstr ""
-
-#: settings/MenuButtonPage.js:275 settings/Menu/ThemePage.js:191
-msgid "Border Width"
-msgstr ""
-
-#: settings/MenuButtonPage.js:276
-msgid "Background colors required if set to 0"
-msgstr ""
-
-#: settings/MenuButtonPage.js:279 settings/Menu/ThemePage.js:188
-msgid "Border Color"
-msgstr ""
-
-#: settings/MenuButtonPage.js:424
-msgid "Menu Button Icons"
-msgstr ""
-
-#: settings/MenuButtonPage.js:428
-msgid "Icons"
-msgstr ""
-
-#: settings/MenuButtonPage.js:448
-msgid "Distros"
-msgstr ""
-
-#: settings/MenuButtonPage.js:454
-msgid "Legal Disclaimer"
-msgstr ""
-
-#: settings/MenuButtonPage.js:486 settings/Menu/VisualSettings.js:191
-msgid "Custom"
-msgstr ""
-
-#: settings/MenuButtonPage.js:520
-msgid "Browse Files..."
-msgstr ""
-
-#: settings/MenuButtonPage.js:525
-msgid "Select an Image File"
-msgstr ""
-
-#: settings/MenuButtonPage.js:533 settings/MenuButtonPage.js:715
-msgid "Select"
-msgstr ""
-
-#: settings/MenuButtonPage.js:552
-msgid "Browse Icons..."
-msgstr ""
-
-#: settings/MenuButtonPage.js:617 settings/Menu/ListPinnedPage.js:611
-msgid "Select an Icon"
-msgstr ""
-
-#: settings/MenuButtonPage.js:622
-msgid "System Icons"
-msgstr ""
-
-#: settings/MenuButtonPage.js:626
-msgid "Search..."
-msgstr ""
-
-#: settings/MenuButtonPage.js:735
-msgid "Legal Disclaimer for Distro Icons"
-msgstr ""
-
-#: settings/MenuPage.js:24
-msgid "Menu"
-msgstr ""
-
-#: settings/MenuPage.js:32
-msgid "How should the menu look?"
-msgstr ""
-
-#: settings/MenuPage.js:39
-msgid "Menu Layout"
-msgstr ""
-
-#: settings/MenuPage.js:40
-msgid "Choose a layout style for the menu"
-msgstr ""
-
-#: settings/MenuPage.js:49 settings/MenuPage.js:91
-#: settings/Menu/LayoutTweaksPage.js:25
-#, javascript-format
-msgid "%s Layout Tweaks"
-msgstr ""
-
-#: settings/MenuPage.js:55
-msgid "Menu Theme"
-msgstr ""
-
-#: settings/MenuPage.js:56
-msgid "Modify menu colors, font size, and border"
-msgstr ""
-
-#: settings/MenuPage.js:65
-msgid "Menu Visual Appearance"
-msgstr ""
-
-#: settings/MenuPage.js:66
-msgid "Change menu height, width, location, and icon sizes"
-msgstr ""
-
-#: settings/MenuPage.js:75
-msgid "Fine Tune"
-msgstr ""
-
-#: settings/MenuPage.js:76
-msgid "Adjust less commonly used settings"
-msgstr ""
-
-#: settings/MenuPage.js:85
-msgid "What should show on the menu?"
-msgstr ""
-
-#: settings/MenuPage.js:92
-msgid "Settings specific to the current menu layout"
-msgstr ""
-
-#: settings/MenuPage.js:112
-msgid "Directory Shortcuts"
-msgstr ""
-
-#: settings/MenuPage.js:134 settings/Menu/SearchOptionsPage.js:16
-msgid "Search Options"
-msgstr ""
-
-#: settings/MenuPage.js:144 settings/Menu/ListPinnedPage.js:379
-msgid "Power Options"
-msgstr ""
-
-#: settings/MenuPage.js:145
-msgid "Choose which power options to show and the display style"
-msgstr ""
-
-#: settings/MenuPage.js:156
-msgid "Extra Categories"
-msgstr ""
-
-#: settings/MenuPage.js:158
-msgid "Add or remove additional custom categories"
-msgstr ""
-
-#: settings/MenuPage.js:168
-msgid "What should show on the context menu?"
-msgstr ""
-
-#: settings/MenuPage.js:173
-msgid "Modify ArcMenu Context Menu"
 msgstr ""
 
 #: settings/Menu/FineTunePage.js:33
@@ -1095,17 +831,10 @@ msgstr ""
 msgid "Clear Apps Marked 'New'"
 msgstr ""
 
-#: settings/Menu/LayoutsPage.js:24
-msgid "Current Menu Layout"
-msgstr ""
-
-#: settings/Menu/LayoutsPage.js:38
-msgid "Choose a new menu layout?"
-msgstr ""
-
-#: settings/Menu/LayoutsPage.js:44
+#: settings/Menu/LayoutTweaksPage.js:25 settings/MenuPage.js:49
+#: settings/MenuPage.js:91
 #, javascript-format
-msgid "%s Menu Layouts"
+msgid "%s Layout Tweaks"
 msgstr ""
 
 #: settings/Menu/LayoutTweaksPage.js:113 settings/Menu/LayoutTweaksPage.js:118
@@ -1231,6 +960,11 @@ msgstr ""
 msgid "Font Size"
 msgstr ""
 
+#: settings/Menu/LayoutTweaksPage.js:600 settings/MenuButtonPage.js:103
+#, javascript-format
+msgid "%d Default Theme Value"
+msgstr ""
+
 #: settings/Menu/LayoutTweaksPage.js:614
 msgid "Show Frequent Apps"
 msgstr ""
@@ -1284,6 +1018,19 @@ msgstr ""
 
 #: settings/Menu/LayoutTweaksPage.js:1034
 msgid "Enable Clock Widget"
+msgstr ""
+
+#: settings/Menu/LayoutsPage.js:24
+msgid "Current Menu Layout"
+msgstr ""
+
+#: settings/Menu/LayoutsPage.js:38
+msgid "Choose a new menu layout?"
+msgstr ""
+
+#: settings/Menu/LayoutsPage.js:44
+#, javascript-format
+msgid "%s Menu Layouts"
 msgstr ""
 
 #: settings/Menu/ListOtherPage.js:34
@@ -1389,6 +1136,10 @@ msgstr ""
 msgid "Panel Extension Settings"
 msgstr ""
 
+#: settings/Menu/ListPinnedPage.js:379 settings/MenuPage.js:144
+msgid "Power Options"
+msgstr ""
+
 #: settings/Menu/ListPinnedPage.js:404
 msgid "Documents"
 msgstr ""
@@ -1443,16 +1194,33 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: settings/Menu/ListPinnedPage.js:640
-msgid "Directory"
+#: settings/Menu/ListPinnedPage.js:592 settings/MenuButtonPage.js:59
+#: settings/MenuButtonPage.js:156
+msgid "Icon"
+msgstr ""
+
+#: settings/Menu/ListPinnedPage.js:605 settings/MenuButtonPage.js:159
+msgid "Browse..."
+msgstr ""
+
+#: settings/Menu/ListPinnedPage.js:611 settings/MenuButtonPage.js:617
+msgid "Select an Icon"
 msgstr ""
 
 #: settings/Menu/ListPinnedPage.js:640
 msgid "Command"
 msgstr ""
 
+#: settings/Menu/ListPinnedPage.js:640
+msgid "Directory"
+msgstr ""
+
 #: settings/Menu/ListPinnedPage.js:653
 msgid "Add"
+msgstr ""
+
+#: settings/Menu/SearchOptionsPage.js:16 settings/MenuPage.js:134
+msgid "Search Options"
 msgstr ""
 
 #: settings/Menu/SearchOptionsPage.js:27
@@ -1491,8 +1259,26 @@ msgstr ""
 msgid "Search for recent files"
 msgstr ""
 
+#: settings/Menu/SubPage.js:44 settings/MenuButtonPage.js:29
+msgid "Reset settings"
+msgstr ""
+
+#: settings/Menu/SubPage.js:49 settings/MenuButtonPage.js:37
+#, javascript-format
+msgid "Reset all %s settings?"
+msgstr ""
+
+#: settings/Menu/SubPage.js:50 settings/MenuButtonPage.js:38
+#, javascript-format
+msgid "All %s settings will be reset to the default value."
+msgstr ""
+
 #: settings/Menu/ThemePage.js:39
 msgid "Override Theme"
+msgstr ""
+
+#: settings/Menu/ThemePage.js:40 settings/MenuButtonPage.js:249
+msgid "Results may vary with third party themes"
 msgstr ""
 
 #: settings/Menu/ThemePage.js:47 settings/Menu/ThemingDialog.js:67
@@ -1512,12 +1298,46 @@ msgstr ""
 msgid "Menu Styling"
 msgstr ""
 
+#: settings/Menu/ThemePage.js:182 settings/Menu/ThemePage.js:208
+#: settings/Menu/ThemePage.js:214 settings/MenuButtonPage.js:256
+#: settings/MenuButtonPage.js:259 settings/MenuButtonPage.js:265
+msgid "Background Color"
+msgstr ""
+
+#: settings/Menu/ThemePage.js:185 settings/Menu/ThemePage.js:211
+#: settings/Menu/ThemePage.js:217 settings/MenuButtonPage.js:253
+#: settings/MenuButtonPage.js:262 settings/MenuButtonPage.js:268
+msgid "Foreground Color"
+msgstr ""
+
+#: settings/Menu/ThemePage.js:188 settings/MenuButtonPage.js:279
+msgid "Border Color"
+msgstr ""
+
+#: settings/Menu/ThemePage.js:191 settings/MenuButtonPage.js:275
+msgid "Border Width"
+msgstr ""
+
+#: settings/Menu/ThemePage.js:194 settings/MenuButtonPage.js:271
+msgid "Border Radius"
+msgstr ""
+
 #: settings/Menu/ThemePage.js:200
 msgid "Separator Color"
 msgstr ""
 
 #: settings/Menu/ThemePage.js:204
 msgid "Menu Items Styling"
+msgstr ""
+
+#: settings/Menu/ThemePage.js:208 settings/Menu/ThemePage.js:211
+#: settings/MenuButtonPage.js:259 settings/MenuButtonPage.js:262
+msgid "Hover"
+msgstr ""
+
+#: settings/Menu/ThemePage.js:214 settings/Menu/ThemePage.js:217
+#: settings/MenuButtonPage.js:265 settings/MenuButtonPage.js:268
+msgid "Active"
 msgstr ""
 
 #: settings/Menu/ThemingDialog.js:15
@@ -1654,6 +1474,10 @@ msgstr ""
 msgid "Wide"
 msgstr ""
 
+#: settings/Menu/VisualSettings.js:191 settings/MenuButtonPage.js:486
+msgid "Custom"
+msgstr ""
+
 #: settings/Menu/VisualSettings.js:193
 msgid "Grid Menu Items"
 msgstr ""
@@ -1702,6 +1526,208 @@ msgstr ""
 msgid "Extra Large"
 msgstr ""
 
+#: settings/Menu/VisualSettings.js:286 settings/MenuButtonPage.js:63
+msgid "Hidden"
+msgstr ""
+
 #: settings/Menu/VisualSettings.js:305
 msgid "Custom Grid Icon Size"
+msgstr ""
+
+#: settings/Menu/VisualSettings.js:353 settings/MenuButtonPage.js:193
+msgid "Icon Size"
+msgstr ""
+
+#: settings/MenuButtonPage.js:18
+msgid "Menu Button"
+msgstr ""
+
+#: settings/MenuButtonPage.js:54
+msgid "Appearance"
+msgstr ""
+
+#: settings/MenuButtonPage.js:60 settings/MenuButtonPage.js:143
+msgid "Text"
+msgstr ""
+
+#: settings/MenuButtonPage.js:61
+msgid "Icon and Text"
+msgstr ""
+
+#: settings/MenuButtonPage.js:62
+msgid "Text and Icon"
+msgstr ""
+
+#: settings/MenuButtonPage.js:65
+msgid "Display Style"
+msgstr ""
+
+#: settings/MenuButtonPage.js:102
+msgid "Padding"
+msgstr ""
+
+#: settings/MenuButtonPage.js:170
+msgid "Choose a New Icon"
+msgstr ""
+
+#: settings/MenuButtonPage.js:206
+msgid "Click Options"
+msgstr ""
+
+#: settings/MenuButtonPage.js:212
+msgid "Context Menu"
+msgstr ""
+
+#: settings/MenuButtonPage.js:213
+msgid "None"
+msgstr ""
+
+#: settings/MenuButtonPage.js:216
+msgid "Left Click"
+msgstr ""
+
+#: settings/MenuButtonPage.js:226
+msgid "Right Click"
+msgstr ""
+
+#: settings/MenuButtonPage.js:236
+msgid "Middle Click"
+msgstr ""
+
+#: settings/MenuButtonPage.js:248
+msgid "Styling"
+msgstr ""
+
+#: settings/MenuButtonPage.js:276
+msgid "Background colors required if set to 0"
+msgstr ""
+
+#: settings/MenuButtonPage.js:424
+msgid "Menu Button Icons"
+msgstr ""
+
+#: settings/MenuButtonPage.js:428
+msgid "Icons"
+msgstr ""
+
+#: settings/MenuButtonPage.js:448
+msgid "Distros"
+msgstr ""
+
+#: settings/MenuButtonPage.js:454
+msgid "Legal Disclaimer"
+msgstr ""
+
+#: settings/MenuButtonPage.js:520
+msgid "Browse Files..."
+msgstr ""
+
+#: settings/MenuButtonPage.js:525
+msgid "Select an Image File"
+msgstr ""
+
+#: settings/MenuButtonPage.js:533 settings/MenuButtonPage.js:715
+msgid "Select"
+msgstr ""
+
+#: settings/MenuButtonPage.js:552
+msgid "Browse Icons..."
+msgstr ""
+
+#: settings/MenuButtonPage.js:622
+msgid "System Icons"
+msgstr ""
+
+#: settings/MenuButtonPage.js:626
+msgid "Search..."
+msgstr ""
+
+#: settings/MenuButtonPage.js:735
+msgid "Legal Disclaimer for Distro Icons"
+msgstr ""
+
+#: settings/MenuPage.js:24
+msgid "Menu"
+msgstr ""
+
+#: settings/MenuPage.js:32
+msgid "How should the menu look?"
+msgstr ""
+
+#: settings/MenuPage.js:39
+msgid "Menu Layout"
+msgstr ""
+
+#: settings/MenuPage.js:40
+msgid "Choose a layout style for the menu"
+msgstr ""
+
+#: settings/MenuPage.js:55
+msgid "Menu Theme"
+msgstr ""
+
+#: settings/MenuPage.js:56
+msgid "Modify menu colors, font size, and border"
+msgstr ""
+
+#: settings/MenuPage.js:65
+msgid "Menu Visual Appearance"
+msgstr ""
+
+#: settings/MenuPage.js:66
+msgid "Change menu height, width, location, and icon sizes"
+msgstr ""
+
+#: settings/MenuPage.js:75
+msgid "Fine Tune"
+msgstr ""
+
+#: settings/MenuPage.js:76
+msgid "Adjust less commonly used settings"
+msgstr ""
+
+#: settings/MenuPage.js:85
+msgid "What should show on the menu?"
+msgstr ""
+
+#: settings/MenuPage.js:92
+msgid "Settings specific to the current menu layout"
+msgstr ""
+
+#: settings/MenuPage.js:112
+msgid "Directory Shortcuts"
+msgstr ""
+
+#: settings/MenuPage.js:145
+msgid "Choose which power options to show and the display style"
+msgstr ""
+
+#: settings/MenuPage.js:156
+msgid "Extra Categories"
+msgstr ""
+
+#: settings/MenuPage.js:158
+msgid "Add or remove additional custom categories"
+msgstr ""
+
+#: settings/MenuPage.js:168
+msgid "What should show on the context menu?"
+msgstr ""
+
+#: settings/MenuPage.js:173
+msgid "Modify ArcMenu Context Menu"
+msgstr ""
+
+#. TRANSLATORS: This will display as "ProjectName v21 Released!" as an example.
+#: updateNotifier.js:56
+#, javascript-format
+msgid "%s v%s Released!"
+msgstr ""
+
+#: updateNotifier.js:67
+msgid "What's new?"
+msgstr ""
+
+#: updateNotifier.js:68
+msgid "Dismiss"
 msgstr ""
