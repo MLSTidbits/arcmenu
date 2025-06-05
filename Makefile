@@ -6,7 +6,11 @@ EXTRA_MODULES = appMenu.js arcmenuManager.js constants.js iconGrid.js menuButton
 		menuWidgets.js placeDisplay.js prefs.js prefsWidgets.js recentFilesManager.js search.js \
 		standaloneRunner.js updateNotifier.js utils.js
 
-TOLOCALIZE = $(EXTRA_MODULES) menulayouts/* settings/*
+TOLOCALIZE = $(EXTRA_MODULES) \
+             $(wildcard menulayouts/*.js) \
+             $(wildcard searchProviders/*.js) \
+             $(wildcard settings/*.js) \
+             $(wildcard settings/Menu/*.js)
 
 EXTRA_DIRECTORIES = icons menulayouts searchProviders settings
 
@@ -52,7 +56,7 @@ mergepo: potfile
 
 ./po/arcmenu.pot: $(TOLOCALIZE)
 	mkdir -p po
-	xgettext -k_ -kN_ --from-code utf-8 -o po/arcmenu.pot --package-name "ArcMenu" $(TOLOCALIZE)
+	xgettext -k_ -kN_ --from-code utf-8 -o po/arcmenu.pot --sort-by-file --add-comments=TRANSLATORS --package-name "ArcMenu" $(TOLOCALIZE)
 
 ./po/%.mo: ./po/%.po
 	msgfmt -c $< -o $@
