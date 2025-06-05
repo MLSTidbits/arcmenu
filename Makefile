@@ -56,7 +56,7 @@ mergepo: potfile
 
 ./po/arcmenu.pot: $(TOLOCALIZE)
 	mkdir -p po
-	xgettext -k_ -kN_ --from-code utf-8 -o po/arcmenu.pot --package-name "ArcMenu" $(TOLOCALIZE)
+	xgettext -k_ -kN_ --from-code utf-8 -o po/arcmenu.pot --sort-by-file --add-comments=TRANSLATORS --package-name "ArcMenu" $(TOLOCALIZE)
 
 ./po/%.mo: ./po/%.po
 	msgfmt -c $< -o $@
