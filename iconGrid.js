@@ -283,8 +283,10 @@ export const IconGridLayout = GObject.registerClass({
     }
 
     addItem(item, index = -1) {
-        if (this._items.has(item))
-            throw new Error(`Item ${item} already added to IconGridLayout`);
+        if (this._items.has(item)) {
+            console.log(`ArcMenu Error: Item ${item} already added to IconGridLayout`);
+            return;
+        }
 
         if (!this._container)
             return;
@@ -300,8 +302,10 @@ export const IconGridLayout = GObject.registerClass({
     }
 
     moveItem(item, newPosition) {
-        if (!this._items.has(item))
-            throw new Error(`Item ${item} is not part of the IconGridLayout`);
+        if (!this._items.has(item)) {
+            console.log(`ArcMenu Error: Item ${item} is not part of the IconGridLayout`);
+            return;
+        }
 
         this._shouldEaseItems = true;
 
@@ -311,8 +315,10 @@ export const IconGridLayout = GObject.registerClass({
     }
 
     removeItem(item) {
-        if (!this._items.has(item))
-            throw new Error(`Item ${item} is not part of the IconGridLayout`);
+        if (!this._items.has(item)) {
+            console.log(`ArcMenu Error: Item ${item} is not part of the IconGridLayout`);
+            return;
+        }
 
         if (!this._container)
             return;
