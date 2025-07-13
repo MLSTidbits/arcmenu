@@ -41,7 +41,7 @@ class ArcMenuVisualSettingsPage extends SubPage {
 
         const menuWidthSpinButton = new Gtk.SpinButton({
             adjustment: new Gtk.Adjustment({
-                lower: 175, upper: 500, step_increment: 25, page_increment: 50, page_size: 0,
+                lower: 175, upper: 2500, step_increment: 25, page_increment: 50, page_size: 0,
             }),
             climb_rate: 25,
             digits: 0,
@@ -62,7 +62,7 @@ class ArcMenuVisualSettingsPage extends SubPage {
 
         const rightPanelWidthSpinButton = new Gtk.SpinButton({
             adjustment: new Gtk.Adjustment({
-                lower: 200, upper: 500, step_increment: 25, page_increment: 50, page_size: 0,
+                lower: 200, upper: 2500, step_increment: 25, page_increment: 50, page_size: 0,
             }),
             climb_rate: 25,
             valign: Gtk.Align.CENTER,
@@ -83,7 +83,7 @@ class ArcMenuVisualSettingsPage extends SubPage {
 
         const widthSpinButton = new Gtk.SpinButton({
             adjustment: new Gtk.Adjustment({
-                lower: -350, upper: 600, step_increment: 25, page_increment: 50, page_size: 0,
+                lower: -350, upper: 5000, step_increment: 25, page_increment: 50, page_size: 0,
             }),
             valign: Gtk.Align.CENTER,
             climb_rate: 25,
