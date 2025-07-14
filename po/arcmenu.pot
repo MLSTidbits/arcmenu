@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-05 10:41-0400\n"
+"POT-Creation-Date: 2025-07-14 08:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -608,7 +608,7 @@ msgstr ""
 msgid "See the <a href=\"%s\">%s</a> for details."
 msgstr ""
 
-#: settings/DonatePage.js:12 updateNotifier.js:66
+#: settings/DonatePage.js:12 updateNotifier.js:87
 msgid "Donate"
 msgstr ""
 
@@ -617,7 +617,7 @@ msgstr ""
 msgid "Help Support %s"
 msgstr ""
 
-#: settings/DonatePage.js:23 updateNotifier.js:57
+#: settings/DonatePage.js:23 updateNotifier.js:75
 #, javascript-format
 msgid ""
 "Thank you for using %s! If you enjoy it and would like to help support its "
@@ -1719,15 +1719,19 @@ msgid "Modify ArcMenu Context Menu"
 msgstr ""
 
 #. TRANSLATORS: This will display as "ProjectName v21 Released!" as an example.
-#: updateNotifier.js:56
+#: updateNotifier.js:70
 #, javascript-format
 msgid "%s v%s Released!"
 msgstr ""
 
-#: updateNotifier.js:67
+#: updateNotifier.js:73
+msgid "Check out what's new."
+msgstr ""
+
+#: updateNotifier.js:90
 msgid "What's new?"
 msgstr ""
 
-#: updateNotifier.js:68
+#: updateNotifier.js:91
 msgid "Dismiss"
 msgstr ""
