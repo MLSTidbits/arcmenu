@@ -90,13 +90,13 @@ install-local: _build
 	rm -rf $(INSTALLBASE)/$(UUID)
 	mkdir -p $(INSTALLBASE)/$(UUID)
 	cp -r ./_build/* $(INSTALLBASE)/$(UUID)/
-	ifeq ($(INSTALLTYPE),system)
-		# system-wide settings and locale files
-		rm -r $(INSTALLBASE)/$(UUID)/schemas $(INSTALLBASE)/$(UUID)/locale
-		mkdir -p $(SHARE_PREFIX)/glib-2.0/schemas $(SHARE_PREFIX)/locale
-		cp -r ./schemas/*gschema.* $(SHARE_PREFIX)/glib-2.0/schemas
-		cp -r ./_build/locale/* $(SHARE_PREFIX)/locale
-	endif
+ifeq ($(INSTALLTYPE),system)
+	# system-wide settings and locale files
+	rm -r $(INSTALLBASE)/$(UUID)/schemas $(INSTALLBASE)/$(UUID)/locale
+	mkdir -p $(SHARE_PREFIX)/glib-2.0/schemas $(SHARE_PREFIX)/locale
+	cp -r ./schemas/*gschema.* $(SHARE_PREFIX)/glib-2.0/schemas
+	cp -r ./_build/locale/* $(SHARE_PREFIX)/locale
+endif
 	-rm -fR _build
 	echo done
 
