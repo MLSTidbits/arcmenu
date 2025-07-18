@@ -19,12 +19,10 @@ export const DragLocation = {
     BOTTOM_EDGE: 6,
 };
 
-// eslint-disable-next-line jsdoc/require-jsdoc
 function swap(value, length) {
     return length - value - 1;
 }
 
-// eslint-disable-next-line jsdoc/require-jsdoc
 function animateIconPosition(icon, box, nChangedIcons) {
     if (!icon.has_allocation() || icon.allocation.equal(box) || icon.opacity === 0) {
         icon.allocate(box);

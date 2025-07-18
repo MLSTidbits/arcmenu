@@ -352,7 +352,7 @@ export class BaseMenuLayout extends St.BoxLayout {
                 let id;
                 try {
                     id = entry.get_desktop_file_id();
-                } catch (e) {
+                } catch {
                     continue;
                 }
 

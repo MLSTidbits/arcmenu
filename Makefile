@@ -1,20 +1,46 @@
-# Basic Makefile
-
 UUID = arcmenu@arcmenu.com
-BASE_MODULES = COPYING extension.js keybinder.js metadata.json README.md RELEASENOTES stylesheet.css theming.js
-EXTRA_MODULES = appMenu.js arcmenuManager.js constants.js iconGrid.js menuButton.js menuController.js \
-		menuWidgets.js placeDisplay.js prefs.js prefsWidgets.js recentFilesManager.js search.js \
-		standaloneRunner.js updateNotifier.js utils.js
 
-TOLOCALIZE = $(EXTRA_MODULES) \
-             $(wildcard menulayouts/*.js) \
-             $(wildcard searchProviders/*.js) \
-             $(wildcard settings/*.js) \
-             $(wildcard settings/Menu/*.js)
+BASE_MODULES = \
+	LICENSE \
+	metadata.json \
+	README.md \
+	RELEASENOTES \
+	src/extension.js \
+	src/keybinder.js \
+	src/stylesheet.css \
+	src/theming.js \
+	$(NULL)
 
-EXTRA_DIRECTORIES = icons menulayouts searchProviders settings
+TRANSLATABLE_MODULES = \
+	src/appMenu.js \
+	src/arcmenuManager.js \
+	src/constants.js \
+	src/iconGrid.js \
+	src/menuButton.js \
+	src/menuController.js \
+	src/menuWidgets.js \
+	src/placeDisplay.js \
+	src/prefs.js \
+	src/prefsWidgets.js \
+	src/recentFilesManager.js \
+	src/search.js \
+	src/standaloneRunner.js \
+	src/updateNotifier.js \
+	src/utils.js \
+	$(NULL)
+
+MODULES = $(BASE_MODULES) $(TRANSLATABLE_MODULES)
+
+TOLOCALIZE = $(TRANSLATABLE_MODULES) \
+             $(wildcard src/menulayouts/*.js) \
+             $(wildcard src/searchProviders/*.js) \
+             $(wildcard src/settings/*.js) \
+             $(wildcard src/settings/Menu/*.js)
+
+EXTRA_DIRECTORIES = icons src/menulayouts src/searchProviders src/settings
 
 MSGSRC = $(wildcard po/*.po)
+
 ifeq ($(strip $(DESTDIR)),)
 	INSTALLTYPE = local
 	INSTALLBASE = $(HOME)/.local/share/gnome-shell/extensions
@@ -86,7 +112,7 @@ zip-file: _build
 _build: all
 	-rm -fR ./_build
 	mkdir -p _build
-	cp $(BASE_MODULES) $(EXTRA_MODULES) _build
+	cp $(MODULES) _build
 	cp -r $(EXTRA_DIRECTORIES) _build
 	mkdir -p _build/schemas
 	cp schemas/*.xml _build/schemas/

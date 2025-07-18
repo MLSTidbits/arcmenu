@@ -211,7 +211,7 @@ export const MenuController = class {
         const appList = this._appSystem.get_installed().filter(appInfo => {
             try {
                 appInfo.get_id(); // catch invalid file encodings
-            } catch (e) {
+            } catch {
                 return false;
             }
             return appInfo.should_show();

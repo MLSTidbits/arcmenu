@@ -263,7 +263,7 @@ export class Layout extends BaseMenuLayout {
         this._appInfoList = Shell.AppSystem.get_default().get_installed().filter(appInfo => {
             try {
                 appInfo.get_id(); // catch invalid file encodings
-            } catch (e) {
+            } catch {
                 return false;
             }
             return this._parentalControlsManager.shouldShowApp(appInfo);
@@ -344,7 +344,7 @@ export class Layout extends BaseMenuLayout {
                 schema_id: 'org.gnome.desktop.app-folders.folder',
                 path: newFolderPath,
             });
-        } catch (e) {
+        } catch {
             console.log('Error creating new folder');
             return;
         }
