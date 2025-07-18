@@ -2,7 +2,8 @@
   "name": "arcmenu",
   "type": "module",
   "scripts": {
-    "lint": "eslint 'src/**/*.js' --fix"
+    "lint": "eslint 'src/**/*.js' --fix",
+    "lint:ci": "eslint 'src/**/*.js'"
   },
   "devDependencies": {
     "@eslint/js": "^9.3.0",
