@@ -3,11 +3,11 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
 import * as Constants from '../../constants.js';
-import {ListPinnedPage} from './ListPinnedPage.js';
-import {ListOtherPage} from './ListOtherPage.js';
+import {ListPinnedPage} from './listPinnedPage.js';
+import {ListOtherPage} from './listOtherPage.js';
 import * as PW from '../../prefsWidgets.js';
-import * as SettingsUtils from '../SettingsUtils.js';
-import {SubPage} from './SubPage.js';
+import * as SettingsUtils from '../settingsUtils.js';
+import {SubPage} from './subPage.js';
 
 import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 

@@ -5,7 +5,7 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
 import * as PW from '../../prefsWidgets.js';
-import * as SettingsUtils from '../SettingsUtils.js';
+import * as SettingsUtils from '../settingsUtils.js';
 
 import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
