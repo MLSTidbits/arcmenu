@@ -2,11 +2,11 @@ UUID = arcmenu@arcmenu.com
 
 BASE_MODULES = \
 	LICENSE \
-	metadata.json \
 	README.md \
-	RELEASENOTES \
 	src/extension.js \
 	src/keybinder.js \
+	src/metadata.json \
+	src/RELEASENOTES \
 	src/stylesheet.css \
 	src/theming.js \
 	$(NULL)
@@ -125,5 +125,5 @@ _build: all
 		cp $$l $$lf/LC_MESSAGES/arcmenu.mo; \
 	done;
 ifneq ($(COMMIT),)
-	sed -i '/"version": .*,/a "commit": "$(COMMIT)",'  _build/metadata.json;
+	sed -i '/"version": .*,/a \  "commit": "$(COMMIT)",'  _build/metadata.json;
 endif
