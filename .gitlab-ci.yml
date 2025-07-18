@@ -1,5 +1,6 @@
-# Triggered when a new tag (e.g., v1.0) is created in the repository.
+# Triggered when a new tag (e.g., v1.0) is created in the repository or a merge request is initiated.
 # Stages:
+# - Review: Runs ESLint and make install for code quality checks on merge requests.
 # - Build: Uses the Makefile to compile the extension and create a zip file for upload to extensions.gnome.org.
 # - Release: Creates a GitLab release for the tag, using release notes from the RELEASENOTES file.
 
