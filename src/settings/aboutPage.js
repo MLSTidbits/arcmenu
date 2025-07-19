@@ -83,7 +83,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
 
         let releaseNotes = '';
         try {
-            const fileContent = GLib.file_get_contents(`${path}/RELEASENOTES`)[1];
+            const fileContent = GLib.file_get_contents(`${path}/RELEASENOTES.md`)[1];
             const decoder = new TextDecoder('utf-8');
             releaseNotes = decoder.decode(fileContent);
         } catch {

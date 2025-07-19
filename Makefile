@@ -1,17 +1,13 @@
 UUID = arcmenu@arcmenu.com
 
-BASE_MODULES = \
+PACKAGE_FILES = \
+	icons/ \
 	LICENSE \
 	README.md \
-	src/extension.js \
-	src/keybinder.js \
-	src/metadata.json \
-	src/RELEASENOTES \
-	src/stylesheet.css \
-	src/theming.js \
-	$(NULL)
+	RELEASENOTES.md \
+	src/*
 
-TRANSLATABLE_MODULES = \
+TOLOCALIZE = \
 	src/appMenu.js \
 	src/arcmenuManager.js \
 	src/constants.js \
@@ -27,17 +23,10 @@ TRANSLATABLE_MODULES = \
 	src/standaloneRunner.js \
 	src/updateNotifier.js \
 	src/utils.js \
-	$(NULL)
-
-MODULES = $(BASE_MODULES) $(TRANSLATABLE_MODULES)
-
-TOLOCALIZE = $(TRANSLATABLE_MODULES) \
-             $(wildcard src/menulayouts/*.js) \
-             $(wildcard src/searchProviders/*.js) \
-             $(wildcard src/settings/*.js) \
-             $(wildcard src/settings/Menu/*.js)
-
-EXTRA_DIRECTORIES = icons src/menulayouts src/searchProviders src/settings
+	$(wildcard src/menulayouts/*.js) \
+	$(wildcard src/searchProviders/*.js) \
+	$(wildcard src/settings/*.js) \
+	$(wildcard src/settings/menuSettings/*.js)
 
 MSGSRC = $(wildcard po/*.po)
 
@@ -112,8 +101,7 @@ zip-file: _build
 _build: all
 	-rm -fR ./_build
 	mkdir -p _build
-	cp $(MODULES) _build
-	cp -r $(EXTRA_DIRECTORIES) _build
+	cp -r $(PACKAGE_FILES) _build
 	mkdir -p _build/schemas
 	cp schemas/*.xml _build/schemas/
 	cp schemas/gschemas.compiled _build/schemas/
