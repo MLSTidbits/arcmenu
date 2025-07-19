@@ -2,7 +2,7 @@
 # Stages:
 # - Review: Runs ESLint and make install for code quality checks on merge requests.
 # - Build: Uses the Makefile to compile the extension and create a zip file for upload to extensions.gnome.org.
-# - Release: Creates a GitLab release for the tag, using release notes from the RELEASENOTES file.
+# - Release: Creates a GitLab release for the tag, using release notes from the RELEASENOTES.md file.
 
 stages:
   - review
@@ -64,4 +64,4 @@ release_job:
     - echo "Creating release for tag ${VERSION}..."
   release:
     tag_name: "${VERSION}"
-    description: RELEASENOTES
+    description: RELEASENOTES.md
