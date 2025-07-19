@@ -1,3 +1,5 @@
+.PHONY: all clean extension potfile mergepo install prefs enable disable reset info show zip-file
+
 UUID = arcmenu@arcmenu.com
 
 PACKAGE_FILES = \
@@ -6,27 +8,6 @@ PACKAGE_FILES = \
 	README.md \
 	RELEASENOTES.md \
 	src/*
-
-TOLOCALIZE = \
-	src/appMenu.js \
-	src/arcmenuManager.js \
-	src/constants.js \
-	src/iconGrid.js \
-	src/menuButton.js \
-	src/menuController.js \
-	src/menuWidgets.js \
-	src/placeDisplay.js \
-	src/prefs.js \
-	src/prefsWidgets.js \
-	src/recentFilesManager.js \
-	src/search.js \
-	src/standaloneRunner.js \
-	src/updateNotifier.js \
-	src/utils.js \
-	$(wildcard src/menulayouts/*.js) \
-	$(wildcard src/searchProviders/*.js) \
-	$(wildcard src/settings/*.js) \
-	$(wildcard src/settings/menuSettings/*.js)
 
 MSGSRC = $(wildcard po/*.po)
 
@@ -59,23 +40,25 @@ extension: ./schemas/gschemas.compiled $(MSGSRC:.po=.mo)
 ./schemas/gschemas.compiled: ./schemas/org.gnome.shell.extensions.arcmenu.gschema.xml
 	glib-compile-schemas ./schemas/
 
-potfile: ./po/arcmenu.pot
+potfile:
+	mkdir -p po
+	find src/ -name '*.js' | xargs \
+	xgettext -k_ -kN_ \
+		--from-code=UTF-8 \
+		--output=po/arcmenu.pot \
+		--sort-by-file \
+		--add-comments=TRANSLATORS \
+		--package-name "ArcMenu"
 
 mergepo: potfile
 	for l in $(MSGSRC); do \
-		msgmerge -U $$l ./po/arcmenu.pot; \
+		msgmerge -NU $$l ./po/arcmenu.pot; \
 	done;
-
-./po/arcmenu.pot: $(TOLOCALIZE)
-	mkdir -p po
-	xgettext -k_ -kN_ --from-code utf-8 -o po/arcmenu.pot --sort-by-file --add-comments=TRANSLATORS --package-name "ArcMenu" $(TOLOCALIZE)
 
 ./po/%.mo: ./po/%.po
 	msgfmt -c $< -o $@
 
-install: install-local
-
-install-local: _build
+install: _build
 	rm -rf $(INSTALLBASE)/$(UUID)
 	mkdir -p $(INSTALLBASE)/$(UUID)
 	cp -r ./_build/* $(INSTALLBASE)/$(UUID)/

@@ -824,7 +824,7 @@ export class ArcSearchProviderInfo extends BaseMenuItem {
     }
 
     setMoreCount(count) {
-        this._moreLabel.text = _('+ %d more', '+ %d more', count).format(count);
+        this._moreLabel.text = _('+ %d more').format(count);
         this._moreLabel.visible = count > 0;
     }
 }
