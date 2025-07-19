@@ -537,7 +537,7 @@ class ArcMenuLayoutTweaksPage extends SubPage {
             orientation: Gtk.Orientation.HORIZONTAL,
             adjustment: new Gtk.Adjustment({
                 lower: 300,
-                upper: 1000,
+                upper: 5000,
                 step_increment: 15,
                 page_increment: 15,
                 page_size: 0,
