@@ -786,7 +786,7 @@ var ArcMenuContextMenu = class ArcMenuArcMenuContextMenu extends PopupMenu.Popup
     }
 
     addPowerOptionsMenuItem() {
-        const powerOptionsItem = new PopupMenu.PopupSubMenuMenuItem(_('Power Off / Log Out'));
+        const powerOptionsItem = new PopupMenu.PopupSubMenuMenuItem(_('Power Off'));
 
         const suspendItem = powerOptionsItem.menu.addAction(_('Suspend'),
             () => this._systemActions.activateSuspend());

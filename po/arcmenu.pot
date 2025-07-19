@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-19 09:02-0400\n"
+"POT-Creation-Date: 2025-07-19 13:40-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -261,7 +261,7 @@ msgid "Show Desktop"
 msgstr ""
 
 #: src/menuButton.js:789 src/menuWidgets.js:860 src/menuWidgets.js:877
-msgid "Power Off / Log Out"
+msgid "Power Off"
 msgstr ""
 
 #: src/menuButton.js:830
@@ -819,6 +819,7 @@ msgid "Hidden"
 msgstr ""
 
 #: src/settings/menuButtonPage.js:65
+#: src/settings/menuSettings/listOtherPage.js:38
 msgid "Display Style"
 msgstr ""
 
@@ -1364,10 +1365,6 @@ msgstr ""
 
 #: src/settings/menuSettings/listOtherPage.js:34
 msgid "Actions will be hidden from ArcMenu if not available on your system."
-msgstr ""
-
-#: src/settings/menuSettings/listOtherPage.js:38
-msgid "Power Off / Log Out Buttons"
 msgstr ""
 
 #: src/settings/menuSettings/listOtherPage.js:41

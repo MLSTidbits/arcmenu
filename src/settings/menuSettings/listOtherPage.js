@@ -35,7 +35,7 @@ class ArcMenuListOtherPage extends SubPage {
             });
 
             const powerDisplayStyleGroup = new Adw.PreferencesGroup({
-                title: _('Power Off / Log Out Buttons'),
+                title: _('Display Style'),
             });
             const powerDisplayStyles = new Gtk.StringList();
             powerDisplayStyles.append(_('Off'));

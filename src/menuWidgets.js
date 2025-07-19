@@ -835,7 +835,7 @@ export class PowerOptionsBox extends St.ScrollView {
     }
 }
 
-// 'Power Off / Log Out' button with popupmenu that shows lock, power off, restart, etc
+// 'Power Off' button with popupmenu that shows lock, power off, restart, etc
 export class LeaveButton extends BaseMenuItem {
     static {
         GObject.registerClass(this);
@@ -857,7 +857,7 @@ export class LeaveButton extends BaseMenuItem {
 
         if (showLabel) {
             this.label = new St.Label({
-                text: _('Power Off / Log Out'),
+                text: _('Power Off'),
                 y_expand: false,
                 y_align: Clutter.ActorAlign.CENTER,
             });
@@ -874,7 +874,7 @@ export class LeaveButton extends BaseMenuItem {
 
             this._closeMenuOnActivate = true;
             this._displayType = Constants.DisplayType.BUTTON;
-            this.tooltipText = _('Power Off / Log Out');
+            this.tooltipText = _('Power Off');
         }
     }
 
