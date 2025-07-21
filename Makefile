@@ -3,8 +3,9 @@
 UUID = arcmenu@arcmenu.com
 
 PACKAGE_FILES = \
-	icons/ \
+	icons \
 	LICENSE \
+	metadata.json \
 	README.md \
 	RELEASENOTES.md \
 	src/*
