@@ -23,6 +23,7 @@ const forbiddenKeyvals = [
     Gdk.KEY_KP_Enter,
     Gdk.KEY_Return,
     Gdk.KEY_Mode_switch,
+    Gdk.KEY_Escape,
 ];
 
 export const GeneralPage = GObject.registerClass(
@@ -107,7 +108,6 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
         multiMonitorSwitch.connect('notify::active', widget => {
             const multiMonitor = widget.get_active();
             this._settings.set_boolean('multi-monitor', multiMonitor);
-            this.menuHotkeyRow.setMultiMonitor(multiMonitor);
         });
 
         const multiMonitorRow = new Adw.ActionRow({
@@ -172,7 +172,7 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
         const hotkeySetting = isMenuHotkey ? 'arcmenu-hotkey' : 'runner-hotkey';
         const primaryMonitorSetting = isMenuHotkey ? 'hotkey-open-primary-monitor'
             : 'runner-hotkey-open-primary-monitor';
-        const accelerator = this._settings.get_strv(hotkeySetting).toString();
+        const accelerator = this._settings.get_strv(hotkeySetting);
         const hotkeyString = this.acceleratorToLabel(accelerator);
         const hotkeyLabel = new Gtk.Label({
             label: hotkeyString,
@@ -190,11 +190,11 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
             dialog.inhibitSystemShortcuts();
             dialog.connect('response', (_w, response) => {
                 if (response === Gtk.ResponseType.APPLY) {
-                    if (dialog.resultsText)
-                        this._settings.set_strv(hotkeySetting, [dialog.resultsText]);
+                    if (dialog.hotkeys)
+                        this._settings.set_strv(hotkeySetting, dialog.hotkeys);
                     else
                         this._settings.set_strv(hotkeySetting, []);
-                    hotkeyLabel.label = this.acceleratorToLabel(dialog.resultsText);
+                    hotkeyLabel.label = this.acceleratorToLabel(dialog.hotkeys);
                 }
                 dialog.restoreSystemShortcuts();
                 dialog.destroy();
@@ -205,30 +205,37 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
             icon_name: 'applications-system-symbolic',
             css_classes: ['flat'],
             valign: Gtk.Align.CENTER,
-            visible: isMenuHotkey ? this._settings.get_boolean('multi-monitor') : true,
         });
-        customHotkeyRow.add_suffix(customizeButton);
+        customHotkeyRow.add_prefix(customizeButton);
 
         customizeButton.connect('clicked', () => {
             const windowPreviewOptions = new HotkeyOptionsDialog(this._settings, _('Hotkey Options'), this.get_root(), primaryMonitorSetting);
             windowPreviewOptions.show();
         });
 
-        customHotkeyRow.setMultiMonitor = bool => {
-            customizeButton.visible = bool;
-        };
+        const editButton = new Gtk.Image({
+            icon_name: 'document-edit-symbolic',
+            valign: Gtk.Align.CENTER,
+            margin_start: 12,
+        });
+        customHotkeyRow.add_suffix(editButton);
 
         return customHotkeyRow;
     }
 
     acceleratorToLabel(accelerator) {
-        if (!accelerator)
+        if (!accelerator || accelerator.length === 0)
             return _('Disabled');
-        const [ok, key, mods] = Gtk.accelerator_parse(accelerator);
-        if (!ok)
-            return '';
 
-        return Gtk.accelerator_get_label(key, mods);
+        const hotkeyStrings = [];
+
+        accelerator.forEach(accel => {
+            const [ok, key, mods] = Gtk.accelerator_parse(accel);
+            if (ok)
+                hotkeyStrings.push(Gtk.accelerator_get_label(key, mods));
+        });
+
+        return hotkeyStrings.join(', ');
     }
 });
 
@@ -264,77 +271,88 @@ var HotkeyDialog = GObject.registerClass({
 },
 class ArcMenuHotkeyDialog extends Adw.Window {
     _init(isMenuHotkey, settings, parent) {
+        const title = isMenuHotkey ? _('ArcMenu Hotkey') : _('Standalone Runner Hotkey');
         super._init({
             modal: true,
-            title: _('Modify Hotkey'),
+            title,
             transient_for: parent.get_root(),
-            resizable: false,
+            resizable: true,
         });
         this._settings = settings;
         this._parentWindow = parent.get_root();
 
-        this.set_default_size(460, 275);
+        this.set_default_size(560, 575);
 
         const eventControllerKey = new Gtk.EventControllerKey();
         this.add_controller(eventControllerKey);
 
         const shortcutController = new Gtk.ShortcutController();
         this.add_controller(shortcutController);
-        const escapeShortcut = new Gtk.Shortcut({
-            trigger: Gtk.ShortcutTrigger.parse_string('Escape'),
-            action: Gtk.ShortcutAction.parse_string('action(window.close)'),
-        });
-        shortcutController.add_shortcut(escapeShortcut);
 
         this.connect('destroy', () => {
             this.restoreSystemShortcuts();
         });
 
         const sidebarToolBarView = new Adw.ToolbarView({
-            top_bar_style: Adw.ToolbarStyle.RAISED,
+            top_bar_style: Adw.ToolbarStyle.FLAT,
         });
         this.set_content(sidebarToolBarView);
 
-        const headerBar = new Adw.HeaderBar({
+        this._headerBar = new Adw.HeaderBar({
             show_end_title_buttons: true,
             show_start_title_buttons: false,
         });
-        sidebarToolBarView.add_top_bar(headerBar);
+        sidebarToolBarView.add_top_bar(this._headerBar);
 
-        const applyButton = new Gtk.Button({
+        this._applyButton = new Gtk.Button({
             label: _('Apply'),
             halign: Gtk.Align.END,
             hexpand: false,
             css_classes: ['suggested-action'],
             visible: false,
         });
-        applyButton.connect('clicked', () => {
+        this._applyButton.connect('clicked', () => {
             this.emit('response', Gtk.ResponseType.APPLY);
         });
-        headerBar.pack_end(applyButton);
+        this._headerBar.pack_end(this._applyButton);
 
-        const cancelButton = new Gtk.Button({
+        this._cancelButton = new Gtk.Button({
             label: _('Cancel'),
             halign: Gtk.Align.START,
             hexpand: false,
             visible: false,
         });
-        cancelButton.connect('clicked', () => this.close());
-        headerBar.pack_start(cancelButton);
+        this._cancelButton.connect('clicked', () => this.close());
+        this._headerBar.pack_start(this._cancelButton);
+
+        this._hotkeySetting = isMenuHotkey ? 'arcmenu-hotkey' : 'runner-hotkey';
+        this.hotkeys = this._settings.get_strv(this._hotkeySetting);
+
+        const hotkeysPage = new Adw.PreferencesPage();
+        sidebarToolBarView.set_content(hotkeysPage);
 
         const content = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL,
             spacing: 18,
-            margin_top: 12,
-            margin_bottom: 12,
-            margin_start: 12,
-            margin_end: 12,
+            height_request: 200,
         });
-        sidebarToolBarView.set_content(content);
+        const addHotkeyGroup = new Adw.PreferencesGroup();
+        addHotkeyGroup.add(content);
+        hotkeysPage.add(addHotkeyGroup);
+
+        this._currentHotkeysGroup = new Adw.PreferencesGroup({
+            title: _('Active Hotkeys'),
+            visible: this.hotkeys.length > 0,
+        });
+        hotkeysPage.add(this._currentHotkeysGroup);
+
+        this.hotkeys.forEach(hotkey => {
+            this._addHotkeyRow(hotkey);
+        });
 
         const keyLabel = new Gtk.Label({
-            /* TRANSLATORS: %s is replaced with a description of the keyboard shortcut, don't translate/transliterate <b>%s</b>*/
-            label: _('Enter a new shortcut to change <b>%s</b>').format(isMenuHotkey ? _('ArcMenu Hotkey') : _('Standalone Runner Hotkey')),
+            label: _('Type on your keyboard to add a new hotkey.'),
+            css_classes: ['title-4'],
             use_markup: true,
             xalign: .5,
             wrap: true,
@@ -359,16 +377,42 @@ class ArcMenuHotkeyDialog extends Adw.Window {
             valign: Gtk.Align.START,
             vexpand: false,
             visible: false,
+            css_classes: ['title-1'],
             disabled_text: _('Disabled'),
         });
         content.append(shortcutLabel);
 
         const conflictLabel = new Gtk.Label({
-            label: _('Press Esc to cancel or Backspace to disable the keyboard shortcut.'),
+            visible: false,
             use_markup: true,
             wrap: true,
         });
         content.append(conflictLabel);
+
+        const addButton = new Gtk.Button({
+            label: _('Add Hotkey'),
+            halign: Gtk.Align.CENTER,
+            hexpand: false,
+            valign: Gtk.Align.CENTER,
+            vexpand: false,
+            css_classes: ['suggested-action'],
+            visible: false,
+        });
+        addButton.connect('clicked', () => {
+            this._currentHotkeysGroup.visible = true;
+            this._headerBar.show_end_title_buttons = false;
+            this._applyButton.visible = true;
+            this._cancelButton.visible = true;
+            this._addHotkeyRow(this.resultsText);
+            this.hotkeys.push(this.resultsText);
+            this.resultsText = null;
+            shortcutLabel.accelerator = null;
+            shortcutLabel.visible = false;
+            keyboardImage.visible = true;
+            conflictLabel.visible = false;
+            addButton.visible = false;
+        });
+        content.append(addButton);
 
         // Based on code from PaperWM prefsKeybinding.js https://github.com/paperwm/PaperWM
         eventControllerKey.connect('key-pressed', (controller, keyval, keycode, state) => {
@@ -390,11 +434,10 @@ class ArcMenuHotkeyDialog extends Adw.Window {
             if (!isModifier && modmask === 0 && keyvalLower === Gdk.KEY_BackSpace) {
                 this.resultsText = null;
                 shortcutLabel.accelerator = null;
-                shortcutLabel.visible = true;
-                cancelButton.visible = true;
-                keyboardImage.visible = false;
+                shortcutLabel.visible = false;
+                keyboardImage.visible = true;
                 conflictLabel.visible = false;
-                applyButton.visible = true;
+                addButton.visible = false;
                 return Gdk.EVENT_STOP;
             }
 
@@ -410,21 +453,54 @@ class ArcMenuHotkeyDialog extends Adw.Window {
 
             shortcutLabel.accelerator = this.resultsText;
             shortcutLabel.visible = true;
-            cancelButton.visible = true;
             keyboardImage.visible = false;
             if (conflicts) {
                 this.resultsText = null;
-                applyButton.visible = false;
                 conflictLabel.css_classes = ['error'];
                 conflictLabel.visible = true;
+                addButton.visible = false;
                 conflictLabel.label = _('Conflict with <b>%s</b> hotkey').format(`${conflicts.conflict}`);
             } else {
                 conflictLabel.visible = false;
-                applyButton.visible = true;
+                addButton.visible = true;
             }
 
             return Gdk.EVENT_STOP;
         });
+    }
+
+    _addHotkeyRow(hotkey) {
+        const [ok, key, mods] = Gtk.accelerator_parse(hotkey);
+        const shortcutLabel = new Gtk.ShortcutLabel({
+            valign: Gtk.Align.CENTER,
+            vexpand: false,
+            accelerator: ok ? Gtk.accelerator_name(key, mods) : null,
+        });
+
+        const shortcutRow = new Adw.ActionRow();
+        this._currentHotkeysGroup.add(shortcutRow);
+
+        const removeButton = new Gtk.Button({
+            icon_name: 'list-remove-symbolic',
+            halign: Gtk.Align.END,
+            hexpand: false,
+            valign: Gtk.Align.CENTER,
+            vexpand: false,
+            css_classes: ['destructive-action'],
+            visible: true,
+        });
+        removeButton.connect('clicked', () => {
+            const index = this.hotkeys.indexOf(hotkey);
+            this.hotkeys.splice(index, 1);
+            this._currentHotkeysGroup.remove(shortcutRow);
+            this._headerBar.show_end_title_buttons = false;
+            this._applyButton.visible = true;
+            this._cancelButton.visible = true;
+            this._currentHotkeysGroup.visible = this.hotkeys.length > 0;
+        });
+
+        shortcutRow.add_prefix(shortcutLabel);
+        shortcutRow.add_suffix(removeButton);
     }
 
     // Based on code from PaperWM prefsKeybinding.js https://github.com/paperwm/PaperWM
@@ -524,11 +600,15 @@ class ArcMenuHotkeyDialog extends Adw.Window {
         }
 
         const arcMenuHotkeys = {};
-        const [runnerHotkey] = this._settings.get_strv('runner-hotkey');
-        const [menuHotkey] = this._settings.get_strv('arcmenu-hotkey');
 
-        arcMenuHotkeys[menuHotkey] = [_('ArcMenu')];
-        arcMenuHotkeys[runnerHotkey] = [_('Standlone Runner')];
+        const runnerHotkey = this._settings.get_strv('runner-hotkey');
+        runnerHotkey.forEach(hotkey => {
+            arcMenuHotkeys[hotkey] = [_('Standlone Runner')];
+        });
+        const arcmenuHotkey = this._settings.get_strv('arcmenu-hotkey');
+        arcmenuHotkey.forEach(hotkey => {
+            arcMenuHotkeys[hotkey] = [_('ArcMenu')];
+        });
 
         for (const combo in newHotkeyMap) {
             if (arcMenuHotkeys[combo]) {

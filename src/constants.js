@@ -188,6 +188,8 @@ export const EXTRA_LARGE_ICON_SIZE = 35;
 export const MISC_ICON_SIZE = 24;
 
 export const SUPER_L = 'Super_L';
+export const SUPER_R = 'Super_R';
+export const SUPER = 'Super';
 
 export const SECTIONS = [
     'devices',

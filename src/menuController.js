@@ -4,6 +4,7 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Shell from 'gi://Shell';
 
+import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import {InputSourceManager} from 'resource:///org/gnome/shell/ui/status/keyboard.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
@@ -14,6 +15,8 @@ import {MenuButton} from './menuButton.js';
 import * as Theming from './theming.js';
 import {StandaloneRunner} from './standaloneRunner.js';
 import * as Utils from './utils.js';
+
+const [ShellVersion] = Config.PACKAGE_VERSION.split('.').map(s => Number(s));
 
 export const MenuController = class {
     constructor(panelInfo, monitorIndex) {
@@ -300,34 +303,70 @@ export const MenuController = class {
         if (!this.isPrimaryPanel)
             return;
 
-        const [runnerHotkey] = ArcMenuManager.settings.get_strv('runner-hotkey');
-        const [menuHotkey] = ArcMenuManager.settings.get_strv('arcmenu-hotkey');
+        const runnerHotkeys = ArcMenuManager.settings.get_strv('runner-hotkey');
+        const arcmenuHotkeys = ArcMenuManager.settings.get_strv('arcmenu-hotkey');
 
         this._customKeybinding.unbind('ToggleArcMenu');
         this._customKeybinding.unbind('ToggleRunnerMenu');
         this._overrideOverlayKey.disable();
 
-        if (runnerHotkey) {
+        if (arcmenuHotkeys.length > 0) {
+            const superKey = this._getSuperHotkey(arcmenuHotkeys);
+            if (superKey) {
+                this._overrideOverlayKey.enable(superKey, () => this.toggleMenus());
+                this._spliceSuperHotkeys(arcmenuHotkeys);
+            }
+
+            if (arcmenuHotkeys.length > 0)
+                this._customKeybinding.bind('ToggleArcMenu', 'arcmenu-hotkey', () => this.toggleMenus());
+        }
+
+        if (runnerHotkeys.length > 0) {
             if (!this.runnerMenu)
                 this.runnerMenu = new StandaloneRunner();
 
-            if (runnerHotkey === Constants.SUPER_L) {
-                this._overrideOverlayKey.enable(() => this.toggleStandaloneRunner());
-            } else {
-                this._customKeybinding.bind('ToggleRunnerMenu', 'runner-hotkey',
-                    () => this.toggleStandaloneRunner());
+            // ArcMenu has priority of the overlay-key. If already enabled, skip for StandaloneRunner.
+            const superKey = this._getSuperHotkey(runnerHotkeys);
+            if (superKey && !this._overrideOverlayKey.enabled) {
+                this._overrideOverlayKey.enable(superKey, () => this.toggleStandaloneRunner());
+                this._spliceSuperHotkeys(runnerHotkeys);
             }
+
+            if (runnerHotkeys.length > 0)
+                this._customKeybinding.bind('ToggleRunnerMenu', 'runner-hotkey', () => this.toggleStandaloneRunner());
         } else if (this.runnerMenu) {
             this.runnerMenu.destroy();
             this.runnerMenu = null;
         }
+    }
 
-        if (menuHotkey === Constants.SUPER_L) {
-            this._overrideOverlayKey.disable();
-            this._overrideOverlayKey.enable(() => this.toggleMenus());
-        } else if (menuHotkey) {
-            this._customKeybinding.bind('ToggleArcMenu', 'arcmenu-hotkey',
-                () => this.toggleMenus());
+    _spliceSuperHotkeys(hotkeys) {
+        const hasSuperL = hotkeys.includes(Constants.SUPER_L);
+        const hasSuperR = hotkeys.includes(Constants.SUPER_R);
+
+        if (hasSuperL && hasSuperR && ShellVersion >= 47) {
+            hotkeys.splice(hotkeys.indexOf(Constants.SUPER_L), 1);
+            hotkeys.splice(hotkeys.indexOf(Constants.SUPER_R), 1);
+        } else if (hasSuperL || hasSuperR) {
+            const index = hotkeys.findIndex(key => key === Constants.SUPER_L || key === Constants.SUPER_R);
+            if (index !== -1)
+                hotkeys.splice(index, 1);
+        }
+    }
+
+    _getSuperHotkey(hotkeys) {
+        if (hotkeys.includes(Constants.SUPER_L) && hotkeys.includes(Constants.SUPER_R)) {
+            // GNOME 47+ supports using 'Super' as the overlay-key, which allows both Super_L and Super_R
+            if (ShellVersion >= 47)
+                return Constants.SUPER;
+            else
+                return hotkeys.find(key => key === Constants.SUPER_L || key === Constants.SUPER_R);
+        } else if (hotkeys.includes(Constants.SUPER_L)) {
+            return Constants.SUPER_L;
+        } else if (hotkeys.includes(Constants.SUPER_R)) {
+            return Constants.SUPER_R;
+        } else {
+            return false;
         }
     }
 
