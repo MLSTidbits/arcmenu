@@ -125,7 +125,7 @@ export function bindPowerItemVisibility(powerMenuItem) {
  */
 export function launchApp(app, event) {
     const activateOnLaunch = ArcMenuManager.settings.get_boolean('activate-on-launch');
-    const button = event.get_button();
+    const button = event ? event.get_button() : 0;
     const modifiers = event ? event.get_state() : 0;
     const isMiddleButton = button && button === Clutter.BUTTON_MIDDLE;
     const isCtrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK) !== 0;
@@ -3464,7 +3464,7 @@ export class SearchEntry extends St.Entry {
 
         if (!this.isEmpty() && searchResult) {
             if (symbol === Clutter.KEY_Return || symbol === Clutter.KEY_KP_Enter) {
-                searchResult.activate(event);
+                searchResult.activate();
                 return Clutter.EVENT_STOP;
             } else if (symbol === Clutter.KEY_Menu && searchResult.hasContextMenu) {
                 searchResult.popupContextMenu();

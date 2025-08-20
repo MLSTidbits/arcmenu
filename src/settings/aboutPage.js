@@ -86,6 +86,9 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
             const fileContent = GLib.file_get_contents(`${path}/RELEASENOTES.md`)[1];
             const decoder = new TextDecoder('utf-8');
             releaseNotes = decoder.decode(fileContent);
+            releaseNotes = releaseNotes.replace(/^- /gm, '• ')
+                            .replace(/^(\t)- /gm, '$1◦ ')
+                            .replace(/^( {4})- /gm, '$1◦ ');
         } catch {
             releaseNotes = "Failed to load 'What's New' content.";
         }
