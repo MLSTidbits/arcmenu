@@ -344,7 +344,7 @@ export const MenuController = class {
         const hasSuperL = hotkeys.includes(Constants.SUPER_L);
         const hasSuperR = hotkeys.includes(Constants.SUPER_R);
 
-        if (hasSuperL && hasSuperR && ShellVersion >= 47) {
+        if (hasSuperL && hasSuperR && ShellVersion >= 48) {
             hotkeys.splice(hotkeys.indexOf(Constants.SUPER_L), 1);
             hotkeys.splice(hotkeys.indexOf(Constants.SUPER_R), 1);
         } else if (hasSuperL || hasSuperR) {
@@ -356,8 +356,8 @@ export const MenuController = class {
 
     _getSuperHotkey(hotkeys) {
         if (hotkeys.includes(Constants.SUPER_L) && hotkeys.includes(Constants.SUPER_R)) {
-            // GNOME 47+ supports using 'Super' as the overlay-key, which allows both Super_L and Super_R
-            if (ShellVersion >= 47)
+            // GNOME 48+ supports using 'Super' as the overlay-key, which allows both Super_L and Super_R
+            if (ShellVersion >= 48)
                 return Constants.SUPER;
             else
                 return hotkeys.find(key => key === Constants.SUPER_L || key === Constants.SUPER_R);
