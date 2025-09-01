@@ -80,9 +80,9 @@ export class UpdateNotification {
         Main.messageTray.add(source);
 
         const notification = this._getNotification(source, title, body, gicon);
+        notification.urgency = MessageTray.Urgency.CRITICAL;
 
         if (!isMinorRelease) {
-            notification.urgency = MessageTray.Urgency.CRITICAL;
             notification.resident = true;
             notification.addAction(_('Donate'), () => this._openSettingsPage(SettingsPage.DONATE));
         }
