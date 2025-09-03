@@ -1,17 +1,10 @@
-<b><span size="large">Version 66 (2025-05-26)</span></b>
+<b><span size="large">Version 67.0</span></b> (2025-09-03)
 
-- Add ArcMenu Layout default view tweak 'Pinned and Frequent Apps'.
-- Add AZ Layout default view tweaks. Pinned or Frequent Apps.
-- Add option to hide search bar when empty.
-- Update command to launch User Settings for GNOME Shell versions >= 46.
-- Add option to activate app on launch.
-- Set 'metadata::trusted: true' when creating desktop shortcuts.
-    - Allows launching the app from desktop without any further modifications.
+- Add support for multiple hotkeys for ArcMenu and Standalone Runner.
+- Settings: Increase the maximum value of width options for the menu size.
+- Update Notifier: only show donation option on major releases.
 
 Bug Fixes: 
 
-- Fix bug where apps assigned to multiple categories only appeared in the first category loaded.
-- Hide category menu item if it contains no apps.
-- Fix bug with Dash to Panel incorrectly hiding when revealed from ArcMenu hotkey when intellihide is enabled.
-- Insider, Windows layouts: fix buggy interaction with sidebar menu and ArcMenu when Override Menu Location enabled.
-- iconGrid: fix app icon position bug when using a RTL Cutter.TextDirection
+- Fix bug causing error logs to appear when activating search results with enter key.
+- Fix rare bug causing empty categories if duplicate desktop files contained within the same category.
