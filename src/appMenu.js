@@ -237,10 +237,9 @@ export const AppContextMenu = class ArcMenuAppContextMenu extends AppMenu {
     _updateDesktopShortcutItem() {
         const isDesktopActive = this.isDesktopActive();
 
-        if (!this._app || !isDesktopActive) {
-            this._createDesktopShortcutItem.visible = false;
+        if (!this._app || !isDesktopActive)
             return;
-        }
+
         this._createDesktopShortcutItem.visible = true;
 
         const [exists] = this.getDesktopShortcut();
