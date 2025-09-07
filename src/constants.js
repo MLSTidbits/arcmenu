@@ -4,6 +4,11 @@ const {gettext: _} = domain('arcmenu');
 export const DASH_TO_PANEL_UUID = 'dash-to-panel@jderose9.github.com';
 export const AZTASKBAR_UUID = 'aztaskbar@aztaskbar.gitlab.com';
 
+export const ClutterAction = {
+    CLICK: 0,
+    PAN: 1,
+};
+
 export const SearchbarLocation = {
     BOTTOM: 0,
     TOP: 1,

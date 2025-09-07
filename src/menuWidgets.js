@@ -200,24 +200,37 @@ export class BaseMenuItem extends St.BoxLayout {
         if (params.reactive && params.hover)
             this.bind_property('hover', this, 'active', GObject.BindingFlags.SYNC_CREATE);
 
-        this._panAction = new Clutter.PanAction({interpolate: true});
-        this._panAction.connect('pan', this._onPan.bind(this));
-        this.add_action(this._panAction);
+        const {panAction} = Utils.createAction({
+            actor: this,
+            actionType: Constants.ClutterAction.PAN,
+            actionParams: {interpolate: true},
+            actionArgs: {onPan: this._onPan.bind(this)},
+        });
+        this._panAction = panAction;
 
-        this._clickAction = new Clutter.ClickAction({
-            enabled: this._activatable,
+        const {clickAction} = Utils.createAction({
+            actor: this,
+            actionType: Constants.ClutterAction.CLICK,
+            actionParams: {enabled: this._activatable},
+            actionArgs: {
+                onClick: this._onClicked.bind(this),
+                onLongPress: this._onLongPress.bind(this),
+                onPressed: this._onPressed.bind(this),
+                onRightClick: this.popupMenu.bind(this),
+            },
         });
-        this._clickAction.connect('clicked', this._onClicked.bind(this));
-        this._clickAction.connect('long-press', this._onLongPress.bind(this));
-        this._clickAction.connect('notify::pressed', () => {
-            if (this._clickAction.pressed)
-                this.add_style_pseudo_class('active');
-            else
-                this.remove_style_pseudo_class('active');
-        });
-        this.add_action(this._clickAction);
+        this._clickAction = clickAction;
 
         this.connect('destroy', () => this._onDestroy());
+    }
+
+    popupMenu() {
+        if (this.hasContextMenu) {
+            this.popupContextMenu();
+            this.add_style_pseudo_class('active');
+        } else {
+            this.remove_style_pseudo_class('active');
+        }
     }
 
     _onPan(action) {
@@ -228,7 +241,8 @@ export class BaseMenuItem extends St.BoxLayout {
             parent = parent.get_parent();
         }
 
-        this._clickAction.release();
+        if (ShellVersion < 49)
+            this._clickAction.release();
 
         return this._menuLayout._onPan(action, parent);
     }
@@ -241,11 +255,8 @@ export class BaseMenuItem extends St.BoxLayout {
             this._menuLayout.grab_key_focus();
             this.remove_style_pseudo_class('active');
             this.activate(Clutter.get_current_event());
-        } else if (action.get_button() === Clutter.BUTTON_SECONDARY) {
-            if (this.hasContextMenu)
-                this.popupContextMenu();
-            else
-                this.remove_style_pseudo_class('active');
+        } else if (action.get_button() === Clutter.BUTTON_SECONDARY && ShellVersion < 49) {
+            this.popupMenu();
         } else if (action.get_button() === 8) {
             const backButton = this._menuLayout.backButton;
             if (backButton && backButton.visible) {
@@ -257,7 +268,19 @@ export class BaseMenuItem extends St.BoxLayout {
         }
     }
 
-    _onLongPress(action, theActor, state) {
+    _onPressed() {
+        if (this._clickAction.pressed)
+            this.add_style_pseudo_class('active');
+        else
+            this.remove_style_pseudo_class('active');
+    }
+
+    _onLongPress(action, actor, state) {
+        if (ShellVersion >= 49) {
+            this.popupMenu();
+            return true;
+        }
+
         const isPrimaryOrTouch = action.get_button() === Clutter.BUTTON_PRIMARY || action.get_button() === 0;
         if (state === Clutter.LongPressState.QUERY)
             return isPrimaryOrTouch && this._menuLayout.arcMenu.isOpen && this.hasContextMenu;
@@ -1534,13 +1557,16 @@ export class DraggableMenuItem extends BaseMenuItem {
         });
 
         if (isDraggable) {
-            this.remove_action(this._panAction);
-            this.remove_action(this._clickAction);
-
-            this._panAction = null;
-
             this._draggable = DND.makeDraggable(this, {timeoutThreshold: 400});
-            this._draggable.addClickAction(this._clickAction);
+
+            if (ShellVersion < 49) {
+                this.remove_action(this._panAction);
+                this.remove_action(this._clickAction);
+
+                this._panAction = null;
+                this._draggable.addClickAction(this._clickAction);
+            }
+
             this._draggable._animateDragEnd = eventTime => {
                 this._draggable._animationInProgress = true;
                 this._draggable._onAnimationComplete(this._draggable._dragActor, eventTime);
@@ -1832,7 +1858,7 @@ export class DraggableMenuItem extends BaseMenuItem {
     }
 
     cancelActions() {
-        if (this._draggable)
+        if (this._draggable && ShellVersion < 49)
             this._draggable.fakeRelease();
 
         DND.removeDragMonitor(this._hoveringDragMonitor);

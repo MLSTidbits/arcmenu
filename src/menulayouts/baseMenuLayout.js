@@ -1262,10 +1262,12 @@ export class BaseMenuLayout extends St.BoxLayout {
                 child.z_position = 1;
         });
 
-        const panAction = new Clutter.PanAction({interpolate: true});
-        panAction.connect('pan', action => this._onPan(action, scrollBox));
-        this.add_action(panAction);
-
+        Utils.createAction({
+            actor: scrollBox,
+            actionType: Constants.ClutterAction.PAN,
+            actionParams: {interpolate: true},
+            actionArgs: {onPan: action => this._onPan(action, scrollBox)},
+        });
         return scrollBox;
     }
 
@@ -1277,9 +1279,14 @@ export class BaseMenuLayout extends St.BoxLayout {
         if (this._menuButton.tooltip.visible)
             this._menuButton.tooltip.hide(true);
 
-        const [dist_, dx_, dy] = action.get_motion_delta(0);
+        let delta;
+        if (action.get_delta)
+            delta = action.get_delta().get_y();
+        else
+            [, , delta] = action.get_motion_delta(0);
+
         const {vadjustment} = Utils.getScrollViewAdjustments(scrollBox);
-        vadjustment.value -=  dy;
+        vadjustment.value -= delta;
         return false;
     }
 
