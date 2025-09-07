@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-31 09:47-0400\n"
+"POT-Creation-Date: 2025-09-06 19:18-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/appMenu.js:63 src/appMenu.js:294
+#: src/appMenu.js:63 src/appMenu.js:293
 msgid "Pin to ArcMenu"
 msgstr ""
 
-#: src/appMenu.js:92 src/appMenu.js:249
+#: src/appMenu.js:92 src/appMenu.js:248
 msgid "Create Desktop Shortcut"
 msgstr ""
 
-#: src/appMenu.js:248
+#: src/appMenu.js:247
 msgid "Delete Desktop Shortcut"
 msgstr ""
 
-#: src/appMenu.js:257 src/appMenu.js:294
+#: src/appMenu.js:256 src/appMenu.js:293
 msgid "Unpin from ArcMenu"
 msgstr ""
 
-#: src/appMenu.js:333
+#: src/appMenu.js:332
 msgid "Open Folder Location"
 msgstr ""
 
@@ -109,7 +109,7 @@ msgid "Switch User"
 msgstr ""
 
 #: src/constants.js:419 src/settings/aboutPage.js:21
-#: src/settings/donatePage.js:17 src/settings/generalPage.js:610
+#: src/settings/donatePage.js:17 src/settings/generalPage.js:609
 #: src/settings/menuButtonPage.js:211
 msgid "ArcMenu"
 msgstr ""
@@ -397,12 +397,12 @@ msgstr ""
 msgid "Rename %s folder"
 msgstr ""
 
-#: src/menulayouts/pop.js:896 src/settings/generalPage.js:320
+#: src/menulayouts/pop.js:896 src/settings/generalPage.js:286
 #: src/settings/menuButtonPage.js:532
 msgid "Cancel"
 msgstr ""
 
-#: src/menulayouts/pop.js:904 src/settings/generalPage.js:308
+#: src/menulayouts/pop.js:904 src/settings/generalPage.js:272
 #: src/settings/menuSettings/listPinnedPage.js:653
 #: src/settings/menuSettings/visualSettings.js:372
 msgid "Apply"
@@ -665,110 +665,118 @@ msgid ""
 "%s going. It is truly appreciated!"
 msgstr ""
 
-#: src/settings/generalPage.js:33
+#: src/settings/generalPage.js:32
 msgid "General"
 msgstr ""
 
-#: src/settings/generalPage.js:40
+#: src/settings/generalPage.js:39
 msgid "Panel Display Options"
 msgstr ""
 
-#: src/settings/generalPage.js:53
+#: src/settings/generalPage.js:52
 msgid "Show Activities Button"
 msgstr ""
 
-#: src/settings/generalPage.js:54
+#: src/settings/generalPage.js:53
 msgid "Dash to Panel may conflict with this setting"
 msgstr ""
 
-#: src/settings/generalPage.js:62 src/settings/generalPage.js:88
+#: src/settings/generalPage.js:61 src/settings/generalPage.js:87
 #: src/settings/menuSettings/layoutTweaksPage.js:683
 msgid "Left"
 msgstr ""
 
-#: src/settings/generalPage.js:63 src/settings/generalPage.js:89
+#: src/settings/generalPage.js:62 src/settings/generalPage.js:88
 msgid "Center"
 msgstr ""
 
-#: src/settings/generalPage.js:64 src/settings/generalPage.js:90
+#: src/settings/generalPage.js:63 src/settings/generalPage.js:89
 #: src/settings/menuSettings/layoutTweaksPage.js:684
 msgid "Right"
 msgstr ""
 
-#: src/settings/generalPage.js:66 src/settings/menuButtonPage.js:126
+#: src/settings/generalPage.js:65 src/settings/menuButtonPage.js:126
 msgid "Position in Panel"
 msgstr ""
 
-#: src/settings/generalPage.js:96
+#: src/settings/generalPage.js:95
 msgid "Menu Alignment"
 msgstr ""
 
-#: src/settings/generalPage.js:114
+#: src/settings/generalPage.js:113
 msgid "Display ArcMenu on all Panels"
 msgstr ""
 
-#: src/settings/generalPage.js:115
+#: src/settings/generalPage.js:114
 msgid "Dash to Panel or App Icons Taskbar extension required"
 msgstr ""
 
-#: src/settings/generalPage.js:131
+#: src/settings/generalPage.js:130
 msgid "Always Prefer Top Panel"
 msgstr ""
 
-#: src/settings/generalPage.js:132
+#: src/settings/generalPage.js:131
 msgid "Useful with Dash to Panel setting 'Keep original gnome-shell top panel'"
 msgstr ""
 
-#: src/settings/generalPage.js:146
+#: src/settings/generalPage.js:145
 msgid "General Settings"
 msgstr ""
 
-#: src/settings/generalPage.js:150 src/settings/generalPage.js:274
+#: src/settings/generalPage.js:149
 msgid "ArcMenu Hotkey"
 msgstr ""
 
-#: src/settings/generalPage.js:151
+#: src/settings/generalPage.js:150
 msgid "Standalone Runner Menu"
 msgstr ""
 
-#: src/settings/generalPage.js:164
+#: src/settings/generalPage.js:163
 msgid "Hide Overview on Startup"
 msgstr ""
 
-#: src/settings/generalPage.js:212
-msgid "Hotkey Options"
-msgstr ""
-
-#: src/settings/generalPage.js:228 src/settings/generalPage.js:381
+#: src/settings/generalPage.js:213 src/settings/generalPage.js:378
 msgid "Disabled"
 msgstr ""
 
-#: src/settings/generalPage.js:258
-msgid "Open on Primary Monitor"
+#: src/settings/generalPage.js:234
+msgid "ArcMenu Hotkeys"
 msgstr ""
 
-#: src/settings/generalPage.js:274
-msgid "Standalone Runner Hotkey"
+#: src/settings/generalPage.js:234
+msgid "Standalone Runner Hotkeys"
 msgstr ""
 
-#: src/settings/generalPage.js:344
+#: src/settings/generalPage.js:307
 msgid "Active Hotkeys"
 msgstr ""
 
-#: src/settings/generalPage.js:354
+#: src/settings/generalPage.js:313
+msgid "Hotkey Options"
+msgstr ""
+
+#: src/settings/generalPage.js:326
+msgid "Super Hotkeys Override GNOME Overview Hotkey"
+msgstr ""
+
+#: src/settings/generalPage.js:340
+msgid "Open on Primary Monitor"
+msgstr ""
+
+#: src/settings/generalPage.js:351
 msgid "Type on your keyboard to add a new hotkey."
 msgstr ""
 
-#: src/settings/generalPage.js:393
+#: src/settings/generalPage.js:390
 msgid "Add Hotkey"
 msgstr ""
 
-#: src/settings/generalPage.js:462
+#: src/settings/generalPage.js:457
 #, javascript-format
 msgid "Conflict with <b>%s</b> hotkey"
 msgstr ""
 
-#: src/settings/generalPage.js:606
+#: src/settings/generalPage.js:605
 msgid "Standlone Runner"
 msgstr ""
 

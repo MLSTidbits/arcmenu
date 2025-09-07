@@ -6,7 +6,6 @@ import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 
 import * as Constants from '../constants.js';
-import * as PW from '../prefsWidgets.js';
 
 import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
@@ -170,8 +169,6 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
 
     _createExpanderRow(title, isMenuHotkey) {
         const hotkeySetting = isMenuHotkey ? 'arcmenu-hotkey' : 'runner-hotkey';
-        const primaryMonitorSetting = isMenuHotkey ? 'hotkey-open-primary-monitor'
-            : 'runner-hotkey-open-primary-monitor';
         const accelerator = this._settings.get_strv(hotkeySetting);
         const hotkeyString = this.acceleratorToLabel(accelerator);
         const hotkeyLabel = new Gtk.Label({
@@ -201,18 +198,6 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
             });
         });
 
-        const customizeButton = new Gtk.Button({
-            icon_name: 'applications-system-symbolic',
-            css_classes: ['flat'],
-            valign: Gtk.Align.CENTER,
-        });
-        customHotkeyRow.add_prefix(customizeButton);
-
-        customizeButton.connect('clicked', () => {
-            const windowPreviewOptions = new HotkeyOptionsDialog(this._settings, _('Hotkey Options'), this.get_root(), primaryMonitorSetting);
-            windowPreviewOptions.show();
-        });
-
         const editButton = new Gtk.Image({
             icon_name: 'document-edit-symbolic',
             valign: Gtk.Align.CENTER,
@@ -239,31 +224,6 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
     }
 });
 
-var HotkeyOptionsDialog = GObject.registerClass(
-class ArcMenuHotkeyOptionsDialog extends PW.DialogWindow {
-    _init(settings, title, parent, primaryMonitorSetting) {
-        super._init(title, parent);
-        this.set_default_size(460, 150);
-        this.search_enabled = false;
-        this.resizable = false;
-
-        const primaryMonitorSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: settings.get_boolean(primaryMonitorSetting),
-        });
-        primaryMonitorSwitch.connect('notify::active', widget => {
-            settings.set_boolean(primaryMonitorSetting, widget.get_active());
-        });
-        const primaryMonitorRow = new Adw.ActionRow({
-            title: _('Open on Primary Monitor'),
-            activatable_widget: primaryMonitorSwitch,
-        });
-        primaryMonitorRow.add_suffix(primaryMonitorSwitch);
-
-        this.pageGroup.add(primaryMonitorRow);
-    }
-});
-
 var HotkeyDialog = GObject.registerClass({
     Signals: {
         'response': {param_types: [GObject.TYPE_INT]},
@@ -271,7 +231,7 @@ var HotkeyDialog = GObject.registerClass({
 },
 class ArcMenuHotkeyDialog extends Adw.Window {
     _init(isMenuHotkey, settings, parent) {
-        const title = isMenuHotkey ? _('ArcMenu Hotkey') : _('Standalone Runner Hotkey');
+        const title = isMenuHotkey ? _('ArcMenu Hotkeys') : _('Standalone Runner Hotkeys');
         super._init({
             modal: true,
             title,
@@ -281,7 +241,11 @@ class ArcMenuHotkeyDialog extends Adw.Window {
         this._settings = settings;
         this._parentWindow = parent.get_root();
 
-        this.set_default_size(560, 575);
+        this.set_default_size(560, 585);
+
+        const primaryMonitorSetting = isMenuHotkey ? 'hotkey-open-primary-monitor' : 'runner-hotkey-open-primary-monitor';
+        const hotkeySetting = isMenuHotkey ? 'arcmenu-hotkey' : 'runner-hotkey';
+        this.hotkeys = this._settings.get_strv(hotkeySetting);
 
         const eventControllerKey = new Gtk.EventControllerKey();
         this.add_controller(eventControllerKey);
@@ -312,6 +276,8 @@ class ArcMenuHotkeyDialog extends Adw.Window {
             visible: false,
         });
         this._applyButton.connect('clicked', () => {
+            this._settings.set_boolean(`${hotkeySetting}-overlay-key-enabled`, useAsOverlayKeySwitch.get_active());
+            this._settings.set_boolean(primaryMonitorSetting, primaryMonitorSwitch.get_active());
             this.emit('response', Gtk.ResponseType.APPLY);
         });
         this._headerBar.pack_end(this._applyButton);
@@ -324,9 +290,6 @@ class ArcMenuHotkeyDialog extends Adw.Window {
         });
         this._cancelButton.connect('clicked', () => this.close());
         this._headerBar.pack_start(this._cancelButton);
-
-        this._hotkeySetting = isMenuHotkey ? 'arcmenu-hotkey' : 'runner-hotkey';
-        this.hotkeys = this._settings.get_strv(this._hotkeySetting);
 
         const hotkeysPage = new Adw.PreferencesPage();
         sidebarToolBarView.set_content(hotkeysPage);
@@ -345,6 +308,40 @@ class ArcMenuHotkeyDialog extends Adw.Window {
             visible: this.hotkeys.length > 0,
         });
         hotkeysPage.add(this._currentHotkeysGroup);
+
+        const hotkeyOptionsGroup = new Adw.PreferencesGroup({
+            title: _('Hotkey Options'),
+        });
+        hotkeysPage.add(hotkeyOptionsGroup);
+
+        const useAsOverlayKeySwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+            active: this._settings.get_boolean(`${hotkeySetting}-overlay-key-enabled`),
+        });
+        useAsOverlayKeySwitch.connect('notify::active', () => {
+            this._toggleHeaderBarButtons(true);
+        });
+
+        const useAsOverlayKeyRow = new Adw.ActionRow({
+            title: _('Super Hotkeys Override GNOME Overview Hotkey'),
+            activatable_widget: useAsOverlayKeySwitch,
+        });
+        useAsOverlayKeyRow.add_suffix(useAsOverlayKeySwitch);
+        hotkeyOptionsGroup.add(useAsOverlayKeyRow);
+
+        const primaryMonitorSwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+            active: settings.get_boolean(primaryMonitorSetting),
+        });
+        primaryMonitorSwitch.connect('notify::active', () => {
+            this._toggleHeaderBarButtons(true);
+        });
+        const primaryMonitorRow = new Adw.ActionRow({
+            title: _('Open on Primary Monitor'),
+            activatable_widget: primaryMonitorSwitch,
+        });
+        primaryMonitorRow.add_suffix(primaryMonitorSwitch);
+        hotkeyOptionsGroup.add(primaryMonitorRow);
 
         this.hotkeys.forEach(hotkey => {
             this._addHotkeyRow(hotkey);
@@ -400,9 +397,7 @@ class ArcMenuHotkeyDialog extends Adw.Window {
         });
         addButton.connect('clicked', () => {
             this._currentHotkeysGroup.visible = true;
-            this._headerBar.show_end_title_buttons = false;
-            this._applyButton.visible = true;
-            this._cancelButton.visible = true;
+            this._toggleHeaderBarButtons(true);
             this._addHotkeyRow(this.resultsText);
             this.hotkeys.push(this.resultsText);
             this.resultsText = null;
@@ -444,6 +439,10 @@ class ArcMenuHotkeyDialog extends Adw.Window {
             // Remove CapsLock
             modmask &= ~Gdk.ModifierType.LOCK_MASK;
 
+            // Remove SUPER_MASK modifier if keyval is Super_L or Super_R
+            if (keyval === Gdk.KEY_Super_L || keyval === Gdk.KEY_Super_R)
+                modmask &= ~Gdk.ModifierType.SUPER_MASK;
+
             const combo = {mods: modmask, keycode, keyval: keyvalLower};
             if (!this._isValidBinding(combo))
                 return Gdk.EVENT_STOP;
@@ -467,6 +466,12 @@ class ArcMenuHotkeyDialog extends Adw.Window {
 
             return Gdk.EVENT_STOP;
         });
+    }
+
+    _toggleHeaderBarButtons(bool) {
+        this._headerBar.show_end_title_buttons = !bool;
+        this._applyButton.visible = bool;
+        this._cancelButton.visible = bool;
     }
 
     _addHotkeyRow(hotkey) {
@@ -493,9 +498,7 @@ class ArcMenuHotkeyDialog extends Adw.Window {
             const index = this.hotkeys.indexOf(hotkey);
             this.hotkeys.splice(index, 1);
             this._currentHotkeysGroup.remove(shortcutRow);
-            this._headerBar.show_end_title_buttons = false;
-            this._applyButton.visible = true;
-            this._cancelButton.visible = true;
+            this._toggleHeaderBarButtons(true);
             this._currentHotkeysGroup.visible = this.hotkeys.length > 0;
         });
 

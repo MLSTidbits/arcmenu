@@ -506,9 +506,17 @@
       <default>['Super_L']</default>
       <summary>Keybind to open ArcMenu</summary>
     </key>
+    <key name="arcmenu-hotkey-overlay-key-enabled" type="b">
+      <default>true</default>
+      <summary>Override the overlay-key for ArcMenu hotkey</summary>
+    </key>
     <key name="runner-hotkey" type="as">
       <default>[]</default>
       <summary>Keybind to open standalone runner menu. Setting a keybind enables the standalone runner menu.</summary>
+    </key>
+    <key name="runner-hotkey-overlay-key-enabled" type="b">
+      <default>false</default>
+      <summary>Override the overlay-key for the Standalone Runner hotkey</summary>
     </key>
     <key type="b" name="hotkey-open-primary-monitor">
       <default>false</default>
