@@ -37,7 +37,7 @@ const INDICATOR_ICON_SIZE = 18;
 const USER_AVATAR_SIZE = 28;
 
 const TOOLTIP_SHOW_TIME = 150;
-const TOOLTIP_HIDE_TIME = 100;
+const TOOLTIP_HIDE_TIME = 150;
 
 const [ShellVersion] = Config.PACKAGE_VERSION.split('.').map(s => Number(s));
 
@@ -244,7 +244,18 @@ export class BaseMenuItem extends St.BoxLayout {
         if (ShellVersion < 49)
             this._clickAction.release();
 
-        return this._menuLayout._onPan(action, parent);
+        this._menuButton.clearTooltipShowingId();
+        this._menuButton.hideTooltip(true);
+
+        let delta;
+        if (action.get_delta)
+            delta = action.get_delta().get_y();
+        else
+            [, , delta] = action.get_motion_delta(0);
+
+        const {vadjustment} = Utils.getScrollViewAdjustments(parent);
+        vadjustment.value -= delta;
+        return false;
     }
 
     _onClicked(action) {
@@ -378,10 +389,9 @@ export class BaseMenuItem extends St.BoxLayout {
             let {description} = this;
             if (this._app)
                 description = this._app.get_description();
-            this._menuButton.tooltip.showTooltip(this, this.tooltipLocation, tooltipTitle,
-                description, this._displayType ? this._displayType : -1);
+            this._menuButton.showTooltip(this, this.tooltipLocation, tooltipTitle, description, this._displayType ?? -1);
         } else if (!this.hover || this._menuLayout.blockHoverState) {
-            this._menuButton.tooltip.hide();
+            this._menuButton.hideTooltip();
         }
     }
 
@@ -446,9 +456,6 @@ export class BaseMenuItem extends St.BoxLayout {
     }
 
     _onDestroy() {
-        if (this._menuButton.tooltip && this._menuButton.tooltip.sourceActor === this)
-            this._menuButton.tooltip.hide(true);
-
         this.contextMenu = null;
         this.isDestroyed = true;
         this._menuButton = null;
@@ -616,26 +623,33 @@ export class Tooltip extends St.Label {
         this.connect('destroy', () => this._onDestroy());
     }
 
-    showTooltip(sourceActor, location, titleLabel, description, displayType) {
+    setTooltipData(sourceActor, location, titleLabel, description, displayType) {
         if (!sourceActor)
             return;
 
         if (this.sourceActor === sourceActor) {
-            this._showTimeout(titleLabel, description, displayType);
+            this._setTooltipText(titleLabel, description, displayType);
             return;
         }
 
+        this.sourceActor?.disconnectObject(this);
         this.sourceActor = sourceActor;
+        this.sourceActor.connectObject('destroy', () => {
+            if (this.sourceActor === sourceActor) {
+                this._menuButton.clearTooltipShowingId();
+                this.hide();
+            }
+        }, this);
         this.location = location;
 
-        this._showTimeout(titleLabel, description, displayType);
+        this._setTooltipText(titleLabel, description, displayType);
     }
 
     disableTooltips() {
         this._useTooltips = !ArcMenuManager.settings.get_boolean('disable-tooltips');
     }
 
-    _setToolTipText(titleLabel, description, displayType) {
+    _setTooltipText(titleLabel, description, displayType) {
         let isEllipsized, titleText;
         if (titleLabel instanceof St.Label) {
             const lbl = titleLabel.clutter_text;
@@ -660,104 +674,78 @@ export class Tooltip extends St.Label {
         } else if (displayType === Constants.DisplayType.BUTTON) {
             this.text = titleText ?? '';
         }
-
-        return !!this.text;
     }
 
-    _showTimeout(titleLabel, description, displayType) {
-        if (this._useTooltips) {
-            this._menuButton.tooltipShowingID = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 750, () => {
-                const shouldShow = this._setToolTipText(titleLabel, description, displayType);
-
-                if (!shouldShow) {
-                    this._menuButton.tooltipShowingID = null;
-                    return GLib.SOURCE_REMOVE;
-                }
-
-                this._show();
-                this._menuButton.tooltipShowing = true;
-                this._menuButton.tooltipShowingID = null;
-                return GLib.SOURCE_REMOVE;
-            });
-        }
-    }
-
-    _show() {
-        if (!this.sourceActor)
+    show() {
+        if (!this.sourceActor || !this.text || !this._useTooltips)
             return;
-        if (this._useTooltips) {
-            this.opacity = 0;
-            this.show();
 
-            const [stageX, stageY] = this.sourceActor.get_transformed_position();
+        this.opacity = 0;
+        super.show();
 
-            const itemWidth  = this.sourceActor.allocation.x2 - this.sourceActor.allocation.x1;
-            const itemHeight = this.sourceActor.allocation.y2 - this.sourceActor.allocation.y1;
+        const [stageX, stageY] = this.sourceActor.get_transformed_position();
 
-            const labelWidth = this.get_width();
-            const labelHeight = this.get_height();
+        const itemWidth  = this.sourceActor.allocation.x2 - this.sourceActor.allocation.x1;
+        const itemHeight = this.sourceActor.allocation.y2 - this.sourceActor.allocation.y1;
 
-            let x, y;
-            const gap = 5;
+        const labelWidth = this.get_width();
+        const labelHeight = this.get_height();
 
-            switch (this.location) {
-            case Constants.TooltipLocation.BOTTOM_CENTERED:
-                y = stageY + itemHeight + gap;
-                x = stageX + Math.floor((itemWidth - labelWidth) / 2);
-                break;
-            case Constants.TooltipLocation.TOP_CENTERED:
-                y = stageY - labelHeight - gap;
-                x = stageX + Math.floor((itemWidth - labelWidth) / 2);
-                break;
-            case Constants.TooltipLocation.BOTTOM:
-            default:
-                y = stageY + itemHeight + gap;
-                x = stageX + gap;
-                break;
-            }
+        let x, y;
+        const gap = 5;
 
-            // keep the label inside the screen
-            const monitor = Main.layoutManager.findMonitorForActor(this.sourceActor);
-            if (x - monitor.x < gap)
-                x += monitor.x - x + gap;
-            else if (x + labelWidth > monitor.x + monitor.width - gap)
-                x -= x + labelWidth - (monitor.x + monitor.width) + gap;
-            else if (y - monitor.y < gap)
-                y += monitor.y - y + gap;
-            else if (y + labelHeight > monitor.y + monitor.height - gap)
-                y -= y + labelHeight - (monitor.y + monitor.height) + gap;
-
-            this.set_position(x, y);
-            this.ease({
-                opacity: 255,
-                duration: TOOLTIP_SHOW_TIME,
-                mode: Clutter.AnimationMode.EASE_OUT_QUAD,
-            });
+        switch (this.location) {
+        case Constants.TooltipLocation.BOTTOM_CENTERED:
+            y = stageY + itemHeight + gap;
+            x = stageX + Math.floor((itemWidth - labelWidth) / 2);
+            break;
+        case Constants.TooltipLocation.TOP_CENTERED:
+            y = stageY - labelHeight - gap;
+            x = stageX + Math.floor((itemWidth - labelWidth) / 2);
+            break;
+        case Constants.TooltipLocation.BOTTOM:
+        default:
+            y = stageY + itemHeight + gap;
+            x = stageX + gap;
+            break;
         }
+
+        // keep the label inside the screen
+        const monitor = Main.layoutManager.findMonitorForActor(this.sourceActor);
+        if (x - monitor.x < gap)
+            x += monitor.x - x + gap;
+        else if (x + labelWidth > monitor.x + monitor.width - gap)
+            x -= x + labelWidth - (monitor.x + monitor.width) + gap;
+        else if (y - monitor.y < gap)
+            y += monitor.y - y + gap;
+        else if (y + labelHeight > monitor.y + monitor.height - gap)
+            y -= y + labelHeight - (monitor.y + monitor.height) + gap;
+
+        this.set_position(x, y);
+        this.ease({
+            opacity: 255,
+            duration: TOOLTIP_SHOW_TIME,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+        });
     }
 
     hide(instantHide) {
-        if (this._useTooltips) {
-            if (this._menuButton.tooltipShowingID) {
-                GLib.source_remove(this._menuButton.tooltipShowingID);
-                this._menuButton.tooltipShowingID = null;
-            }
-            this.sourceActor = null;
-            this.ease({
-                opacity: 0,
-                duration: instantHide ? 0 : TOOLTIP_HIDE_TIME,
-                mode: Clutter.AnimationMode.EASE_OUT_QUAD,
-                onComplete: () => super.hide(),
-            });
-        }
+        if (!this._useTooltips)
+            return;
+
+        this._menuButton.clearTooltipShowingId();
+        this.sourceActor?.disconnectObject(this);
+        this.sourceActor = null;
+        this.ease({
+            opacity: 0,
+            duration: instantHide ? 0 : TOOLTIP_HIDE_TIME,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            onComplete: () => super.hide(),
+        });
     }
 
     _onDestroy() {
-        if (this._menuButton.tooltipShowingID) {
-            GLib.source_remove(this._menuButton.tooltipShowingID);
-            this._menuButton.tooltipShowingID = null;
-        }
-
+        this._menuButton.clearTooltipShowingId();
         global.stage.remove_child(this);
         this.sourceActor = null;
         this._menuButton = null;
@@ -972,15 +960,8 @@ export class LeaveButton extends BaseMenuItem {
         this.leaveMenu.connect('open-state-changed', (menu, open) => {
             if (open) {
                 this.add_style_pseudo_class('active');
-                if (this._menuButton.tooltipShowingID) {
-                    GLib.source_remove(this._menuButton.tooltipShowingID);
-                    this._menuButton.tooltipShowingID = null;
-                    this._menuButton.tooltipShowing = false;
-                }
-                if (this.tooltip) {
-                    this.tooltip.hide();
-                    this._menuButton.tooltipShowing = false;
-                }
+                this._menuButton.clearTooltipShowingId();
+                this._menuButton.hideTooltip();
             } else {
                 this.remove_style_pseudo_class('active');
                 this.active = false;
@@ -1370,11 +1351,8 @@ export class ShortcutMenuItem extends BaseMenuItem {
             else if (this.folderPath)
                 this.contextMenu.setFolderPath(this.folderPath);
         }
-        if (this.contextMenu !== undefined) {
-            if (this.tooltip !== undefined)
-                this.tooltip.hide();
+        if (this.contextMenu !== undefined)
             this.contextMenu.open(BoxPointer.PopupAnimation.FULL);
-        }
     }
 
     activate(event) {
@@ -1498,19 +1476,15 @@ export class AvatarMenuIcon extends St.Bin {
     }
 
     _onHover() {
-        if (this.hover) {
-            this._menuButton.tooltip.showTooltip(this, this.tooltipLocation, GLib.get_real_name(),
-                null, Constants.DisplayType.BUTTON);
-        } else {
-            this._menuButton.tooltip.hide();
-        }
+        if (this.hover)
+            this._menuButton.showTooltip(this, this.tooltipLocation, GLib.get_real_name(), null, Constants.DisplayType.BUTTON);
+        else
+            this._menuButton.hideTooltip();
     }
 
     _onUserChanged() {
         if (this._user.is_loaded) {
             this.label.set_text(this._user.get_real_name());
-            if (this.tooltip)
-                this.tooltip.titleLabel.text = this._user.get_real_name();
 
             let iconFile = this._user.get_icon_file();
             if (iconFile && !GLib.file_test(iconFile, GLib.FileTest.EXISTS))
@@ -1585,15 +1559,8 @@ export class DraggableMenuItem extends BaseMenuItem {
 
     _onDragBegin() {
         this.isDragging = true;
-        if (this._menuButton.tooltipShowingID) {
-            GLib.source_remove(this._menuButton.tooltipShowingID);
-            this._menuButton.tooltipShowingID = null;
-            this._menuButton.tooltipShowing = false;
-        }
-        if (this.tooltip) {
-            this.tooltip.hide();
-            this._menuButton.tooltipShowing = false;
-        }
+        this._menuButton.clearTooltipShowingId();
+        this._menuButton.hideTooltip();
 
         if (this.contextMenu && this.contextMenu.isOpen)
             this.contextMenu.toggle();
@@ -2065,15 +2032,9 @@ export class PinnedAppsFolderMenuItem extends DraggableMenuItem {
     }
 
     _loadPinnedApps() {
-        if (this._menuButton.tooltipShowingID) {
-            GLib.source_remove(this._menuButton.tooltipShowingID);
-            this._menuButton.tooltipShowingID = null;
-            this._menuButton.tooltipShowing = false;
-        }
-        if (this.tooltip) {
-            this.tooltip.hide();
-            this._menuButton.tooltipShowing = false;
-        }
+        this._menuButton.clearTooltipShowingId();
+        this._menuButton.hideTooltip();
+
         for (let i = this.appList.length - 1; i >= 0; --i) {
             const item = this.appList[i];
             item.disconnectObject(this);
@@ -2184,8 +2145,7 @@ export class PinnedAppsFolderMenuItem extends DraggableMenuItem {
                 this.contextMenu.centerBoxPointerPosition();
             this.contextMenu.addUnpinItem(this._command, this.folderSettings);
         }
-        if (this.tooltip !== undefined)
-            this.tooltip.hide();
+
         this.contextMenu.open(BoxPointer.PopupAnimation.FULL);
     }
 
@@ -2361,8 +2321,7 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
             else
                 this.contextMenu.addUnpinItem(this._command);
         }
-        if (this.tooltip !== undefined)
-            this.tooltip.hide();
+
         this.contextMenu.open(BoxPointer.PopupAnimation.FULL);
     }
 
@@ -2590,8 +2549,6 @@ export class ApplicationMenuItem extends BaseMenuItem {
 
     popupContextMenu() {
         this.removeIndicator();
-        if (this.tooltip)
-            this.tooltip.hide();
 
         if (!this._app && !this.folderPath)
             return;
@@ -2680,7 +2637,7 @@ export class FolderDialog extends PopupMenu.PopupMenu {
             row_spacing: hasRowSpacing ? this._menuLayout.rowSpacing : 4,
         });
 
-        this._scrollView = this._menuLayout._createScrollBox({
+        this._scrollView = Utils.createPanActionScrollView(this._menuButton, {
             x_expand: true,
             y_expand: true,
             x_align: Clutter.ActorAlign.FILL,
@@ -2752,15 +2709,8 @@ export class FolderDialog extends PopupMenu.PopupMenu {
             });
 
             this._sourceActor.add_style_pseudo_class('active');
-            if (this._menuButton.tooltipShowingID) {
-                GLib.source_remove(this._menuButton.tooltipShowingID);
-                this._menuButton.tooltipShowingID = null;
-                this._menuButton.tooltipShowing = false;
-            }
-            if (this.tooltip) {
-                this.tooltip.hide();
-                this._menuButton.tooltipShowing = false;
-            }
+            this._menuButton.clearTooltipShowingId();
+            this._menuButton.hideTooltip();
         } else {
             this.box.ease({
                 scale_x: .3,
@@ -3316,9 +3266,6 @@ export class PlaceMenuItem extends BaseMenuItem {
     }
 
     popupContextMenu() {
-        if (this.tooltip)
-            this.tooltip.hide();
-
         if (this.contextMenu === undefined) {
             this.contextMenu = new AppContextMenu(this, this._menuLayout);
             if (this.folderPath)

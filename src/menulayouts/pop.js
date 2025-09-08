@@ -92,7 +92,7 @@ export class Layout extends BaseMenuLayout {
         this.topBox.add_child(this.searchEntry);
 
         // Applications Box - Contains Favorites, Categories or programs
-        this.applicationsScrollBox = this._createScrollBox({
+        this.applicationsScrollBox = this._createScrollView({
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.START,
@@ -805,8 +805,6 @@ class GroupFolderMenuItem extends MW.DraggableMenuItem {
     popupContextMenu() {
         if (this.home_folder)
             return;
-        if (this.tooltip)
-            this.tooltip.hide();
 
         if (this.contextMenu === undefined) {
             this.contextMenu = new PopupMenu.PopupMenu(this, 0.5, St.Side.TOP);
@@ -1292,8 +1290,6 @@ export class ApplicationMenuItem extends MW.DraggableMenuItem {
 
     popupContextMenu() {
         this.removeIndicator();
-        if (this.tooltip)
-            this.tooltip.hide();
 
         if (!this._app && !this.folderPath)
             return;

@@ -1246,48 +1246,8 @@ export class BaseMenuLayout extends St.BoxLayout {
         });
     }
 
-    _createScrollBox(params) {
-        const scrollBox = new St.ScrollView({
-            ...params,
-            clip_to_allocation: true,
-            hscrollbar_policy: St.PolicyType.NEVER,
-            vscrollbar_policy: St.PolicyType.AUTOMATIC,
-            overlay_scrollbars: true,
-        });
-
-        // With overlay_scrollbars = true, the scrollbar appears behind the menu items
-        // Maybe a bug in GNOME? Fix it with this.
-        scrollBox.get_children().forEach(child => {
-            if (child instanceof St.ScrollBar)
-                child.z_position = 1;
-        });
-
-        Utils.createAction({
-            actor: scrollBox,
-            actionType: Constants.ClutterAction.PAN,
-            actionParams: {interpolate: true},
-            actionArgs: {onPan: action => this._onPan(action, scrollBox)},
-        });
-        return scrollBox;
-    }
-
-    _onPan(action, scrollBox) {
-        if (this._menuButton.tooltipShowingID) {
-            GLib.source_remove(this._menuButton.tooltipShowingID);
-            this._menuButton.tooltipShowingID = null;
-        }
-        if (this._menuButton.tooltip.visible)
-            this._menuButton.tooltip.hide(true);
-
-        let delta;
-        if (action.get_delta)
-            delta = action.get_delta().get_y();
-        else
-            [, , delta] = action.get_motion_delta(0);
-
-        const {vadjustment} = Utils.getScrollViewAdjustments(scrollBox);
-        vadjustment.value -= delta;
-        return false;
+    _createScrollView(params) {
+        return Utils.createPanActionScrollView(this._menuButton, params);
     }
 
     _createLabelWithSeparator(headerLabel) {

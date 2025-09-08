@@ -130,15 +130,9 @@ export const AppContextMenu = class ArcMenuAppContextMenu extends AppMenu {
     }
 
     open(animate) {
-        if (this._menuButton.tooltipShowingID) {
-            GLib.source_remove(this._menuButton.tooltipShowingID);
-            this._menuButton.tooltipShowingID = null;
-            this._menuButton.tooltipShowing = false;
-        }
-        if (this.sourceActor.tooltip) {
-            this.sourceActor.tooltip.hide();
-            this._menuButton.tooltipShowing = false;
-        }
+        this._menuButton.clearTooltipShowingId();
+        this._menuButton.hideTooltip();
+
         this._updateDesktopShortcutItem();
 
         super.open(animate);

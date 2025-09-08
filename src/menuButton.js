@@ -118,9 +118,8 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         this.menu.destroy();
         this.menu = null;
 
-        this.tooltipShowing = false;
-        this.tooltipShowingID = null;
-        this.tooltip = new MW.Tooltip(this);
+        this._tooltipShowingID = null;
+        this._tooltip = new MW.Tooltip(this);
 
         this._intellihideRelease = false;
 
@@ -176,8 +175,8 @@ class ArcMenuMenuButton extends PanelMenu.Button {
     }
 
     createMenuLayout() {
-        this._clearTooltipShowingId();
-        this._clearTooltip();
+        this.clearTooltipShowingId();
+        this.hideTooltip(true);
 
         this._destroyMenuLayout();
 
@@ -445,25 +444,31 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             this._menuLayout.updateWidth(true);
     }
 
-    _clearTooltipShowingId() {
-        if (this.tooltipShowingID) {
-            GLib.source_remove(this.tooltipShowingID);
-            this.tooltipShowingID = null;
+    clearTooltipShowingId() {
+        if (this._tooltipShowingID) {
+            GLib.source_remove(this._tooltipShowingID);
+            this._tooltipShowingID = null;
         }
     }
 
-    _clearTooltip() {
-        this.tooltipShowing = false;
-        if (this.tooltip) {
-            this.tooltip.hide();
-            this.tooltip.sourceActor = null;
-        }
+    showTooltip(sourceActor, location, titleLabel, description, displayType) {
+        this.clearTooltipShowingId();
+        this._tooltipShowingID = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 750, () => {
+            this._tooltip.setTooltipData(sourceActor, location, titleLabel, description, displayType);
+            this._tooltip.show();
+            this._tooltipShowingID = null;
+            return GLib.SOURCE_REMOVE;
+        });
+    }
+
+    hideTooltip(instant) {
+        this._tooltip.hide(instant);
     }
 
     _onDestroy() {
         this._stopTrackingMouse();
         Main.layoutManager.disconnectObject(this);
-        this._clearTooltipShowingId();
+        this.clearTooltipShowingId();
 
         if (this._dtpSettings) {
             this._dtpSettings.disconnectObject(this);
@@ -475,8 +480,8 @@ class ArcMenuMenuButton extends PanelMenu.Button {
 
         this._destroyMenuLayout();
 
-        this.tooltip?.destroy();
-        this.tooltip = null;
+        this._tooltip?.destroy();
+        this._tooltip = null;
         this.arcMenu?.destroy();
         this.arcMenu = null;
         this.arcMenuContextMenu?.destroy();
@@ -545,8 +550,8 @@ class ArcMenuMenuButton extends PanelMenu.Button {
                 this._intellihideRelease = true;
         } else {
             if (!this.arcMenu.isOpen) {
-                this._clearTooltipShowingId();
-                this._clearTooltip();
+                this.clearTooltipShowingId();
+                this.hideTooltip(true);
             }
 
             if (!this.arcMenu.isOpen && !this.arcMenuContextMenu.isOpen) {

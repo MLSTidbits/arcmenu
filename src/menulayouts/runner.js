@@ -88,7 +88,7 @@ export class Layout extends BaseMenuLayout {
         this.topBox.add_child(this.runnerTweaksButton);
         this.add_child(this.topBox);
 
-        this.applicationsScrollBox = this._createScrollBox({
+        this.applicationsScrollBox = this._createScrollView({
             x_expand: true,
             y_expand: false,
             y_align: Clutter.ActorAlign.START,

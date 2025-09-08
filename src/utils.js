@@ -424,6 +424,46 @@ export function openPrefs(uuid) {
         extension.openPreferences();
 }
 
+export function createPanActionScrollView(menuButton, params) {
+    const scrollView = new St.ScrollView({
+        ...params,
+        clip_to_allocation: true,
+        hscrollbar_policy: St.PolicyType.NEVER,
+        vscrollbar_policy: St.PolicyType.AUTOMATIC,
+        overlay_scrollbars: true,
+    });
+
+    // With overlay_scrollbars = true, the scrollbar appears behind the menu items
+    // Maybe a bug in GNOME? Fix it with this.
+    scrollView.get_children().forEach(child => {
+        if (child instanceof St.ScrollBar)
+            child.z_position = 1;
+    });
+
+    const onPanFunc = (a, mb, sv) => {
+        mb.clearTooltipShowingId();
+        mb.hideTooltip();
+
+        let delta;
+        if (a.get_delta)
+            delta = a.get_delta().get_y();
+        else
+            [, , delta] = a.get_motion_delta(0);
+
+        const {vadjustment} = getScrollViewAdjustments(sv);
+        vadjustment.value -= delta;
+        return false;
+    };
+
+    createAction({
+        actor: scrollView,
+        actionType: Constants.ClutterAction.PAN,
+        actionParams: {interpolate: true},
+        actionArgs: {onPan: action => onPanFunc(action, menuButton, scrollView)},
+    });
+    return scrollView;
+}
+
 /**
  *
  * @param {Clutter.Actor} parent
