@@ -6,8 +6,20 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
 import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.js';
-
 import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+
+const getGioUnixOutputStream = async () => {
+    try {
+        const {default: GioUnix} = await import('gi://GioUnix');
+        if (GioUnix.OutputStream)
+            return GioUnix.OutputStream;
+
+        return Gio.UnixOutputStream;
+    } catch {
+        return Gio.UnixOutputStream;
+    }
+};
+const GioUnixOutputStream = await getGioUnixOutputStream();
 
 export const AboutPage = GObject.registerClass(
 class ArcMenuAboutPage extends Adw.PreferencesPage {
@@ -199,7 +211,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
             this._showFileChooser(
                 _('Load Settings'),
                 {action: Gtk.FileChooserAction.OPEN},
-                '_Open',
+                _('Open'),
                 filename => {
                     if (filename && GLib.file_test(filename, GLib.FileTest.EXISTS)) {
                         const settingsFile = Gio.File.new_for_path(filename);
@@ -212,8 +224,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
                                        null
                                    );
 
-                        // TODO: Replace this with `GioUnix.OutputStream` later
-                        const outputStream = new Gio.UnixOutputStream({fd: stdin, close_fd: true});
+                        const outputStream = new GioUnixOutputStream({fd: stdin, close_fd: true});
                         GLib.close(stdout);
                         GLib.close(stderr);
                         outputStream.splice(settingsFile.read(null),
@@ -230,7 +241,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
             this._showFileChooser(
                 _('Save Settings'),
                 {action: Gtk.FileChooserAction.SAVE},
-                '_Save',
+                _('Save'),
                 filename => {
                     const file = Gio.file_new_for_path(filename);
                     const raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
@@ -390,7 +401,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
             modal: true,
             action: params.action,
         });
-        dialog.add_button('_Cancel', Gtk.ResponseType.CANCEL);
+        dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
         dialog.add_button(acceptBtn, Gtk.ResponseType.ACCEPT);
 
         dialog.connect('response', (self, response) => {
