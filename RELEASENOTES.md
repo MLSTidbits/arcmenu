@@ -1,4 +1,4 @@
-<b><span size="large">Version 67.1</span></b> (2025-09-07)
+<b><span size="large">Version 67.1</span></b> (2025-09-14)
 
 - Add GNOME 49 Support.
 - Add hotkey option to toggle overriding the GNOME Overview hotkey when using 'Super' hotkeys for ArcMenu.
