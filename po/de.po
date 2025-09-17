@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arc Menu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-15 08:34-0400\n"
-"PO-Revision-Date: 2023-12-07 13:00+0100\n"
+"POT-Creation-Date: 2025-09-09 15:11-0400\n"
+"PO-Revision-Date: 2025-09-14 21:14+0200\n"
 "Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: German <>\n"
 "Language: de\n"
@@ -18,888 +18,1354 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.7\n"
 
-#: appMenu.js:63 appMenu.js:318
+#: src/appMenu.js:63 src/appMenu.js:287
 msgid "Pin to ArcMenu"
 msgstr "In ArcMenu anheften"
 
-#: appMenu.js:85 appMenu.js:274
+#: src/appMenu.js:92 src/appMenu.js:242
 msgid "Create Desktop Shortcut"
 msgstr "Schreibtischverknüpfung erstellen"
 
-#: appMenu.js:273
+#: src/appMenu.js:241
 msgid "Delete Desktop Shortcut"
 msgstr "Schreibtischverknüpfung löschen"
 
-#: appMenu.js:282 appMenu.js:318
+#: src/appMenu.js:250 src/appMenu.js:287
 msgid "Unpin from ArcMenu"
 msgstr "Nicht mehr in ArcMenu anheften"
 
-#: appMenu.js:357
+#: src/appMenu.js:326
 msgid "Open Folder Location"
 msgstr "Ort des Ordners öffnen"
 
-#: constants.js:79
+#: src/constants.js:97
 msgid "Favorites"
 msgstr "Favoriten"
 
-#: constants.js:80 menulayouts/runner.js:130 menulayouts/windows.js:334
-#: settings/Menu/LayoutTweaksPage.js:821
+#: src/constants.js:98 src/menulayouts/runner.js:131
+#: src/menulayouts/windows.js:340
+#: src/settings/menuSettings/layoutTweaksPage.js:335
+#: src/settings/menuSettings/layoutTweaksPage.js:877
 msgid "Frequent Apps"
 msgstr "Häufige Anwendungen"
 
-#: constants.js:81 menuWidgets.js:1128 menulayouts/az.js:63
-#: menulayouts/az.js:72 menulayouts/eleven.js:54 menulayouts/eleven.js:63
-#: menulayouts/redmond.js:72 menulayouts/redmond.js:75
-#: menulayouts/redmond.js:79
+#: src/constants.js:99 src/menuWidgets.js:1185 src/menulayouts/az.js:64
+#: src/menulayouts/az.js:73 src/menulayouts/eleven.js:55
+#: src/menulayouts/eleven.js:64 src/menulayouts/redmond.js:74
+#: src/menulayouts/redmond.js:77 src/menulayouts/redmond.js:81
+#: src/menulayouts/sleek.js:74 src/menulayouts/sleek.js:77
 msgid "All Apps"
 msgstr "Alle Anwendungen"
 
-#: constants.js:82 menulayouts/insider.js:276
-#: settings/Menu/LayoutTweaksPage.js:701 settings/Menu/LayoutTweaksPage.js:819
-#: settings/MenuPage.js:101
+#: src/constants.js:100 src/menulayouts/insider.js:290
+#: src/settings/menuPage.js:101
+#: src/settings/menuSettings/layoutTweaksPage.js:334
+#: src/settings/menuSettings/layoutTweaksPage.js:763
+#: src/settings/menuSettings/layoutTweaksPage.js:875
 msgid "Pinned Apps"
 msgstr "Angeheftete Anwendungen"
 
 # Wortlaut der deutschen Übersetzung aus dem Menüeintrag in "Dateien" (Gnome Files) übernommen, um eine einheitliche Übersetzung zu erhalten.
-#: constants.js:83 menulayouts/raven.js:302 menulayouts/unity.js:373
-#: searchProviders/recentFiles.js:29 searchProviders/recentFiles.js:30
+#: src/constants.js:101 src/menulayouts/raven.js:296
+#: src/menulayouts/unity.js:363 src/searchProviders/recentFiles.js:29
+#: src/searchProviders/recentFiles.js:30
 msgid "Recent Files"
 msgstr "Zuletzt verwendet"
 
-#: constants.js:242 menuButton.js:732 settings/Menu/ListPinnedPage.js:377
+#: src/constants.js:272 src/menuButton.js:805
+#: src/settings/menuSettings/listPinnedPage.js:401
 msgid "Log Out..."
 msgstr "Abmelden …"
 
-#: constants.js:243 menuButton.js:731 settings/Menu/ListPinnedPage.js:376
+#: src/constants.js:273 src/menuButton.js:804
+#: src/settings/menuSettings/listPinnedPage.js:400
 msgid "Lock"
 msgstr "Sperren"
 
-#: constants.js:244 menuButton.js:726 settings/Menu/ListPinnedPage.js:379
+#: src/constants.js:274 src/menuButton.js:799
+#: src/settings/menuSettings/listPinnedPage.js:403
 msgid "Restart..."
 msgstr "Neu starten …"
 
-#: constants.js:245 menuButton.js:727 settings/Menu/ListPinnedPage.js:378
+#: src/constants.js:275 src/menuButton.js:800
+#: src/settings/menuSettings/listPinnedPage.js:402
 msgid "Power Off..."
 msgstr "Ausschalten …"
 
-#: constants.js:246 menuButton.js:723 settings/Menu/ListPinnedPage.js:380
+#: src/constants.js:276 src/menuButton.js:796
+#: src/settings/menuSettings/listPinnedPage.js:404
 msgid "Suspend"
 msgstr "Bereitschaft"
 
-#: constants.js:247 settings/Menu/ListPinnedPage.js:381
+#: src/constants.js:277 src/settings/menuSettings/listPinnedPage.js:405
 msgid "Hybrid Sleep"
 msgstr "Hybrid-Schlaf"
 
-#: constants.js:248 settings/Menu/ListPinnedPage.js:383
+#: src/constants.js:278 src/settings/menuSettings/listPinnedPage.js:407
 msgid "Hibernate"
 msgstr "Ruhezustand"
 
-#: constants.js:249 menuButton.js:733 settings/Menu/ListPinnedPage.js:384
+#: src/constants.js:279 src/menuButton.js:806
+#: src/settings/menuSettings/listPinnedPage.js:408
 msgid "Switch User"
 msgstr "Benutzer wechseln"
 
-#: constants.js:391 settings/AboutPage.js:43
+#: src/constants.js:424 src/settings/aboutPage.js:33
+#: src/settings/donatePage.js:17 src/settings/generalPage.js:613
+#: src/settings/menuButtonPage.js:211
 msgid "ArcMenu"
 msgstr "ArcMenu"
 
-#: constants.js:396
+#: src/constants.js:429
 msgid "Brisk"
 msgstr "Brisk"
 
-#: constants.js:401
+#: src/constants.js:434
 msgid "Whisker"
 msgstr "Whisker"
 
-#: constants.js:406
+#: src/constants.js:439
 msgid "GNOME Menu"
 msgstr "GNOME-Menü"
 
-#: constants.js:411
+#: src/constants.js:444
 msgid "Mint"
 msgstr "Mint"
 
-#: constants.js:416
+#: src/constants.js:449
 msgid "Budgie"
 msgstr "Budgie"
 
-#: constants.js:424
+#: src/constants.js:457
 msgid "Unity"
 msgstr "Unity"
 
-#: constants.js:429
+#: src/constants.js:462
 msgid "Plasma"
 msgstr "Plasma"
 
-#: constants.js:434
+#: src/constants.js:467
 msgid "tognee"
 msgstr "tognee"
 
-#: constants.js:439
+#: src/constants.js:472
 msgid "Insider"
 msgstr "Insider"
 
-#: constants.js:444
+#: src/constants.js:477
 msgid "Redmond"
 msgstr "Redmond"
 
-#: constants.js:449
+#: src/constants.js:482
 msgid "Windows"
 msgstr "Windows"
 
-#: constants.js:454
+#: src/constants.js:487
 msgid "11"
 msgstr "11"
 
-#: constants.js:459
+#: src/constants.js:492
 msgid "a.z."
 msgstr "a.z."
 
-#: constants.js:464
+#: src/constants.js:497
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: constants.js:469
-#| msgid "Top"
+#: src/constants.js:502
 msgid "Pop"
 msgstr "Pop"
 
-#: constants.js:477
+#: src/constants.js:507
+msgid "Sleek"
+msgstr "Sleek"
+
+#: src/constants.js:515
 msgid "Elementary"
 msgstr "Elementary"
 
-#: constants.js:482
+#: src/constants.js:520
 msgid "Chromebook"
 msgstr "Chromebook"
 
-#: constants.js:490
+#: src/constants.js:528
 msgid "Runner"
 msgstr "Runner"
 
-#: constants.js:495
+#: src/constants.js:533
 msgid "GNOME Overview"
 msgstr "GNOME-Übersicht"
 
-#: constants.js:503
+#: src/constants.js:541
 msgid "Raven"
 msgstr "Raven"
 
-#: constants.js:511
+#: src/constants.js:549
 msgid "Traditional"
 msgstr "Traditionell"
 
-#: constants.js:516
+#: src/constants.js:554
 msgid "Modern"
 msgstr "Modern"
 
-#: constants.js:521
+#: src/constants.js:559
 msgid "Touch"
 msgstr "Touch"
 
-#: constants.js:526
+#: src/constants.js:564
 msgid "Launcher"
 msgstr "Starter"
 
-#: constants.js:531
+#: src/constants.js:569
 msgid "Alternative"
 msgstr "Alternativ"
 
-#: constants.js:538 menulayouts/whisker.js:51
+#: src/constants.js:576
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: constants.js:538
+#: src/constants.js:576
 msgid "Software"
 msgstr "Software"
 
-#: constants.js:538
+#: src/constants.js:576
 msgid "Terminal"
 msgstr "Terminal"
 
-#: constants.js:538
+#: src/constants.js:576
 msgid "Tweaks"
 msgstr "Optimierungen"
 
-#: constants.js:539 menuButton.js:676 menuWidgets.js:497
-#: settings/Menu/ListPinnedPage.js:346 settings/Menu/ListPinnedPage.js:366
+#: src/constants.js:577 src/menuButton.js:749 src/menuWidgets.js:574
+#: src/settings/menuSettings/listPinnedPage.js:368
+#: src/settings/menuSettings/listPinnedPage.js:390
 msgid "Activities Overview"
 msgstr "Aktivitätenübersicht"
 
-#: constants.js:539 menuButton.js:662 prefs.js:24 settings/AboutPage.js:128
-#: settings/Menu/ListPinnedPage.js:334 settings/Menu/ListPinnedPage.js:343
-#: settings/Menu/ListPinnedPage.js:353
+#: src/constants.js:577 src/menuButton.js:735
+#: src/settings/menuSettings/listPinnedPage.js:354
+#: src/settings/menuSettings/listPinnedPage.js:365
+#: src/settings/menuSettings/listPinnedPage.js:377
 msgid "ArcMenu Settings"
 msgstr "ArcMenu-Einstellungen"
 
-#: constants.js:539
+#: src/constants.js:577
 msgid "Files"
 msgstr "Dateien"
 
-#: menuButton.js:39 menulayouts/plasma.js:122 menulayouts/plasma.js:559
+#: src/menuButton.js:38 src/menulayouts/plasma.js:128
+#: src/menulayouts/plasma.js:576
 msgid "Apps"
 msgstr "Anwendungen"
 
-#: menuButton.js:707 settings/Menu/ListPinnedPage.js:369
+#: src/menuButton.js:780 src/settings/menuSettings/listPinnedPage.js:393
 msgid "Show Desktop"
 msgstr "Schreibtisch anzeigen"
 
-#: menuButton.js:721 menuWidgets.js:814 menuWidgets.js:832
-msgid "Power Off / Log Out"
-msgstr "Ausschalten/Abmelden"
+#: src/menuButton.js:794 src/menuWidgets.js:871 src/menuWidgets.js:888
+msgid "Power Off"
+msgstr "Ausschalten"
 
-#: menuButton.js:762
+#: src/menuButton.js:835
 msgid "Dash to Panel Settings"
 msgstr "Dash to Panel-Einstellungen"
 
-#: menuButton.js:766
+#: src/menuButton.js:839
 msgid "App Icons Taskbar Settings"
 msgstr "Einstellungen für App Icons Taskbar"
 
-#: menuWidgets.js:869 menulayouts/plasma.js:321
+#: src/menuWidgets.js:925 src/menulayouts/plasma.js:328
 msgid "Session"
 msgstr "Sitzung"
 
-#: menuWidgets.js:873 menulayouts/plasma.js:325
+#: src/menuWidgets.js:929 src/menulayouts/plasma.js:332
 msgid "System"
 msgstr "System"
 
-#: menuWidgets.js:1058 menuWidgets.js:1079 menulayouts/az.js:64
-#: menulayouts/eleven.js:55 menulayouts/redmond.js:73 menulayouts/redmond.js:78
-#: settings/Menu/SubPage.js:76 settings/Menu/ThemingDialog.js:338
+#: src/menuWidgets.js:1115 src/menuWidgets.js:1136 src/menulayouts/az.js:65
+#: src/menulayouts/eleven.js:56 src/menulayouts/redmond.js:75
+#: src/menulayouts/redmond.js:80 src/menulayouts/sleek.js:75
 msgid "Back"
 msgstr "Zurück"
 
-#: menuWidgets.js:1798
-msgid "New"
-msgstr "Neu"
-
-#: menuWidgets.js:2486 menulayouts/az.js:71 menulayouts/eleven.js:62
-#: menulayouts/insider.js:171 menulayouts/plasma.js:117 menulayouts/raven.js:61
-#: menulayouts/raven.js:236 menulayouts/raven.js:284 menulayouts/redmond.js:74
-#: menulayouts/redmond.js:77 menulayouts/redmond.js:80 menulayouts/unity.js:39
-#: menulayouts/unity.js:278 menulayouts/unity.js:354 menulayouts/windows.js:411
-msgid "Pinned"
-msgstr "Angeheftet"
-
-#: menuWidgets.js:2651
-msgid "Unmount Drive"
-msgstr "Laufwerk aushängen"
-
-#: menuWidgets.js:2653
-msgid "Eject Drive"
-msgstr "Laufwerk auswerfen"
-
-#: menuWidgets.js:2697
-msgid "Remove from Recent"
-msgstr "Aus Zuletzt entfernen"
-
-#: menuWidgets.js:2779
-msgid "Search…"
-msgstr "Suchen …"
-
-#: menulayouts/baseMenuLayout.js:466
-msgid "More Recent Files..."
-msgstr "Weitere zuletzt verwendete Dateien …"
-
-#: menulayouts/eleven.js:70
-msgid "Frequent"
-msgstr "Häufig"
-
-#: menulayouts/plasma.js:126 placeDisplay.js:131 placeDisplay.js:154
-#: settings/Menu/ListPinnedPage.js:400
-msgid "Computer"
-msgstr "Rechner"
-
-#: menulayouts/plasma.js:130
-msgid "Leave"
-msgstr "Verlassen"
-
-#: menulayouts/plasma.js:269 menulayouts/windows.js:271
-#: settings/MenuPage.js:123
-msgid "Application Shortcuts"
-msgstr "Anwendungsverknüpfungen"
-
-#: menulayouts/plasma.js:274 menulayouts/windows.js:275
-msgid "Places"
-msgstr "Orte"
-
-#: menulayouts/plasma.js:289 menulayouts/windows.js:207
-#: settings/Menu/LayoutTweaksPage.js:748 settings/Menu/LayoutTweaksPage.js:867
-msgid "Bookmarks"
-msgstr "Lesezeichen"
-
-#: menulayouts/plasma.js:291 menulayouts/windows.js:209
-msgid "Devices"
-msgstr "Geräte"
-
-#: menulayouts/plasma.js:293 menulayouts/windows.js:211
-#: settings/Menu/ListPinnedPage.js:401
-msgid "Network"
-msgstr "Netzwerk"
-
-#: menulayouts/pop.js:250 menulayouts/pop.js:252
-msgid "Library Home"
-msgstr ""
-
-#: menulayouts/pop.js:308
-msgid "New Folder"
-msgstr "Neuer Ordner"
-
-#: menulayouts/pop.js:342
+#: src/menuWidgets.js:2384 src/menulayouts/pop.js:355
 msgid "Unnamed Folder"
 msgstr "Unbenannter Ordner"
 
-#: menulayouts/pop.js:686
+#: src/menuWidgets.js:2484 src/menulayouts/pop.js:1183
+msgid "New"
+msgstr "Neu"
+
+#: src/menuWidgets.js:3037 src/menulayouts/az.js:72 src/menulayouts/az.js:226
+#: src/menulayouts/eleven.js:63 src/menulayouts/insider.js:188
+#: src/menulayouts/plasma.js:123 src/menulayouts/raven.js:62
+#: src/menulayouts/raven.js:233 src/menulayouts/raven.js:274
+#: src/menulayouts/redmond.js:76 src/menulayouts/redmond.js:79
+#: src/menulayouts/redmond.js:82 src/menulayouts/sleek.js:76
+#: src/menulayouts/unity.js:41 src/menulayouts/unity.js:271
+#: src/menulayouts/unity.js:341 src/menulayouts/windows.js:418
+msgid "Pinned"
+msgstr "Angeheftet"
+
+#: src/menuWidgets.js:3207
+msgid "Unmount Drive"
+msgstr "Laufwerk aushängen"
+
+#: src/menuWidgets.js:3209
+msgid "Eject Drive"
+msgstr "Laufwerk auswerfen"
+
+#: src/menuWidgets.js:3253
+msgid "Remove from Recent"
+msgstr "Aus Zuletzt entfernen"
+
+#: src/menuWidgets.js:3333
+msgid "Search…"
+msgstr "Suchen …"
+
+#: src/menulayouts/az.js:229 src/menulayouts/eleven.js:71
+msgid "Frequent"
+msgstr "Häufig"
+
+#: src/menulayouts/baseMenuLayout.js:502
+msgid "More Recent Files..."
+msgstr "Weitere zuletzt verwendete Dateien …"
+
+#: src/menulayouts/plasma.js:132 src/placeDisplay.js:133
+#: src/placeDisplay.js:156 src/settings/menuSettings/listPinnedPage.js:424
+msgid "Computer"
+msgstr "Rechner"
+
+#: src/menulayouts/plasma.js:136
+msgid "Leave"
+msgstr "Verlassen"
+
+#: src/menulayouts/plasma.js:276 src/menulayouts/windows.js:275
+#: src/settings/menuPage.js:123
+msgid "Application Shortcuts"
+msgstr "Anwendungsverknüpfungen"
+
+#: src/menulayouts/plasma.js:281 src/menulayouts/windows.js:279
+msgid "Places"
+msgstr "Orte"
+
+#: src/menulayouts/plasma.js:296 src/menulayouts/windows.js:208
+#: src/settings/menuSettings/layoutTweaksPage.js:810
+#: src/settings/menuSettings/layoutTweaksPage.js:964
+msgid "Bookmarks"
+msgstr "Lesezeichen"
+
+#: src/menulayouts/plasma.js:298 src/menulayouts/windows.js:210
+msgid "Devices"
+msgstr "Geräte"
+
+#: src/menulayouts/plasma.js:300 src/menulayouts/windows.js:212
+#: src/settings/menuSettings/listPinnedPage.js:425
+msgid "Network"
+msgstr "Netzwerk"
+
+#: src/menulayouts/pop.js:258 src/menulayouts/pop.js:461
+#: src/menulayouts/pop.js:474
+msgid "Library Home"
+msgstr "Eigene Bibliothek"
+
+#: src/menulayouts/pop.js:724
+msgid "New Folder"
+msgstr "Neuer Ordner"
+
+#: src/menulayouts/pop.js:821
 msgid "Rename Folder"
 msgstr "Ordner umbenennen"
 
-#: menulayouts/pop.js:687
+#: src/menulayouts/pop.js:822
 msgid "Delete Folder"
 msgstr "Ordner löschen"
 
-#: menulayouts/pop.js:697
+#: src/menulayouts/pop.js:832
 #, javascript-format
 msgid "Permanently delete %s folder?"
 msgstr "Ordner »%s« dauerhaft löschen?"
 
-#: menulayouts/pop.js:702
-#| msgid "None"
+#: src/menulayouts/pop.js:837
 msgid "No"
 msgstr "Nein"
 
-#: menulayouts/pop.js:710
+#: src/menulayouts/pop.js:845
 msgid "Yes"
 msgstr "Ja"
 
-#: menulayouts/pop.js:725
+#: src/menulayouts/pop.js:860
 #, javascript-format
 msgid "Rename %s folder"
 msgstr "Ordner »%s« umbenennen"
 
-#: menulayouts/pop.js:759
+#: src/menulayouts/pop.js:894 src/settings/aboutPage.js:404
+#: src/settings/generalPage.js:286 src/settings/menuButtonPage.js:532
+#: src/settings/menuSettings/listPinnedPage.js:629
+#: src/settings/menuSettings/themingDialog.js:269
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: menulayouts/pop.js:767 settings/GeneralPage.js:462
-#: settings/Menu/ListPinnedPage.js:637 settings/Menu/VisualSettings.js:365
+#: src/menulayouts/pop.js:902 src/settings/generalPage.js:272
+#: src/settings/menuSettings/listPinnedPage.js:666
+#: src/settings/menuSettings/visualSettings.js:372
 msgid "Apply"
 msgstr "Anwenden"
 
-#: menulayouts/raven.js:61 menulayouts/raven.js:242 menulayouts/unity.js:39
-#: menulayouts/unity.js:282 settings/Menu/LayoutTweaksPage.js:586
-#: settings/Menu/LayoutTweaksPage.js:621 settings/Menu/LayoutTweaksPage.js:700
-#: settings/Menu/LayoutTweaksPage.js:797 settings/Menu/LayoutTweaksPage.js:822
+#: src/menulayouts/raven.js:62 src/menulayouts/raven.js:239
+#: src/menulayouts/unity.js:41 src/menulayouts/unity.js:275
+#: src/settings/menuSettings/layoutTweaksPage.js:629
+#: src/settings/menuSettings/layoutTweaksPage.js:656
+#: src/settings/menuSettings/layoutTweaksPage.js:762
+#: src/settings/menuSettings/layoutTweaksPage.js:853
+#: src/settings/menuSettings/layoutTweaksPage.js:878
+#: src/settings/menuSettings/layoutTweaksPage.js:918
 msgid "All Programs"
 msgstr "Alle Programme"
 
-#: menulayouts/raven.js:286 menulayouts/unity.js:356
-#: settings/Menu/VisualSettings.js:224
+#: src/menulayouts/raven.js:280 src/menulayouts/unity.js:346
+#: src/settings/menuSettings/visualSettings.js:231
 msgid "Shortcuts"
 msgstr "Verknüpfungen"
 
-#: menulayouts/runner.js:217
+#: src/menulayouts/runner.js:229
 msgid "Configure Runner"
 msgstr "Runner konfigurieren"
 
-#: menulayouts/unity.js:420
+#: src/menulayouts/unity.js:411
 msgid "Categories"
 msgstr "Kategorien"
 
-#: menulayouts/windows.js:432
+#: src/menulayouts/windows.js:443
 msgid "Extras"
 msgstr "Extras"
 
-#: placeDisplay.js:54
+#: src/placeDisplay.js:56
 #, javascript-format
 msgid "Failed to launch “%s”"
 msgstr "Starten von »%s« fehlgeschlagen"
 
-#: placeDisplay.js:69
+#: src/placeDisplay.js:71
 #, javascript-format
 msgid "Failed to mount volume for “%s”"
 msgstr "Einhängen von Speicher »%s« fehlgeschlagen"
 
-#: placeDisplay.js:117 placeDisplay.js:340
-#: settings/Menu/LayoutTweaksPage.js:585 settings/Menu/LayoutTweaksPage.js:620
-#: settings/Menu/ListPinnedPage.js:392 utils.js:246
+#: src/placeDisplay.js:119 src/placeDisplay.js:340
+#: src/settings/menuSettings/layoutTweaksPage.js:628
+#: src/settings/menuSettings/layoutTweaksPage.js:655
+#: src/settings/menuSettings/listPinnedPage.js:416 src/utils.js:234
 msgid "Home"
 msgstr "Persönlicher Ordner"
 
-#: placeDisplay.js:221
+#: src/placeDisplay.js:223
 #, javascript-format
 msgid "Ejecting drive “%s” failed:"
 msgstr "Auswerfen von Laufwerk »%s« fehlgeschlagen:"
 
-#: prefsWidgets.js:246
+#: src/prefsWidgets.js:266
 msgid "Modify"
 msgstr "Bearbeiten"
 
-#: prefsWidgets.js:261
+#: src/prefsWidgets.js:281
 msgid "Move Up"
 msgstr "Nach oben"
 
-#: prefsWidgets.js:268
+#: src/prefsWidgets.js:288
 msgid "Move Down"
 msgstr "Nach unten"
 
-#: prefsWidgets.js:275
+#: src/prefsWidgets.js:295
 msgid "Remove"
 msgstr "Entfernen"
 
-#: search.js:726
+#: src/search.js:742
 msgid "Searching..."
 msgstr "Suche läuft …"
 
-#: search.js:728
+#: src/search.js:744
 msgid "No results."
 msgstr "Keine Ergebnisse."
 
-#: search.js:810
+#: src/search.js:827
 #, javascript-format
 msgid "+ %d more"
 msgstr "+ %d mehr"
 
-#: searchProviders/openWindows.js:31
+#: src/searchProviders/openWindows.js:31
 msgid "List of open windows across all workspaces"
 msgstr "Liste geöffneter Fenster auf allen Arbeitsflächen"
 
-#: searchProviders/openWindows.js:32
+#: src/searchProviders/openWindows.js:32
 msgid "Open Windows"
 msgstr "Geöffnete Fenster"
 
-#: searchProviders/openWindows.js:46
+#: src/searchProviders/openWindows.js:46
 #, javascript-format
 msgid "'%s' on Workspace %d"
 msgstr "»%s« auf Arbeitsfläche %d"
 
-#: searchProviders/recentFiles.js:90
+#: src/searchProviders/recentFiles.js:90
 #, javascript-format
 msgid "Failed to open “%s”"
 msgstr "Öffnen von »%s« fehlgeschlagen"
 
-#: settings/AboutPage.js:18 settings/Menu/ListPinnedPage.js:363
+#: src/settings/aboutPage.js:28 src/settings/menuSettings/listPinnedPage.js:387
 msgid "About"
 msgstr "Info"
 
-#: settings/AboutPage.js:24
+#: src/settings/aboutPage.js:34
 msgid "Application Menu Extension for GNOME"
 msgstr "Anwendungsmenü-Erweiterung für GNOME"
 
-#: settings/AboutPage.js:66
-msgid "ArcMenu Version"
-msgstr "ArcMenu-Version"
+#. TRANSLATORS: 'PROJECT_NAME' Version
+#: src/settings/aboutPage.js:79
+#, javascript-format
+msgid "%s Version"
+msgstr "%s Version"
 
-#: settings/AboutPage.js:76
+#. TRANSLATORS: 'PROJECT_NAME' - Release Notes
+#: src/settings/aboutPage.js:88
+#, javascript-format
+msgid "%s - Release Notes"
+msgstr "%s - Anmerkungen zur Veröffentlichung"
+
+#: src/settings/aboutPage.js:90
+msgid "What's New"
+msgstr "Was gibts neues"
+
+#: src/settings/aboutPage.js:139
+msgid "Message Tray Update Notification"
+msgstr "Benachrichtigung über Aktualisierung"
+
+#: src/settings/aboutPage.js:140
+#, javascript-format
+msgid "Show a notification when %s receives an update."
+msgstr ""
+"Blende einen Hinweis in der Benachrichtigungsleiste ein, wenn  %s eine "
+"Aktualisierung erfahren hat."
+
+#: src/settings/aboutPage.js:148
 msgid "Git Commit"
 msgstr "Git Commit"
 
-#: settings/AboutPage.js:86
+#: src/settings/aboutPage.js:158
 msgid "GNOME Version"
-msgstr "GNOME-Version"
+msgstr "GNOME Version"
 
-#: settings/AboutPage.js:95
+#: src/settings/aboutPage.js:167
 msgid "OS Name"
 msgstr "Name des Betriebssystems"
 
-#: settings/AboutPage.js:108
+#: src/settings/aboutPage.js:180
 msgid "Windowing System"
 msgstr "Fensterverwaltung"
 
-#: settings/AboutPage.js:116
-msgid "ArcMenu GitLab"
-msgstr "ArcMenu GitLab"
+#. TRANSLATORS: 'PROJECT_NAME' on GitLab
+#: src/settings/aboutPage.js:191
+#, javascript-format
+msgid "%s on GitLab"
+msgstr "%s auf GitLab"
 
-#: settings/AboutPage.js:119
-msgid "Donate via PayPal"
-msgstr "Spenden über PayPal"
+#: src/settings/aboutPage.js:194
+msgid "Report an Issue"
+msgstr "Ein Problem melden"
 
-#: settings/AboutPage.js:131 settings/Menu/ThemingDialog.js:71
-#: settings/Menu/ThemingDialog.js:76
+#. TRANSLATORS: 'PROJECT_NAME' Settings
+#: src/settings/aboutPage.js:204
+#, javascript-format
+msgid "%s Settings"
+msgstr "%s Einstellungen"
+
+#: src/settings/aboutPage.js:207 src/settings/menuSettings/themingDialog.js:70
+#: src/settings/menuSettings/themingDialog.js:75
 msgid "Load"
 msgstr "Laden"
 
-#: settings/AboutPage.js:136
+#: src/settings/aboutPage.js:212
 msgid "Load Settings"
 msgstr "Einstellungen laden"
 
-#: settings/AboutPage.js:162 settings/Menu/ThemingDialog.js:129
-#: settings/Menu/ThemingDialog.js:142
+#: src/settings/aboutPage.js:214
+#: src/settings/menuSettings/listPinnedPage.js:630
+#: src/settings/menuSettings/themingDialog.js:77
+msgid "Open"
+msgstr "Ö_ffnen"
+
+#: src/settings/aboutPage.js:237 src/settings/aboutPage.js:244
+#: src/settings/menuSettings/themingDialog.js:128
+#: src/settings/menuSettings/themingDialog.js:141
+#: src/settings/menuSettings/themingDialog.js:143
 msgid "Save"
 msgstr "Speichern"
 
-#: settings/AboutPage.js:167
+#: src/settings/aboutPage.js:242
 msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
-#: settings/AboutPage.js:188
+#: src/settings/aboutPage.js:264 src/settings/aboutPage.js:265
 msgid "Credits"
 msgstr "Danksagungen"
 
-#: settings/GeneralPage.js:13
+#: src/settings/aboutPage.js:269
+msgid "Brought to you by"
+msgstr "Zur Verfügung gestellt von"
+
+#: src/settings/aboutPage.js:280
+msgid "History"
+msgstr "Historie"
+
+#: src/settings/aboutPage.js:298
+msgid "Contributions by"
+msgstr "Beigetragen haben"
+
+#: src/settings/aboutPage.js:301
+msgid "Contributors"
+msgstr "Beitragende"
+
+#: src/settings/aboutPage.js:303
+msgid "Translators"
+msgstr "Übersetzer"
+
+#: src/settings/aboutPage.js:307
+msgid "Artwork by"
+msgstr "Kunstwerke von"
+
+#: src/settings/aboutPage.js:315 src/settings/aboutPage.js:316
+msgid "Legal"
+msgstr "Rechtliches"
+
+#: src/settings/aboutPage.js:322
+msgid "This program comes with absolutely no warranty."
+msgstr "Das Programm kommt ohne jegliche Garantie."
+
+#: src/settings/aboutPage.js:324
+msgid "GNU General Public License, version 2 or later"
+msgstr "GNU General Public License, version 2 or later"
+
+#. TRANSLATORS: this is the program license url; the string contains the name of the license as link text.
+#: src/settings/aboutPage.js:324
+#, javascript-format
+msgid "See the <a href=\"%s\">%s</a> for details."
+msgstr "Siehe <a href=\"%s\">%s</a> für Details."
+
+#: src/settings/donatePage.js:12 src/updateNotifier.js:87
+msgid "Donate"
+msgstr "Spenden"
+
+#: src/settings/donatePage.js:22
+#, javascript-format
+msgid "Help Support %s"
+msgstr "Hilf %s zu unterstützen"
+
+#: src/settings/donatePage.js:23 src/updateNotifier.js:75
+#, javascript-format
+msgid ""
+"Thank you for using %s! If you enjoy it and would like to help support its "
+"continued development, please consider making a donation."
+msgstr ""
+"Danke für das Benutzen von %s! Wenn es dir gefällt und du die weitere "
+"Entwicklung unterstützen möchtest, erwäge eine Spende."
+
+#: src/settings/donatePage.js:27
+msgid "Donate via PayPal"
+msgstr "Spenden über PayPal"
+
+#: src/settings/donatePage.js:30
+msgid "Donate via Buy Me a Coffee"
+msgstr "Spenden über Buy Me a Coffee"
+
+#: src/settings/donatePage.js:42
+#, javascript-format
+msgid ""
+"A huge thank you to everyone who has supported %s! Your support helps keep "
+"%s going. It is truly appreciated!"
+msgstr ""
+"Ein riesiges Danke an alle, die %s unterstützt haben! Deine Unterstützung "
+"hilft %s weiterzumachen. Wir danken dir sehr!"
+
+#: src/settings/generalPage.js:32
 msgid "General"
 msgstr "Allgemein"
 
-#: settings/GeneralPage.js:20
+#: src/settings/generalPage.js:39
 msgid "Panel Display Options"
 msgstr "Darstellung im Panel"
 
-#: settings/GeneralPage.js:33
+#: src/settings/generalPage.js:52
 msgid "Show Activities Button"
 msgstr "Aktivitäten-Knopf anzeigen"
 
-#: settings/GeneralPage.js:34
+#: src/settings/generalPage.js:53
 msgid "Dash to Panel may conflict with this setting"
 msgstr "»Dash to Panel« könnte mit dieser Einstellung in Konflikt stehen"
 
-#: settings/GeneralPage.js:42 settings/GeneralPage.js:68
-#: settings/Menu/LayoutTweaksPage.js:648
+#: src/settings/generalPage.js:61 src/settings/generalPage.js:87
+#: src/settings/menuSettings/layoutTweaksPage.js:683
 msgid "Left"
 msgstr "Links"
 
-#: settings/GeneralPage.js:43 settings/GeneralPage.js:69
+#: src/settings/generalPage.js:62 src/settings/generalPage.js:88
 msgid "Center"
 msgstr "Mitte"
 
-#: settings/GeneralPage.js:44 settings/GeneralPage.js:70
-#: settings/Menu/LayoutTweaksPage.js:649
+#: src/settings/generalPage.js:63 src/settings/generalPage.js:89
+#: src/settings/menuSettings/layoutTweaksPage.js:684
 msgid "Right"
 msgstr "Rechts"
 
-#: settings/GeneralPage.js:46 settings/MenuButtonPage.js:124
+#: src/settings/generalPage.js:65 src/settings/menuButtonPage.js:126
 msgid "Position in Panel"
 msgstr "Position im Panel"
 
-#: settings/GeneralPage.js:76
+#: src/settings/generalPage.js:95
 msgid "Menu Alignment"
 msgstr "Menüausrichtung"
 
-#: settings/GeneralPage.js:95
+#: src/settings/generalPage.js:113
 msgid "Display ArcMenu on all Panels"
 msgstr "ArcMenu auf allen Panels anzeigen"
 
-#: settings/GeneralPage.js:96
+#: src/settings/generalPage.js:114
 msgid "Dash to Panel or App Icons Taskbar extension required"
-msgstr ""
-"Die Erweiterungen »Dash to Panel« oder »App Icons Taskbar« erforderlich"
+msgstr "Die Erweiterung »Dash to Panel« oder »App Icons Taskbar« erforderlich"
 
-#: settings/GeneralPage.js:112
+#: src/settings/generalPage.js:130
 msgid "Always Prefer Top Panel"
 msgstr "Immer oberes Panel bevorzugen"
 
-#: settings/GeneralPage.js:113
+#: src/settings/generalPage.js:131
 msgid "Useful with Dash to Panel setting 'Keep original gnome-shell top panel'"
 msgstr ""
 "Nützlich bei der »Dash to Panel«-Einstellung 'Originale obere Leiste der "
 "GNOME-Shell behalten'"
 
-#: settings/GeneralPage.js:127
+#: src/settings/generalPage.js:145
 msgid "General Settings"
 msgstr "Allgemeine Einstellungen"
 
-#: settings/GeneralPage.js:131
+#: src/settings/generalPage.js:149
 msgid "ArcMenu Hotkey"
 msgstr "ArcMenu-Tastenkürzel"
 
-#: settings/GeneralPage.js:132
+#: src/settings/generalPage.js:150
 msgid "Standalone Runner Menu"
 msgstr "Freistehendes Runner-Menü"
 
-#: settings/GeneralPage.js:145
+#: src/settings/generalPage.js:163
 msgid "Hide Overview on Startup"
 msgstr "Übersicht beim Starten verstecken"
 
-#: settings/GeneralPage.js:174 settings/GeneralPage.js:293
-msgid "Hotkey Conflict"
-msgstr "Tastenkürzel-Konflikt"
+#: src/settings/generalPage.js:213 src/settings/generalPage.js:378
+msgid "Disabled"
+msgstr "Deaktiviert"
 
-#: settings/GeneralPage.js:175
-msgid "ArcMenu and Standalone Runner are assigned the same hotkey"
-msgstr ""
-"»ArcMenu« und »Standalone Runner« sind dem selben Tastenkürzel zugeordnet"
+#: src/settings/generalPage.js:234
+msgid "ArcMenu Hotkeys"
+msgstr "ArcMenu-Tastenkürzel"
 
-#: settings/GeneralPage.js:221
+#: src/settings/generalPage.js:234
+msgid "Standalone Runner Hotkeys"
+msgstr "Freistehende Runner Tastenkürzel"
+
+#: src/settings/generalPage.js:307
+msgid "Active Hotkeys"
+msgstr "ArcMenu-Tastenkürzel"
+
+#: src/settings/generalPage.js:313
+msgid "Hotkey Options"
+msgstr "Einstellungen für freies Runner-Menü"
+
+#: src/settings/generalPage.js:326
+msgid "Super Hotkeys Override GNOME Overview Hotkey"
+msgstr "Super Tastenkürzel überschreiben GNOME Übersichts-Tastenkürzel"
+
+#: src/settings/generalPage.js:340
 msgid "Open on Primary Monitor"
 msgstr "Auf dem Hauptbildschirm öffnen"
 
-#: settings/GeneralPage.js:227
-msgid "Left Super Key"
-msgstr "Linke Super-Taste"
+#: src/settings/generalPage.js:351
+msgid "Type on your keyboard to add a new hotkey."
+msgstr "Tippe auf der Tastatur, um ein neues Tastenkürzel hinzuzufügen."
 
-#: settings/GeneralPage.js:228
-msgid "Custom Hotkey"
-msgstr "Eigenes Tastenkürzel"
+#: src/settings/generalPage.js:390
+msgid "Add Hotkey"
+msgstr "Tastenkürzel hinzufügen"
 
-#: settings/GeneralPage.js:230
-msgid "Hotkey"
-msgstr "Tastenkürzel"
-
-#: settings/GeneralPage.js:243
-msgid "Modify Hotkey"
-msgstr "Tastenkürzel anpassen"
-
-#: settings/GeneralPage.js:248
-msgid "Current Hotkey"
-msgstr "Aktuelles Tastenkürzel"
-
-#: settings/GeneralPage.js:322
-msgid "Set Custom Hotkey"
-msgstr "Benutzerdefiniertes Tastenkürzel festlegen"
-
-#: settings/GeneralPage.js:347
-msgid "Choose Modifiers"
-msgstr "Hilfstasten wählen"
-
-#: settings/GeneralPage.js:357
-msgid "Ctrl"
-msgstr "Strg"
-
-#: settings/GeneralPage.js:361
-msgid "Super"
-msgstr "Super"
-
-#: settings/GeneralPage.js:365
-msgid "Shift"
-msgstr "Umschalt"
-
-#: settings/GeneralPage.js:369
-msgid "Alt"
-msgstr "Alt"
-
-#: settings/GeneralPage.js:437
-msgid "Press any key"
-msgstr "Drücken Sie eine beliebige Taste"
-
-#: settings/GeneralPage.js:452
-msgid "New Hotkey"
-msgstr "Neues Tastenkürzel"
-
-#: settings/Menu/FineTunePage.js:32
-msgid "Show Category Sub Menus"
-msgstr "Kategorie-Untermenüs anzeigen"
-
-#: settings/Menu/FineTunePage.js:46
-msgid "Show Application Descriptions"
-msgstr "Anwendungsbeschreibungen anzeigen"
-
-#: settings/Menu/FineTunePage.js:60
-msgid "Disable ScrollView Fade Effects"
-msgstr "ScrollView-Überblendeffekte deaktivieren"
-
-#: settings/Menu/FineTunePage.js:74
-msgid "Disable Tooltips"
-msgstr "Minihilfen deaktivieren"
-
-#: settings/Menu/FineTunePage.js:88
-msgid "Alphabetize 'All Programs' Category"
-msgstr "Kategorie »Alle Programme« alphabetisch sortieren"
-
-#: settings/Menu/FineTunePage.js:102
-msgid "Show Hidden Recent Files"
-msgstr "Zuletzt verwendete verborgene Dateien anzeigen"
-
-#: settings/Menu/FineTunePage.js:121
-msgid "Enable/Disable multi-lined labels on large application icon layouts."
-msgstr ""
-"Mehrzeilige Beschriftungen bei Ansichten mit großen Anwendungssymbolen "
-"aktivieren oder deaktivieren."
-
-#: settings/Menu/FineTunePage.js:121 settings/Menu/FineTunePage.js:134
-msgid "Multi-Lined Labels"
-msgstr "Mehrzeilige Beschriftungen"
-
-#: settings/Menu/FineTunePage.js:145
-msgid "Full Color"
-msgstr "Farbig"
-
-#: settings/Menu/FineTunePage.js:146
-msgid "Symbolic"
-msgstr "Stilisiert"
-
-#: settings/Menu/FineTunePage.js:148
-msgid "Category Icon Type"
-msgstr "Symbolart für Kategorien"
-
-#: settings/Menu/FineTunePage.js:149 settings/Menu/FineTunePage.js:160
-msgid "Some icon themes may not include selected icon type"
-msgstr ""
-"Einige Symbolthemen enthalten möglicherweise nicht die ausgewählten Symbolart"
-
-#: settings/Menu/FineTunePage.js:159
-msgid "Shortcuts Icon Type"
-msgstr "Symbolart für Verknüpfungen"
-
-#: settings/Menu/FineTunePage.js:183
-msgid "Disable New Apps Tracker"
-msgstr "Erkennen neuer Anwendungen deaktivieren"
-
-#: settings/Menu/FineTunePage.js:192
-msgid "Clear All"
-msgstr "Alle entfernen"
-
-#: settings/Menu/FineTunePage.js:201
-msgid "Clear Apps Marked 'New'"
-msgstr "Markierung »Neu« von Anwendungen entfernen"
-
-#: settings/Menu/LayoutTweaksPage.js:24 settings/MenuPage.js:49
-#: settings/MenuPage.js:91
+#: src/settings/generalPage.js:461
 #, javascript-format
-msgid "%s Layout Tweaks"
-msgstr "Anpassungen für die Ansicht %s"
+msgid "Conflict with <b>%s</b> hotkey"
+msgstr "Konflikt mit <b>%s</b> Tastenkürzel"
 
-#: settings/Menu/LayoutTweaksPage.js:116
-msgid "Vertical Separator"
-msgstr "Vertikale Trennlinie"
+#: src/settings/generalPage.js:609
+msgid "Standlone Runner"
+msgstr "Freistehendes Runner-Menü"
 
-#: settings/Menu/LayoutTweaksPage.js:125
-msgid "Mouse Click"
-msgstr "Mausklick"
+#: src/settings/menuButtonPage.js:18
+msgid "Menu Button"
+msgstr "Menüknopf"
 
-#: settings/Menu/LayoutTweaksPage.js:126
-msgid "Mouse Hover"
-msgstr "Mausberührung"
+#: src/settings/menuButtonPage.js:29 src/settings/menuSettings/subPage.js:44
+msgid "Reset settings"
+msgstr "Einstellungen zurücksetzen"
 
-#: settings/Menu/LayoutTweaksPage.js:129
-msgid "Category Activation"
-msgstr "Kategorien-Aktivierung"
+#: src/settings/menuButtonPage.js:37 src/settings/menuSettings/subPage.js:49
+#, javascript-format
+msgid "Reset all %s settings?"
+msgstr "Alle Einstellungen für »%s« zurücksetzen?"
 
-#: settings/Menu/LayoutTweaksPage.js:152
-msgid "Round"
-msgstr "Rund"
+#: src/settings/menuButtonPage.js:38 src/settings/menuSettings/subPage.js:50
+#, javascript-format
+msgid "All %s settings will be reset to the default value."
+msgstr "Alle Einstellungen für »%s« werden auf die Vorgabewerte zurückgesetzt."
 
-#: settings/Menu/LayoutTweaksPage.js:153 settings/Menu/VisualSettings.js:178
-#: settings/Menu/VisualSettings.js:179 settings/Menu/VisualSettings.js:180
-msgid "Square"
-msgstr "Quadratisch"
+#: src/settings/menuButtonPage.js:54
+msgid "Appearance"
+msgstr "Erscheinungsbild"
 
-#: settings/Menu/LayoutTweaksPage.js:155
-msgid "Avatar Icon Shape"
-msgstr "Form des Benutzerbilds"
+#: src/settings/menuButtonPage.js:59 src/settings/menuButtonPage.js:156
+#: src/settings/menuSettings/listPinnedPage.js:605
+msgid "Icon"
+msgstr "Symbol"
 
-#: settings/Menu/LayoutTweaksPage.js:171 settings/Menu/LayoutTweaksPage.js:888
-msgid "Bottom"
-msgstr "Unten"
+#: src/settings/menuButtonPage.js:60 src/settings/menuButtonPage.js:143
+msgid "Text"
+msgstr "Text"
 
-#: settings/Menu/LayoutTweaksPage.js:172 settings/Menu/LayoutTweaksPage.js:466
-#: settings/Menu/LayoutTweaksPage.js:889
-msgid "Top"
-msgstr "Oben"
+#: src/settings/menuButtonPage.js:61
+msgid "Icon and Text"
+msgstr "Symbol und Text"
 
-#: settings/Menu/LayoutTweaksPage.js:175
-msgid "Searchbar Location"
-msgstr "Position der Suchleiste"
+#: src/settings/menuButtonPage.js:62
+msgid "Text and Icon"
+msgstr "Text und Symbol"
 
-#: settings/Menu/LayoutTweaksPage.js:196
-msgid "Flip Layout Horizontally"
-msgstr "Ansicht horizontal vertauschen"
+#: src/settings/menuButtonPage.js:63
+#: src/settings/menuSettings/visualSettings.js:286
+msgid "Hidden"
+msgstr "Versteckt"
 
-#: settings/Menu/LayoutTweaksPage.js:212
-msgid "Disable User Avatar"
-msgstr "Benutzerbild deaktivieren"
+#: src/settings/menuButtonPage.js:65
+#: src/settings/menuSettings/listOtherPage.js:38
+msgid "Display Style"
+msgstr "Darstellung"
 
-#: settings/Menu/LayoutTweaksPage.js:252 settings/Menu/LayoutTweaksPage.js:588
-#: settings/Menu/LayoutTweaksPage.js:623 settings/Menu/LayoutTweaksPage.js:704
-#: settings/Menu/LayoutTweaksPage.js:799 settings/Menu/LayoutTweaksPage.js:824
-msgid "Default View"
-msgstr "Standard-Ansicht"
+#: src/settings/menuButtonPage.js:102
+msgid "Padding"
+msgstr "Einbettung"
 
-#: settings/Menu/LayoutTweaksPage.js:279 settings/Menu/LayoutTweaksPage.js:348
-msgid "Disable Frequent Apps"
-msgstr "Häufige Anwendungen deaktivieren"
-
-#: settings/Menu/LayoutTweaksPage.js:287 settings/Menu/LayoutTweaksPage.js:290
-#: settings/Menu/LayoutTweaksPage.js:306 settings/Menu/LayoutTweaksPage.js:309
-#: settings/Menu/LayoutTweaksPage.js:371 settings/Menu/LayoutTweaksPage.js:374
-#: settings/Menu/LayoutTweaksPage.js:602 settings/Menu/LayoutTweaksPage.js:605
-#: settings/Menu/LayoutTweaksPage.js:673 settings/Menu/LayoutTweaksPage.js:676
-#: settings/Menu/LayoutTweaksPage.js:762 settings/Menu/LayoutTweaksPage.js:765
-msgid "Button Shortcuts"
-msgstr "Knopf-Verknüpfungen"
-
-#: settings/Menu/LayoutTweaksPage.js:329
-msgid "Show Apps Grid"
-msgstr "Anwendungsraster anzeigen"
-
-#: settings/Menu/LayoutTweaksPage.js:362
-msgid "Disable Pinned Apps"
-msgstr "Angeheftete Anwendungen deaktivieren"
-
-#: settings/Menu/LayoutTweaksPage.js:396
-msgid "Activate on Hover"
-msgstr "Beim Berühren aktivieren"
-
-#: settings/Menu/LayoutTweaksPage.js:414 settings/Menu/LayoutTweaksPage.js:417
-#: settings/Menu/LayoutTweaksPage.js:722 settings/Menu/LayoutTweaksPage.js:842
-msgid "Extra Shortcuts"
-msgstr "Zusätzliche Verknüpfungen"
-
-#: settings/Menu/LayoutTweaksPage.js:454
-msgid "Enable Activities Overview Shortcut"
-msgstr "Kürzel für Aktivitätenübersicht aktivieren"
-
-#: settings/Menu/LayoutTweaksPage.js:467
-msgid "Centered"
-msgstr "Mittig"
-
-#: settings/Menu/LayoutTweaksPage.js:469
-msgid "Position"
-msgstr "Position"
-
-#: settings/Menu/LayoutTweaksPage.js:480 settings/Menu/LayoutTweaksPage.js:634
-msgid "List"
-msgstr "Liste"
-
-#: settings/Menu/LayoutTweaksPage.js:481 settings/Menu/LayoutTweaksPage.js:635
-msgid "Grid"
-msgstr "Raster"
-
-#: settings/Menu/LayoutTweaksPage.js:483 settings/Menu/LayoutTweaksPage.js:637
-msgid "Search Results Display Style"
-msgstr "Darstellung der Suchergebnisse"
-
-#: settings/Menu/LayoutTweaksPage.js:510 settings/Menu/VisualSettings.js:308
-msgid "Width"
-msgstr "Breite"
-
-#: settings/Menu/LayoutTweaksPage.js:533 settings/Menu/VisualSettings.js:36
-#: settings/Menu/VisualSettings.js:327
-msgid "Height"
-msgstr "Höhe"
-
-#: settings/Menu/LayoutTweaksPage.js:556 settings/Menu/ThemePage.js:168
-msgid "Font Size"
-msgstr "Schriftgröße"
-
-#: settings/Menu/LayoutTweaksPage.js:557 settings/MenuButtonPage.js:101
+#: src/settings/menuButtonPage.js:103
+#: src/settings/menuSettings/layoutTweaksPage.js:600
 #, javascript-format
 msgid "%d Default Theme Value"
 msgstr "Voreingestellter Themenwert ist %d"
 
-#: settings/Menu/LayoutTweaksPage.js:571
+#: src/settings/menuButtonPage.js:159
+#: src/settings/menuSettings/listPinnedPage.js:618
+msgid "Browse..."
+msgstr "Durchsuchen …"
+
+#: src/settings/menuButtonPage.js:170
+msgid "Choose a New Icon"
+msgstr "Ein neues Symbol auswählen"
+
+#: src/settings/menuButtonPage.js:193
+#: src/settings/menuSettings/visualSettings.js:353
+msgid "Icon Size"
+msgstr "Symbolgröße"
+
+#: src/settings/menuButtonPage.js:206
+msgid "Click Options"
+msgstr "Klickverhalten"
+
+#: src/settings/menuButtonPage.js:212
+msgid "Context Menu"
+msgstr "Kontextmenü"
+
+#: src/settings/menuButtonPage.js:213
+msgid "None"
+msgstr "Keines"
+
+#: src/settings/menuButtonPage.js:216
+msgid "Left Click"
+msgstr "Linksklick"
+
+#: src/settings/menuButtonPage.js:226
+msgid "Right Click"
+msgstr "Rechtsklick"
+
+#: src/settings/menuButtonPage.js:236
+msgid "Middle Click"
+msgstr "Mittelklick"
+
+#: src/settings/menuButtonPage.js:248
+msgid "Styling"
+msgstr "Menügestaltung"
+
+#: src/settings/menuButtonPage.js:249 src/settings/menuSettings/themePage.js:40
+msgid "Results may vary with third party themes"
+msgstr "Die Ergebnisse können bei Themen von Drittanbietern variieren"
+
+#: src/settings/menuButtonPage.js:253 src/settings/menuButtonPage.js:262
+#: src/settings/menuButtonPage.js:268
+#: src/settings/menuSettings/themePage.js:185
+#: src/settings/menuSettings/themePage.js:211
+#: src/settings/menuSettings/themePage.js:217
+msgid "Foreground Color"
+msgstr "Vordergrundfarbe"
+
+#: src/settings/menuButtonPage.js:256 src/settings/menuButtonPage.js:259
+#: src/settings/menuButtonPage.js:265
+#: src/settings/menuSettings/themePage.js:182
+#: src/settings/menuSettings/themePage.js:208
+#: src/settings/menuSettings/themePage.js:214
+msgid "Background Color"
+msgstr "Hintergrundfarbe"
+
+#: src/settings/menuButtonPage.js:259 src/settings/menuButtonPage.js:262
+#: src/settings/menuSettings/themePage.js:208
+#: src/settings/menuSettings/themePage.js:211
+msgid "Hover"
+msgstr "Berühren"
+
+#: src/settings/menuButtonPage.js:265 src/settings/menuButtonPage.js:268
+#: src/settings/menuSettings/themePage.js:214
+#: src/settings/menuSettings/themePage.js:217
+msgid "Active"
+msgstr "Aktiv"
+
+#: src/settings/menuButtonPage.js:271
+#: src/settings/menuSettings/themePage.js:194
+msgid "Border Radius"
+msgstr "Eckenabrundung"
+
+#: src/settings/menuButtonPage.js:275
+#: src/settings/menuSettings/themePage.js:191
+msgid "Border Width"
+msgstr "Rahmengröße"
+
+#: src/settings/menuButtonPage.js:276
+msgid "Background colors required if set to 0"
+msgstr "Hintergrundfarben erforderlich, wenn auf 0 gesetzt"
+
+#: src/settings/menuButtonPage.js:279
+#: src/settings/menuSettings/themePage.js:188
+msgid "Border Color"
+msgstr "Rahmenfarbe"
+
+#: src/settings/menuButtonPage.js:424
+msgid "Menu Button Icons"
+msgstr "Symbol für Menüknopf"
+
+#: src/settings/menuButtonPage.js:428
+msgid "Icons"
+msgstr "Symbole"
+
+#: src/settings/menuButtonPage.js:448
+msgid "Distros"
+msgstr "Distro-Symbole"
+
+#: src/settings/menuButtonPage.js:454
+msgid "Legal Disclaimer"
+msgstr "Haftungsausschluss"
+
+#: src/settings/menuButtonPage.js:486
+#: src/settings/menuSettings/visualSettings.js:191
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: src/settings/menuButtonPage.js:520
+msgid "Browse Files..."
+msgstr "Durchsuchen …"
+
+#: src/settings/menuButtonPage.js:525
+msgid "Select an Image File"
+msgstr "Ein Symbol auswählen"
+
+#: src/settings/menuButtonPage.js:533 src/settings/menuButtonPage.js:715
+msgid "Select"
+msgstr "Alle auswählen"
+
+#: src/settings/menuButtonPage.js:552
+msgid "Browse Icons..."
+msgstr "Symbole durchsuchen …"
+
+#: src/settings/menuButtonPage.js:617
+#: src/settings/menuSettings/listPinnedPage.js:624
+msgid "Select an Icon"
+msgstr "Ein Symbol auswählen"
+
+#: src/settings/menuButtonPage.js:622
+msgid "System Icons"
+msgstr "Systemsymbol"
+
+#: src/settings/menuButtonPage.js:626
+msgid "Search..."
+msgstr "Suche läuft …"
+
+#: src/settings/menuButtonPage.js:735
+msgid "Legal Disclaimer for Distro Icons"
+msgstr "Haftungsausschluss für Distro-Symbole"
+
+#: src/settings/menuPage.js:24
+msgid "Menu"
+msgstr "Menü"
+
+#: src/settings/menuPage.js:32
+msgid "How should the menu look?"
+msgstr "Wie soll das Menü aussehen?"
+
+#: src/settings/menuPage.js:39
+msgid "Menu Layout"
+msgstr "Menüansicht"
+
+#: src/settings/menuPage.js:40
+msgid "Choose a layout style for the menu"
+msgstr "Darstellungsvariante für das Menü auswählen"
+
+#: src/settings/menuPage.js:49 src/settings/menuPage.js:91
+#: src/settings/menuSettings/layoutTweaksPage.js:25
+#, javascript-format
+msgid "%s Layout Tweaks"
+msgstr "Anpassungen für die Ansicht %s"
+
+#: src/settings/menuPage.js:55
+msgid "Menu Theme"
+msgstr "Menü-Thema"
+
+#: src/settings/menuPage.js:56
+msgid "Modify menu colors, font size, and border"
+msgstr "Schriftgröße, Menüfarben und Rahmen anpassen"
+
+#: src/settings/menuPage.js:65
+msgid "Menu Visual Appearance"
+msgstr "Erscheinungsbild des Menüs"
+
+#: src/settings/menuPage.js:66
+msgid "Change menu height, width, location, and icon sizes"
+msgstr "Menühöhe und -breite, Position sowie Symbolgrößen ändern"
+
+#: src/settings/menuPage.js:75
+msgid "Fine Tune"
+msgstr "Feineinstellung"
+
+#: src/settings/menuPage.js:76
+msgid "Adjust less commonly used settings"
+msgstr "Weniger häufig verwendete Einstellungen anpassen"
+
+#: src/settings/menuPage.js:85
+msgid "What should show on the menu?"
+msgstr "Was soll im Menü angezeigt werden?"
+
+#: src/settings/menuPage.js:92
+msgid "Settings specific to the current menu layout"
+msgstr "Bestimmte Einstellungen für die aktuelle Menüansicht"
+
+#: src/settings/menuPage.js:112
+msgid "Directory Shortcuts"
+msgstr "Verzeichnisverknüpfungen"
+
+#: src/settings/menuPage.js:134
+#: src/settings/menuSettings/searchOptionsPage.js:16
+msgid "Search Options"
+msgstr "Suchoptionen"
+
+#: src/settings/menuPage.js:144 src/settings/menuSettings/listPinnedPage.js:392
+msgid "Power Options"
+msgstr "Beenden-Optionen"
+
+#: src/settings/menuPage.js:145
+msgid "Choose which power options to show and the display style"
+msgstr "Optionen zum Beenden sowie deren Darstellungsart anpassen"
+
+#: src/settings/menuPage.js:156
+msgid "Extra Categories"
+msgstr "Weitere Kategorien"
+
+#: src/settings/menuPage.js:158
+msgid "Add or remove additional custom categories"
+msgstr "Zusätzliche eigene Kategorien hinzufügen oder entfernen"
+
+#: src/settings/menuPage.js:168
+msgid "What should show on the context menu?"
+msgstr "Was soll im Kontextmenü angezeigt werden?"
+
+#: src/settings/menuPage.js:173
+msgid "Modify ArcMenu Context Menu"
+msgstr "Kontextmenü von ArcMenu anpassen"
+
+#: src/settings/menuSettings/fineTunePage.js:33
+msgid "Show Category Sub Menus"
+msgstr "Kategorie-Untermenüs anzeigen"
+
+#: src/settings/menuSettings/fineTunePage.js:47
+msgid "Show Application Descriptions"
+msgstr "Anwendungsbeschreibungen anzeigen"
+
+#: src/settings/menuSettings/fineTunePage.js:61
+msgid "Disable ScrollView Fade Effects"
+msgstr "ScrollView-Überblendeffekte deaktivieren"
+
+#: src/settings/menuSettings/fineTunePage.js:75
+msgid "Disable Tooltips"
+msgstr "Minihilfen deaktivieren"
+
+#: src/settings/menuSettings/fineTunePage.js:89
+msgid "Group Apps Alphabetically on List Views"
+msgstr "Gruppiere Anwendungen alphabetisch in Listenansichten"
+
+#: src/settings/menuSettings/fineTunePage.js:90
+#: src/settings/menuSettings/fineTunePage.js:105
+msgid "For All Apps sections"
+msgstr "Alle Anwendungen"
+
+#: src/settings/menuSettings/fineTunePage.js:104
+msgid "Group Apps Alphabetically on Grid Views"
+msgstr "Gruppiere Anwendungen alphabetisch in Kachelansichten"
+
+#: src/settings/menuSettings/fineTunePage.js:119
+msgid "Show Hidden Recent Files"
+msgstr "Zuletzt verwendete verborgene Dateien anzeigen"
+
+#: src/settings/menuSettings/fineTunePage.js:133
+msgid "Multi-Lined Labels"
+msgstr "Mehrzeilige Beschriftungen"
+
+#: src/settings/menuSettings/fineTunePage.js:134
+msgid "Allow application labels to span multiple lines on grid style layouts"
+msgstr ""
+"Erlaube Applikationsbeschriftungen über mehrere Zeilen auf Kachel Layouts"
+
+#: src/settings/menuSettings/fineTunePage.js:148
+msgid "Activate App Window on Launch"
+msgstr "Aktiviere Anwendungsfenster beim Start"
+
+#: src/settings/menuSettings/fineTunePage.js:149
+msgid ""
+"Launching an app activates its existing window if one is open; otherwise, it "
+"launches a new instance. Hold Ctrl while launching or middle-click to open a "
+"new window."
+msgstr ""
+"Der Start einer Anwendung aktiviert dessen existierendes Fenster, wenn eins "
+"offen ist; andernfalls wird eine neue Instanz geöffnet. Halte Strg beim "
+"Öffnen oder die mittlere Maustaste, um ein neues Fenster zu öffnen."
+
+#: src/settings/menuSettings/fineTunePage.js:159
+msgid "Full Color"
+msgstr "Farbig"
+
+#: src/settings/menuSettings/fineTunePage.js:160
+msgid "Symbolic"
+msgstr "Stilisiert"
+
+#: src/settings/menuSettings/fineTunePage.js:162
+msgid "Category Icon Type"
+msgstr "Symbolart für Kategorien"
+
+#: src/settings/menuSettings/fineTunePage.js:163
+#: src/settings/menuSettings/fineTunePage.js:174
+msgid "Some icon themes may not include selected icon type"
+msgstr ""
+"Einige Symbolthemen enthalten möglicherweise nicht die ausgewählten Symbolart"
+
+#: src/settings/menuSettings/fineTunePage.js:173
+msgid "Shortcuts Icon Type"
+msgstr "Symbolart für Verknüpfungen"
+
+#: src/settings/menuSettings/fineTunePage.js:197
+msgid "Disable New Apps Tracker"
+msgstr "Erkennen neuer Anwendungen deaktivieren"
+
+#: src/settings/menuSettings/fineTunePage.js:206
+msgid "Clear All"
+msgstr "Alle entfernen"
+
+#: src/settings/menuSettings/fineTunePage.js:215
+msgid "Clear Apps Marked 'New'"
+msgstr "Markierung »Neu« von Anwendungen entfernen"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:113
+#: src/settings/menuSettings/layoutTweaksPage.js:118
+#: src/settings/menuSettings/layoutTweaksPage.js:784
+#: src/settings/menuSettings/layoutTweaksPage.js:939
+msgid "Extra Shortcuts"
+msgstr "Zusätzliche Verknüpfungen"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:138
+msgid "Vertical Separator"
+msgstr "Vertikale Trennlinie"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:147
+msgid "Mouse Click"
+msgstr "Mausklick"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:148
+msgid "Mouse Hover"
+msgstr "Mausberührung"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:151
+msgid "Category Activation"
+msgstr "Kategorien-Aktivierung"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:174
+msgid "Round"
+msgstr "Rund"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:175
+#: src/settings/menuSettings/visualSettings.js:185
+#: src/settings/menuSettings/visualSettings.js:186
+#: src/settings/menuSettings/visualSettings.js:187
+msgid "Square"
+msgstr "Quadratisch"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:177
+msgid "Avatar Icon Shape"
+msgstr "Form des Benutzerbilds"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:193
+#: src/settings/menuSettings/layoutTweaksPage.js:985
+msgid "Bottom"
+msgstr "Unten"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:194
+#: src/settings/menuSettings/layoutTweaksPage.js:509
+#: src/settings/menuSettings/layoutTweaksPage.js:986
+msgid "Top"
+msgstr "Oben"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:197
+msgid "Searchbar Location"
+msgstr "Position der Suchleiste"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:218
+msgid "Flip Layout Horizontally"
+msgstr "Ansicht horizontal vertauschen"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:234
+msgid "Disable User Avatar"
+msgstr "Benutzerbild deaktivieren"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:274
+#: src/settings/menuSettings/layoutTweaksPage.js:338
+#: src/settings/menuSettings/layoutTweaksPage.js:631
+#: src/settings/menuSettings/layoutTweaksPage.js:658
+#: src/settings/menuSettings/layoutTweaksPage.js:766
+#: src/settings/menuSettings/layoutTweaksPage.js:855
+#: src/settings/menuSettings/layoutTweaksPage.js:881
+msgid "Default View"
+msgstr "Standard-Ansicht"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:301
+#: src/settings/menuSettings/layoutTweaksPage.js:407
+msgid "Disable Frequent Apps"
+msgstr "Häufige Anwendungen deaktivieren"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:327
+msgid "Merge Top and Bottom Panels"
+msgstr "Oberes und unteres Panel zusammenführen"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:365
+#: src/settings/menuSettings/layoutTweaksPage.js:908
+msgid "Max Frequent Apps"
+msgstr "Anzahl der häufigen Anwendungen"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:388
+msgid "Show Apps Grid"
+msgstr "Anwendungsraster anzeigen"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:421
+msgid "Disable Pinned Apps"
+msgstr "Angeheftete Anwendungen deaktivieren"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:447
+msgid "Activate on Hover"
+msgstr "Beim Berühren aktivieren"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:497
+msgid "Enable Activities Overview Shortcut"
+msgstr "Kürzel für Aktivitätenübersicht aktivieren"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:510
+msgid "Centered"
+msgstr "Mittig"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:512
+msgid "Position"
+msgstr "Position"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:523
+#: src/settings/menuSettings/layoutTweaksPage.js:669
+msgid "List"
+msgstr "Liste"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:524
+#: src/settings/menuSettings/layoutTweaksPage.js:670
+msgid "Grid"
+msgstr "Raster"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:526
+#: src/settings/menuSettings/layoutTweaksPage.js:672
+msgid "Search Results Display Style"
+msgstr "Darstellung der Suchergebnisse"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:553
+#: src/settings/menuSettings/visualSettings.js:315
+msgid "Width"
+msgstr "Breite"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:576
+#: src/settings/menuSettings/visualSettings.js:36
+#: src/settings/menuSettings/visualSettings.js:334
+msgid "Height"
+msgstr "Höhe"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:599
+#: src/settings/menuSettings/themePage.js:197
+msgid "Font Size"
+msgstr "Schriftgröße"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:614
 msgid "Show Frequent Apps"
 msgstr "Häufige Anwendungen anzeigen"
 
-#: settings/Menu/LayoutTweaksPage.js:651
+#: src/settings/menuSettings/layoutTweaksPage.js:686
 msgid "Position on Monitor"
 msgstr "Position auf dem Bildschirm"
 
-#: settings/Menu/LayoutTweaksPage.js:734 settings/Menu/LayoutTweaksPage.js:853
+#: src/settings/menuSettings/layoutTweaksPage.js:744
+#: src/settings/menuSettings/visualSettings.js:77
+msgid "Right-Panel Width"
+msgstr "Breite rechter Bereich"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:796
+#: src/settings/menuSettings/layoutTweaksPage.js:950
 msgid "External Devices"
 msgstr "Externe Geräte"
 
-#: settings/Menu/LayoutTweaksPage.js:786
+#: src/settings/menuSettings/layoutTweaksPage.js:842
 msgid "Nothing Yet!"
 msgstr "Noch nichts!"
 
-#: settings/Menu/LayoutTweaksPage.js:796 settings/Menu/LayoutTweaksPage.js:820
+#: src/settings/menuSettings/layoutTweaksPage.js:852
+#: src/settings/menuSettings/layoutTweaksPage.js:876
+#: src/settings/menuSettings/layoutTweaksPage.js:917
 msgid "Categories List"
 msgstr "Kategorieliste"
 
-#: settings/Menu/LayoutTweaksPage.js:875
+#: src/settings/menuSettings/layoutTweaksPage.js:879
+msgid "Pinned and Frequent Apps"
+msgstr "Häufige und angeheftete Anwendungen"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:921
+msgid "'All Apps' Button Action"
+msgstr "Aktion bei 'Alle Anwendungen'"
+
+#: src/settings/menuSettings/layoutTweaksPage.js:972
 msgid "Category Quick Links"
 msgstr "Schnellzugriffe auf Kategorien"
 
-#: settings/Menu/LayoutTweaksPage.js:876
+#: src/settings/menuSettings/layoutTweaksPage.js:973
 msgid ""
 "Display quick links of extra categories on the home page\n"
 "Must also be enabled in 'Menu -> Extra Categories' section"
@@ -907,639 +1373,667 @@ msgstr ""
 "Schnellzugriffe auf Extra-Kategorien in Startansicht anzeigen\n"
 "Muss auch im Bereich »Menü -> Extra-Kategorien« aktiviert sein"
 
-#: settings/Menu/LayoutTweaksPage.js:891
+#: src/settings/menuSettings/layoutTweaksPage.js:988
 msgid "Quick Links Location"
 msgstr "Position der Schnellzugriffe"
 
-#: settings/Menu/LayoutTweaksPage.js:923
+#: src/settings/menuSettings/layoutTweaksPage.js:1020
 msgid "Enable Weather Widget"
 msgstr "Wetter-Widget aktivieren"
 
-#: settings/Menu/LayoutTweaksPage.js:937
+#: src/settings/menuSettings/layoutTweaksPage.js:1034
 msgid "Enable Clock Widget"
 msgstr "Uhren-Widget aktivieren"
 
-#: settings/Menu/LayoutsPage.js:24
+#: src/settings/menuSettings/layoutsPage.js:24
 msgid "Current Menu Layout"
 msgstr "Aktuelle Menüansicht"
 
-#: settings/Menu/LayoutsPage.js:38
+#: src/settings/menuSettings/layoutsPage.js:38
 msgid "Choose a new menu layout?"
 msgstr "Eine neue Menüansicht auswählen?"
 
-#: settings/Menu/LayoutsPage.js:44
+#: src/settings/menuSettings/layoutsPage.js:44
 #, javascript-format
 msgid "%s Menu Layouts"
 msgstr "%s-Menüansichten"
 
-#: settings/Menu/ListOtherPage.js:34
+#: src/settings/menuSettings/listOtherPage.js:34
 msgid "Actions will be hidden from ArcMenu if not available on your system."
 msgstr ""
 "Auf Ihrem System nicht verfügbare Aktionen werden in ArcMenu ausgeblendet."
 
-#: settings/Menu/ListOtherPage.js:38
-msgid "Power Off / Log Out Buttons"
-msgstr "Knöpfe für Ausschalten/Abmelden"
-
-#: settings/Menu/ListOtherPage.js:41 settings/Menu/VisualSettings.js:111
-#: settings/Menu/VisualSettings.js:177 settings/Menu/VisualSettings.js:271
+#: src/settings/menuSettings/listOtherPage.js:41
+#: src/settings/menuSettings/visualSettings.js:111
+#: src/settings/menuSettings/visualSettings.js:184
+#: src/settings/menuSettings/visualSettings.js:278
 msgid "Off"
 msgstr "Aus"
 
-#: settings/Menu/ListOtherPage.js:42
+#: src/settings/menuSettings/listOtherPage.js:42
 msgid "Power Buttons"
 msgstr "Beenden-Knöpfe"
 
-#: settings/Menu/ListOtherPage.js:43
+#: src/settings/menuSettings/listOtherPage.js:43
 msgid "Power Menu"
 msgstr "Beenden-Menü"
 
-#: settings/Menu/ListOtherPage.js:45
+#: src/settings/menuSettings/listOtherPage.js:45
 msgid "Override Display Style"
 msgstr "Darstellungsstil überschreiben"
 
-#: settings/Menu/ListPinnedPage.js:35 settings/Menu/ListPinnedPage.js:38
-#: settings/Menu/ListPinnedPage.js:44
+#: src/settings/menuSettings/listPinnedPage.js:77
+#: src/settings/menuSettings/listPinnedPage.js:80
+#: src/settings/menuSettings/listPinnedPage.js:86
+#: src/settings/menuSettings/listPinnedPage.js:91
 msgid "Add More Apps"
 msgstr "Weitere Anwendungen hinzufügen"
 
-#: settings/Menu/ListPinnedPage.js:41
+#: src/settings/menuSettings/listPinnedPage.js:83
 msgid "Add Default User Directories"
 msgstr "Voreingestellte Benutzerverzeichnisse hinzufügen"
 
-#: settings/Menu/ListPinnedPage.js:47
+#: src/settings/menuSettings/listPinnedPage.js:89
 msgid "Add More Shortcuts"
 msgstr "Weitere Verknüpfungen hinzufügen"
 
-#: settings/Menu/ListPinnedPage.js:123
+#: src/settings/menuSettings/listPinnedPage.js:155
 msgid "Add Custom Shortcut"
 msgstr "Benutzerdefinierte Verknüpfung hinzufügen"
 
-#: settings/Menu/ListPinnedPage.js:242
+#: src/settings/menuSettings/listPinnedPage.js:246
 msgid "Invalid Shortcut"
 msgstr "Ungültige Verknüpfung"
 
-#: settings/Menu/ListPinnedPage.js:319
+#: src/settings/menuSettings/listPinnedPage.js:338
 msgid "Add to your Pinned Apps"
 msgstr "Zu Ihren angehefteten Anwendungen hinzufügen"
 
-#: settings/Menu/ListPinnedPage.js:321
+#: src/settings/menuSettings/listPinnedPage.js:340
 msgid "Add to your Extra Shortcuts"
 msgstr "Zu Ihren Extra-Verknüpfungen hinzufügen"
 
-#: settings/Menu/ListPinnedPage.js:323
+#: src/settings/menuSettings/listPinnedPage.js:342
 msgid "Select Application Shortcuts"
 msgstr "Anwendungsverknüpfungen auswählen"
 
-#: settings/Menu/ListPinnedPage.js:325
+#: src/settings/menuSettings/listPinnedPage.js:344
 msgid "Select Directory Shortcuts"
 msgstr "Verzeichnisverknüpfungen auswählen"
 
-#: settings/Menu/ListPinnedPage.js:327
+#: src/settings/menuSettings/listPinnedPage.js:346
 msgid "Add to the Context Menu"
 msgstr "Zum Kontextmenü hinzufügen"
 
-#: settings/Menu/ListPinnedPage.js:345
-msgid "Run Command..."
-msgstr "Befehl ausführen …"
-
-#: settings/Menu/ListPinnedPage.js:348
-msgid "Show All Apps"
-msgstr "Alle Anwendungen anzeigen"
-
-#: settings/Menu/ListPinnedPage.js:355
-msgid "Menu Settings"
-msgstr "Menü-Einstellungen"
-
-#: settings/Menu/ListPinnedPage.js:357
-msgid "Menu Theming"
-msgstr "Menüthemen"
-
-#: settings/Menu/ListPinnedPage.js:359
-msgid "Change Menu Layout"
-msgstr "Menüansicht anpassen"
-
-#: settings/Menu/ListPinnedPage.js:361
-msgid "Menu Button Settings"
-msgstr "Einstellungen für den Menüknopf"
-
-#: settings/Menu/ListPinnedPage.js:364
-msgid "Panel Extension Settings"
-msgstr "Einstellungen von Panel-Erweiterungen"
-
-#: settings/Menu/ListPinnedPage.js:368 settings/MenuPage.js:144
-msgid "Power Options"
-msgstr "Beenden-Optionen"
-
-#: settings/Menu/ListPinnedPage.js:370 settings/Menu/ListPinnedPage.js:375
+#: src/settings/menuSettings/listPinnedPage.js:360
+#: src/settings/menuSettings/listPinnedPage.js:371
+#: src/settings/menuSettings/listPinnedPage.js:394
+#: src/settings/menuSettings/listPinnedPage.js:399
 msgid "Separator"
 msgstr "Trennlinie"
 
-#: settings/Menu/ListPinnedPage.js:393
+#: src/settings/menuSettings/listPinnedPage.js:361
+#: src/settings/menuSettings/listPinnedPage.js:372
+msgid "Spacer"
+msgstr "Abstandshalter"
+
+#: src/settings/menuSettings/listPinnedPage.js:367
+msgid "Run Command..."
+msgstr "Befehl ausführen …"
+
+#: src/settings/menuSettings/listPinnedPage.js:370
+msgid "Show All Apps"
+msgstr "Alle Anwendungen anzeigen"
+
+#: src/settings/menuSettings/listPinnedPage.js:379
+msgid "Menu Settings"
+msgstr "Menü-Einstellungen"
+
+#: src/settings/menuSettings/listPinnedPage.js:381
+msgid "Menu Theming"
+msgstr "Menüthemen"
+
+#: src/settings/menuSettings/listPinnedPage.js:383
+msgid "Change Menu Layout"
+msgstr "Menüansicht anpassen"
+
+#: src/settings/menuSettings/listPinnedPage.js:385
+msgid "Menu Button Settings"
+msgstr "Einstellungen für den Menüknopf"
+
+#: src/settings/menuSettings/listPinnedPage.js:388
+msgid "Panel Extension Settings"
+msgstr "Einstellungen von Panel-Erweiterungen"
+
+#: src/settings/menuSettings/listPinnedPage.js:417
 msgid "Documents"
 msgstr "Dokumente"
 
-#: settings/Menu/ListPinnedPage.js:395
+#: src/settings/menuSettings/listPinnedPage.js:419
 msgid "Downloads"
 msgstr "Downloads"
 
-#: settings/Menu/ListPinnedPage.js:397
+#: src/settings/menuSettings/listPinnedPage.js:421
 msgid "Music"
 msgstr "Musik"
 
-#: settings/Menu/ListPinnedPage.js:398
+#: src/settings/menuSettings/listPinnedPage.js:422
 msgid "Pictures"
 msgstr "Bilder"
 
-#: settings/Menu/ListPinnedPage.js:399
+#: src/settings/menuSettings/listPinnedPage.js:423
 msgid "Videos"
 msgstr "Videos"
 
 # Wortlaut der deutschen Übersetzung aus dem Menüeintrag in "Dateien" (Gnome Files) übernommen, um eine einheitliche Übersetzung zu erhalten.
-#: settings/Menu/ListPinnedPage.js:402
+#: src/settings/menuSettings/listPinnedPage.js:426
 msgid "Recent"
 msgstr "Zuletzt verwendet"
 
-#: settings/Menu/ListPinnedPage.js:432
+#: src/settings/menuSettings/listPinnedPage.js:453
 msgid "Dash to Panel or App Icons Taskbar"
 msgstr "»Dash to Panel« oder »App Icons Taskbar«"
 
-#: settings/Menu/ListPinnedPage.js:514
+#: src/settings/menuSettings/listPinnedPage.js:534
 #, javascript-format
 msgid "%s has been added"
 msgstr "%s wurde hinzugefügt"
 
-#: settings/Menu/ListPinnedPage.js:525
+#: src/settings/menuSettings/listPinnedPage.js:545
 #, javascript-format
 msgid "%s has been removed"
 msgstr "%s wurde entfernt"
 
-#: settings/Menu/ListPinnedPage.js:548
+#: src/settings/menuSettings/listPinnedPage.js:569
 msgid "Add a Custom Shortcut"
 msgstr "Eine benutzerdefinierte Verknüpfung hinzufügen"
 
-#: settings/Menu/ListPinnedPage.js:553
+#: src/settings/menuSettings/listPinnedPage.js:579
 msgid "Edit Pinned App"
 msgstr "Angeheftete Anwendung bearbeiten"
 
-#: settings/Menu/ListPinnedPage.js:555
+#: src/settings/menuSettings/listPinnedPage.js:581
 msgid "Edit Shortcut"
 msgstr "Verknüpfung bearbeiten"
 
-#: settings/Menu/ListPinnedPage.js:566
+#: src/settings/menuSettings/listPinnedPage.js:593
 msgid "Title"
 msgstr "Titel"
 
-#: settings/Menu/ListPinnedPage.js:578 settings/MenuButtonPage.js:57
-msgid "Icon"
-msgstr "Symbol"
-
-#: settings/Menu/ListPinnedPage.js:590 settings/MenuButtonPage.js:156
-#: settings/MenuButtonPage.js:460
-msgid "Browse..."
-msgstr "Durchsuchen …"
-
-#: settings/Menu/ListPinnedPage.js:596 settings/MenuButtonPage.js:465
-msgid "Select an Icon"
-msgstr "Ein Symbol auswählen"
-
-#: settings/Menu/ListPinnedPage.js:625
+#: src/settings/menuSettings/listPinnedPage.js:653
 msgid "Command"
 msgstr "Befehl"
 
-#: settings/Menu/ListPinnedPage.js:625
+#: src/settings/menuSettings/listPinnedPage.js:653
 msgid "Directory"
 msgstr "Verzeichnis"
 
-#: settings/Menu/ListPinnedPage.js:637
+#: src/settings/menuSettings/listPinnedPage.js:666
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: settings/Menu/SearchOptionsPage.js:22
-msgid "Extra Search Providers"
-msgstr "Zusätzliche Suchdienste"
+#: src/settings/menuSettings/searchOptionsPage.js:27
+msgid "Hide Search Bar"
+msgstr "Suchleiste entfernen"
 
-#: settings/Menu/SearchOptionsPage.js:33
-msgid "Search for open windows across all workspaces"
-msgstr "Nach offenen Fenstern auf allen Arbeitsflächen suchen"
+#: src/settings/menuSettings/searchOptionsPage.js:28
+msgid "The search bar hides when empty and appears when typing."
+msgstr ""
+"Die Sucheleiste wird verborgen, solange sie leer ist, und erscheint beim "
+"Tippen."
 
-#: settings/Menu/SearchOptionsPage.js:47
-msgid "Search for recent files"
-msgstr "Nach zuletzt verwendeten Dateien suchen"
-
-#: settings/Menu/SearchOptionsPage.js:55 settings/MenuPage.js:134
-msgid "Search Options"
-msgstr "Suchoptionen"
-
-#: settings/Menu/SearchOptionsPage.js:66
+#: src/settings/menuSettings/searchOptionsPage.js:42
 msgid "Show Search Result Descriptions"
 msgstr "Beschreibungen der Suchergebnisse anzeigen"
 
-#: settings/Menu/SearchOptionsPage.js:81
+#: src/settings/menuSettings/searchOptionsPage.js:57
 msgid "Highlight search result terms"
 msgstr "Suchbegriffe hervorheben"
 
-#: settings/Menu/SearchOptionsPage.js:100
+#: src/settings/menuSettings/searchOptionsPage.js:76
 msgid "Max Search Results"
 msgstr "Maximale Anzahl an Suchergebnissen"
 
-#: settings/Menu/SearchOptionsPage.js:144
+#: src/settings/menuSettings/searchOptionsPage.js:120
 msgid "Search Box Border Radius"
 msgstr "Eckenabrundung der Suchleiste"
 
-#: settings/Menu/SubPage.js:53 settings/MenuButtonPage.js:27
-msgid "Reset settings"
-msgstr "Einstellungen zurücksetzen"
+#: src/settings/menuSettings/searchOptionsPage.js:134
+msgid "Extra Search Providers"
+msgstr "Zusätzliche Suchdienste"
 
-#: settings/Menu/SubPage.js:58 settings/MenuButtonPage.js:35
-#, javascript-format
-msgid "Reset all %s settings?"
-msgstr "Alle Einstellungen für »%s« zurücksetzen?"
+#: src/settings/menuSettings/searchOptionsPage.js:145
+msgid "Search for open windows across all workspaces"
+msgstr "Nach offenen Fenstern auf allen Arbeitsflächen suchen"
 
-#: settings/Menu/SubPage.js:59 settings/MenuButtonPage.js:36
-#, javascript-format
-msgid "All %s settings will be reset to the default value."
-msgstr "Alle Einstellungen für »%s« werden auf die Vorgabewerte zurückgesetzt."
+#: src/settings/menuSettings/searchOptionsPage.js:159
+msgid "Search for recent files"
+msgstr "Nach zuletzt verwendeten Dateien suchen"
 
-#: settings/Menu/ThemePage.js:38
+#: src/settings/menuSettings/themePage.js:39
 msgid "Override Theme"
 msgstr "Thema überschreiben"
 
-#: settings/Menu/ThemePage.js:39 settings/MenuButtonPage.js:202
-msgid "Results may vary with third party themes"
-msgstr "Die Ergebnisse können bei Themen von Drittanbietern variieren"
-
-#: settings/Menu/ThemePage.js:46 settings/Menu/ThemingDialog.js:68
-#: settings/Menu/ThemingDialog.js:76 settings/Menu/ThemingDialog.js:142
+#: src/settings/menuSettings/themePage.js:47
+#: src/settings/menuSettings/themingDialog.js:67
+#: src/settings/menuSettings/themingDialog.js:75
+#: src/settings/menuSettings/themingDialog.js:141
 msgid "Menu Themes"
 msgstr "Menü-Themen"
 
-#: settings/Menu/ThemePage.js:90
+#: src/settings/menuSettings/themePage.js:119
 msgid "Current Theme"
 msgstr "Aktuelles Thema"
 
-#: settings/Menu/ThemePage.js:118
+#: src/settings/menuSettings/themePage.js:147
 msgid "Save as Theme"
 msgstr "Als Thema speichern"
 
-#: settings/Menu/ThemePage.js:148
+#: src/settings/menuSettings/themePage.js:177
 msgid "Menu Styling"
 msgstr "Menügestaltung"
 
-#: settings/Menu/ThemePage.js:153 settings/Menu/ThemePage.js:179
-#: settings/Menu/ThemePage.js:185 settings/MenuButtonPage.js:209
-#: settings/MenuButtonPage.js:212 settings/MenuButtonPage.js:218
-msgid "Background Color"
-msgstr "Hintergrundfarbe"
-
-#: settings/Menu/ThemePage.js:156 settings/Menu/ThemePage.js:182
-#: settings/Menu/ThemePage.js:188 settings/MenuButtonPage.js:206
-#: settings/MenuButtonPage.js:215 settings/MenuButtonPage.js:221
-msgid "Foreground Color"
-msgstr "Vordergrundfarbe"
-
-#: settings/Menu/ThemePage.js:159 settings/MenuButtonPage.js:232
-msgid "Border Color"
-msgstr "Rahmenfarbe"
-
-#: settings/Menu/ThemePage.js:162 settings/MenuButtonPage.js:228
-msgid "Border Width"
-msgstr "Rahmengröße"
-
-#: settings/Menu/ThemePage.js:165 settings/MenuButtonPage.js:224
-msgid "Border Radius"
-msgstr "Eckenabrundung"
-
-#: settings/Menu/ThemePage.js:171
+#: src/settings/menuSettings/themePage.js:200
 msgid "Separator Color"
 msgstr "Farbe der Trennlinie"
 
-#: settings/Menu/ThemePage.js:175
+#: src/settings/menuSettings/themePage.js:204
 msgid "Menu Items Styling"
 msgstr "Gestaltung der Menüeinträge"
 
-#: settings/Menu/ThemePage.js:179 settings/Menu/ThemePage.js:182
-#: settings/MenuButtonPage.js:212 settings/MenuButtonPage.js:215
-msgid "Hover"
-msgstr "Berühren"
-
-#: settings/Menu/ThemePage.js:185 settings/Menu/ThemePage.js:188
-#: settings/MenuButtonPage.js:218 settings/MenuButtonPage.js:221
-msgid "Active"
-msgstr "Aktiv"
-
-#: settings/Menu/ThemingDialog.js:16
+#: src/settings/menuSettings/themingDialog.js:15
 msgid "Save Theme As..."
 msgstr "Thema speichern unter …"
 
-#: settings/Menu/ThemingDialog.js:28
+#: src/settings/menuSettings/themingDialog.js:27
 msgid "Theme Name"
 msgstr "Name des Themas"
 
-#: settings/Menu/ThemingDialog.js:45
+#: src/settings/menuSettings/themingDialog.js:44
 msgid "Save Theme"
 msgstr "Thema speichern"
 
-#: settings/Menu/ThemingDialog.js:61
+#: src/settings/menuSettings/themingDialog.js:60
 msgid "Manage Themes"
 msgstr "Themen verwalten"
 
-#: settings/Menu/ThemingDialog.js:316
+#: src/settings/menuSettings/themingDialog.js:322
 msgid "Save Themes"
 msgstr "Themen speichern"
 
-#: settings/Menu/ThemingDialog.js:318
+#: src/settings/menuSettings/themingDialog.js:324
 msgid "Load Themes"
 msgstr "Themen laden"
 
-#: settings/Menu/ThemingDialog.js:398
+#: src/settings/menuSettings/themingDialog.js:377
 #, javascript-format
 msgid "%s has been selected"
 msgstr "»%s« wurde ausgewählt"
 
-#: settings/Menu/ThemingDialog.js:410
+#: src/settings/menuSettings/themingDialog.js:389
 #, javascript-format
 msgid "%s has been unselected"
 msgstr "»%s« wurde abgewählt"
 
-#: settings/Menu/VisualSettings.js:18
+#: src/settings/menuSettings/visualSettings.js:18
 msgid "Menu Size"
 msgstr "Menügröße"
 
-#: settings/Menu/VisualSettings.js:56
+#: src/settings/menuSettings/visualSettings.js:56
 msgid "Left-Panel Width"
 msgstr "Breite linker Bereich"
 
-#: settings/Menu/VisualSettings.js:57 settings/Menu/VisualSettings.js:78
+#: src/settings/menuSettings/visualSettings.js:57
+#: src/settings/menuSettings/visualSettings.js:78
 msgid "Traditional Layouts"
 msgstr "Traditionelle Ansichten"
 
-#: settings/Menu/VisualSettings.js:77
-msgid "Right-Panel Width"
-msgstr "Breite rechter Bereich"
-
-#: settings/Menu/VisualSettings.js:98
+#: src/settings/menuSettings/visualSettings.js:98
 msgid "Width Offset"
 msgstr "Breitenanpassung"
 
-#: settings/Menu/VisualSettings.js:99 settings/Menu/VisualSettings.js:186
+#: src/settings/menuSettings/visualSettings.js:99
+#: src/settings/menuSettings/visualSettings.js:193
 msgid "Non-Traditional Layouts"
 msgstr "Nicht-traditionelle Ansichten"
 
-#: settings/Menu/VisualSettings.js:106
+#: src/settings/menuSettings/visualSettings.js:106
 msgid "Menu Location"
 msgstr "Menüposition"
 
-#: settings/Menu/VisualSettings.js:112
+#: src/settings/menuSettings/visualSettings.js:112
 msgid "Top Centered"
 msgstr "Oben zentriert"
 
-#: settings/Menu/VisualSettings.js:113
+#: src/settings/menuSettings/visualSettings.js:113
+msgid "Top Left"
+msgstr "Oben links"
+
+#: src/settings/menuSettings/visualSettings.js:114
+msgid "Top Right"
+msgstr "Oben rechts"
+
+#: src/settings/menuSettings/visualSettings.js:115
 msgid "Bottom Centered"
 msgstr "Unten zentriert"
 
-#: settings/Menu/VisualSettings.js:115
+#: src/settings/menuSettings/visualSettings.js:116
+msgid "Bottom Left"
+msgstr "Unten links"
+
+#: src/settings/menuSettings/visualSettings.js:117
+msgid "Bottom Right"
+msgstr "Unten rechts"
+
+#: src/settings/menuSettings/visualSettings.js:118
+msgid "Left Centered"
+msgstr "Mittig links"
+
+#: src/settings/menuSettings/visualSettings.js:119
+msgid "Right Centered"
+msgstr "Mittig rechts"
+
+#: src/settings/menuSettings/visualSettings.js:120
+msgid "Monitor Centered"
+msgstr "Monitor-zentriert"
+
+#: src/settings/menuSettings/visualSettings.js:122
 msgid "Override Menu Location"
 msgstr "Menüposition überschreiben"
 
-#: settings/Menu/VisualSettings.js:156
+#: src/settings/menuSettings/visualSettings.js:163
 msgid "Override Menu Rise"
-msgstr "Menüaufgang überschreiben"
+msgstr "Menüabstand überschreiben"
 
-#: settings/Menu/VisualSettings.js:157
+#: src/settings/menuSettings/visualSettings.js:164
 msgid "Menu Distance from Panel and Screen Edge"
-msgstr "Menüabstand von Panel und Bildschirmrand"
+msgstr "Menüabstand zum Panel und Bildschirmrand"
 
-#: settings/Menu/VisualSettings.js:171
+#: src/settings/menuSettings/visualSettings.js:178
 msgid "Override Icon Sizes"
 msgstr "Symbolgrößen überschreiben"
 
-#: settings/Menu/VisualSettings.js:172
+#: src/settings/menuSettings/visualSettings.js:179
 msgid "Override the icon size of various menu items"
 msgstr "Symbolgröße von verschiedenen Menüeinträgen überschreiben"
 
-#: settings/Menu/VisualSettings.js:178 settings/Menu/VisualSettings.js:181
-#: settings/Menu/VisualSettings.js:273
+#: src/settings/menuSettings/visualSettings.js:185
+#: src/settings/menuSettings/visualSettings.js:188
+#: src/settings/menuSettings/visualSettings.js:280
 msgid "Small"
 msgstr "Klein"
 
-#: settings/Menu/VisualSettings.js:179 settings/Menu/VisualSettings.js:182
-#: settings/Menu/VisualSettings.js:274
+#: src/settings/menuSettings/visualSettings.js:186
+#: src/settings/menuSettings/visualSettings.js:189
+#: src/settings/menuSettings/visualSettings.js:281
 msgid "Medium"
 msgstr "Mittel"
 
-#: settings/Menu/VisualSettings.js:180 settings/Menu/VisualSettings.js:183
-#: settings/Menu/VisualSettings.js:275
+#: src/settings/menuSettings/visualSettings.js:187
+#: src/settings/menuSettings/visualSettings.js:190
+#: src/settings/menuSettings/visualSettings.js:282
 msgid "Large"
 msgstr "Groß"
 
-#: settings/Menu/VisualSettings.js:181 settings/Menu/VisualSettings.js:182
-#: settings/Menu/VisualSettings.js:183
+#: src/settings/menuSettings/visualSettings.js:188
+#: src/settings/menuSettings/visualSettings.js:189
+#: src/settings/menuSettings/visualSettings.js:190
 msgid "Wide"
 msgstr "Breit"
 
-#: settings/Menu/VisualSettings.js:184
-msgid "Custom"
-msgstr "Benutzerdefiniert"
-
-#: settings/Menu/VisualSettings.js:186
+#: src/settings/menuSettings/visualSettings.js:193
 msgid "Grid Menu Items"
 msgstr "Raster mit Menüeinträgen"
 
-#: settings/Menu/VisualSettings.js:187
+#: src/settings/menuSettings/visualSettings.js:194
 msgid "Apps, Pinned Apps, Shortcuts, Grid Search Results"
 msgstr ""
 "Anwendungen, Angeheftete Anwendungen, Verknüpfungen, Raster mit "
 "Suchergebnissen"
 
-#: settings/Menu/VisualSettings.js:217
+#: src/settings/menuSettings/visualSettings.js:224
 msgid "Applications"
 msgstr "Anwendungen"
 
-#: settings/Menu/VisualSettings.js:218
+#: src/settings/menuSettings/visualSettings.js:225
 msgid "Apps, Pinned Apps, Items within Category, List Search Results"
 msgstr ""
 "Anwendungen, Angeheftete Anwendungen, Einträge innerhalb Kategorie, Liste "
 "mit Suchergebnissen"
 
-#: settings/Menu/VisualSettings.js:225
+#: src/settings/menuSettings/visualSettings.js:232
 msgid "Directory / Application / Other Shortcuts, Power Menu"
-msgstr "Verzeichnis/Anwendung/Andere Verknüpfungen, Beenden-Menü"
+msgstr "Verzeichnis / Anwendung / Andere Verknüpfungen, Beenden-Menü"
 
-#: settings/Menu/VisualSettings.js:231
+#: src/settings/menuSettings/visualSettings.js:238
 msgid "Application Categories"
 msgstr "Anwendungskategorien"
 
-#: settings/Menu/VisualSettings.js:237
+#: src/settings/menuSettings/visualSettings.js:244
 msgid "Button Widgets"
 msgstr "Knopf-Widgets"
 
-#: settings/Menu/VisualSettings.js:238
+#: src/settings/menuSettings/visualSettings.js:245
 msgid "Power Buttons, Unity Bottom Bar, Mint Side Bar, etc"
 msgstr "Beenden-Knöpfe, untere Leiste bei Unity, Seitenleiste bei Mint, etc"
 
-#: settings/Menu/VisualSettings.js:244
+#: src/settings/menuSettings/visualSettings.js:251
 msgid "Miscellaneous"
 msgstr "Verschiedenes"
 
-#: settings/Menu/VisualSettings.js:245
+#: src/settings/menuSettings/visualSettings.js:252
 msgid "Avatar, Search, Navigation Icons"
 msgstr "Benutzerbild, Suche, Navigationssymbole"
 
-#: settings/Menu/VisualSettings.js:272
+#: src/settings/menuSettings/visualSettings.js:279
 msgid "Extra Small"
 msgstr "Besonders klein"
 
-#: settings/Menu/VisualSettings.js:276
+#: src/settings/menuSettings/visualSettings.js:283
 msgid "Extra Large"
 msgstr "Besonders groß"
 
-#: settings/Menu/VisualSettings.js:279 settings/MenuButtonPage.js:61
-msgid "Hidden"
-msgstr "Versteckt"
-
-#: settings/Menu/VisualSettings.js:298
+#: src/settings/menuSettings/visualSettings.js:305
 msgid "Custom Grid Icon Size"
 msgstr "Symbolgröße bei benutzerdefiniertem Raster"
 
-#: settings/Menu/VisualSettings.js:346 settings/MenuButtonPage.js:190
-msgid "Icon Size"
-msgstr "Symbolgröße"
+#. TRANSLATORS: This will display as "ProjectName v21 Released!" as an example.
+#: src/updateNotifier.js:70
+#, javascript-format
+msgid "%s v%s Released!"
+msgstr "%s v%s veröffentlicht!"
 
-#: settings/MenuButtonPage.js:16
-msgid "Menu Button"
-msgstr "Menüknopf"
+#: src/updateNotifier.js:73
+msgid "Check out what's new."
+msgstr "Schau an, was es neues gibt."
 
-#: settings/MenuButtonPage.js:52
-msgid "Menu Button Appearance"
-msgstr "Erscheinungsbild des Menüknopfes"
+#: src/updateNotifier.js:90
+msgid "What's new?"
+msgstr "Was gibts neues?"
 
-#: settings/MenuButtonPage.js:58 settings/MenuButtonPage.js:141
-msgid "Text"
-msgstr "Text"
+#: src/updateNotifier.js:91
+msgid "Dismiss"
+msgstr "Schließen"
 
-#: settings/MenuButtonPage.js:59
-msgid "Icon and Text"
-msgstr "Symbol und Text"
+#~ msgid "ArcMenu maintainer and developer"
+#~ msgstr "ArcMenu Betreuer und Entwickler"
 
-#: settings/MenuButtonPage.js:60
-msgid "Text and Icon"
-msgstr "Text und Symbol"
+#~ msgid "ArcMenu founder, maintainer, and digital art designer"
+#~ msgstr "ArcMenu Gründer, Betreuer und Designer für digitale Kunst"
 
-#: settings/MenuButtonPage.js:63
-msgid "Display Style"
-msgstr "Darstellung"
+#~ msgid "Developer"
+#~ msgstr "Entwickler"
 
-#: settings/MenuButtonPage.js:100
-msgid "Padding"
-msgstr "Einbettung"
+#~ msgid ""
+#~ "<span size=\"small\">ArcMenu was first released in 2017 by Andy C. The "
+#~ "original ArcMenu project can be found <a href=\"https://gitlab.com/"
+#~ "LinxGem33/Arc-Menu\">here</a>.\n"
+#~ "\n"
+#~ "In 2017, ArcMenu started as a fork of the Zorin menu extension by <a "
+#~ "href=\"https://zorin.com/os/Zorin\">Zorin OS</a>. As it's own separate "
+#~ "project, ArcMenu rapidly began developing innovative features and quickly "
+#~ "diverged away from Zorin menu thanks to the works of <a href=\"https://"
+#~ "gitlab.com/LinxGem33\">Andy C</a>, <a href=\"https://gitlab.com/"
+#~ "AndrewZaech\">Andrew Zaech</a>, <a href=\"https://github.com/"
+#~ "lexruee\">Alexander Rüedlinger</a> and other contributors. ArcMenu has "
+#~ "been rewritten from the ground up since it's inception and has it's own "
+#~ "separate, original and unique code base, unrelated to that of Zorin menu."
+#~ "</span>"
+#~ msgstr ""
+#~ "<span size=\"small\">ArcMenu wurde das erste Mal 2017 von Andy C "
+#~ "veröffentlicht. Das originale ArcMenu Projekt kann <a href=\"https://"
+#~ "gitlab.com/LinxGem33/Arc-Menu\">hier</a> gefunden werden.\n"
+#~ "\n"
+#~ "In 2017 startete ArcMenu als eine Abspaltung der Zorin Menü-Erweiterung "
+#~ "von <a href=\"https://zorin.com/os/Zorin\">Zorin OS</a>. Als "
+#~ "eigenständiges Projekt begann ArcMenu schnell innovative Features zu "
+#~ "entwickeln und wich immer mehr von Zorin Menü ab, dank der Arbeit von <a "
+#~ "href=\"https://gitlab.com/LinxGem33\">Andy C</a>, <a href=\"https://"
+#~ "gitlab.com/AndrewZaech\">Andrew Zaech</a>, <a href=\"https://github.com/"
+#~ "lexruee\">Alexander Rüedlinger</a> und anderen Beitragenden. ArcMenu "
+#~ "wurde seit seiner Gründung von Grund auf neu geschrieben und hat seine "
+#~ "eigene, originale und einzigartige Quellcode-Basis, unabhängig von Zorin "
+#~ "Menü.</span>"
 
-#: settings/MenuButtonPage.js:153
-msgid "Menu Button Icon"
-msgstr "Symbol für Menüknopf"
+#~ msgid "ArcMenu logo and other ArcMenu icon assets"
+#~ msgstr "ArcMenu Logo und andere ArcMenu Symbole"
 
-#: settings/MenuButtonPage.js:167
-msgid "Choose a new icon"
-msgstr "Ein neues Symbol auswählen"
+#~ msgid "Modification and creation of some ArcMenu icon assets"
+#~ msgstr "Modifikation und Erstellung einiger ArcMenu Symbole"
 
-#: settings/MenuButtonPage.js:201
-msgid "Menu Button Styling"
-msgstr "Gestaltung des Menüknopfes"
+#~ msgid "_Cancel"
+#~ msgstr "_Abbrechen"
 
-#: settings/MenuButtonPage.js:229
-msgid "Background colors required if set to 0"
-msgstr "Hintergrundfarben erforderlich, wenn auf 0 gesetzt"
+#~ msgid "_Save"
+#~ msgstr "_Speichern"
 
-#: settings/MenuButtonPage.js:377 settings/MenuButtonPage.js:381
-msgid "ArcMenu Icons"
-msgstr "ArcMenu-Symbole"
+#~ msgid ""
+#~ "<span size=\"small\">ArcMenu was first released in 2017 by Andy C. The "
+#~ "original ArcMenu project can be found <a href=\"https://gitlab.com/"
+#~ "LinxGem33/Arc-Menu\">here</a>.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "<span size=\"small\">ArcMenu wurde erstmals in 2017 von Andy C "
+#~ "veröffentlicht. Das originale ArcMenu Projekt kann <a href=\"https://"
+#~ "gitlab.com/LinxGem33/Arc-Menu\">hier</a> gefunden werden.\n"
+#~ "\n"
 
-#: settings/MenuButtonPage.js:401
-msgid "Distro Icons"
-msgstr "Distro-Symbole"
+#~ msgid ""
+#~ "In 2017, ArcMenu started as a fork of the Zorin menu extension by <a "
+#~ "href=\"https://zorin.com/os/Zorin\">Zorin OS</a>. "
+#~ msgstr ""
+#~ "In 2017 startete ArcMenu als Abspaltung der Zorin Menü-Erweiterung von <a "
+#~ "href=\"https://zorin.com/os/Zorin\">Zorin OS</a>. "
 
-#: settings/MenuButtonPage.js:426 settings/MenuButtonPage.js:491
-msgid "Custom Icon"
-msgstr "Benutzerdefiniertes Symbol"
+#~ msgid ""
+#~ "As it's own separate project, ArcMenu rapidly began developing innovative "
+#~ "features and quickly diverged "
+#~ msgstr ""
+#~ "Als ein eigenständiges Projekt begann ArcMenu schnell innovative Features "
+#~ "zu entwickeln und hat sich schnell divergiert "
 
-#: settings/MenuButtonPage.js:549
-msgid "Legal disclaimer for Distro Icons"
-msgstr "Haftungsausschluss für Distro-Symbole"
+#~ msgid ""
+#~ "away from Zorin menu thanks to the works of <a href=\"https://gitlab.com/"
+#~ "LinxGem33\">Andy C</a>, "
+#~ msgstr ""
+#~ "away from Zorin menu thanks to the works of <a href=\"https://gitlab.com/"
+#~ "LinxGem33\">Andy C</a>, "
 
-#: settings/MenuPage.js:24
-msgid "Menu"
-msgstr "Menü"
+#~ msgid ""
+#~ "<a href=\"https://gitlab.com/AndrewZaech\">Andrew Zaech</a>, <a "
+#~ "href=\"https://github.com/lexruee\">Alexander Rüedlinger</a> and other "
+#~ "contributors. "
+#~ msgstr ""
+#~ "<a href=\"https://gitlab.com/AndrewZaech\">Andrew Zaech</a>, <a "
+#~ "href=\"https://github.com/lexruee\">Alexander Rüedlinger</a> and other "
+#~ "contributors. "
 
-#: settings/MenuPage.js:32
-msgid "How should the menu look?"
-msgstr "Wie soll das Menü aussehen?"
+#~ msgid ""
+#~ "ArcMenu has been rewritten from the ground up since it's inception and "
+#~ "has it's own separate, original and unique code base, unrelated to that "
+#~ "of Zorin menu.</span>"
+#~ msgstr ""
+#~ "ArcMenu has been rewritten from the ground up since it's inception and "
+#~ "has it's own separate, original and unique code base, unrelated to that "
+#~ "of Zorin menu.</span>"
 
-#: settings/MenuPage.js:39
-msgid "Menu Layout"
-msgstr "Menüansicht"
+#~ msgid "Power Off / Log Out"
+#~ msgstr "Ausschalten/Abmelden"
 
-#: settings/MenuPage.js:40
-msgid "Choose a layout style for the menu"
-msgstr "Darstellungsvariante für das Menü auswählen"
+#~ msgid "ArcMenu Version"
+#~ msgstr "ArcMenu-Version"
 
-#: settings/MenuPage.js:55
-msgid "Menu Theme"
-msgstr "Menü-Thema"
+#~ msgid "ArcMenu GitLab"
+#~ msgstr "ArcMenu GitLab"
 
-#: settings/MenuPage.js:56
-msgid "Modify menu colors, font size, and border"
-msgstr "Schriftgröße, Menüfarben und Rahmen anpassen"
+#~ msgid "Hotkey Conflict"
+#~ msgstr "Tastenkürzel-Konflikt"
 
-#: settings/MenuPage.js:65
-msgid "Menu Visual Appearance"
-msgstr "Erscheinungsbild des Menüs"
+#~ msgid "ArcMenu and Standalone Runner are assigned the same hotkey"
+#~ msgstr ""
+#~ "»ArcMenu« und »Standalone Runner« sind dem selben Tastenkürzel zugeordnet"
 
-#: settings/MenuPage.js:66
-msgid "Change menu height, width, location, and icon sizes"
-msgstr "Menühöhe und -breite, Position sowie Symbolgrößen ändern"
+#~ msgid "Left Super Key"
+#~ msgstr "Linke Super-Taste"
 
-#: settings/MenuPage.js:75
-msgid "Fine Tune"
-msgstr "Feineinstellung"
+#~ msgid "Custom Hotkey"
+#~ msgstr "Eigenes Tastenkürzel"
 
-#: settings/MenuPage.js:76
-msgid "Adjust less commonly used visual settings"
-msgstr "Weniger häufig verwendete visuelle Einstellungen anpassen"
+#~ msgid "Modify Hotkey"
+#~ msgstr "Tastenkürzel anpassen"
 
-#: settings/MenuPage.js:85
-msgid "What should show on the menu?"
-msgstr "Was soll im Menü angezeigt werden?"
+#~ msgid "Current Hotkey"
+#~ msgstr "Aktuelles Tastenkürzel"
 
-#: settings/MenuPage.js:92
-msgid "Settings specific to the current menu layout"
-msgstr "Bestimmte Einstellungen für die aktuelle Menüansicht"
+#~ msgid "Set Custom Hotkey"
+#~ msgstr "Benutzerdefiniertes Tastenkürzel festlegen"
 
-#: settings/MenuPage.js:112
-msgid "Directory Shortcuts"
-msgstr "Verzeichnisverknüpfungen"
+#~ msgid "Choose Modifiers"
+#~ msgstr "Hilfstasten wählen"
 
-#: settings/MenuPage.js:145
-msgid "Choose which power options to show and the display style"
-msgstr "Optionen zum Beenden sowie deren Darstellungsart anpassen"
+#~ msgid "Ctrl"
+#~ msgstr "Strg"
 
-#: settings/MenuPage.js:156
-msgid "Extra Categories"
-msgstr "Weitere Kategorien"
+#~ msgid "Super"
+#~ msgstr "Super"
 
-#: settings/MenuPage.js:158
-msgid "Add or remove additional custom categories"
-msgstr "Zusätzliche eigene Kategorien hinzufügen oder entfernen"
+#~ msgid "Shift"
+#~ msgstr "Umschalt"
 
-#: settings/MenuPage.js:168
-msgid "What should show on the context menu?"
-msgstr "Was soll im Kontextmenü angezeigt werden?"
+#~ msgid "Alt"
+#~ msgstr "Alt"
 
-#: settings/MenuPage.js:173
-msgid "Modify ArcMenu Context Menu"
-msgstr "Kontextmenü von ArcMenu anpassen"
+#~ msgid "Press any key"
+#~ msgstr "Drücken Sie eine beliebige Taste"
 
-#~ msgid "Context Menu"
-#~ msgstr "Kontextmenü"
+#~ msgid "New Hotkey"
+#~ msgstr "Neues Tastenkürzel"
+
+#~ msgid "Alphabetize 'All Programs' Category"
+#~ msgstr "Kategorie »Alle Programme« alphabetisch sortieren"
+
+#~ msgid "Enable/Disable multi-lined labels on large application icon layouts."
+#~ msgstr ""
+#~ "Mehrzeilige Beschriftungen bei Ansichten mit großen Anwendungssymbolen "
+#~ "aktivieren oder deaktivieren."
+
+#~ msgid "Button Shortcuts"
+#~ msgstr "Knopf-Verknüpfungen"
+
+#~ msgid "Power Off / Log Out Buttons"
+#~ msgstr "Knöpfe für Ausschalten/Abmelden"
+
+#~ msgid "Menu Button Appearance"
+#~ msgstr "Erscheinungsbild des Menüknopfes"
+
+#~ msgid "Menu Button Styling"
+#~ msgstr "Gestaltung des Menüknopfes"
+
+#~ msgid "ArcMenu Icons"
+#~ msgstr "ArcMenu-Symbole"
+
+#~ msgid "Custom Icon"
+#~ msgstr "Benutzerdefiniertes Symbol"
 
 #~ msgid "ArcMenu - Hibernate Error!"
 #~ msgstr "Arc Menü - Ruhezustand-Fehler!"
@@ -1552,12 +2046,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 
 #~ msgid "System unable to hybrid sleep."
 #~ msgstr "System kann nicht in Hybrid-Schlaf wechseln."
-
-#~ msgid "Version"
-#~ msgstr "Version"
-
-#~ msgid "GitLab"
-#~ msgstr "GitLab"
 
 #~ msgid "Brisk Menu Shortcuts"
 #~ msgstr "Brisk-Menü-Verknüpfungen"
@@ -1592,9 +2080,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 #~ msgid "Restart"
 #~ msgstr "Neu starten"
 
-#~ msgid "Power Off"
-#~ msgstr "Ausschalten"
-
 #~ msgid "Customize Menu"
 #~ msgstr "Menü anpassen"
 
@@ -1603,9 +2088,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 
 #~ msgid "Session Type"
 #~ msgstr "Sitzungsart"
-
-#~ msgid "All Applications"
-#~ msgstr "Alle Anwendungen"
 
 #~ msgid "In-Line"
 #~ msgstr "Liste"
@@ -1655,9 +2137,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 #~ msgid "Previous Page"
 #~ msgstr "Vorherige Seite"
 
-#~ msgid "Appearance"
-#~ msgstr "Erscheinungsbild"
-
 #~ msgid "Icon Sizes"
 #~ msgstr "Symbolgrößen"
 
@@ -1678,9 +2157,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 
 #~ msgid "Runner Hotkey"
 #~ msgstr "Tastenzuordnung für Runner"
-
-#~ msgid "Browse Icons"
-#~ msgstr "Symbole ansehen"
 
 #~ msgid "Grid Icons"
 #~ msgstr "Symbolraster"
@@ -1832,9 +2308,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 #~ msgid "Terminal Command:"
 #~ msgstr "Terminalbefehl:"
 
-#~ msgid "Hot Corner Options"
-#~ msgstr "Einstellungen für aktive Ecke"
-
 #~ msgid "Modify Hot Corner"
 #~ msgstr "Aktive Ecke anpassen"
 
@@ -1879,9 +2352,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 
 #~ msgid "GNOME Default"
 #~ msgstr "GNOME-Standard"
-
-#~ msgid "Disabled"
-#~ msgstr "Deaktiviert"
 
 #~ msgid "Open ArcMenu"
 #~ msgstr "ArcMenü öffnen"
@@ -1958,9 +2428,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 #~ msgid "Menu Items Icon Size"
 #~ msgstr "Größe der Symbole im Menü"
 
-#~ msgid "Disable Searchbox Border"
-#~ msgstr "Rahmen um Suchleiste entfernen"
-
 #~ msgid "Disable Menu Arrow"
 #~ msgstr "Menüpfeil deaktivieren"
 
@@ -1984,9 +2451,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 
 #~ msgid "Select Themes to Export"
 #~ msgstr "Themen zum Exportieren auswählen"
-
-#~ msgid "Select All"
-#~ msgstr "Alle auswählen"
 
 #~ msgid "Manage Presets"
 #~ msgstr "Vorlagen verwalten"
@@ -2049,18 +2513,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 
 #~ msgid "Restore Default Settings?"
 #~ msgstr "Standardwerte wiederherstellen?"
-
-#~ msgid "Developers"
-#~ msgstr "Entwickler"
-
-#~ msgid "Translators"
-#~ msgstr "Übersetzer"
-
-#~ msgid "Contributors"
-#~ msgstr "Beitragende"
-
-#~ msgid "Artwork"
-#~ msgstr "Kunstwerke"
 
 #~ msgid "New Apps Tracker"
 #~ msgstr "Erkennung neuer Apps"
@@ -2613,9 +3065,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 #~ msgid "User Manual"
 #~ msgstr "Handbuch"
 
-#~ msgid "System Icon"
-#~ msgstr "Systemsymbol"
-
 #~ msgid "Arc Menu Original"
 #~ msgstr "Arc-Menü, Original"
 
@@ -2702,9 +3151,6 @@ msgstr "Kontextmenü von ArcMenu anpassen"
 
 #~ msgid "Arch Linux"
 #~ msgstr "Arch Linux"
-
-#~ msgid "OpenSUSE"
-#~ msgstr "OpenSUSE"
 
 #~ msgid "Override the shell theme for Arc Menu only"
 #~ msgstr "Shell-Thema überschreiben (nur Arc Menü)"
