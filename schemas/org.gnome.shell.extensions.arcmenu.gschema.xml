@@ -23,6 +23,7 @@
         <value value='19' nick='Enterprise'/>
         <value value='20' nick='Pop'/>
         <value value='21' nick='Sleek'/>
+        <value value='22' nick='Zest'/>
     </enum>
     <enum id='org.gnome.shell.extensions.arcmenu.forcemenulocation'>
         <value value='0' nick='Off'/>
@@ -640,7 +641,11 @@
     </key>
     <key type="i" name="sleek-layout-panel-width">
       <default>225</default>
-      <summary>Sleek layout right panel width.</summary>
+      <summary>Sleek layout extra shortcuts panel width.</summary>
+    </key>
+      <key type="i" name="zest-layout-panel-width">
+      <default>225</default>
+      <summary>Zest layout extra shortcuts panel width.</summary>
     </key>
     <key type="b" name="az-layout-merge-panels">
       <default>false</default>
@@ -760,6 +765,21 @@
         ]
       </default>
       <summary>'Sleek' layout extra shortcuts</summary>
+    </key>
+      <key name="zest-layout-extra-shortcuts" type="aa{ss}">
+      <default>
+        [
+          {'id': 'ArcMenu_Home', 'name': 'Home', 'icon': 'ArcMenu_Home'},
+          {'id': 'ArcMenu_Documents', 'name': 'Documents', 'icon': 'ArcMenu_Documents'},
+          {'id': 'ArcMenu_Downloads', 'name': 'Downloads', 'icon': 'ArcMenu_Downloads'},
+          {'id': 'ArcMenu_Music', 'name': 'Music', 'icon': 'ArcMenu_Music'},
+          {'id': 'ArcMenu_Pictures', 'name': 'Pictures', 'icon': 'ArcMenu_Pictures'},
+          {'id': 'ArcMenu_Software', 'name': 'Software'},
+          {'id': 'org.gnome.Settings.desktop'},
+          {'id': 'org.gnome.Terminal.desktop'}
+        ]
+      </default>
+      <summary>'Zest' layout extra shortcuts</summary>
     </key>
     <key name="unity-layout-extra-shortcuts" type="aa{ss}">
       <default>

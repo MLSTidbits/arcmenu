@@ -45,6 +45,7 @@ export function setVisibleRows(rows, menuLayout) {
     case Constants.MenuLayout.WHISKER:
     case Constants.MenuLayout.BRISK:
     case Constants.MenuLayout.ENTERPRISE:
+    case Constants.MenuLayout.ZEST:
         rows[Constants.SettingsPage.DIRECTORY_SHORTCUTS].visible = false;
         rows[Constants.SettingsPage.APPLICATION_SHORTCUTS].visible = false;
         break;

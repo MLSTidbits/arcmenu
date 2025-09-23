@@ -416,6 +416,7 @@ export const MenuLayout = {
     ENTERPRISE: 19,
     POP: 20,
     SLEEK: 21,
+    ZEST: 22,
 };
 
 export const TraditionalMenus = [
@@ -506,6 +507,11 @@ export const ModernMenus = [
         LAYOUT: MenuLayout.SLEEK,
         TITLE: _('Sleek'),
         IMAGE: 'menu-sleek-symbolic',
+    },
+    {
+        LAYOUT: MenuLayout.ZEST,
+        TITLE: _('Zest'),
+        IMAGE: 'menu-zest-symbolic',
     },
 ];
 
