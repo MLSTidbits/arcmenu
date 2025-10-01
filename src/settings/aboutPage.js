@@ -126,7 +126,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
             vexpand: true,
             valign: Gtk.Align.END,
         });
-        whatsNewGroup.add(enableNotificationsGroup);
+        whatsNewPage.add(enableNotificationsGroup);
 
         const enableNotificationsSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
