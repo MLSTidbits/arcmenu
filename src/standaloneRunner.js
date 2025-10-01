@@ -53,7 +53,15 @@ export const StandaloneRunner = class ArcMenuStandaloneRunner {
             this.arcMenu.box.add_child(this._menuLayout);
     }
 
-    closeOtherMenus() {
+    onArcMenuClose() {
+        // Clear active state for activeMenuItem
+        if (this._menuLayout?.activeMenuItem)
+            this._menuLayout.activeMenuItem.active = false;
+
+        this._closeOtherMenus();
+    }
+
+    _closeOtherMenus() {
         if (this.contextMenuManager.activeMenu)
             this.contextMenuManager.activeMenu.toggle();
         if (this.subMenuManager.activeMenu)
@@ -61,7 +69,7 @@ export const StandaloneRunner = class ArcMenuStandaloneRunner {
     }
 
     toggleMenu() {
-        this.closeOtherMenus();
+        this._closeOtherMenus();
 
         if (!this.arcMenu.isOpen)
             this._menuLayout.updateLocation();

@@ -323,7 +323,7 @@ export class BaseMenuItem extends St.BoxLayout {
     }
 
     set active(active) {
-        if (this.isDestroyed || !this.mapped)
+        if (this.isDestroyed)
             return;
 
         // Prevent a mouse hover event from setting a new active menu item, until next mouse move event.
@@ -342,13 +342,8 @@ export class BaseMenuItem extends St.BoxLayout {
                     topSearchResult.remove_style_pseudo_class('active');
 
                 // track the active menu item for keyboard navigation
-                if (this._menuLayout.activeMenuItem !== this) {
+                if (this._menuLayout.activeMenuItem !== this)
                     this._menuLayout.activeMenuItem = this;
-                    // Ensure the new activeMenuItem is visible in scroll view, only when not hovered.
-                    // We don't want to mouse to adjust the scrollview.
-                    if (!this.hover)
-                        Utils.ensureActorVisibleInScrollView(this);
-                }
 
                 this._setSelectedStyle();
                 if (this.can_focus)
@@ -407,6 +402,10 @@ export class BaseMenuItem extends St.BoxLayout {
     vfunc_key_focus_in() {
         super.vfunc_key_focus_in();
         this.active = true;
+
+        // Ensure the new activeMenuItem is visible in scroll view
+        if (!this.hover)
+            Utils.ensureActorVisibleInScrollView(this);
     }
 
     vfunc_key_focus_out() {
@@ -960,6 +959,7 @@ export class LeaveButton extends BaseMenuItem {
         this.leaveMenu.connect('open-state-changed', (menu, open) => {
             if (open) {
                 this.add_style_pseudo_class('active');
+                this.active = true;
                 this._menuButton.clearTooltipShowingId();
                 this._menuButton.hideTooltip();
             } else {
@@ -2957,7 +2957,7 @@ export class CategoryMenuItem extends BaseMenuItem {
         this._updateIcon();
 
         this._indicator = new St.Icon({
-            icon_name: 'starred-symbolic',
+            icon_name: 'media-record-symbolic',
             style_class: 'arcmenu-indicator',
             icon_size: INDICATOR_ICON_SIZE,
             x_expand: true,

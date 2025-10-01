@@ -383,7 +383,15 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             return -1;
     }
 
-    closeOtherMenus() {
+    onArcMenuClose() {
+        // Clear active state for activeMenuItem
+        if (this._menuLayout?.activeMenuItem)
+            this._menuLayout.activeMenuItem.active = false;
+
+        this._closeOtherMenus();
+    }
+
+    _closeOtherMenus() {
         if (this.contextMenuManager.activeMenu)
             this.contextMenuManager.activeMenu.toggle();
         if (this.subMenuManager.activeMenu)
@@ -396,7 +404,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
     }
 
     toggleMenu() {
-        this.closeOtherMenus();
+        this._closeOtherMenus();
 
         const layout = ArcMenuManager.settings.get_enum('menu-layout');
         if (layout === Constants.MenuLayout.GNOME_OVERVIEW) {
@@ -651,7 +659,6 @@ export const ArcMenu = class ArcMenuArcMenu extends PopupMenu.PopupMenu {
         Main.uiGroup.add_child(this.actor);
         this.actor.add_style_class_name('panel-menu arcmenu-menu');
         this.actor.hide();
-        this._menuClosedID = this.connect('menu-closed', () => this._menuButton.setDefaultMenuView());
 
         this.actor.connectObject('captured-event', this._onCapturedEvent.bind(this), this);
 
@@ -672,23 +679,19 @@ export const ArcMenu = class ArcMenuArcMenu extends PopupMenu.PopupMenu {
         if (!this.isOpen) {
             this._menuButton.arcMenu.actor._muteInput = false;
             this._menuButton.arcMenu.actor._muteKeys = false;
+            this._menuButton?.setDefaultMenuView();
         }
         super.open(animate);
     }
 
     close(animate) {
-        if (this.isOpen)
-            this._menuButton?.closeOtherMenus();
+        this._menuButton?.onArcMenuClose();
 
         super.close(animate);
     }
 
     destroy() {
         this._boxPointer.remove_effect_by_name('dim');
-        if (this._menuClosedID) {
-            this.disconnect(this._menuClosedID);
-            this._menuClosedID = null;
-        }
         super.destroy();
         this._dimEffect = null;
         this._menuButton = null;
