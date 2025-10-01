@@ -884,6 +884,7 @@ export class BaseMenuLayout extends St.BoxLayout {
         const actors = box.get_children();
         for (let i = 0; i < actors.length; i++) {
             const actor = actors[i];
+            actor.remove_all_transitions();
             box.remove_child(actor);
         }
     }
