@@ -62,6 +62,7 @@ release_job:
     - job: build_job
   script:
     - echo "Creating release for tag ${VERSION}..."
+    - awk '/<b>/{if (++count == 2) exit} {print}' RELEASENOTES.md > RELEASENOTES_FILTERED.md
   release:
     tag_name: "${VERSION}"
-    description: RELEASENOTES.md
+    description: RELEASENOTES_FILTERED.md
