@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-08 10:28-0500\n"
-"PO-Revision-Date: 2020-02-26 22:07+0100\n"
+"PO-Revision-Date: 2025-10-04 22:07+0100\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -289,15 +289,15 @@ msgstr "Afegeix als favorits"
 
 #: menuWidgets.js:247 menuWidgets.js:298
 msgid "Unpin from Arc Menu"
-msgstr "Ancora a l'Arc Menu"
+msgstr "Desancora de l'Arc Menu"
 
 #: menuWidgets.js:261
 msgid "Pin to Arc Menu"
-msgstr "Desancora a l'Arc Menu"
+msgstr "Ancora a l'Arc Menu"
 
 #: menuWidgets.js:274
 msgid "Show Details"
-msgstr "Mostra les dades"
+msgstr "Mostra els detalls"
 
 #: menuWidgets.js:683 menuWidgets.js:811 menuWidgets.js:1951
 #: menuWidgets.js:2088 menuWidgets.js:2287
@@ -572,7 +572,7 @@ msgstr "Estableix la drecera personalitzada"
 
 #: prefs.js:633
 msgid "Shortcut Name:"
-msgstr "Nom de la drecera"
+msgstr "Nom de la drecera:"
 
 #: prefs.js:648
 #, fuzzy
