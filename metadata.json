@@ -4,8 +4,8 @@
   "gettext-domain": "arcmenu",
   "name": "ArcMenu",
   "description": "Application Menu Extension for GNOME",
-  "version": 68,
-  "version-name": "67.1",
+  "version": 69,
+  "version-name": "67.2",
   "shell-version": [ "45", "46", "47", "48", "49" ],
   "url": "https://gitlab.com/arcmenu/ArcMenu",
   "donations": {
