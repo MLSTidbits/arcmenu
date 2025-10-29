@@ -84,7 +84,7 @@ class ArcMenuFineTunePage extends SubPage {
             this._settings.set_boolean('disable-scrollview-fade-effect', widget.get_active());
         });
         const fadeEffectRow = new Adw.ActionRow({
-            title: _('Disable ScrollView Fade Effects'),
+            title: _('Disable Scrollview Fade Effects'),
             activatable_widget: fadeEffectSwitch,
         });
         fadeEffectRow.add_suffix(fadeEffectSwitch);
