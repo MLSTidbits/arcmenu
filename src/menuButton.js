@@ -551,7 +551,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             this.menuButtonWidget.addStylePseudoClass('active');
             this.add_style_pseudo_class('active');
 
-            if (Main.panel.menuManager && Main.panel.menuManager.activeMenu)
+            if (Main.panel.menuManager?.activeMenu)
                 Main.panel.menuManager.activeMenu.toggle();
 
             if (!this._intellihideRelease && this._panelParent.intellihide?.enabled)
@@ -562,38 +562,35 @@ class ArcMenuMenuButton extends PanelMenu.Button {
                 this.hideTooltip(true);
             }
 
-            if (!this.arcMenu.isOpen && !this.arcMenuContextMenu.isOpen) {
-                this.menuButtonWidget.removeStylePseudoClass('active');
-                this.remove_style_pseudo_class('active');
+            if (this.arcMenu.isOpen || this.arcMenuContextMenu.isOpen)
+                return;
 
-                if (this._intellihideRelease && !this._panelNeedsHiding) {
-                    this._intellihideRelease = false;
-                    const hidePanel = () => this._panelParent.intellihide?.release(1);
+            this.menuButtonWidget.removeStylePseudoClass('active');
+            this.remove_style_pseudo_class('active');
 
-                    const isMouseOnPanel = this._isMouseOnPanel();
-                    if (isMouseOnPanel)
-                        this._startTrackingMouse(hidePanel);
-                    else
-                        hidePanel();
-                }
-                if (this._panelNeedsHiding) {
-                    this._panelNeedsHiding = false;
-                    // Hide panel if monitor inFullscreen, else show it
-                    const hidePanel = () => {
-                        const monitor = Main.layoutManager.findMonitorForActor(this);
-                        this._panelBox.visible = !(global.window_group.visible &&
-                                                    monitor &&
-                                                    monitor.inFullscreen);
-                    };
-
-                    const isMouseOnPanel = this._isMouseOnPanel();
-                    if (isMouseOnPanel)
-                        this._startTrackingMouse(hidePanel);
-                    else
-                        hidePanel();
-                }
+            if (this._intellihideRelease && !this._panelNeedsHiding) {
+                this._intellihideRelease = false;
+                const hidePanel = () => this._panelParent.intellihide?.release(1);
+                this._maybeHidePanel(hidePanel);
+            }
+            if (this._panelNeedsHiding) {
+                this._panelNeedsHiding = false;
+                // Hide panel if monitor inFullscreen, else show it
+                const hidePanel = () => {
+                    const monitor = Main.layoutManager.findMonitorForActor(this);
+                    this._panelBox.visible = !(global.window_group.visible && monitor?.inFullscreen);
+                };
+                this._maybeHidePanel(hidePanel);
             }
         }
+    }
+
+    _maybeHidePanel(callback) {
+        const isMouseOnPanel = this._isMouseOnPanel();
+        if (isMouseOnPanel)
+            this._startTrackingMouse(callback);
+        else
+            callback();
     }
 
     _maybeShowPanel() {
