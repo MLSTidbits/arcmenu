@@ -100,22 +100,24 @@ export class CustomKeybinding {
     }
 
     bind(keybindingNameKey, keybindingValueKey, keybindingHandler) {
-        if (!this._keybindings.has(keybindingNameKey)) {
-            this._keybindings.set(keybindingNameKey, keybindingValueKey);
+        if (this._keybindings.has(keybindingNameKey))
+            return;
 
-            Main.wm.addKeybinding(keybindingValueKey, ArcMenuManager.settings,
-                Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
-                Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW | Shell.ActionMode.POPUP,
-                keybindingHandler);
-        }
+        this._keybindings.set(keybindingNameKey, keybindingValueKey);
+
+        Main.wm.addKeybinding(keybindingValueKey, ArcMenuManager.settings,
+            Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+            Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW | Shell.ActionMode.POPUP,
+            keybindingHandler);
     }
 
     unbind(keybindingNameKey) {
-        if (this._keybindings.has(keybindingNameKey)) {
-            const keybindingValueKey = this._keybindings.get(keybindingNameKey);
-            Main.wm.removeKeybinding(keybindingValueKey);
-            this._keybindings.delete(keybindingNameKey);
-        }
+        if (!this._keybindings.has(keybindingNameKey))
+            return;
+
+        const keybindingValueKey = this._keybindings.get(keybindingNameKey);
+        Main.wm.removeKeybinding(keybindingValueKey);
+        this._keybindings.delete(keybindingNameKey);
     }
 
     unbindAll() {
