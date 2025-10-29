@@ -141,7 +141,8 @@ export const MenuController = class {
                 'menu-item-grid-icon-size', 'menu-item-icon-size', 'button-item-icon-size', 'quicklinks-item-icon-size',
                 'menu-item-category-icon-size', 'category-icon-type', 'shortcut-icon-type', 'show-category-sub-menus',
                 'arcmenu-extra-categories-links', 'arcmenu-extra-categories-links-location', 'raven-search-display-style',
-                'runner-show-frequent-apps', 'default-menu-view-redmond', 'disable-recently-installed-apps', 'az-layout-merge-panels'],
+                'runner-show-frequent-apps', 'default-menu-view-redmond', 'disable-recently-installed-apps', 'az-layout-merge-panels',
+                'scrollbars-visible', 'scrollbars-overlay'],
             this._recreateMenuLayout.bind(this));
 
         this._connectSettings(['left-panel-width', 'right-panel-width', 'menu-width-adjustment'],

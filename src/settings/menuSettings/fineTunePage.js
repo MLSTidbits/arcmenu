@@ -50,6 +50,32 @@ class ArcMenuFineTunePage extends SubPage {
         appDescriptionsRow.add_suffix(appDescriptionsSwitch);
         miscGroup.add(appDescriptionsRow);
 
+        const showScrollbarsExpanderRow = new Adw.ExpanderRow({
+            title: _('Show Scrollbars'),
+            show_enable_switch: true,
+            expanded: this._settings.get_boolean('scrollbars-visible'),
+            enable_expansion: this._settings.get_boolean('scrollbars-visible'),
+        });
+        miscGroup.add(showScrollbarsExpanderRow);
+
+        showScrollbarsExpanderRow.connect('notify::enable-expansion', widget => {
+            this._settings.set_boolean('scrollbars-visible', widget.enable_expansion);
+        });
+
+        const overlayScrollbarsSwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+            active: this._settings.get_boolean('scrollbars-overlay'),
+        });
+        overlayScrollbarsSwitch.connect('notify::active', widget => {
+            this._settings.set_boolean('scrollbars-overlay', widget.get_active());
+        });
+        const overlayScrollbarsRow = new Adw.ActionRow({
+            title: _('Overlay Scrollbars'),
+            activatable_widget: overlayScrollbarsSwitch,
+        });
+        overlayScrollbarsRow.add_suffix(overlayScrollbarsSwitch);
+        showScrollbarsExpanderRow.add_row(overlayScrollbarsRow);
+
         const fadeEffectSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
         });

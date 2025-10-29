@@ -425,20 +425,26 @@ export function openPrefs(uuid) {
 }
 
 export function createPanActionScrollView(menuButton, params) {
+    const {settings} = ArcMenuManager;
+    const showScrollbars = settings.get_boolean('scrollbars-visible');
+    const overlayScrollbars = settings.get_boolean('scrollbars-overlay');
+
     const scrollView = new St.ScrollView({
         ...params,
         clip_to_allocation: true,
         hscrollbar_policy: St.PolicyType.NEVER,
-        vscrollbar_policy: St.PolicyType.AUTOMATIC,
-        overlay_scrollbars: true,
+        vscrollbar_policy: showScrollbars ? St.PolicyType.AUTOMATIC : St.PolicyType.EXTERNAL,
+        overlay_scrollbars: overlayScrollbars,
     });
 
     // With overlay_scrollbars = true, the scrollbar appears behind the menu items
     // Maybe a bug in GNOME? Fix it with this.
-    scrollView.get_children().forEach(child => {
-        if (child instanceof St.ScrollBar)
-            child.z_position = 1;
-    });
+    if (overlayScrollbars) {
+        scrollView.get_children().forEach(child => {
+            if (child instanceof St.ScrollBar)
+                child.z_position = 1;
+        });
+    }
 
     const onPanFunc = (a, mb, sv) => {
         mb.clearTooltipShowingId();

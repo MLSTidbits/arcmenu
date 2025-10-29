@@ -305,7 +305,15 @@
     </key>
     <key type="b" name="disable-scrollview-fade-effect">
       <default>false</default>
-      <summary>disable the fade effect on scrollviews</summary>
+      <summary>Disable the fade effect on scrollviews</summary>
+    </key>
+    <key type="b" name="scrollbars-visible">
+      <default>true</default>
+      <summary>Show/hide scrollbars on scrollviews</summary>
+    </key>
+    <key type="b" name="scrollbars-overlay">
+      <default>true</default>
+      <summary>Enable/disable overlay scrollbars</summary>
     </key>
     <key type="b" name="apps-show-extra-details">
       <default>false</default>
