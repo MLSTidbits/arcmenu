@@ -591,6 +591,10 @@
       <default>false</default>
       <summary>Hide overview on startup</summary>
     </key>
+    <key type="b" name="hide-overview-on-arcmenu-close">
+      <default>false</default>
+      <summary>Hide overview when ArcMenu closes</summary>
+    </key>
     <key type="b" name="activate-on-launch">
       <default>false</default>
       <summary>Activate existing window instead of opening new one on application launch.</summary>

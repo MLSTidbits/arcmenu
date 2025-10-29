@@ -546,7 +546,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             this._menuLayout.setDefaultMenuView();
     }
 
-    _onOpenStateChanged(_menu, open) {
+    _onOpenStateChanged(menu, open) {
         if (open) {
             this.menuButtonWidget.addStylePseudoClass('active');
             this.add_style_pseudo_class('active');
@@ -557,9 +557,14 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             if (!this._intellihideRelease && this._panelParent.intellihide?.enabled)
                 this._intellihideRelease = true;
         } else {
-            if (!this.arcMenu.isOpen) {
+            const isArcMenu = menu === this.arcMenu;
+            const closeOverview = ArcMenuManager.settings.get_boolean('hide-overview-on-arcmenu-close');
+
+            if (isArcMenu) {
                 this.clearTooltipShowingId();
                 this.hideTooltip(true);
+                if (closeOverview)
+                    Main.overview.hide();
             }
 
             if (this.arcMenu.isOpen || this.arcMenuContextMenu.isOpen)

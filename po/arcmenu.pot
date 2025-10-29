@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-29 10:07-0400\n"
+"POT-Creation-Date: 2025-10-29 19:26-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,27 +70,27 @@ msgstr ""
 msgid "Recent Files"
 msgstr ""
 
-#: src/constants.js:272 src/menuButton.js:805
+#: src/constants.js:272 src/menuButton.js:810
 #: src/settings/menuSettings/listPinnedPage.js:401
 msgid "Log Out..."
 msgstr ""
 
-#: src/constants.js:273 src/menuButton.js:804
+#: src/constants.js:273 src/menuButton.js:809
 #: src/settings/menuSettings/listPinnedPage.js:400
 msgid "Lock"
 msgstr ""
 
-#: src/constants.js:274 src/menuButton.js:799
+#: src/constants.js:274 src/menuButton.js:804
 #: src/settings/menuSettings/listPinnedPage.js:403
 msgid "Restart..."
 msgstr ""
 
-#: src/constants.js:275 src/menuButton.js:800
+#: src/constants.js:275 src/menuButton.js:805
 #: src/settings/menuSettings/listPinnedPage.js:402
 msgid "Power Off..."
 msgstr ""
 
-#: src/constants.js:276 src/menuButton.js:796
+#: src/constants.js:276 src/menuButton.js:801
 #: src/settings/menuSettings/listPinnedPage.js:404
 msgid "Suspend"
 msgstr ""
@@ -103,13 +103,13 @@ msgstr ""
 msgid "Hibernate"
 msgstr ""
 
-#: src/constants.js:279 src/menuButton.js:806
+#: src/constants.js:279 src/menuButton.js:811
 #: src/settings/menuSettings/listPinnedPage.js:408
 msgid "Switch User"
 msgstr ""
 
 #: src/constants.js:425 src/settings/aboutPage.js:33
-#: src/settings/donatePage.js:17 src/settings/generalPage.js:613
+#: src/settings/donatePage.js:17 src/settings/generalPage.js:627
 #: src/settings/menuButtonPage.js:211
 msgid "ArcMenu"
 msgstr ""
@@ -238,13 +238,13 @@ msgstr ""
 msgid "Tweaks"
 msgstr ""
 
-#: src/constants.js:583 src/menuButton.js:749 src/menuWidgets.js:573
+#: src/constants.js:583 src/menuButton.js:754 src/menuWidgets.js:573
 #: src/settings/menuSettings/listPinnedPage.js:368
 #: src/settings/menuSettings/listPinnedPage.js:390
 msgid "Activities Overview"
 msgstr ""
 
-#: src/constants.js:583 src/menuButton.js:735
+#: src/constants.js:583 src/menuButton.js:740
 #: src/settings/menuSettings/listPinnedPage.js:354
 #: src/settings/menuSettings/listPinnedPage.js:365
 #: src/settings/menuSettings/listPinnedPage.js:377
@@ -260,19 +260,19 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
-#: src/menuButton.js:780 src/settings/menuSettings/listPinnedPage.js:393
+#: src/menuButton.js:785 src/settings/menuSettings/listPinnedPage.js:393
 msgid "Show Desktop"
 msgstr ""
 
-#: src/menuButton.js:794 src/menuWidgets.js:870 src/menuWidgets.js:887
+#: src/menuButton.js:799 src/menuWidgets.js:870 src/menuWidgets.js:887
 msgid "Power Off"
 msgstr ""
 
-#: src/menuButton.js:835
+#: src/menuButton.js:840
 msgid "Dash to Panel Settings"
 msgstr ""
 
-#: src/menuButton.js:839
+#: src/menuButton.js:844
 msgid "App Icons Taskbar Settings"
 msgstr ""
 
@@ -402,13 +402,13 @@ msgid "Rename %s folder"
 msgstr ""
 
 #: src/menulayouts/pop.js:894 src/settings/aboutPage.js:404
-#: src/settings/generalPage.js:286 src/settings/menuButtonPage.js:532
+#: src/settings/generalPage.js:300 src/settings/menuButtonPage.js:532
 #: src/settings/menuSettings/listPinnedPage.js:629
 #: src/settings/menuSettings/themingDialog.js:269
 msgid "Cancel"
 msgstr ""
 
-#: src/menulayouts/pop.js:902 src/settings/generalPage.js:272
+#: src/menulayouts/pop.js:902 src/settings/generalPage.js:286
 #: src/settings/menuSettings/listPinnedPage.js:666
 #: src/settings/menuSettings/visualSettings.js:372
 msgid "Apply"
@@ -749,48 +749,52 @@ msgstr ""
 msgid "Hide Overview on Startup"
 msgstr ""
 
-#: src/settings/generalPage.js:213 src/settings/generalPage.js:378
+#: src/settings/generalPage.js:177
+msgid "Hide Overview on ArcMenu Close"
+msgstr ""
+
+#: src/settings/generalPage.js:227 src/settings/generalPage.js:392
 msgid "Disabled"
 msgstr ""
 
-#: src/settings/generalPage.js:234
+#: src/settings/generalPage.js:248
 msgid "ArcMenu Hotkeys"
 msgstr ""
 
-#: src/settings/generalPage.js:234
+#: src/settings/generalPage.js:248
 msgid "Standalone Runner Hotkeys"
 msgstr ""
 
-#: src/settings/generalPage.js:307
+#: src/settings/generalPage.js:321
 msgid "Active Hotkeys"
 msgstr ""
 
-#: src/settings/generalPage.js:313
+#: src/settings/generalPage.js:327
 msgid "Hotkey Options"
 msgstr ""
 
-#: src/settings/generalPage.js:326
+#: src/settings/generalPage.js:340
 msgid "Super Hotkeys Override GNOME Overview Hotkey"
 msgstr ""
 
-#: src/settings/generalPage.js:340
+#: src/settings/generalPage.js:354
 msgid "Open on Primary Monitor"
 msgstr ""
 
-#: src/settings/generalPage.js:351
+#: src/settings/generalPage.js:365
 msgid "Type on your keyboard to add a new hotkey."
 msgstr ""
 
-#: src/settings/generalPage.js:390
+#: src/settings/generalPage.js:404
 msgid "Add Hotkey"
 msgstr ""
 
-#: src/settings/generalPage.js:461
+#: src/settings/generalPage.js:475
 #, javascript-format
 msgid "Conflict with <b>%s</b> hotkey"
 msgstr ""
 
-#: src/settings/generalPage.js:609
+#: src/settings/generalPage.js:623
 msgid "Standlone Runner"
 msgstr ""
 
@@ -1104,7 +1108,7 @@ msgid "Overlay Scrollbars"
 msgstr ""
 
 #: src/settings/menuSettings/fineTunePage.js:87
-msgid "Disable ScrollView Fade Effects"
+msgid "Disable Scrollview Fade Effects"
 msgstr ""
 
 #: src/settings/menuSettings/fineTunePage.js:101
