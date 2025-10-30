@@ -591,9 +591,9 @@
       <default>false</default>
       <summary>Hide overview on startup</summary>
     </key>
-    <key type="b" name="hide-overview-on-arcmenu-close">
+    <key type="b" name="hide-overview-on-arcmenu-open">
       <default>false</default>
-      <summary>Hide overview when ArcMenu closes</summary>
+      <summary>Hide overview when ArcMenu opens</summary>
     </key>
     <key type="b" name="activate-on-launch">
       <default>false</default>

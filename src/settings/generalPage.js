@@ -166,19 +166,19 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
         hideOverviewRow.add_suffix(hideOverviewSwitch);
         generalGroup.add(hideOverviewRow);
 
-        const hideOverviewOnCloseSwitch = new Gtk.Switch({
+        const hideOverviewOnOpenSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean('hide-overview-on-arcmenu-close'),
+            active: this._settings.get_boolean('hide-overview-on-arcmenu-open'),
         });
-        hideOverviewOnCloseSwitch.connect('notify::active', widget => {
-            this._settings.set_boolean('hide-overview-on-arcmenu-close', widget.get_active());
+        hideOverviewOnOpenSwitch.connect('notify::active', widget => {
+            this._settings.set_boolean('hide-overview-on-arcmenu-open', widget.get_active());
         });
-        const hideOverviewOnCloseRow = new Adw.ActionRow({
-            title: _('Hide Overview on ArcMenu Close'),
-            activatable_widget: hideOverviewOnCloseSwitch,
+        const hideOverviewOnOpenRow = new Adw.ActionRow({
+            title: _('Hide Overview when ArcMenu Opens'),
+            activatable_widget: hideOverviewOnOpenSwitch,
         });
-        hideOverviewOnCloseRow.add_suffix(hideOverviewOnCloseSwitch);
-        generalGroup.add(hideOverviewOnCloseRow);
+        hideOverviewOnOpenRow.add_suffix(hideOverviewOnOpenSwitch);
+        generalGroup.add(hideOverviewOnOpenRow);
     }
 
     _createExpanderRow(title, isMenuHotkey) {
