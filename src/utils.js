@@ -114,6 +114,54 @@ export function canHibernateOrSleep(callName, asyncCallback) {
     });
 }
 
+/**
+ * Manages multiple delayed timeouts.
+ * Each delay is identified by a unique string ID, ensuring only one active timeout per ID.
+ * Calling `scheduleUpdate` for an existing ID cancels the previous timeout and schedules a new one.
+ * When the timeout fires, the callback runs, the ID is cleaned up, and the timeout is removed.
+ */
+export class DelayedUpdater {
+    constructor() {
+        this._delays = new Map();
+    }
+
+    scheduleUpdate(id, callback) {
+        this.cancelUpdate(id);
+
+        const timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 300, () => {
+            callback();
+            this._delays.delete(id);
+            return GLib.SOURCE_REMOVE;
+        });
+
+        this._delays.set(id, timeoutId);
+    }
+
+    cancelUpdate(id) {
+        if (this._delays.has(id)) {
+            const timeoutId = this._delays.get(id);
+            GLib.source_remove(timeoutId);
+            this._delays.delete(id);
+        }
+    }
+
+    cancelAll() {
+        for (const timeoutId of this._delays.values())
+            GLib.source_remove(timeoutId);
+
+        this._delays.clear();
+    }
+
+    destroy() {
+        this.cancelAll();
+        this._delays = null;
+    }
+
+    hasActive(id) {
+        return this._delays.has(id);
+    }
+}
+
 export function convertToButton(item) {
     item.tooltipLocation = Constants.TooltipLocation.BOTTOM_CENTERED;
     item.remove_child(item.label);

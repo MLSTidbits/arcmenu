@@ -1,7 +1,6 @@
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import Gio from 'gi://Gio';
-import GLib from 'gi://GLib';
 import Shell from 'gi://Shell';
 
 import * as Config from 'resource:///org/gnome/shell/misc/config.js';
@@ -24,6 +23,7 @@ export const MenuController = class {
         this.panel = panelInfo.panel;
         this.monitorIndex = monitorIndex;
         this.isPrimaryPanel = panelInfo.isPrimaryPanel;
+        this._delayedUpdater = new Utils.DelayedUpdater();
 
         // Allow other extensions and DBus command to open/close ArcMenu
         if (!global.toggleArcMenu && this.isPrimaryPanel) {
@@ -40,7 +40,7 @@ export const MenuController = class {
             this._overrideOverlayKey = new Keybinder.OverrideOverlayKey();
             this._customKeybinding = new Keybinder.CustomKeybinding();
             this._appSystem = Shell.AppSystem.get_default();
-            this._updateHotKeyBinder();
+            this._updateHotkeys();
             this._initRecentAppsTracker();
             this._inputSourceManagerOverride();
         }
@@ -51,6 +51,10 @@ export const MenuController = class {
         this._setButtonIconSize();
         this._setButtonIconPadding();
         this._configureActivitiesButton();
+    }
+
+    get menuButton() {
+        return this._menuButton;
     }
 
     _inputSourceManagerOverride() {
@@ -93,8 +97,9 @@ export const MenuController = class {
 
     _getAllMenus() {
         const menus = [];
-        for (let i = 0; i < ArcMenuManager.menuControllers.length; i++) {
-            const menuButton = ArcMenuManager.menuControllers[i]._menuButton;
+        const {menuControllers} = ArcMenuManager;
+        for (let i = 0; i < menuControllers.length; i++) {
+            const {menuButton} = menuControllers[i];
             menus.push(menuButton.arcMenu);
         }
         if (this.runnerMenu)
@@ -118,10 +123,10 @@ export const MenuController = class {
                 'menu-item-active-fg-color', 'menu-button-fg-color', 'menu-button-bg-color', 'menu-arrow-rise',
                 'menu-button-hover-bg-color', 'menu-button-hover-fg-color', 'menu-button-active-bg-color',
                 'menu-button-active-fg-color', 'menu-button-border-radius', 'menu-button-border-width'],
-            this._overrideMenuTheme.bind(this));
+            this._updateMenuTheme.bind(this));
 
         this._connectSettings(['arcmenu-hotkey', 'runner-hotkey', 'arcmenu-hotkey-overlay-key-enabled', 'runner-hotkey-overlay-key-enabled'],
-            this._updateHotKeyBinder.bind(this));
+            this._updateHotkeys.bind(this));
 
         this._connectSettings(['position-in-panel', 'menu-button-position-offset'],
             this._setButtonPosition.bind(this));
@@ -164,24 +169,28 @@ export const MenuController = class {
         this._connectSettings(['force-menu-location'], this._forceMenuLocation.bind(this));
     }
 
-    _overrideMenuTheme() {
+    _updateMenuTheme() {
         if (!this.isPrimaryPanel)
             return;
 
-        if (this._updateThemeDelayId)
-            GLib.source_remove(this._updateThemeDelayId);
-
-        this._updateThemeDelayId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 300, () => {
+        this._delayedUpdater.scheduleUpdate('updateMenuTheme', () => {
             Theming.updateStylesheet();
-            this._updateThemeDelayId = null;
-            return GLib.SOURCE_REMOVE;
         });
     }
 
     _recreateMenuLayout() {
-        this._menuButton.createMenuLayout();
-        if (this.runnerMenu)
-            this.runnerMenu.createMenuLayout();
+        if (!this.isPrimaryPanel)
+            return;
+
+        this._delayedUpdater.scheduleUpdate('recreateMenuLayout', () => {
+            const {menuControllers} = ArcMenuManager;
+            for (let i = 0; i < menuControllers.length; i++) {
+                const {menuButton} = menuControllers[i];
+                menuButton.createMenuLayout();
+            }
+            if (this.runnerMenu)
+                this.runnerMenu.createMenuLayout();
+        });
     }
 
     _forceMenuLocation() {
@@ -263,9 +272,9 @@ export const MenuController = class {
 
     _toggleMenuOnMonitor(monitor) {
         let currentMonitorIndex = 0;
-        for (let i = 0; i < ArcMenuManager.menuControllers.length; i++) {
-            const menuButton = ArcMenuManager.menuControllers[i]._menuButton;
-            const {monitorIndex} = ArcMenuManager.menuControllers[i];
+        const {menuControllers} = ArcMenuManager;
+        for (let i = 0; i < menuControllers.length; i++) {
+            const {menuButton, monitorIndex} = menuControllers[i];
 
             if (monitor.index === monitorIndex) {
                 currentMonitorIndex = i;
@@ -277,12 +286,12 @@ export const MenuController = class {
         }
 
         // open the current monitors menu
-        ArcMenuManager.menuControllers[currentMonitorIndex]._menuButton.toggleMenu();
+        ArcMenuManager.menuControllers[currentMonitorIndex].menuButton.toggleMenu();
     }
 
     _closeAllArcMenus() {
         for (let i = 0; i < ArcMenuManager.menuControllers.length; i++) {
-            const menuButton = ArcMenuManager.menuControllers[i]._menuButton;
+            const {menuButton} = ArcMenuManager.menuControllers[i];
             if (menuButton.arcMenu.isOpen)
                 menuButton.toggleMenu();
             menuButton.closeContextMenu();
@@ -301,14 +310,11 @@ export const MenuController = class {
         this._menuButton.loadPinnedApps();
     }
 
-    _updateHotKeyBinder() {
+    _updateHotkeys() {
         if (!this.isPrimaryPanel)
             return;
 
-        if (this._updateHotkeyDelayId)
-            GLib.source_remove(this._updateHotkeyDelayId);
-
-        this._updateHotkeyDelayId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 300, () => {
+        this._delayedUpdater.scheduleUpdate('updateHotkeys', () => {
             const runnerHotkeys = ArcMenuManager.settings.get_strv('runner-hotkey');
             const arcmenuHotkeys = ArcMenuManager.settings.get_strv('arcmenu-hotkey');
 
@@ -344,9 +350,6 @@ export const MenuController = class {
                 this.runnerMenu.destroy();
                 this.runnerMenu = null;
             }
-
-            this._updateHotkeyDelayId = null;
-            return GLib.SOURCE_REMOVE;
         });
     }
 
@@ -548,15 +551,8 @@ export const MenuController = class {
         }
         this._inputSourcesSettings = null;
 
-        if (this._updateThemeDelayId) {
-            GLib.source_remove(this._updateThemeDelayId);
-            this._updateThemeDelayId = null;
-        }
-
-        if (this._updateHotkeyDelayId) {
-            GLib.source_remove(this._updateHotkeyDelayId);
-            this._updateHotkeyDelayId = null;
-        }
+        this._delayedUpdater.destroy();
+        this._delayedUpdater = null;
 
         if (this._appSystem)
             this._appSystem.disconnectObject(this);
