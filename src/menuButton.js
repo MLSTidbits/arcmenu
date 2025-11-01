@@ -470,7 +470,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
     }
 
     hideTooltip(instant) {
-        this._tooltip.hide(instant);
+        this._tooltip?.hide(instant);
     }
 
     _onDestroy() {

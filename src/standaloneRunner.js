@@ -105,7 +105,7 @@ export const StandaloneRunner = class ArcMenuStandaloneRunner {
     }
 
     hideTooltip(instant) {
-        this._tooltip.hide(instant);
+        this._tooltip?.hide(instant);
     }
 
     destroy() {
