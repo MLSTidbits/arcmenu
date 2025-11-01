@@ -303,9 +303,9 @@
       <default>'Symbolic'</default>
       <summary>Shortcut icon type. Full_Color or Symbolic</summary>
     </key>
-    <key type="b" name="disable-scrollview-fade-effect">
-      <default>false</default>
-      <summary>Disable the fade effect on scrollviews</summary>
+    <key type="b" name="scrollview-fade-effect">
+      <default>true</default>
+      <summary>Enable the fade effect on scrollviews</summary>
     </key>
     <key type="b" name="scrollbars-visible">
       <default>true</default>
@@ -355,13 +355,13 @@
       <default>false</default>
       <summary>Activate Categories on Hover</summary>
     </key>
-    <key type="b" name="disable-recently-installed-apps">
-      <default>false</default>
-      <summary>disable recently installed apps</summary>
+    <key type="b" name="show-recently-installed-apps">
+      <default>true</default>
+      <summary>Recently installed apps</summary>
     </key>
-    <key type="b" name="disable-tooltips">
-      <default>false</default>
-      <summary>disable tooltips</summary>
+    <key type="b" name="show-tooltips">
+      <default>true</default>
+      <summary>Tooltips</summary>
     </key>
       <key type="b" name="show-category-sub-menus">
       <default>false</default>
@@ -407,9 +407,9 @@
       <default>true</default>
       <summary>Set Unity layout to display "Home Screen" as default</summary>
     </key>
-    <key type="b" name="disable-user-avatar">
-      <default>false</default>
-      <summary>Disable the user avatar icon from the menu</summary>
+    <key type="b" name="show-user-avatar">
+      <default>true</default>
+      <summary>Show the user avatar icon from the menu</summary>
     </key>
     <key type="b" name="enable-activities-shortcut">
       <default>false</default>
@@ -431,13 +431,13 @@
       <default>'Categories_List'</default>
       <summary>ArcMenu layout - 'All Apps' button action</summary>
     </key>
-    <key type="b" name="windows-disable-frequent-apps">
-      <default>false</default>
-      <summary>Windows layout - disable frequent apps</summary>
+    <key type="b" name="windows-show-frequent-apps">
+      <default>true</default>
+      <summary>Windows layout - show frequent apps</summary>
     </key>
-    <key type="b" name="windows-disable-pinned-apps">
-      <default>false</default>
-      <summary>Windows layout - disable pinned apps</summary>
+    <key type="b" name="windows-show-pinned-apps">
+      <default>true</default>
+      <summary>Windows layout - show pinned apps</summary>
     </key>
     <key type="b" name="gnome-dash-show-applications">
       <default>false</default>
@@ -463,9 +463,9 @@
       <default>0</default>
       <summary>Runner layout - font size</summary>
     </key>
-    <key type="b" name="eleven-disable-frequent-apps">
-      <default>false</default>
-      <summary>Eleven Layout - disable frequent apps</summary>
+    <key type="b" name="eleven-show-frequent-apps">
+      <default>true</default>
+      <summary>Eleven Layout - show frequent apps</summary>
     </key>
     <key type="b" name="vert-separator">
       <default>false</default>

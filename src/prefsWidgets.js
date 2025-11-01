@@ -8,6 +8,33 @@ import Gtk from 'gi://Gtk';
 
 import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+export class SwitchRow extends Adw.ActionRow {
+    static [GObject.properties] = {
+        'setting-name': GObject.ParamSpec.string('setting-name', 'setting-name', 'setting-name',
+            GObject.ParamFlags.READWRITE,
+            ''),
+    };
+
+    static {
+        GObject.registerClass(this);
+    }
+
+    constructor(settings, params) {
+        super(params);
+
+        if (!this.settingName)
+            throw new Error('SwitchRow requires a "setting-name" property');
+
+        if (!settings)
+            throw new Error('SwitchRow settings must be initialized');
+
+        const switchButton = new Gtk.Switch({valign: Gtk.Align.CENTER});
+        settings.bind(this.settingName, switchButton, 'active', Gio.SettingsBindFlags.DEFAULT);
+        this.add_suffix(switchButton);
+        this.activatable_widget = switchButton;
+    }
+}
+
 export const DialogWindow = GObject.registerClass({
     Signals: {
         'response': {param_types: [GObject.TYPE_INT]},

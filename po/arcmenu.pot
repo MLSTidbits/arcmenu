@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-29 19:26-0400\n"
+"POT-Creation-Date: 2025-11-01 09:58-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -455,7 +455,7 @@ msgstr ""
 #: src/placeDisplay.js:119 src/placeDisplay.js:340
 #: src/settings/menuSettings/layoutTweaksPage.js:631
 #: src/settings/menuSettings/layoutTweaksPage.js:658
-#: src/settings/menuSettings/listPinnedPage.js:416 src/utils.js:234
+#: src/settings/menuSettings/listPinnedPage.js:416 src/utils.js:282
 msgid "Home"
 msgstr ""
 
@@ -464,19 +464,19 @@ msgstr ""
 msgid "Ejecting drive “%s” failed:"
 msgstr ""
 
-#: src/prefsWidgets.js:266
+#: src/prefsWidgets.js:293
 msgid "Modify"
 msgstr ""
 
-#: src/prefsWidgets.js:281
+#: src/prefsWidgets.js:308
 msgid "Move Up"
 msgstr ""
 
-#: src/prefsWidgets.js:288
+#: src/prefsWidgets.js:315
 msgid "Move Down"
 msgstr ""
 
-#: src/prefsWidgets.js:295
+#: src/prefsWidgets.js:322
 msgid "Remove"
 msgstr ""
 
@@ -750,7 +750,7 @@ msgid "Hide Overview on Startup"
 msgstr ""
 
 #: src/settings/generalPage.js:177
-msgid "Hide Overview on ArcMenu Close"
+msgid "Hide Overview when ArcMenu Opens"
 msgstr ""
 
 #: src/settings/generalPage.js:227 src/settings/generalPage.js:392
@@ -1091,97 +1091,105 @@ msgstr ""
 msgid "Modify ArcMenu Context Menu"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:33
+#: src/settings/menuSettings/fineTunePage.js:29
 msgid "Show Category Sub Menus"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:47
+#: src/settings/menuSettings/fineTunePage.js:32
 msgid "Show Application Descriptions"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:54
-msgid "Show Scrollbars"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:73
-msgid "Overlay Scrollbars"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:87
-msgid "Disable Scrollview Fade Effects"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:101
-msgid "Disable Tooltips"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:115
-msgid "Group Apps Alphabetically on List Views"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:116
-#: src/settings/menuSettings/fineTunePage.js:131
-msgid "For All Apps sections"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:130
-msgid "Group Apps Alphabetically on Grid Views"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:145
+#: src/settings/menuSettings/fineTunePage.js:35
 msgid "Show Hidden Recent Files"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:159
-msgid "Multi-Lined Labels"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:160
+#: src/settings/menuSettings/fineTunePage.js:39
 msgid "Allow application labels to span multiple lines on grid style layouts"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:174
+#: src/settings/menuSettings/fineTunePage.js:39
+msgid "Show Multi Lined Labels"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:42
+msgid "Show Tooltips"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:46
+#: src/settings/menuSettings/fineTunePage.js:50
+msgid "For All Apps sections"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:46
+msgid "Group Apps Alphabetically on List Views"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:50
+msgid "Group Apps Alphabetically on Grid Views"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:53
 msgid "Activate App Window on Launch"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:175
+#: src/settings/menuSettings/fineTunePage.js:54
 msgid ""
 "Launching an app activates its existing window if one is open; otherwise, it "
 "launches a new instance. Hold Ctrl while launching or middle-click to open a "
 "new window."
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:185
+#: src/settings/menuSettings/fineTunePage.js:58
+msgid "Scrollview Options"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:62
+msgid "Scrollview Fade Effects"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:67
+msgid "Show Scrollbars"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:74
+msgid "Overlay Scrollbars"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:78
+msgid "Icon Style"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:83
 msgid "Full Color"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:186
+#: src/settings/menuSettings/fineTunePage.js:84
 msgid "Symbolic"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:188
+#: src/settings/menuSettings/fineTunePage.js:86
 msgid "Category Icon Type"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:189
-#: src/settings/menuSettings/fineTunePage.js:200
+#: src/settings/menuSettings/fineTunePage.js:87
+#: src/settings/menuSettings/fineTunePage.js:103
 msgid "Some icon themes may not include selected icon type"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:199
+#: src/settings/menuSettings/fineTunePage.js:102
 msgid "Shortcuts Icon Type"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:223
-msgid "Disable New Apps Tracker"
+#: src/settings/menuSettings/fineTunePage.js:118
+msgid "New Apps Tracker"
 msgstr ""
 
-#: src/settings/menuSettings/fineTunePage.js:232
+#: src/settings/menuSettings/fineTunePage.js:122
+msgid "Enable"
+msgstr ""
+
+#: src/settings/menuSettings/fineTunePage.js:127
 msgid "Clear All"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:241
-msgid "Clear Apps Marked 'New'"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:116
@@ -1242,7 +1250,7 @@ msgid "Flip Layout Horizontally"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:237
-msgid "Disable User Avatar"
+msgid "Show User Avatar"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:277
@@ -1257,7 +1265,8 @@ msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:304
 #: src/settings/menuSettings/layoutTweaksPage.js:410
-msgid "Disable Frequent Apps"
+#: src/settings/menuSettings/layoutTweaksPage.js:617
+msgid "Show Frequent Apps"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:330
@@ -1274,7 +1283,7 @@ msgid "Show Apps Grid"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:424
-msgid "Disable Pinned Apps"
+msgid "Show Pinned Apps"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:450
@@ -1322,10 +1331,6 @@ msgstr ""
 #: src/settings/menuSettings/layoutTweaksPage.js:602
 #: src/settings/menuSettings/themePage.js:197
 msgid "Font Size"
-msgstr ""
-
-#: src/settings/menuSettings/layoutTweaksPage.js:617
-msgid "Show Frequent Apps"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:689

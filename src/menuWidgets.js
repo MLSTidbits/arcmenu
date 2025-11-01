@@ -617,8 +617,8 @@ export class Tooltip extends St.Label {
         global.stage.add_child(this);
         this.hide();
 
-        this._useTooltips = !ArcMenuManager.settings.get_boolean('disable-tooltips');
-        ArcMenuManager.settings.connectObject('changed::disable-tooltips', this.disableTooltips.bind(this), this);
+        this._useTooltips = ArcMenuManager.settings.get_boolean('show-tooltips');
+        ArcMenuManager.settings.connectObject('changed::show-tooltips', this._showTooltipsChanged.bind(this), this);
         this.connect('destroy', () => this._onDestroy());
     }
 
@@ -644,8 +644,8 @@ export class Tooltip extends St.Label {
         this._setTooltipText(titleLabel, description, displayType);
     }
 
-    disableTooltips() {
-        this._useTooltips = !ArcMenuManager.settings.get_boolean('disable-tooltips');
+    _showTooltipsChanged() {
+        this._useTooltips = ArcMenuManager.settings.get_boolean('show-tooltips');
     }
 
     _setTooltipText(titleLabel, description, displayType) {
@@ -1181,6 +1181,12 @@ export class ViewAllAppsButton extends BaseMenuItem {
     constructor(menuLayout) {
         super(menuLayout);
 
+        this._iconBin = new St.Bin({
+            x_expand: false,
+            x_align: Clutter.ActorAlign.START,
+        });
+        this.add_child(this._iconBin);
+
         const label = new St.Label({
             text: _('All Apps'),
             x_expand: false,
@@ -1190,20 +1196,15 @@ export class ViewAllAppsButton extends BaseMenuItem {
         });
         this.add_child(label);
 
-        this._iconBin = new St.Bin({
-            x_expand: false,
-            x_align: Clutter.ActorAlign.START,
-        });
-        this.add_child(this._iconBin);
         this._updateIcon();
     }
 
     createIcon() {
-        const iconSizeEnum = ArcMenuManager.settings.get_enum('misc-item-icon-size');
-        const iconSize = Utils.getIconSize(iconSizeEnum, Constants.MISC_ICON_SIZE);
+        const iconSizeEnum = ArcMenuManager.settings.get_enum('menu-item-category-icon-size');
+        const iconSize = Utils.getIconSize(iconSizeEnum, Constants.MEDIUM_ICON_SIZE);
 
         return new St.Icon({
-            icon_name: 'go-next-symbolic',
+            icon_name: 'view-app-grid-symbolic',
             icon_size: iconSize,
             x_align: Clutter.ActorAlign.START,
             style_class: 'popup-menu-icon',
@@ -2428,8 +2429,8 @@ export class ApplicationMenuItem extends BaseMenuItem {
         this.isSearchResult = !!Object.keys(this.metaInfo).length;
 
         if (this._app) {
-            const disableRecentAppsIndicator = ArcMenuManager.settings.get_boolean('disable-recently-installed-apps');
-            if (!disableRecentAppsIndicator) {
+            const showRecentApps = ArcMenuManager.settings.get_boolean('show-recently-installed-apps');
+            if (showRecentApps) {
                 const recentApps = ArcMenuManager.settings.get_strv('recently-installed-apps');
                 this.isRecentlyInstalled = recentApps.some(appIter => appIter === this._app.get_id());
             }

@@ -136,17 +136,17 @@ export const MenuController = class {
 
         this._connectSettings(
             ['directory-shortcuts', 'application-shortcuts', 'extra-categories', 'custom-grid-icon-size',
-                'power-options', 'show-external-devices', 'show-bookmarks', 'disable-user-avatar', 'runner-search-display-style',
+                'power-options', 'show-external-devices', 'show-bookmarks', 'show-user-avatar', 'runner-search-display-style',
                 'avatar-style', 'enable-activities-shortcut', 'enable-horizontal-flip', 'power-display-style',
                 'searchbar-default-bottom-location', 'searchbar-default-top-location', 'multi-lined-labels',
                 'apps-show-extra-details', 'show-search-result-details', 'search-provider-open-windows',
-                'search-provider-recent-files', 'misc-item-icon-size', 'windows-disable-pinned-apps',
-                'disable-scrollview-fade-effect', 'windows-disable-frequent-apps', 'default-menu-view',
+                'search-provider-recent-files', 'misc-item-icon-size', 'windows-show-pinned-apps',
+                'scrollview-fade-effect', 'windows-show-frequent-apps', 'default-menu-view',
                 'default-menu-view-tognee', 'group-apps-alphabetically-list-layouts', 'group-apps-alphabetically-grid-layouts',
                 'menu-item-grid-icon-size', 'menu-item-icon-size', 'button-item-icon-size', 'quicklinks-item-icon-size',
                 'menu-item-category-icon-size', 'category-icon-type', 'shortcut-icon-type', 'show-category-sub-menus',
                 'arcmenu-extra-categories-links', 'arcmenu-extra-categories-links-location', 'raven-search-display-style',
-                'runner-show-frequent-apps', 'default-menu-view-redmond', 'disable-recently-installed-apps', 'az-layout-merge-panels',
+                'runner-show-frequent-apps', 'default-menu-view-redmond', 'show-recently-installed-apps', 'az-layout-merge-panels',
                 'scrollbars-visible', 'scrollbars-overlay'],
             this._recreateMenuLayout.bind(this));
 
@@ -203,8 +203,8 @@ export const MenuController = class {
     }
 
     _setRecentlyInstalledApps() {
-        const isDisabled = ArcMenuManager.settings.get_boolean('disable-recently-installed-apps');
-        if (isDisabled)
+        const showNewApps = ArcMenuManager.settings.get_boolean('show-recently-installed-apps');
+        if (!showNewApps)
             return;
 
         const appList = this._listAllApps();

@@ -225,20 +225,20 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         return horizontalFlipRow;
     }
 
-    _disableAvatarRow() {
-        const disableAvatarSwitch = new Gtk.Switch({
+    _showAvatarRow() {
+        const showAvatarSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
         });
-        disableAvatarSwitch.set_active(this._settings.get_boolean('disable-user-avatar'));
-        disableAvatarSwitch.connect('notify::active', widget => {
-            this._settings.set_boolean('disable-user-avatar', widget.get_active());
+        showAvatarSwitch.set_active(this._settings.get_boolean('show-user-avatar'));
+        showAvatarSwitch.connect('notify::active', widget => {
+            this._settings.set_boolean('show-user-avatar', widget.get_active());
         });
-        const disableAvatarRow = new Adw.ActionRow({
-            title: _('Disable User Avatar'),
-            activatable_widget: disableAvatarSwitch,
+        const showAvatarRow = new Adw.ActionRow({
+            title: _('Show User Avatar'),
+            activatable_widget: showAvatarSwitch,
         });
-        disableAvatarRow.add_suffix(disableAvatarSwitch);
-        return disableAvatarRow;
+        showAvatarRow.add_suffix(showAvatarSwitch);
+        return showAvatarRow;
     }
 
     _loadEnterpriseTweaks() {
@@ -293,19 +293,19 @@ class ArcMenuLayoutTweaksPage extends SubPage {
 
     _loadElevenTweaks() {
         const tweaksGroup = new Adw.PreferencesGroup();
-        const disableFrequentAppsSwitch = new Gtk.Switch({
+        const showFrequentAppsSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
         });
-        disableFrequentAppsSwitch.set_active(this._settings.get_boolean('eleven-disable-frequent-apps'));
-        disableFrequentAppsSwitch.connect('notify::active', widget => {
-            this._settings.set_boolean('eleven-disable-frequent-apps', widget.get_active());
+        showFrequentAppsSwitch.set_active(this._settings.get_boolean('eleven-show-frequent-apps'));
+        showFrequentAppsSwitch.connect('notify::active', widget => {
+            this._settings.set_boolean('eleven-show-frequent-apps', widget.get_active());
         });
-        const disableFrequentAppsRow = new Adw.ActionRow({
-            title: _('Disable Frequent Apps'),
-            activatable_widget: disableFrequentAppsSwitch,
+        const showFrequentAppsRow = new Adw.ActionRow({
+            title: _('Show Frequent Apps'),
+            activatable_widget: showFrequentAppsSwitch,
         });
-        disableFrequentAppsRow.add_suffix(disableFrequentAppsSwitch);
-        tweaksGroup.add(disableFrequentAppsRow);
+        showFrequentAppsRow.add_suffix(showFrequentAppsSwitch);
+        tweaksGroup.add(showFrequentAppsRow);
         this.add(tweaksGroup);
 
         const extraShortcutsGroup = new Adw.PreferencesGroup();
@@ -402,12 +402,12 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         const frequentAppsSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
         });
-        frequentAppsSwitch.set_active(this._settings.get_boolean('windows-disable-frequent-apps'));
+        frequentAppsSwitch.set_active(this._settings.get_boolean('windows-show-frequent-apps'));
         frequentAppsSwitch.connect('notify::active', widget => {
-            this._settings.set_boolean('windows-disable-frequent-apps', widget.get_active());
+            this._settings.set_boolean('windows-show-frequent-apps', widget.get_active());
         });
         const frequentAppsRow = new Adw.ActionRow({
-            title: _('Disable Frequent Apps'),
+            title: _('Show Frequent Apps'),
             activatable_widget: frequentAppsSwitch,
         });
         frequentAppsRow.add_suffix(frequentAppsSwitch);
@@ -416,12 +416,12 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         const pinnedAppsSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
         });
-        pinnedAppsSwitch.set_active(this._settings.get_boolean('windows-disable-pinned-apps'));
+        pinnedAppsSwitch.set_active(this._settings.get_boolean('windows-show-pinned-apps'));
         pinnedAppsSwitch.connect('notify::active', widget => {
-            this._settings.set_boolean('windows-disable-pinned-apps', widget.get_active());
+            this._settings.set_boolean('windows-show-pinned-apps', widget.get_active());
         });
         const pinnedAppsRow = new Adw.ActionRow({
-            title: _('Disable Pinned Apps'),
+            title: _('Show Pinned Apps'),
             activatable_widget: pinnedAppsSwitch,
         });
         pinnedAppsRow.add_suffix(pinnedAppsSwitch);
@@ -778,7 +778,7 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         tweaksGroup.add(this._createAvatarShapeRow());
         tweaksGroup.add(this._createSearchBarLocationRow());
         tweaksGroup.add(this._createFlipHorizontalRow());
-        tweaksGroup.add(this._disableAvatarRow());
+        tweaksGroup.add(this._showAvatarRow());
         tweaksGroup.add(this._createVertSeparatorRow());
 
         this.add(tweaksGroup);
@@ -821,7 +821,7 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         const tweaksGroup = new Adw.PreferencesGroup();
         tweaksGroup.add(this._createVertSeparatorRow());
         tweaksGroup.add(this._createAvatarShapeRow());
-        tweaksGroup.add(this._disableAvatarRow());
+        tweaksGroup.add(this._showAvatarRow());
         this.add(tweaksGroup);
 
         const extraShortcutsGroup = new Adw.PreferencesGroup();
@@ -934,7 +934,7 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         tweaksGroup.add(this._createAvatarShapeRow());
         tweaksGroup.add(this._createSearchBarLocationRow(searchBarBottomDefault));
         tweaksGroup.add(this._createFlipHorizontalRow());
-        tweaksGroup.add(this._disableAvatarRow());
+        tweaksGroup.add(this._showAvatarRow());
         tweaksGroup.add(this._createVertSeparatorRow());
         this.add(tweaksGroup);
 
@@ -1005,7 +1005,7 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         tweaksGroup.add(this._createActivateOnHoverRow());
         tweaksGroup.add(this._createAvatarShapeRow());
         tweaksGroup.add(this._createFlipHorizontalRow());
-        tweaksGroup.add(this._disableAvatarRow());
+        tweaksGroup.add(this._showAvatarRow());
         tweaksGroup.add(this._createVertSeparatorRow());
 
         const extraShortcutsGroup = new Adw.PreferencesGroup();

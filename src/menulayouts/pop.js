@@ -1165,8 +1165,8 @@ export class ApplicationMenuItem extends MW.DraggableMenuItem {
 
         this.hasContextMenu = !!this._app;
 
-        const disableRecentAppsIndicator = ArcMenuManager.settings.get_boolean('disable-recently-installed-apps');
-        if (!disableRecentAppsIndicator) {
+        const showNewApps = ArcMenuManager.settings.get_boolean('show-recently-installed-apps');
+        if (showNewApps) {
             const recentApps = ArcMenuManager.settings.get_strv('recently-installed-apps');
             this.isRecentlyInstalled = recentApps.some(appIter => appIter === this._app.get_id());
         }
