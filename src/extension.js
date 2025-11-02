@@ -5,7 +5,7 @@ import {ArcMenuManager} from './arcmenuManager.js';
 import * as Constants from './constants.js';
 import {MenuController} from './menuController.js';
 import {SearchProviderEmitter} from './searchProviders/searchProviderEmitter.js';
-import * as Theming from './theming.js';
+import {CustomStylesheet} from './theming.js';
 
 import * as Utils from './utils.js';
 import {UpdateNotification} from './updateNotifier.js';
@@ -14,13 +14,12 @@ export default class ArcMenu extends Extension {
     enable() {
         this.settings = this.getSettings();
         this._arcmenuManager = new ArcMenuManager(this);
-
         this.searchProviderEmitter = new SearchProviderEmitter();
-
+        this.menuControllers = [];
         this._azTaskbarActive = false;
         this._dtpActive = false;
-
         this._updateNotification = new UpdateNotification(this);
+        this._customStylesheet = new CustomStylesheet(this.settings);
 
         const hideOverviewOnStartup = this.settings.get_boolean('hide-overview-on-startup');
         if (hideOverviewOnStartup && Main.layoutManager._startingUp) {
@@ -35,10 +34,6 @@ export default class ArcMenu extends Extension {
 
         this.settings.connectObject('changed::multi-monitor', () => this._reload(), this);
         this.settings.connectObject('changed::dash-to-panel-standalone', () => this._reload(), this);
-        this.menuControllers = [];
-
-        this.customStylesheet = null;
-        Theming.createStylesheet();
 
         this._enableButtons();
 
@@ -64,7 +59,7 @@ export default class ArcMenu extends Extension {
 
         this._connectExtensionSignals();
 
-        global.connectObject('shutdown', () => Theming.deleteStylesheet(), this);
+        global.connectObject('shutdown', () => this._customStylesheet.destroy(), this);
     }
 
     disable() {
@@ -77,8 +72,8 @@ export default class ArcMenu extends Extension {
         this._updateNotification.destroy();
         this._updateNotification = null;
 
-        Theming.deleteStylesheet();
-        this.customStylesheet = null;
+        this._customStylesheet.destroy();
+        this._customStylesheet = null;
 
         this._disableButtons();
         this.menuControllers = null;

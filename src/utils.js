@@ -115,50 +115,59 @@ export function canHibernateOrSleep(callName, asyncCallback) {
 }
 
 /**
- * Manages multiple delayed timeouts.
- * Each delay is identified by a unique string ID, ensuring only one active timeout per ID.
- * Calling `scheduleUpdate` for an existing ID cancels the previous timeout and schedules a new one.
- * When the timeout fires, the callback runs, the ID is cleaned up, and the timeout is removed.
+ * Helper function to monitor 'changed' events on a variable number of GSettings keys using
+ * the same callback and binding object. It connects each key's `changed::${key}` signal to
+ * the provided callback via `connectObject`.
+ *
+ * @param {string[]} settingNamesArray Array of GSettings key names to monitor for changes.
+ * @param {Function} callback The callback function to invoke on any monitored setting change.
+ * @param {object} object The object to bind as `this` context for the callback connections.
  */
-export class DelayedUpdater {
-    constructor() {
-        this._delays = new Map();
+export function connectSettings(settingNamesArray, callback, object) {
+    ArcMenuManager.settings.connectObject(
+        ...settingNamesArray.flatMap(setting => [`changed::${setting}`, callback]),
+        object
+    );
+}
+
+/**
+ * A utility for debouncing callbacks using GLib timeouts.
+ * Useful for rapid GSetting key changes to prevent excessive callbacks.
+ * Schedules executions after a delay, canceling and rescheduling on repeated calls per ID.
+ * Supports multiple independent debouncers keyed by unique IDs.
+ */
+export class Debouncer {
+    constructor(delay = 300) {
+        this._delay = delay;
+        this._timers = new Map();
     }
 
-    scheduleUpdate(id, callback) {
-        this.cancelUpdate(id);
+    debounce(id, callback) {
+        this._cancel(id);
 
-        const timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 300, () => {
+        const timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, this._delay, () => {
             callback();
-            this._delays.delete(id);
+            this._timers.delete(id);
             return GLib.SOURCE_REMOVE;
         });
 
-        this._delays.set(id, timeoutId);
+        this._timers.set(id, timeoutId);
     }
 
-    cancelUpdate(id) {
-        if (this._delays.has(id)) {
-            const timeoutId = this._delays.get(id);
+    _cancel(id) {
+        if (this._timers.has(id)) {
+            const timeoutId = this._timers.get(id);
             GLib.source_remove(timeoutId);
-            this._delays.delete(id);
+            this._timers.delete(id);
         }
     }
 
-    cancelAll() {
-        for (const timeoutId of this._delays.values())
+    destroy() {
+        for (const timeoutId of this._timers.values())
             GLib.source_remove(timeoutId);
 
-        this._delays.clear();
-    }
-
-    destroy() {
-        this.cancelAll();
-        this._delays = null;
-    }
-
-    hasActive(id) {
-        return this._delays.has(id);
+        this._timers.clear();
+        this._timers = null;
     }
 }
 
