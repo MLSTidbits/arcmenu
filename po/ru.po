@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arc Menu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 09:03-0400\n"
-"PO-Revision-Date: 2025-09-26 21:09+1000\n"
+"POT-Creation-Date: 2025-11-01 09:58-0400\n"
+"PO-Revision-Date: 2025-11-03 23:03+1000\n"
 "Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -52,7 +52,7 @@ msgstr "Избранное"
 msgid "Frequent Apps"
 msgstr "Часто используемые"
 
-#: src/constants.js:99 src/menuWidgets.js:1185 src/menulayouts/az.js:64
+#: src/constants.js:99 src/menuWidgets.js:1191 src/menulayouts/az.js:64
 #: src/menulayouts/az.js:73 src/menulayouts/eleven.js:55
 #: src/menulayouts/eleven.js:64 src/menulayouts/redmond.js:74
 #: src/menulayouts/redmond.js:77 src/menulayouts/redmond.js:81
@@ -74,27 +74,27 @@ msgstr "Закреплённые приложения"
 msgid "Recent Files"
 msgstr "Недавние файлы"
 
-#: src/constants.js:272 src/menuButton.js:805
+#: src/constants.js:272 src/menuButton.js:810
 #: src/settings/menuSettings/listPinnedPage.js:401
 msgid "Log Out..."
 msgstr "Завершить сеанс..."
 
-#: src/constants.js:273 src/menuButton.js:804
+#: src/constants.js:273 src/menuButton.js:809
 #: src/settings/menuSettings/listPinnedPage.js:400
 msgid "Lock"
 msgstr "Заблокировать экран"
 
-#: src/constants.js:274 src/menuButton.js:799
+#: src/constants.js:274 src/menuButton.js:804
 #: src/settings/menuSettings/listPinnedPage.js:403
 msgid "Restart..."
 msgstr "Перезагрузить..."
 
-#: src/constants.js:275 src/menuButton.js:800
+#: src/constants.js:275 src/menuButton.js:805
 #: src/settings/menuSettings/listPinnedPage.js:402
 msgid "Power Off..."
 msgstr "Выключить..."
 
-#: src/constants.js:276 src/menuButton.js:796
+#: src/constants.js:276 src/menuButton.js:801
 #: src/settings/menuSettings/listPinnedPage.js:404
 msgid "Suspend"
 msgstr "Ждущий режим"
@@ -107,13 +107,13 @@ msgstr "Гибридный спящий режим"
 msgid "Hibernate"
 msgstr "Спящий режим"
 
-#: src/constants.js:279 src/menuButton.js:806
+#: src/constants.js:279 src/menuButton.js:811
 #: src/settings/menuSettings/listPinnedPage.js:408
 msgid "Switch User"
 msgstr "Сменить пользователя"
 
 #: src/constants.js:425 src/settings/aboutPage.js:33
-#: src/settings/donatePage.js:17 src/settings/generalPage.js:613
+#: src/settings/donatePage.js:17 src/settings/generalPage.js:627
 #: src/settings/menuButtonPage.js:211
 msgid "ArcMenu"
 msgstr "ArcMenu"
@@ -242,13 +242,13 @@ msgstr "Терминал"
 msgid "Tweaks"
 msgstr "Доп. настройки GNOME"
 
-#: src/constants.js:583 src/menuButton.js:749 src/menuWidgets.js:574
+#: src/constants.js:583 src/menuButton.js:754 src/menuWidgets.js:573
 #: src/settings/menuSettings/listPinnedPage.js:368
 #: src/settings/menuSettings/listPinnedPage.js:390
 msgid "Activities Overview"
 msgstr "«Обзор»"
 
-#: src/constants.js:583 src/menuButton.js:735
+#: src/constants.js:583 src/menuButton.js:740
 #: src/settings/menuSettings/listPinnedPage.js:354
 #: src/settings/menuSettings/listPinnedPage.js:365
 #: src/settings/menuSettings/listPinnedPage.js:377
@@ -264,27 +264,27 @@ msgstr "Файлы"
 msgid "Apps"
 msgstr "Приложения"
 
-#: src/menuButton.js:780 src/settings/menuSettings/listPinnedPage.js:393
+#: src/menuButton.js:785 src/settings/menuSettings/listPinnedPage.js:393
 msgid "Show Desktop"
 msgstr "Показать рабочий стол"
 
-#: src/menuButton.js:794 src/menuWidgets.js:871 src/menuWidgets.js:888
+#: src/menuButton.js:799 src/menuWidgets.js:870 src/menuWidgets.js:887
 msgid "Power Off"
 msgstr "Выключить"
 
-#: src/menuButton.js:835
+#: src/menuButton.js:840
 msgid "Dash to Panel Settings"
 msgstr "Настройки «Dash to Panel»"
 
-#: src/menuButton.js:839
+#: src/menuButton.js:844
 msgid "App Icons Taskbar Settings"
 msgstr "Настройки «App Icons Taskbar»"
 
-#: src/menuWidgets.js:925 src/menulayouts/plasma.js:328
+#: src/menuWidgets.js:924 src/menulayouts/plasma.js:328
 msgid "Session"
 msgstr "Сессии"
 
-#: src/menuWidgets.js:929 src/menulayouts/plasma.js:332
+#: src/menuWidgets.js:928 src/menulayouts/plasma.js:332
 msgid "System"
 msgstr "Система"
 
@@ -294,15 +294,15 @@ msgstr "Система"
 msgid "Back"
 msgstr "Назад"
 
-#: src/menuWidgets.js:2384 src/menulayouts/pop.js:355
+#: src/menuWidgets.js:2385 src/menulayouts/pop.js:355
 msgid "Unnamed Folder"
 msgstr "Папка без названия"
 
-#: src/menuWidgets.js:2484 src/menulayouts/pop.js:1183
+#: src/menuWidgets.js:2485 src/menulayouts/pop.js:1183
 msgid "New"
 msgstr "Новое"
 
-#: src/menuWidgets.js:3037 src/menulayouts/az.js:72 src/menulayouts/az.js:226
+#: src/menuWidgets.js:3038 src/menulayouts/az.js:72 src/menulayouts/az.js:226
 #: src/menulayouts/eleven.js:63 src/menulayouts/insider.js:188
 #: src/menulayouts/plasma.js:123 src/menulayouts/raven.js:62
 #: src/menulayouts/raven.js:233 src/menulayouts/raven.js:274
@@ -313,19 +313,19 @@ msgstr "Новое"
 msgid "Pinned"
 msgstr "Закреплённые"
 
-#: src/menuWidgets.js:3207
+#: src/menuWidgets.js:3208
 msgid "Unmount Drive"
 msgstr "Отмонтировать диск"
 
-#: src/menuWidgets.js:3209
+#: src/menuWidgets.js:3210
 msgid "Eject Drive"
 msgstr "Извлечь диск"
 
-#: src/menuWidgets.js:3253
+#: src/menuWidgets.js:3254
 msgid "Remove from Recent"
 msgstr "Убрать из «Недавние»"
 
-#: src/menuWidgets.js:3333
+#: src/menuWidgets.js:3334
 msgid "Search…"
 msgstr "Поиск…"
 
@@ -406,13 +406,13 @@ msgid "Rename %s folder"
 msgstr "Переименовать папку %s"
 
 #: src/menulayouts/pop.js:894 src/settings/aboutPage.js:404
-#: src/settings/generalPage.js:286 src/settings/menuButtonPage.js:532
+#: src/settings/generalPage.js:300 src/settings/menuButtonPage.js:532
 #: src/settings/menuSettings/listPinnedPage.js:629
 #: src/settings/menuSettings/themingDialog.js:269
 msgid "Cancel"
 msgstr "Отменить"
 
-#: src/menulayouts/pop.js:902 src/settings/generalPage.js:272
+#: src/menulayouts/pop.js:902 src/settings/generalPage.js:286
 #: src/settings/menuSettings/listPinnedPage.js:666
 #: src/settings/menuSettings/visualSettings.js:372
 msgid "Apply"
@@ -459,7 +459,7 @@ msgstr "Не удалось подключить раздел для «%s»"
 #: src/placeDisplay.js:119 src/placeDisplay.js:340
 #: src/settings/menuSettings/layoutTweaksPage.js:631
 #: src/settings/menuSettings/layoutTweaksPage.js:658
-#: src/settings/menuSettings/listPinnedPage.js:416 src/utils.js:234
+#: src/settings/menuSettings/listPinnedPage.js:416 src/utils.js:282
 msgid "Home"
 msgstr "Домашняя папка"
 
@@ -468,19 +468,19 @@ msgstr "Домашняя папка"
 msgid "Ejecting drive “%s” failed:"
 msgstr "Не удалось извлечь раздел «%s»:"
 
-#: src/prefsWidgets.js:266
+#: src/prefsWidgets.js:293
 msgid "Modify"
 msgstr "Изменить"
 
-#: src/prefsWidgets.js:281
+#: src/prefsWidgets.js:308
 msgid "Move Up"
 msgstr "Переместить вверх"
 
-#: src/prefsWidgets.js:288
+#: src/prefsWidgets.js:315
 msgid "Move Down"
 msgstr "Переместить вниз"
 
-#: src/prefsWidgets.js:295
+#: src/prefsWidgets.js:322
 msgid "Remove"
 msgstr "Удалить"
 
@@ -757,49 +757,53 @@ msgstr "Автономное меню Runner"
 msgid "Hide Overview on Startup"
 msgstr "Скрывать «Обзор» при запуске"
 
-#: src/settings/generalPage.js:213 src/settings/generalPage.js:378
+#: src/settings/generalPage.js:177
+msgid "Hide Overview when ArcMenu Opens"
+msgstr "Скрывать «Обзор» при открытом ArcMenu"
+
+#: src/settings/generalPage.js:227 src/settings/generalPage.js:392
 msgid "Disabled"
 msgstr "Отключено"
 
-#: src/settings/generalPage.js:234
+#: src/settings/generalPage.js:248
 msgid "ArcMenu Hotkeys"
 msgstr "Горячие клавиши для ArcMenu"
 
-#: src/settings/generalPage.js:234
+#: src/settings/generalPage.js:248
 msgid "Standalone Runner Hotkeys"
 msgstr "Горячие клавиши для автономного меню Runner"
 
-#: src/settings/generalPage.js:307
+#: src/settings/generalPage.js:321
 msgid "Active Hotkeys"
 msgstr "Активные горячие клавиши"
 
-#: src/settings/generalPage.js:313
+#: src/settings/generalPage.js:327
 msgid "Hotkey Options"
 msgstr "Настройка горячих клавиш"
 
-#: src/settings/generalPage.js:326
+#: src/settings/generalPage.js:340
 msgid "Super Hotkeys Override GNOME Overview Hotkey"
 msgstr "Переопределить клавишу «Super» с режима «Обзор» GNOME"
 
-#: src/settings/generalPage.js:340
+#: src/settings/generalPage.js:354
 msgid "Open on Primary Monitor"
 msgstr "Открывать на основном мониторе"
 
-#: src/settings/generalPage.js:351
+#: src/settings/generalPage.js:365
 msgid "Type on your keyboard to add a new hotkey."
 msgstr ""
 "Введите комбинацию на клавиатуре, чтобы добавить новую горячую клавишу."
 
-#: src/settings/generalPage.js:390
+#: src/settings/generalPage.js:404
 msgid "Add Hotkey"
 msgstr "Добавить горячую клавишу"
 
-#: src/settings/generalPage.js:461
+#: src/settings/generalPage.js:475
 #, javascript-format
 msgid "Conflict with <b>%s</b> hotkey"
 msgstr "Конфликт с горячей клавишей <b>%s</b>"
 
-#: src/settings/generalPage.js:609
+#: src/settings/generalPage.js:623
 msgid "Standlone Runner"
 msgstr "Автономное меню Runner"
 
@@ -1097,54 +1101,50 @@ msgstr "Что должно отображаться в контекстном �
 msgid "Modify ArcMenu Context Menu"
 msgstr "Изменение контекстного меню ArcMenu"
 
-#: src/settings/menuSettings/fineTunePage.js:33
+#: src/settings/menuSettings/fineTunePage.js:29
 msgid "Show Category Sub Menus"
 msgstr "Показывать категории в подменю"
 
-#: src/settings/menuSettings/fineTunePage.js:47
+#: src/settings/menuSettings/fineTunePage.js:32
 msgid "Show Application Descriptions"
 msgstr "Показывать описание приложений"
 
-#: src/settings/menuSettings/fineTunePage.js:61
-msgid "Disable ScrollView Fade Effects"
-msgstr "Отключить ScrollView эффекты затухания"
-
-#: src/settings/menuSettings/fineTunePage.js:75
-msgid "Disable Tooltips"
-msgstr "Отключить подсказки"
-
-#: src/settings/menuSettings/fineTunePage.js:89
-msgid "Group Apps Alphabetically on List Views"
-msgstr "Группировать приложения по алфавиту при отображении списком"
-
-#: src/settings/menuSettings/fineTunePage.js:90
-#: src/settings/menuSettings/fineTunePage.js:105
-msgid "For All Apps sections"
-msgstr "Для раздела «Все приложения»"
-
-#: src/settings/menuSettings/fineTunePage.js:104
-msgid "Group Apps Alphabetically on Grid Views"
-msgstr "Группировать приложения по алфавиту при отображении сеткой"
-
-#: src/settings/menuSettings/fineTunePage.js:119
+#: src/settings/menuSettings/fineTunePage.js:35
 msgid "Show Hidden Recent Files"
 msgstr "Показывать скрытые недавние файлы"
 
-#: src/settings/menuSettings/fineTunePage.js:133
-msgid "Multi-Lined Labels"
-msgstr "Подпись в несколько строк"
-
-#: src/settings/menuSettings/fineTunePage.js:134
+#: src/settings/menuSettings/fineTunePage.js:39
 msgid "Allow application labels to span multiple lines on grid style layouts"
 msgstr ""
 "Разрешить описанию приложений занимать несколько строк в макетах в стиле "
 "сетки"
 
-#: src/settings/menuSettings/fineTunePage.js:148
+#: src/settings/menuSettings/fineTunePage.js:39
+msgid "Show Multi Lined Labels"
+msgstr "Показывать подписи в несколько строк"
+
+#: src/settings/menuSettings/fineTunePage.js:42
+msgid "Show Tooltips"
+msgstr "Показывать подсказки"
+
+#: src/settings/menuSettings/fineTunePage.js:46
+#: src/settings/menuSettings/fineTunePage.js:50
+msgid "For All Apps sections"
+msgstr "Для раздела «Все приложения»"
+
+#: src/settings/menuSettings/fineTunePage.js:46
+msgid "Group Apps Alphabetically on List Views"
+msgstr "Группировать приложения по алфавиту при отображении списком"
+
+#: src/settings/menuSettings/fineTunePage.js:50
+msgid "Group Apps Alphabetically on Grid Views"
+msgstr "Группировать приложения по алфавиту при отображении сеткой"
+
+#: src/settings/menuSettings/fineTunePage.js:53
 msgid "Activate App Window on Launch"
 msgstr "Активировать окно приложения при его запуске"
 
-#: src/settings/menuSettings/fineTunePage.js:149
+#: src/settings/menuSettings/fineTunePage.js:54
 msgid ""
 "Launching an app activates its existing window if one is open; otherwise, it "
 "launches a new instance. Hold Ctrl while launching or middle-click to open a "
@@ -1155,38 +1155,58 @@ msgstr ""
 "нажатой клавиши Ctrl во время запуска приложения или щелчок средней кнопкой "
 "мыши откроет новое окно приложения."
 
-#: src/settings/menuSettings/fineTunePage.js:159
+#: src/settings/menuSettings/fineTunePage.js:58
+msgid "Scrollview Options"
+msgstr "Настройки Scrollview"
+
+#: src/settings/menuSettings/fineTunePage.js:62
+msgid "Scrollview Fade Effects"
+msgstr "Эффекты затухания в ScrollView"
+
+#: src/settings/menuSettings/fineTunePage.js:67
+msgid "Show Scrollbars"
+msgstr "Показывать полосы прокрутки"
+
+#: src/settings/menuSettings/fineTunePage.js:74
+msgid "Overlay Scrollbars"
+msgstr "Наложение полос прокрутки"
+
+#: src/settings/menuSettings/fineTunePage.js:78
+msgid "Icon Style"
+msgstr "Стиль значков"
+
+#: src/settings/menuSettings/fineTunePage.js:83
 msgid "Full Color"
 msgstr "Полноцветные"
 
-#: src/settings/menuSettings/fineTunePage.js:160
+#: src/settings/menuSettings/fineTunePage.js:84
 msgid "Symbolic"
 msgstr "Символьные"
 
-#: src/settings/menuSettings/fineTunePage.js:162
+#: src/settings/menuSettings/fineTunePage.js:86
 msgid "Category Icon Type"
 msgstr "Тип значков категорий"
 
-#: src/settings/menuSettings/fineTunePage.js:163
-#: src/settings/menuSettings/fineTunePage.js:174
+#: src/settings/menuSettings/fineTunePage.js:87
+#: src/settings/menuSettings/fineTunePage.js:103
 msgid "Some icon themes may not include selected icon type"
 msgstr "Некоторые темы значков могут не включать выбранный тип значков"
 
-#: src/settings/menuSettings/fineTunePage.js:173
+#: src/settings/menuSettings/fineTunePage.js:102
 msgid "Shortcuts Icon Type"
 msgstr "Тип значков ярлыков"
 
-#: src/settings/menuSettings/fineTunePage.js:197
-msgid "Disable New Apps Tracker"
-msgstr "Отключить отслеживание новых приложений"
+#: src/settings/menuSettings/fineTunePage.js:118
+msgid "New Apps Tracker"
+msgstr "Отслеживать новые приложения"
 
-#: src/settings/menuSettings/fineTunePage.js:206
+#: src/settings/menuSettings/fineTunePage.js:122
+msgid "Enable"
+msgstr "Включить"
+
+#: src/settings/menuSettings/fineTunePage.js:127
 msgid "Clear All"
 msgstr "Очистить всё"
-
-#: src/settings/menuSettings/fineTunePage.js:215
-msgid "Clear Apps Marked 'New'"
-msgstr "Очистить отметки недавно установленных приложений"
 
 #: src/settings/menuSettings/layoutTweaksPage.js:116
 #: src/settings/menuSettings/layoutTweaksPage.js:121
@@ -1246,8 +1266,8 @@ msgid "Flip Layout Horizontally"
 msgstr "Отразить по горизонтали"
 
 #: src/settings/menuSettings/layoutTweaksPage.js:237
-msgid "Disable User Avatar"
-msgstr "Отключить аватар пользователя"
+msgid "Show User Avatar"
+msgstr "Показывать аватар пользователя"
 
 #: src/settings/menuSettings/layoutTweaksPage.js:277
 #: src/settings/menuSettings/layoutTweaksPage.js:341
@@ -1261,8 +1281,9 @@ msgstr "Вид по умолчанию"
 
 #: src/settings/menuSettings/layoutTweaksPage.js:304
 #: src/settings/menuSettings/layoutTweaksPage.js:410
-msgid "Disable Frequent Apps"
-msgstr "Отключить часто используемые приложения"
+#: src/settings/menuSettings/layoutTweaksPage.js:617
+msgid "Show Frequent Apps"
+msgstr "Показывать часто используемые приложения"
 
 #: src/settings/menuSettings/layoutTweaksPage.js:330
 msgid "Merge Top and Bottom Panels"
@@ -1278,8 +1299,8 @@ msgid "Show Apps Grid"
 msgstr "Показывать сетку приложений"
 
 #: src/settings/menuSettings/layoutTweaksPage.js:424
-msgid "Disable Pinned Apps"
-msgstr "Отключить закрепленные приложения"
+msgid "Show Pinned Apps"
+msgstr "Показывать закреплённые приложения"
 
 #: src/settings/menuSettings/layoutTweaksPage.js:450
 msgid "Activate on Hover"
@@ -1327,10 +1348,6 @@ msgstr "Высота"
 #: src/settings/menuSettings/themePage.js:197
 msgid "Font Size"
 msgstr "Размер шрифта"
-
-#: src/settings/menuSettings/layoutTweaksPage.js:617
-msgid "Show Frequent Apps"
-msgstr "Показывать часто используемые приложения"
 
 #: src/settings/menuSettings/layoutTweaksPage.js:689
 msgid "Position on Monitor"
@@ -1856,6 +1873,18 @@ msgstr "Что нового?"
 #: src/updateNotifier.js:91
 msgid "Dismiss"
 msgstr "Отклонить"
+
+#~ msgid "Disable New Apps Tracker"
+#~ msgstr "Отключить отслеживание новых приложений"
+
+#~ msgid "Clear Apps Marked 'New'"
+#~ msgstr "Очистить отметки недавно установленных приложений"
+
+#~ msgid "Disable Frequent Apps"
+#~ msgstr "Отключить часто используемые приложения"
+
+#~ msgid "Disable Pinned Apps"
+#~ msgstr "Отключить закрепленные приложения"
 
 #~ msgid "Power Off / Log Out"
 #~ msgstr "Выключить / Завершить сеанс"
@@ -2436,9 +2465,6 @@ msgstr "Отклонить"
 #~ msgid "Developers"
 #~ msgstr "Разработчики"
 
-#~ msgid "New Apps Tracker"
-#~ msgstr "Отслеживать новые приложения"
-
 #~ msgid "Type to search…"
 #~ msgstr "Введите для поиска…"
 
@@ -2766,9 +2792,6 @@ msgstr "Отклонить"
 #~ "indicator label"
 #~ msgstr ""
 #~ "Изменить цвет фона метки индикатора \"недавно установленного приложения\""
-
-#~ msgid "Enable/Disble"
-#~ msgstr "Включить/Отключить"
 
 #~ msgid ""
 #~ "Browse a list of all default User Directories to add to your Directories "
