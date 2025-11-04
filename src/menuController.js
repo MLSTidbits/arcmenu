@@ -142,19 +142,13 @@ export const MenuController = class {
             this
         );
 
-        Utils.connectSettings(
-            ['pinned-apps', 'enable-weather-widget-unity', 'enable-clock-widget-unity', 'enable-weather-widget-raven', 'enable-clock-widget-raven'],
-            this._updatePinnedApps.bind(this),
-            this
-        );
-
+        Utils.connectSettings(['pinned-apps'], this._updatePinnedApps.bind(this), this);
         Utils.connectSettings(['menu-position-alignment'], this._setMenuPositionAlignment.bind(this), this);
         Utils.connectSettings(['menu-button-appearance'], this._setButtonAppearance.bind(this), this);
         Utils.connectSettings(['custom-menu-button-text'], this._setButtonText.bind(this), this);
         Utils.connectSettings(['custom-menu-button-icon-size'], this._setButtonIconSize.bind(this), this);
         Utils.connectSettings(['button-padding'], this._setButtonIconPadding.bind(this), this);
         Utils.connectSettings(['menu-height'], this._updateMenuHeight.bind(this), this);
-        Utils.connectSettings(['enable-unity-homescreen'], this._setDefaultMenuView.bind(this), this);
         Utils.connectSettings(['menu-layout'], this._changeMenuLayout.bind(this), this);
         Utils.connectSettings(['runner-position'], this._updateLocation.bind(this), this);
         Utils.connectSettings(['show-activities-button'], this._configureActivitiesButton.bind(this), this);
@@ -165,7 +159,7 @@ export const MenuController = class {
         if (!this.isPrimaryPanel)
             return;
 
-        this._debouncer.debounce('recreateMenuLayout', () => {
+        this._debouncer.debounce('createMenuLayout', () => {
             const {menuControllers} = ArcMenuManager;
             for (let i = 0; i < menuControllers.length; i++) {
                 const {menuButton} = menuControllers[i];
@@ -223,11 +217,9 @@ export const MenuController = class {
     }
 
     _changeMenuLayout() {
-        this._menuButton.createMenuLayout();
-    }
-
-    _setDefaultMenuView() {
-        this._menuButton.setDefaultMenuView();
+        this._debouncer.debounce('createMenuLayout', () => {
+            this._menuButton.createMenuLayout();
+        });
     }
 
     _setRunnerMenuActive(sender, enabled) {
@@ -246,45 +238,46 @@ export const MenuController = class {
     }
 
     _toggleArcMenu() {
-        if (this._runnerMenu && this._runnerMenu.arcMenu.isOpen)
+        if (this._runnerMenu?.isOpen)
             this._runnerMenu.toggleMenu();
-        if (global.dashToPanel || global.azTaskbar) {
-            const MultipleArcMenus = ArcMenuManager.menuControllers.length > 1;
-            const ShowArcMenuOnPrimaryMonitor = ArcMenuManager.settings.get_boolean('hotkey-open-primary-monitor');
-            if (MultipleArcMenus && ShowArcMenuOnPrimaryMonitor)
-                this._toggleMenuOnMonitor(Main.layoutManager.primaryMonitor);
-            else if (MultipleArcMenus && !ShowArcMenuOnPrimaryMonitor)
-                this._toggleMenuOnMonitor(Main.layoutManager.currentMonitor);
-            else
-                this._menuButton.toggleMenu();
-        } else {
-            this._menuButton.toggleMenu();
+
+        const multipleArcMenus = ArcMenuManager.menuControllers.length > 1;
+        if (multipleArcMenus) {
+            const openOnPrimaryMonitor = ArcMenuManager.settings.get_boolean('hotkey-open-primary-monitor');
+            const monitor = openOnPrimaryMonitor ? Main.layoutManager.primaryMonitor : Main.layoutManager.currentMonitor;
+            this._toggleMenuOnMonitor(monitor);
+            return;
         }
+
+        this._menuButton.toggleMenu();
     }
 
     _toggleMenuOnMonitor(monitor) {
-        let currentMonitorIndex = 0;
+        let menuButtonOnMonitor = null;
         const {menuControllers} = ArcMenuManager;
         for (let i = 0; i < menuControllers.length; i++) {
             const {menuButton, monitorIndex} = menuControllers[i];
 
             if (monitor.index === monitorIndex) {
-                currentMonitorIndex = i;
+                menuButtonOnMonitor = menuButton;
             } else {
-                if (menuButton.arcMenu.isOpen)
+                if (menuButton.isOpen)
                     menuButton.toggleMenu();
                 menuButton.closeContextMenu();
             }
         }
 
-        // open the current monitors menu
-        ArcMenuManager.menuControllers[currentMonitorIndex].menuButton.toggleMenu();
+        if (menuButtonOnMonitor)
+            menuButtonOnMonitor.toggleMenu();
+        else
+            this._menuButton.toggleMenu();
     }
 
     _closeAllArcMenus() {
-        for (let i = 0; i < ArcMenuManager.menuControllers.length; i++) {
-            const {menuButton} = ArcMenuManager.menuControllers[i];
-            if (menuButton.arcMenu.isOpen)
+        const {menuControllers} = ArcMenuManager;
+        for (let i = 0; i < menuControllers.length; i++) {
+            const {menuButton} = menuControllers[i];
+            if (menuButton.isOpen)
                 menuButton.toggleMenu();
             menuButton.closeContextMenu();
         }

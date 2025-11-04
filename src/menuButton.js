@@ -9,6 +9,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PointerWatcher from 'resource:///org/gnome/shell/ui/pointerWatcher.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
+import {Spinner} from 'resource:///org/gnome/shell/ui/animation.js';
 import * as SystemActions from 'resource:///org/gnome/shell/misc/systemActions.js';
 
 import {ArcMenuManager} from './arcmenuManager.js';
@@ -147,6 +148,10 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         this.add_child(this.menuButtonWidget);
     }
 
+    get isOpen() {
+        return this.arcMenu?.isOpen;
+    }
+
     initiate() {
         this._dtp = Main.extensionManager.lookup(Constants.DASH_TO_PANEL_UUID);
 
@@ -180,16 +185,50 @@ class ArcMenuMenuButton extends PanelMenu.Button {
 
         this._destroyMenuLayout();
 
-        const layout = ArcMenuManager.settings.get_enum('menu-layout');
+        const loadingPlaceholder = this._createLoadingPlaceholder();
+        this.arcMenu.box.add_child(loadingPlaceholder);
 
+        const layout = ArcMenuManager.settings.get_enum('menu-layout');
         this._menuLayout = LayoutHandler.createMenuLayout(this, layout);
 
+        loadingPlaceholder.destroy();
         if (this._menuLayout) {
             this.arcMenu.box.add_child(this._menuLayout);
             this.setMenuPositionAlignment();
             this.forceMenuLocation();
             this.updateHeight();
+
+            // If ArcMenu is open while the new layout is loading,
+            // the new layout needs these updated.
+            if (this.arcMenu.isOpen) {
+                this._menuLayout.updateLocation?.();
+                this._menuLayout.updateStyle?.();
+                this._menuLayout.grab_key_focus();
+            }
         }
+    }
+
+    _createLoadingPlaceholder() {
+        const boxLayout = new St.BoxLayout({
+            x_align: Clutter.ActorAlign.FILL,
+            x_expand: true,
+            y_align: Clutter.ActorAlign.FILL,
+            y_expand: true,
+            style: 'spacing: 15px; padding: 35px 15px;',
+        });
+        const label = new St.Label({
+            text: _('Loading Menu Layout'),
+            y_expand: true,
+            y_align: Clutter.ActorAlign.CENTER,
+            x_expand: true,
+            x_align: Clutter.ActorAlign.CENTER,
+            style: 'font-size: 14pt;',
+        });
+        const spinner = new Spinner(34);
+        spinner.play();
+        boxLayout.add_child(label);
+        boxLayout.add_child(spinner);
+        return boxLayout;
     }
 
     setMenuPositionAlignment() {
@@ -416,12 +455,8 @@ class ArcMenuMenuButton extends PanelMenu.Button {
         }
 
         if (!this.arcMenu.isOpen) {
-            if (this._menuLayout?.updateLocation)
-                this._menuLayout.updateLocation();
-
-            if (this._menuLayout?.updateStyle)
-                this._menuLayout.updateStyle();
-
+            this._menuLayout.updateLocation?.();
+            this._menuLayout.updateStyle?.();
             this._maybeShowPanel();
         }
 
@@ -448,8 +483,10 @@ class ArcMenuMenuButton extends PanelMenu.Button {
     }
 
     updateWidth() {
-        if (this._menuLayout?.updateWidth)
-            this._menuLayout.updateWidth(true);
+        if (!this._menuLayout)
+            return;
+
+        this._menuLayout.updateWidth?.(true);
     }
 
     clearTooltipShowingId() {
@@ -518,8 +555,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
     }
 
     updateLocation() {
-        if (this._menuLayout && this._menuLayout.updateLocation)
-            this._menuLayout.updateLocation();
+        this._menuLayout?.updateLocation?.();
     }
 
     getActiveCategoryType() {
@@ -556,8 +592,7 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             if (isArcMenu && closeOverview)
                 Main.overview.hide();
 
-            if (Main.panel.menuManager?.activeMenu)
-                Main.panel.menuManager.activeMenu.toggle();
+            Main.panel.menuManager?.activeMenu?.toggle();
 
             if (!this._intellihideRelease && this._panelParent.intellihide?.enabled)
                 this._intellihideRelease = true;
