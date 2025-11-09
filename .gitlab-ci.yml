@@ -22,9 +22,8 @@ review_job:
   stage: review
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-  image: fedora:latest
+  image: registry.gitlab.com/andrewzaech/gnome-ci-base:latest
   script:
-    - dnf install -y gettext git glib2 make nodejs
     - npm ci
     - touch eslint_output.log make_install.log
     - echo "Running ESLint..."
@@ -40,13 +39,14 @@ review_job:
 build_job:
   stage: build
   extends: .run_on_tag
-  image: fedora:latest
+  image: registry.gitlab.com/andrewzaech/gnome-ci-base:latest
   script:
-    - dnf install -y gettext git glib2 make zip
     - echo "Running make install..."
-    - make install VERSION=${VERSION} || { echo "ERROR make install failed."; exit 1; }
+    - make install VERSION=${VERSION} || { echo "ERROR - make install failed."; exit 1; }
     - echo "Creating a zip file..."
     - make zip-file
+    - echo "Uploading to extensions.gnome.org..."
+    - gnome-extensions upload --accept-tos --user "$EGO_USER" --password "$EGO_PASSWORD" "${UUID}_${VERSION}.zip" || { echo "WARNING - Upload failed. Use zip from artifacts for manual upload."; }
   artifacts:
     when: on_success
     name: "${NAME} ${VERSION}"
