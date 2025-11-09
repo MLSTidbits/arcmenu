@@ -78,7 +78,7 @@ prefs enable disable reset info show:
 
 zip-file: _build
 	cd _build ; \
-	zip -qr "$(UUID)$(VSTRING).zip" .
+	zip -qr "$(UUID)$(VSTRING).zip" . -x "schemas/gschemas.compiled" 
 	mv _build/$(UUID)$(VSTRING).zip ./
 	-rm -fR _build
 
