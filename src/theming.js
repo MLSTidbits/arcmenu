@@ -40,19 +40,24 @@ export class CustomStylesheet {
             this._stylesheet = file;
             await this._update();
         } catch (e) {
+            this._stylesheet = null;
             console.log(`ArcMenu - Error creating custom stylesheet: ${e}`);
         }
     }
 
     async _delete() {
+        if (!this._stylesheet)
+            return;
+
         this._unload();
 
         try {
             if (this._stylesheet.query_exists(null))
                 await this._stylesheet.delete_async(GLib.PRIORITY_DEFAULT, null);
         } catch (e) {
-            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
-                console.log(`ArcMenu - Error deleting custom stylesheet: ${e}`);
+            console.log(`ArcMenu - Error deleting custom stylesheet: ${e}`);
+        } finally {
+            this._stylesheet = null;
         }
     }
 
@@ -62,7 +67,6 @@ export class CustomStylesheet {
         this._settings.disconnectObject(this);
         this._fileName = null;
         this._settings = null;
-        this._stylesheet = null;
         this._debouncer = null;
     }
 
@@ -82,8 +86,6 @@ export class CustomStylesheet {
 
         this._unload();
 
-        let css = '';
-
         const customThemeEnabled = this._settings.get_boolean('override-menu-theme');
         const [menuRise, menuRiseValue] = this._settings.get_value('menu-arrow-rise').deep_unpack();
         const [buttonFG, buttonFGColor] = this._settings.get_value('menu-button-fg-color').deep_unpack();
@@ -96,6 +98,8 @@ export class CustomStylesheet {
         const [buttonWidth, buttonWidthValue] = this._settings.get_value('menu-button-border-width').deep_unpack();
         const [buttonBorder, buttonBorderColor] = this._settings.get_value('menu-button-border-color').deep_unpack();
         const [searchBorder, searchBorderValue] = this._settings.get_value('search-entry-border-radius').deep_unpack();
+
+        let css = '';
 
         if (buttonFG)
             css += `.arcmenu-menu-button{ color: ${buttonFGColor}; }`;
@@ -136,6 +140,7 @@ export class CustomStylesheet {
                 console.log('ArcMenu - Failed to replace contents of custom stylesheet.');
                 return;
             }
+
             const theme = St.ThemeContext.get_for_stage(global.stage).get_theme();
             theme.load_stylesheet(this._stylesheet);
         } catch (e) {
