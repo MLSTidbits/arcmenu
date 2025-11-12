@@ -22,7 +22,7 @@ review_job:
   stage: review
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-  image: registry.gitlab.com/andrewzaech/gnome-ci-base:latest
+  image: registry.gitlab.com/andrewzaech/gnome-extensions-ci:latest
   script:
     - npm ci
     - touch eslint_output.log make_install.log
@@ -39,7 +39,7 @@ review_job:
 build_job:
   stage: build
   extends: .run_on_tag
-  image: registry.gitlab.com/andrewzaech/gnome-ci-base:latest
+  image: registry.gitlab.com/andrewzaech/gnome-extensions-ci:latest
   script:
     - echo "Running make install..."
     - make install VERSION=${VERSION} || { echo "ERROR - make install failed."; exit 1; }
