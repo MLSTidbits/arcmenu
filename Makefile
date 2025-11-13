@@ -1,5 +1,8 @@
 .PHONY: all clean extension potfile mergepo install prefs enable disable reset info show zip-file
 
+GETTEXT_DOMAIN = arcmenu
+NAME = ArcMenu
+SETTINGS_SCHEMA = org.gnome.shell.extensions.arcmenu
 UUID = arcmenu@arcmenu.com
 
 PACKAGE_FILES = \
@@ -9,6 +12,11 @@ PACKAGE_FILES = \
 	README.md \
 	RELEASENOTES.md \
 	src/*
+
+# If VERSION is provided via CLI, suffix ZIP_NAME with _$(VERSION).
+# Otherwise, inject git commit SHA (if available) into metadata.json.
+COMMIT = $(if $(VERSION),,$(shell git rev-parse HEAD))
+ZIP_NAME = $(UUID)$(if $(VERSION),_$(VERSION),)
 
 MSGSRC = $(wildcard po/*.po)
 
@@ -21,16 +29,6 @@ else
 	INSTALLBASE = $(SHARE_PREFIX)/gnome-shell/extensions
 endif
 
-# The command line passed variable VERSION is used to set the version string
-# in the generated zip-file. If no VERSION is passed,
-# the current commit SHA1 is added to the metadata
-ifdef VERSION
-	VSTRING = _$(VERSION)
-else
-	COMMIT = $(shell git rev-parse HEAD)
-	VSTRING =
-endif
-
 all: extension
 
 clean:
@@ -38,7 +36,7 @@ clean:
 
 extension: ./schemas/gschemas.compiled $(MSGSRC:.po=.mo)
 
-./schemas/gschemas.compiled: ./schemas/org.gnome.shell.extensions.arcmenu.gschema.xml
+./schemas/gschemas.compiled: ./schemas/$(SETTINGS_SCHEMA).gschema.xml
 	glib-compile-schemas ./schemas/
 
 potfile:
@@ -46,14 +44,14 @@ potfile:
 	find src/ -name '*.js' | xargs \
 	xgettext -k_ -kN_ \
 		--from-code=UTF-8 \
-		--output=po/arcmenu.pot \
+		--output=po/$(GETTEXT_DOMAIN).pot \
 		--sort-by-file \
 		--add-comments=TRANSLATORS \
-		--package-name "ArcMenu"
+		--package-name "$(NAME)"
 
 mergepo: potfile
 	for l in $(MSGSRC); do \
-		msgmerge -NU $$l ./po/arcmenu.pot; \
+		msgmerge -NU $$l ./po/$(GETTEXT_DOMAIN).pot; \
 	done;
 
 ./po/%.mo: ./po/%.po
@@ -78,8 +76,8 @@ prefs enable disable reset info show:
 
 zip-file: _build
 	cd _build ; \
-	zip -qr "$(UUID)$(VSTRING).zip" . -x "schemas/gschemas.compiled" 
-	mv _build/$(UUID)$(VSTRING).zip ./
+	zip -qr "$(ZIP_NAME).zip" . -x "schemas/gschemas.compiled"
+	mv _build/$(ZIP_NAME).zip ./
 	-rm -fR _build
 
 _build: all
@@ -94,7 +92,7 @@ _build: all
 		lf=_build/locale/`basename $$l .mo`; \
 		mkdir -p $$lf; \
 		mkdir -p $$lf/LC_MESSAGES; \
-		cp $$l $$lf/LC_MESSAGES/arcmenu.mo; \
+		cp $$l $$lf/LC_MESSAGES/$(GETTEXT_DOMAIN).mo; \
 	done;
 ifneq ($(COMMIT),)
 	sed -i '/"version": .*,/a \  "commit": "$(COMMIT)",'  _build/metadata.json;
