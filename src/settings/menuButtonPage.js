@@ -440,7 +440,7 @@ class ArcMenuArcMenuIcons extends PW.DialogWindow {
         this.pageGroup.add(this._arcMenuIconsFlowBox);
 
         Constants.MenuIcons.forEach(icon => {
-            const iconTile = new PW.MenuButtonIconTile(icon.IMAGE);
+            const iconTile = new PW.MenuButtonIconTile(icon.PATH);
             this._arcMenuIconsFlowBox.add(iconTile);
         });
 
@@ -477,7 +477,7 @@ class ArcMenuArcMenuIcons extends PW.DialogWindow {
         });
 
         Constants.DistroIcons.forEach(icon => {
-            const iconTile = new PW.MenuButtonIconTile(icon.IMAGE, icon.NAME);
+            const iconTile = new PW.MenuButtonIconTile(icon.PATH, icon.NAME);
             this._distroIconsFlowBox.add(iconTile);
         });
         distroIconsGroup.add(this._distroIconsFlowBox);

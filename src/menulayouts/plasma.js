@@ -120,7 +120,7 @@ export class Layout extends BaseMenuLayout {
         layout.hookup_style(this.grid);
         this.navigateBox.add_child(this.grid);
 
-        this.pinnedAppsButton = new PlasmaMenuItem(this, _('Pinned'), `${Constants.RESOURCE_PATH}${Constants.ArcMenuLogoSymbolic}.svg`);
+        this.pinnedAppsButton = new PlasmaMenuItem(this, _('Pinned'), `${ArcMenuManager.extension.path}/${Constants.ArcMenuLogoSymbolic}`);
         this.pinnedAppsButton.connect('activate', () => this.displayPinnedApps());
         this.grid.layout_manager.attach(this.pinnedAppsButton, 0, 0, 1, 1);
         this.pinnedAppsButton.setActive(true);

@@ -990,7 +990,7 @@ export class PowerButton extends ArcMenuButtonItem {
 
     constructor(menuLayout, powerType) {
         super(menuLayout, Constants.PowerOptions[powerType].NAME,
-            Constants.PowerOptions[powerType].IMAGE);
+            Constants.PowerOptions[powerType].ICON);
         this.powerType = powerType;
 
         const binding = bindPowerItemVisibility(this);
@@ -1034,7 +1034,7 @@ export class PowerMenuItem extends BaseMenuItem {
         const iconSize = Utils.getIconSize(iconSizeEnum, this._menuLayout.quicklinks_icon_size);
 
         return new St.Icon({
-            gicon: Gio.icon_new_for_string(Constants.PowerOptions[this.powerType].IMAGE),
+            gicon: Gio.icon_new_for_string(Constants.PowerOptions[this.powerType].ICON),
             style_class: 'popup-menu-icon',
             icon_size: iconSize,
         });
@@ -2272,8 +2272,8 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
         // Allows dragging the pinned app into the overview workspace thumbnail.
         this.app = this._app;
 
-        if (this._iconString === Constants.ShortcutCommands.ARCMENU_ICON || this._iconString.includes(Constants.ArcMenuLogoSymbolic))
-            this._iconString = `${Constants.RESOURCE_PATH}${Constants.ArcMenuLogoSymbolic}.svg`;
+        if (this._iconString === Constants.ShortcutCommands.ARCMENU_ICON || this._iconString === `${ArcMenuManager.extension.path}/icons/arcmenu-logo-symbolic.svg`)
+            this._iconString = `${ArcMenuManager.extension.path}/${Constants.ArcMenuLogoSymbolic}`;
 
         if (this._app && this._iconString === '') {
             const appIcon = this._app.create_icon_texture(Constants.MEDIUM_ICON_SIZE);

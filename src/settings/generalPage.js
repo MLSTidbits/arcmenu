@@ -370,8 +370,12 @@ class ArcMenuHotkeyDialog extends Adw.Window {
         });
         content.append(keyLabel);
 
+        const directory = GLib.path_get_dirname(import.meta.url);
+        const rootDirectory = GLib.path_get_dirname(directory);
+        const iconPath = '/icons/hicolor/16x16/actions/settings-keyboard.svg';
+
         const keyboardImage = new Gtk.Picture({
-            file: Gio.File.new_for_uri(`${Constants.RESOURCE_PATH}settings-keyboard.svg`),
+            file: Gio.File.new_for_uri(`${rootDirectory}${iconPath}`),
             halign: Gtk.Align.CENTER,
             valign: Gtk.Align.CENTER,
             can_shrink: false,

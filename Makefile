@@ -1,22 +1,17 @@
-.PHONY: all clean compile-resources compile-schemas extension potfile mergepo install prefs enable disable reset info show zip-file
+.PHONY: all clean extension potfile mergepo install prefs enable disable reset info show zip-file
 
 GETTEXT_DOMAIN = arcmenu
 NAME = ArcMenu
 SETTINGS_SCHEMA = org.gnome.shell.extensions.arcmenu
 UUID = arcmenu@arcmenu.com
 
-# Files and directories to build into extension.
-# src/* flattens the src directory to root.
 PACKAGE_FILES = \
+	icons \
 	LICENSE \
 	metadata.json \
 	README.md \
 	RELEASENOTES.md \
 	src/*
-
-# Directories to scan for .js and .ui files.
-# `make potfile` uses xgettext to extract strings to build the .pot template.
-I18N_DIRS = src/
 
 # If VERSION is provided via CLI, suffix ZIP_NAME with _$(VERSION).
 # Otherwise, inject git commit SHA (if available) into metadata.json.
@@ -38,22 +33,16 @@ all: extension
 
 clean:
 	rm -f ./schemas/gschemas.compiled
-	rm -f ./data/resources.gresource
 
-extension: compile-schemas $(MSGSRC:.po=.mo) compile-resources
+extension: ./schemas/gschemas.compiled $(MSGSRC:.po=.mo)
 
-compile-schemas: ./schemas/$(SETTINGS_SCHEMA).gschema.xml
+./schemas/gschemas.compiled: ./schemas/$(SETTINGS_SCHEMA).gschema.xml
 	glib-compile-schemas ./schemas/
-
-compile-resources:
-	glib-compile-resources \
-		--sourcedir data \
-		./data/resources.gresource.xml
 
 potfile:
 	mkdir -p po
-	find $(I18N_DIRS) \( -name '*.js' -o -name '*.ui' \) | xargs \
-	xgettext \
+	find src/ -name '*.js' | xargs \
+	xgettext -k_ -kN_ \
 		--from-code=UTF-8 \
 		--output=po/$(GETTEXT_DOMAIN).pot \
 		--sort-by-file \
@@ -98,8 +87,6 @@ _build: all
 	mkdir -p _build/schemas
 	cp schemas/*.xml _build/schemas/
 	cp schemas/gschemas.compiled _build/schemas/
-	mkdir -p _build/data
-	cp data/resources.gresource _build/data/resources.gresource
 	mkdir -p _build/locale
 	for l in $(MSGSRC:.po=.mo) ; do \
 		lf=_build/locale/`basename $$l .mo`; \

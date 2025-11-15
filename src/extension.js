@@ -1,5 +1,3 @@
-import Gio from 'gi://Gio';
-
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
@@ -14,9 +12,6 @@ import {UpdateNotification} from './updateNotifier.js';
 
 export default class ArcMenu extends Extension {
     enable() {
-        this._resource = Gio.Resource.load(`${this.path}/data/resources.gresource`);
-        Gio.resources_register(this._resource);
-
         this.settings = this.getSettings();
         this._arcmenuManager = new ArcMenuManager(this);
         this.searchProviderEmitter = new SearchProviderEmitter();
@@ -89,8 +84,6 @@ export default class ArcMenu extends Extension {
         this._arcmenuManager.destroy();
         this._arcmenuManager = null;
 
-        Gio.resources_unregister(this._resource);
-        this._resource = null;
         this.settings = null;
     }
 
