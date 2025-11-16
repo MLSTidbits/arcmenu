@@ -209,9 +209,8 @@ class ArcMenuListPinnedPage extends SubPage {
         let shortcutIcon = icon;
         let rowTitle = name;
 
-        if (shortcutIcon === Constants.ShortcutCommands.ARCMENU_ICON) {
-            const extension = ExtensionPreferences.lookupByURL(import.meta.url);
-            shortcutIcon = `${extension.path}/${Constants.ArcMenuLogoSymbolic}`;
+        if (shortcutIcon === Constants.ShortcutCommands.ARCMENU_ICON || shortcutIcon.includes?.(Constants.ArcMenuLogoSymbolic)) {
+            shortcutIcon = Constants.ArcMenuLogoSymbolic;
         } else if (id === 'org.gnome.Settings.desktop' && !appInfo) {
             appInfo = GioUnixDesktopAppInfo.new('gnome-control-center.desktop');
         } else if (id === Constants.ShortcutCommands.SOFTWARE) {
@@ -238,11 +237,11 @@ class ArcMenuListPinnedPage extends SubPage {
         if (shortcutData.isFolder)
             shortcutIcon = 'folder-symbolic';
 
-        row.gicon = Gio.icon_new_for_string(shortcutIcon);
+        row.gicon = Gio.Icon.new_for_string(shortcutIcon);
         row.title = GLib.markup_escape_text(rowTitle, -1);
 
         if (id.endsWith('.desktop') && !appInfo) {
-            row.gicon = Gio.icon_new_for_string('dialog-warning-symbolic');
+            row.gicon = Gio.Icon.new_for_string('dialog-warning-symbolic');
             row.title = `<b><i>${_('Invalid Shortcut')}</i></b> - ${row.title ? _(row.title) : id}`;
             row.css_classes = ['error'];
         } else {
@@ -299,7 +298,7 @@ class ArcMenuListPinnedPage extends SubPage {
             editEntryButton.css_classes = ['flat'];
             row.add_suffix(editEntryButton);
             const goNextImage = new Gtk.Image({
-                gicon: Gio.icon_new_for_string('go-next-symbolic'),
+                gicon: Gio.Icon.new_for_string('go-next-symbolic'),
                 valign: Gtk.Align.CENTER,
             });
             row.add_suffix(goNextImage);
@@ -347,11 +346,9 @@ class ArcMenuAddAppsToPinnedListWindow extends PW.DialogWindow {
 
         this._createShortcutsArray();
 
-        const extension = ExtensionPreferences.lookupByURL(import.meta.url);
-
         if (this._dialogType === Constants.MenuSettingsListType.PINNED_APPS  ||
             this._dialogType === Constants.MenuSettingsListType.FOLDER_PINNED_APPS) {
-            const extraItem = [[_('ArcMenu Settings'), `${extension.path}/${Constants.ArcMenuLogoSymbolic}`,
+            const extraItem = [[_('ArcMenu Settings'), Constants.ArcMenuLogoSymbolic,
                 Constants.ShortcutCommands.ARCMENU_SETTINGS]];
             this._loadExtraCategories(extraItem);
             this._loadCategories();
@@ -362,7 +359,7 @@ class ArcMenuAddAppsToPinnedListWindow extends PW.DialogWindow {
             this._loadExtraCategories(extraLinks);
         } else if (this._dialogType === Constants.MenuSettingsListType.APPLICATIONS) {
             const extraLinks = [];
-            extraLinks.push([_('ArcMenu Settings'), `${extension.path}/${Constants.ArcMenuLogoSymbolic}`,
+            extraLinks.push([_('ArcMenu Settings'), Constants.ArcMenuLogoSymbolic,
                 Constants.ShortcutCommands.ARCMENU_SETTINGS]);
             extraLinks.push([_('Run Command...'), 'system-run-symbolic', Constants.ShortcutCommands.RUN_COMMAND]);
             extraLinks.push([_('Activities Overview'), 'view-fullscreen-symbolic',
@@ -374,17 +371,17 @@ class ArcMenuAddAppsToPinnedListWindow extends PW.DialogWindow {
             this._loadCategories();
         } else if (this._dialogType === Constants.MenuSettingsListType.CONTEXT_MENU) {
             const extraLinks = [];
-            extraLinks.push([_('ArcMenu Settings'), `${extension.path}/${Constants.ArcMenuLogoSymbolic}`,
+            extraLinks.push([_('ArcMenu Settings'), Constants.ArcMenuLogoSymbolic,
                 Constants.ShortcutCommands.SETTINGS]);
-            extraLinks.push([_('Menu Settings'), `${extension.path}/${Constants.ArcMenuLogoSymbolic}`,
+            extraLinks.push([_('Menu Settings'), Constants.ArcMenuLogoSymbolic,
                 Constants.ShortcutCommands.SETTINGS_MENU]);
-            extraLinks.push([_('Menu Theming'), `${extension.path}/${Constants.ArcMenuLogoSymbolic}`,
+            extraLinks.push([_('Menu Theming'), Constants.ArcMenuLogoSymbolic,
                 Constants.ShortcutCommands.SETTINGS_THEME]);
-            extraLinks.push([_('Change Menu Layout'), `${extension.path}/${Constants.ArcMenuLogoSymbolic}`,
+            extraLinks.push([_('Change Menu Layout'), Constants.ArcMenuLogoSymbolic,
                 Constants.ShortcutCommands.SETTINGS_LAYOUT]);
-            extraLinks.push([_('Menu Button Settings'), `${extension.path}/${Constants.ArcMenuLogoSymbolic}`,
+            extraLinks.push([_('Menu Button Settings'), Constants.ArcMenuLogoSymbolic,
                 Constants.ShortcutCommands.SETTINGS_BUTTON]);
-            extraLinks.push([_('About'), `${extension.path}/${Constants.ArcMenuLogoSymbolic}`, Constants.ShortcutCommands.SETTINGS_ABOUT]);
+            extraLinks.push([_('About'), Constants.ArcMenuLogoSymbolic, Constants.ShortcutCommands.SETTINGS_ABOUT]);
             extraLinks.push([_('Panel Extension Settings'), 'application-x-addon-symbolic',
                 Constants.ShortcutCommands.PANEL_EXTENSION_SETTINGS]);
             extraLinks.push([_('Activities Overview'), 'view-fullscreen-symbolic',
@@ -471,7 +468,7 @@ class ArcMenuAddAppsToPinnedListWindow extends PW.DialogWindow {
             };
 
             const iconImage = new Gtk.Image({
-                gicon: Gio.icon_new_for_string(iconString),
+                gicon: Gio.Icon.new_for_string(iconString),
                 pixel_size: 22,
             });
             frameRow.add_prefix(iconImage);
@@ -506,7 +503,7 @@ class ArcMenuAddAppsToPinnedListWindow extends PW.DialogWindow {
                 const icon = allApps[i].get_icon() ? allApps[i].get_icon().to_string() : 'dialog-information';
 
                 const iconImage = new Gtk.Image({
-                    gicon: Gio.icon_new_for_string(icon),
+                    gicon: Gio.Icon.new_for_string(icon),
                     pixel_size: 22,
                 });
                 frameRow.add_prefix(iconImage);

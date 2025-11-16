@@ -9,7 +9,6 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PointerWatcher from 'resource:///org/gnome/shell/ui/pointerWatcher.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-import {Spinner} from 'resource:///org/gnome/shell/ui/animation.js';
 import * as SystemActions from 'resource:///org/gnome/shell/misc/systemActions.js';
 
 import {ArcMenuManager} from './arcmenuManager.js';
@@ -217,17 +216,14 @@ class ArcMenuMenuButton extends PanelMenu.Button {
             style: 'spacing: 15px; padding: 35px 15px;',
         });
         const label = new St.Label({
-            text: _('Loading Menu Layout'),
+            text: _('Loading Menu Layout...'),
             y_expand: true,
             y_align: Clutter.ActorAlign.CENTER,
             x_expand: true,
             x_align: Clutter.ActorAlign.CENTER,
             style: 'font-size: 14pt;',
         });
-        const spinner = new Spinner(34);
-        spinner.play();
         boxLayout.add_child(label);
-        boxLayout.add_child(spinner);
         return boxLayout;
     }
 

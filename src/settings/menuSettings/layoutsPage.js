@@ -70,7 +70,7 @@ class ArcMenuLayoutsPage extends SubPage {
                     const newMenuLayoutInfo = this.getMenuLayoutInfo(this.selectedMenuLayout);
 
                     currentLayoutBoxRow.label.label = newMenuLayoutInfo.TITLE;
-                    currentLayoutBoxRow.image.gicon = Gio.icon_new_for_string(newMenuLayoutInfo.IMAGE);
+                    currentLayoutBoxRow.image.gicon = Gio.Icon.new_for_string(newMenuLayoutInfo.IMAGE);
 
                     this.expandedRow.expanded = false;
                     this.emit('response', Gtk.ResponseType.APPLY);
@@ -178,7 +178,7 @@ class ArcMenuMenuLayoutRow extends Gtk.Box {
         this.image = new Gtk.Image({
             hexpand: false,
             halign: Gtk.Align.CENTER,
-            gicon: Gio.icon_new_for_string(imagePath),
+            gicon: Gio.Icon.new_for_string(imagePath),
             pixel_size: 145,
         });
 

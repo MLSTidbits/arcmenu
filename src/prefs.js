@@ -1,4 +1,5 @@
 import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
 import * as Constants from './constants.js';
@@ -15,10 +16,13 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
     constructor(metadata) {
         super(metadata);
 
-        const iconPath = `${this.path}/icons`;
+        const resourcePath = '/org/gnome/shell/extensions/arcmenu/icons';
         const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-        if (!iconTheme.get_search_path().includes(iconPath))
-            iconTheme.add_search_path(iconPath);
+        if (!iconTheme.get_resource_path().includes(resourcePath))
+            iconTheme.add_resource_path(resourcePath);
+
+        const resource = Gio.Resource.load(`${this.path}/data/resources.gresource`);
+        Gio.resources_register(resource);
     }
 
     fillPreferencesWindow(window) {

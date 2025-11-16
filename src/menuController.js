@@ -348,12 +348,41 @@ export const MenuController = class {
     }
 
     _setButtonIcon() {
-        const path = ArcMenuManager.settings.get_string('custom-menu-button-icon');
         const {menuButtonWidget} = this._menuButton;
         const stIcon = menuButtonWidget.getPanelIcon();
+        stIcon.gicon = this._getButtonIcon();
+    }
 
-        const iconString = Utils.getMenuButtonIcon(path);
-        stIcon.set_gicon(Gio.icon_new_for_string(iconString));
+    _getButtonIcon() {
+        const customIconPath = ArcMenuManager.settings.get_string('custom-menu-button-icon');
+        const menuIconType = ArcMenuManager.settings.get_enum('menu-button-icon');
+
+        switch (menuIconType) {
+        case Constants.MenuIconType.CUSTOM: {
+            if (customIconPath)
+                return Gio.Icon.new_for_string(customIconPath);
+            else
+                return Gio.Icon.new_for_string('start-here-symbolic');
+        }
+        case Constants.MenuIconType.DISTRO_ICON: {
+            const iconEnum = ArcMenuManager.settings.get_int('distro-icon');
+            const iconName = Constants.DistroIcons[iconEnum].IMAGE;
+            const uri = `${Constants.RESOURCE_PATH}${iconName}.svg`;
+            return Gio.Icon.new_for_string(uri);
+        }
+        case Constants.MenuIconType.MENU_ICON: {
+            const iconEnum = ArcMenuManager.settings.get_int('arc-menu-icon');
+            const iconName = Constants.MenuIcons[iconEnum].IMAGE;
+            if (iconName === 'view-app-grid-symbolic') {
+                return Gio.Icon.new_for_string('view-app-grid-symbolic');
+            } else {
+                const uri = `${Constants.RESOURCE_PATH}${iconName}.svg`;
+                return Gio.Icon.new_for_string(uri);
+            }
+        }
+        default:
+            return Gio.Icon.new_for_string('start-here-symbolic');
+        }
     }
 
     _setButtonIconSize() {

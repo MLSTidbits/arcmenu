@@ -275,26 +275,23 @@ export function getGridIconSize(iconSizeEnum, defaultIconSize) {
 }
 
 export function getCategoryDetails(iconTheme, currentCategory) {
-    const extensionPath = ArcMenuManager.extension.path;
-
     let name = null, gicon = null, fallbackIcon = null;
 
     for (const entry of Constants.Categories) {
         if (entry.CATEGORY === currentCategory) {
             name = entry.NAME;
-            gicon = Gio.icon_new_for_string(entry.ICON);
+            gicon = Gio.Icon.new_for_string(entry.IMAGE);
             return [name, gicon, fallbackIcon];
         }
     }
 
     if (currentCategory === Constants.CategoryType.HOME_SCREEN) {
         name = _('Home');
-        gicon = Gio.icon_new_for_string('computer-symbolic');
+        gicon = Gio.Icon.new_for_string('computer-symbolic');
         return [name, gicon, fallbackIcon];
     } else {
         name = currentCategory.get_name();
         const categoryIcon = currentCategory.get_icon();
-        const fallbackIconDirectory = `${extensionPath}/icons/category-icons/`;
 
         if (!categoryIcon)
             return [name, gicon, fallbackIcon];
@@ -309,16 +306,16 @@ export function getCategoryDetails(iconTheme, currentCategory) {
         if (categoryIconType === Constants.CategoryIconType.SYMBOLIC) {
             const icon = iconTheme.lookup_icon(symbolicName, 26, St.IconLookupFlags.FORCE_SYMBOLIC);
             if (icon) {
-                gicon = Gio.icon_new_for_string(symbolicName);
+                gicon = Gio.Icon.new_for_string(symbolicName);
             } else {
-                const filePath = `${fallbackIconDirectory}${symbolicIconFile}`;
-                const file = Gio.File.new_for_path(filePath);
+                const filePath = `${Constants.RESOURCE_PATH}${symbolicIconFile}`;
+                const file = Gio.File.new_for_uri(filePath);
                 if (file.query_exists(null))
-                    gicon = Gio.icon_new_for_string(`${fallbackIconDirectory}${symbolicIconFile}`);
+                    gicon = Gio.Icon.new_for_string(`${Constants.RESOURCE_PATH}${symbolicIconFile}`);
             }
         }
 
-        fallbackIcon = Gio.icon_new_for_string(`${fallbackIconDirectory}${symbolicIconFile}`);
+        fallbackIcon = Gio.Icon.new_for_string(`${Constants.RESOURCE_PATH}${symbolicIconFile}`);
         return [name, gicon, fallbackIcon];
     }
 }
@@ -344,36 +341,6 @@ export function getPowerTypeFromShortcutCommand(command) {
     default:
         return Constants.PowerType.POWER_OFF;
     }
-}
-
-export function getMenuButtonIcon(path) {
-    const extensionPath = ArcMenuManager.extension.path;
-    const {settings} = ArcMenuManager;
-
-    const iconType = settings.get_enum('menu-button-icon');
-    const iconDirectory = `${extensionPath}/icons/hicolor/16x16/actions/`;
-
-    if (iconType === Constants.MenuIconType.CUSTOM) {
-        if (path && GLib.file_test(path, GLib.FileTest.IS_REGULAR))
-            return path;
-        else
-            return path;
-    } else if (iconType === Constants.MenuIconType.DISTRO_ICON) {
-        const iconEnum = settings.get_int('distro-icon');
-        const iconPath = `${iconDirectory + Constants.DistroIcons[iconEnum].PATH}.svg`;
-        if (GLib.file_test(iconPath, GLib.FileTest.IS_REGULAR))
-            return iconPath;
-    } else {
-        const iconEnum = settings.get_int('arc-menu-icon');
-        const iconPath = `${iconDirectory + Constants.MenuIcons[iconEnum].PATH}.svg`;
-        if (Constants.MenuIcons[iconEnum].PATH === 'view-app-grid-symbolic')
-            return 'view-app-grid-symbolic';
-        else if (GLib.file_test(iconPath, GLib.FileTest.IS_REGULAR))
-            return iconPath;
-    }
-
-    console.log('ArcMenu Error - Failed to set menu button icon. Set to System Default.');
-    return 'start-here-symbolic';
 }
 
 export function findSoftwareManager() {

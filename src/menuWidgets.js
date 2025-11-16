@@ -786,7 +786,7 @@ export class ArcMenuButtonItem extends BaseMenuItem {
         const iconSize = Utils.getIconSize(iconSizeEnum, this._menuLayout.buttons_icon_size);
 
         return new St.Icon({
-            gicon: this.gicon ? this.gicon : Gio.icon_new_for_string(this.iconName),
+            gicon: this.gicon ? this.gicon : Gio.Icon.new_for_string(this.iconName),
             icon_size: overrideIconSize ? overrideIconSize : iconSize,
             x_expand: true,
             x_align: Clutter.ActorAlign.CENTER,
@@ -896,7 +896,7 @@ export class LeaveButton extends BaseMenuItem {
         const iconSize = Utils.getIconSize(iconSizeEnum, defaultIconSize);
 
         return new St.Icon({
-            gicon: Gio.icon_new_for_string(this.iconName),
+            gicon: Gio.Icon.new_for_string(this.iconName),
             icon_size: overrideIconSize ? overrideIconSize : iconSize,
             x_expand: !this.showLabel,
             x_align: this.showLabel ? Clutter.ActorAlign.START : Clutter.ActorAlign.CENTER,
@@ -990,7 +990,7 @@ export class PowerButton extends ArcMenuButtonItem {
 
     constructor(menuLayout, powerType) {
         super(menuLayout, Constants.PowerOptions[powerType].NAME,
-            Constants.PowerOptions[powerType].ICON);
+            Constants.PowerOptions[powerType].IMAGE);
         this.powerType = powerType;
 
         const binding = bindPowerItemVisibility(this);
@@ -1034,7 +1034,7 @@ export class PowerMenuItem extends BaseMenuItem {
         const iconSize = Utils.getIconSize(iconSizeEnum, this._menuLayout.quicklinks_icon_size);
 
         return new St.Icon({
-            gicon: Gio.icon_new_for_string(Constants.PowerOptions[this.powerType].ICON),
+            gicon: Gio.Icon.new_for_string(Constants.PowerOptions[this.powerType].IMAGE),
             style_class: 'popup-menu-icon',
             icon_size: iconSize,
         });
@@ -1083,7 +1083,7 @@ export class NavigationButton extends ArcMenuButtonItem {
         const iconSize = Utils.getIconSize(iconSizeEnum, Constants.EXTRA_SMALL_ICON_SIZE);
 
         return new St.Icon({
-            gicon: this.gicon ? this.gicon : Gio.icon_new_for_string(this.iconName),
+            gicon: this.gicon ? this.gicon : Gio.Icon.new_for_string(this.iconName),
             icon_size: iconSize,
             x_expand: true,
             x_align: Clutter.ActorAlign.CENTER,
@@ -1333,7 +1333,7 @@ export class ShortcutMenuItem extends BaseMenuItem {
 
         return new St.Icon({
             icon_name: this.iconName,
-            gicon: Gio.icon_new_for_string(this.iconName),
+            gicon: Gio.Icon.new_for_string(this.iconName),
             style_class: this._displayType === Constants.DisplayType.LIST ? 'popup-menu-icon' : '',
             icon_size: iconSize,
         });
@@ -2272,8 +2272,8 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
         // Allows dragging the pinned app into the overview workspace thumbnail.
         this.app = this._app;
 
-        if (this._iconString === Constants.ShortcutCommands.ARCMENU_ICON || this._iconString === `${ArcMenuManager.extension.path}/icons/arcmenu-logo-symbolic.svg`)
-            this._iconString = `${ArcMenuManager.extension.path}/${Constants.ArcMenuLogoSymbolic}`;
+        if (this._iconString === Constants.ShortcutCommands.ARCMENU_ICON || this._iconString.includes(Constants.ArcMenuLogoSymbolic))
+            this._iconString = `${Constants.RESOURCE_PATH}${Constants.ArcMenuLogoSymbolic}.svg`;
 
         if (this._app && this._iconString === '') {
             const appIcon = this._app.create_icon_texture(Constants.MEDIUM_ICON_SIZE);
@@ -2306,7 +2306,7 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
         }
 
         return new St.Icon({
-            gicon: Gio.icon_new_for_string(this._iconString),
+            gicon: Gio.Icon.new_for_string(this._iconString),
             icon_size: iconSize,
             style_class: this._displayType === Constants.DisplayType.GRID ? '' : 'popup-menu-icon',
         });
@@ -2328,7 +2328,7 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
 
     getDragActor() {
         const icon = new St.Icon({
-            gicon: Gio.icon_new_for_string(this._iconString),
+            gicon: Gio.Icon.new_for_string(this._iconString),
             style_class: 'popup-menu-icon',
             icon_size: this._iconBin.get_child().icon_size,
         });

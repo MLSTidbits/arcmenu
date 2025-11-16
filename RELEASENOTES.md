@@ -1,3 +1,11 @@
+<b><span size="large">v67.3</span></b>
+
+- Add option to show/hide scrollbars.
+- Add option to enable/disable overlay scrollbars.
+- Add option to hide GNOME Overview when ArcMenu opens.
+- App Context Menu: fix desktop shortcut menu item visibility bug.
+- Reorganize Fine Tune page in settings.
+
 <b><span size="large">v67.2</span></b>
 
 - Add new menu layout "Zest".

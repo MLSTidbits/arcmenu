@@ -64,7 +64,7 @@ class ArcMenuSettingRow extends Adw.ActionRow {
         });
 
         const goNextImage = new Gtk.Image({
-            gicon: Gio.icon_new_for_string('go-next-symbolic'),
+            gicon: Gio.Icon.new_for_string('go-next-symbolic'),
             halign: Gtk.Align.END,
             valign: Gtk.Align.CENTER,
             hexpand: false,
@@ -133,7 +133,7 @@ export const DragRow = GObject.registerClass({
         this.connect('notify::gicon', () => (this.icon.gicon = this.gicon));
 
         this.dragIcon = new Gtk.Image({
-            gicon: Gio.icon_new_for_string('list-drag-handle-symbolic'),
+            gicon: Gio.Icon.new_for_string('list-drag-handle-symbolic'),
             pixel_size: 12,
         });
         this.add_prefix(this.dragIcon);
@@ -438,7 +438,7 @@ export const MenuButtonIconTile = GObject.registerClass(class ArcMenuMenuButtonI
 
         const ICON_SIZE = 32;
         this._image = new Gtk.Image({
-            gicon: Gio.icon_new_for_string(icon),
+            gicon: Gio.Icon.new_for_string(icon),
             pixel_size: ICON_SIZE,
         });
 
@@ -454,7 +454,7 @@ export const MenuButtonIconTile = GObject.registerClass(class ArcMenuMenuButtonI
     }
 
     setIcon(icon) {
-        this._image.gicon = Gio.icon_new_for_string(icon);
+        this._image.gicon = Gio.Icon.new_for_string(icon);
     }
 
     setActive(active) {
@@ -493,7 +493,7 @@ export const MenuLayoutTile = GObject.registerClass(class ArcMenuMenuLayoutTile 
         this.layout = styleInfo.LAYOUT;
 
         this._image = new Gtk.Image({
-            gicon: Gio.icon_new_for_string(styleInfo.IMAGE),
+            gicon: Gio.Icon.new_for_string(styleInfo.IMAGE),
             pixel_size: 145,
         });
 
