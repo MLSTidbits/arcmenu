@@ -314,14 +314,10 @@ export class IconChooserDialog extends HeaderBarDialog {
 
     _bindItem(_factory, listItem) {
         const item = listItem.get_item();
-        const {name, icon, group} = item;
+        const {name} = item;
 
         listItem.child.tooltip_text = name;
-
-        if (group === IconGroup.SYSTEM)
-            listItem._image.icon_name = icon;
-        else
-            listItem._image.gicon = Gio.Icon.new_for_string(icon);
+        listItem._image.icon_name = name;
     }
 
     _launchFileChooser() {
