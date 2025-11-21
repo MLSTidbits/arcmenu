@@ -561,7 +561,7 @@ class ArcMenuAddAppsToPinnedListWindow extends PW.DialogWindow {
 });
 
 var AddCustomLinkDialogWindow = GObject.registerClass(
-class ArcMenuAddCustomLinkDialogWindow extends PW.DialogWindow {
+class ArcMenuAddCustomLinkDialogWindow extends PW.HeaderBarDialog {
     _init(settings, parent, dialogType, shortcutData = null) {
         let title = _('Add a Custom Shortcut');
 
@@ -579,123 +579,119 @@ class ArcMenuAddCustomLinkDialogWindow extends PW.DialogWindow {
             }
         }
 
-        super._init(_(title), parent);
-        this.set_default_size(600, 325);
-        this.search_enabled = false;
+        super._init(_(title), shortcutData ? _('Apply') : _('Add'), parent);
+        this.set_default_size(600, 300);
         this._settings = settings;
         this._dialogType = dialogType;
         this.shortcutData = shortcutData;
+        this._iconImage = new Gtk.Image();
 
-        const nameFrameRow = new Adw.ActionRow({
-            title: _('Title'),
-        });
+        const nameFrameRow = new Adw.ActionRow({title: _('Title')});
 
-        const nameEntry = new Gtk.Entry({
+        this._nameEntry = new Gtk.Entry({
             valign: Gtk.Align.CENTER,
             hexpand: true,
             halign: Gtk.Align.FILL,
         });
-        nameFrameRow.add_suffix(nameEntry);
+        nameFrameRow.add_suffix(this._nameEntry);
         this.pageGroup.add(nameFrameRow);
 
         const iconFrameRow = new Adw.ActionRow({
             title: _('Icon'),
             visible: !onlyNameChanges,
         });
-        const iconEntry = new Gtk.Entry({
-            valign: Gtk.Align.CENTER,
-            hexpand: true,
-            halign: Gtk.Align.FILL,
-        });
-
-        const fileFilter = new Gtk.FileFilter();
-        fileFilter.add_pixbuf_formats();
-        const fileChooserButton = new Gtk.Button({
-            icon_name: 'search-symbolic',
-            tooltip_text: _('Browse...'),
-            valign: Gtk.Align.CENTER,
-        });
-
-        fileChooserButton.connect('clicked', () => {
-            const dialog = new Gtk.FileChooserDialog({
-                title: _('Select an Icon'),
-                transient_for: this.get_root(),
-                modal: true,
-                action: Gtk.FileChooserAction.OPEN,
-            });
-            dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
-            dialog.add_button(_('Open'), Gtk.ResponseType.ACCEPT);
-
-            dialog.set_filter(fileFilter);
-
-            dialog.connect('response', (self, response) => {
-                if (response === Gtk.ResponseType.ACCEPT) {
-                    const iconFilepath = dialog.get_file().get_path();
-                    iconEntry.set_text(iconFilepath);
-                    dialog.destroy();
-                } else if (response === Gtk.ResponseType.CANCEL) {
-                    dialog.destroy();
-                }
-            });
-            dialog.show();
-        });
-        iconFrameRow.add_suffix(iconEntry);
-        iconFrameRow.add_suffix(fileChooserButton);
         this.pageGroup.add(iconFrameRow);
 
-        if (this._dialogType === Constants.MenuSettingsListType.DIRECTORIES)
-            iconEntry.set_text(Constants.ShortcutCommands.FOLDER);
+        const browseFilesButton = new Gtk.Button({
+            valign: Gtk.Align.CENTER,
+            label: _('Browse...'),
+        });
+        browseFilesButton.connect('clicked', () => this._launchIconChooser());
+
+        const iconButton = new Gtk.Button({
+            valign: Gtk.Align.CENTER,
+            child: this._iconImage,
+        });
+        this._clearIconButton = new Gtk.Button({
+            icon_name: 'edit-clear-symbolic',
+            tooltip_text: _('Clear Icon'),
+            valign: Gtk.Align.CENTER,
+            sensitive: false,
+        });
+        this._clearIconButton.connect('clicked', () => {
+            this._iconImage.gicon = null;
+            this._clearIconButton.sensitive = false;
+        });
+        const iconBox = new Gtk.Box({
+            css_classes: ['linked'],
+        });
+        iconBox.append(iconButton);
+        iconBox.append(this._clearIconButton);
+        iconFrameRow.add_suffix(browseFilesButton);
+        iconFrameRow.add_suffix(iconBox);
 
         const cmdFrameRow = new Adw.ActionRow({
             title: this._dialogType === Constants.MenuSettingsListType.DIRECTORIES ? _('Directory') : _('Command'),
             visible: !onlyNameChanges,
         });
 
-        const cmdEntry = new Gtk.Entry({
+        this._cmdEntry = new Gtk.Entry({
             valign: Gtk.Align.CENTER,
             hexpand: true,
             halign: Gtk.Align.FILL,
         });
-        cmdFrameRow.add_suffix(cmdEntry);
+        cmdFrameRow.add_suffix(this._cmdEntry);
         this.pageGroup.add(cmdFrameRow);
 
-        const addButton = new Gtk.Button({
-            label: this.shortcutData ? _('Apply') : _('Add'),
-            halign: Gtk.Align.END,
-            css_classes: ['suggested-action'],
-        });
-
         if (this.shortcutData !== null) {
-            nameEntry.text = this.shortcutData.name ?? '';
-            iconEntry.text = this.shortcutData.icon ?? '';
-            cmdEntry.text = this.shortcutData.id ?? '';
+            this._nameEntry.text = this.shortcutData.name ?? '';
+            if (this.shortcutData.icon) {
+                this._iconImage.gicon = Gio.Icon.new_for_string(this.shortcutData.icon);
+                this._clearIconButton.sensitive = true;
+            }
+            this._cmdEntry.text = this.shortcutData.id ?? '';
         } else {
             this.shortcutData = {};
         }
 
-        addButton.connect('clicked', () => {
-            const name = nameEntry.get_text();
-            const icon = iconEntry.get_text();
-            const id = cmdEntry.get_text();
+        this._nameEntry.connect('changed', () => this._setActionButtonSensitive(true));
+        this._cmdEntry.connect('changed', () => this._setActionButtonSensitive(true));
+        this._iconImage.connect('notify::gicon', () => this._setActionButtonSensitive(true));
+    }
 
-            if (name.length)
-                this.shortcutData.name = name;
-            else if (this.shortcutData.name !== undefined)
-                delete this.shortcutData.name;
+    _onActionClicked() {
+        const name = this._nameEntry.get_text();
+        const icon = this._iconImage.gicon?.to_string() ?? '';
+        const id = this._cmdEntry.get_text();
 
-            if (icon.length)
-                this.shortcutData.icon = icon;
-            else if (this.shortcutData.icon !== undefined)
-                delete this.shortcutData.icon;
+        if (name.length)
+            this.shortcutData.name = name;
+        else if (this.shortcutData.name !== undefined)
+            delete this.shortcutData.name;
 
-            if (id.length)
-                this.shortcutData.id = id;
-            else if (this.shortcutData.id !== undefined)
-                delete this.shortcutData.id;
+        if (icon.length)
+            this.shortcutData.icon = icon;
+        else if (this.shortcutData.icon !== undefined)
+            delete this.shortcutData.icon;
 
-            this.emit('response', Gtk.ResponseType.APPLY);
+        if (id.length)
+            this.shortcutData.id = id;
+        else if (this.shortcutData.id !== undefined)
+            delete this.shortcutData.id;
+
+        super._onActionClicked();
+    }
+
+    _launchIconChooser() {
+        const dialog = new PW.IconChooserDialog(this._settings, this.get_root());
+        dialog.connect('response', (_self, response) => {
+            if (response === Gtk.ResponseType.APPLY) {
+                this._clearIconButton.sensitive = true;
+                this._iconImage.gicon = Gio.Icon.new_for_string(dialog.iconString);
+            }
+
+            dialog.destroy();
         });
-
-        this.pageGroup.set_header_suffix(addButton);
+        dialog.show();
     }
 });

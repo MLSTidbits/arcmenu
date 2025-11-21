@@ -140,13 +140,19 @@ export class Debouncer {
     constructor(delay = 300) {
         this._delay = delay;
         this._timers = new Map();
+        this._idles = new Map();
     }
 
     debounce(id, callback) {
         this._cancel(id);
 
         const timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, this._delay, () => {
-            callback();
+            const idleId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+                callback();
+                this._idles.delete(id);
+                return GLib.SOURCE_REMOVE;
+            });
+            this._idles.set(id, idleId);
             this._timers.delete(id);
             return GLib.SOURCE_REMOVE;
         });
@@ -160,12 +166,21 @@ export class Debouncer {
             GLib.source_remove(timeoutId);
             this._timers.delete(id);
         }
+        if (this._idles.has(id)) {
+            const timeoutId = this._idles.get(id);
+            GLib.source_remove(timeoutId);
+            this._idles.delete(id);
+        }
     }
 
     destroy() {
-        for (const timeoutId of this._timers.values())
-            GLib.source_remove(timeoutId);
+        for (const id of this._timers.values())
+            GLib.source_remove(id);
+        for (const id of this._idles.values())
+            GLib.source_remove(id);
 
+        this._idles.clear();
+        this._idles = null;
         this._timers.clear();
         this._timers = null;
     }
@@ -308,14 +323,14 @@ export function getCategoryDetails(iconTheme, currentCategory) {
             if (icon) {
                 gicon = Gio.Icon.new_for_string(symbolicName);
             } else {
-                const filePath = `${Constants.RESOURCE_PATH}${symbolicIconFile}`;
+                const filePath = `${Constants.RESOURCE_PATH}/categories/${symbolicIconFile}`;
                 const file = Gio.File.new_for_uri(filePath);
                 if (file.query_exists(null))
-                    gicon = Gio.Icon.new_for_string(`${Constants.RESOURCE_PATH}${symbolicIconFile}`);
+                    gicon = Gio.Icon.new_for_string(`${Constants.RESOURCE_PATH}/categories/${symbolicIconFile}`);
             }
         }
 
-        fallbackIcon = Gio.Icon.new_for_string(`${Constants.RESOURCE_PATH}${symbolicIconFile}`);
+        fallbackIcon = Gio.Icon.new_for_string(`${Constants.RESOURCE_PATH}/categories/${symbolicIconFile}`);
         return [name, gicon, fallbackIcon];
     }
 }

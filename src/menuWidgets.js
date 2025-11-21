@@ -2273,7 +2273,7 @@ export class PinnedAppsMenuItem extends DraggableMenuItem {
         this.app = this._app;
 
         if (this._iconString === Constants.ShortcutCommands.ARCMENU_ICON || this._iconString.includes(Constants.ArcMenuLogoSymbolic))
-            this._iconString = `${Constants.RESOURCE_PATH}${Constants.ArcMenuLogoSymbolic}.svg`;
+            this._iconString = `${Constants.RESOURCE_PATH}/emblems/${Constants.ArcMenuLogoSymbolic}.svg`;
 
         if (this._app && this._iconString === '') {
             const appIcon = this._app.create_icon_texture(Constants.MEDIUM_ICON_SIZE);

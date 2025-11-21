@@ -6,7 +6,38 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
-import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+
+export const IconGroup = Object.freeze({
+    ALL:        0,
+    CUSTOM:     1,
+    DISTRO:     2,
+    ACTIONS:    3,
+    APPS:       4,
+    CATEGORIES: 5,
+    DEVICES:    6,
+    EMBLEMS:    7,
+    EMOTES:     8,
+    MIMETYPES:  9,
+    OTHER:      10,
+    PLACES:     11,
+    SCALABLE:   12,
+    STATUS:     13,
+});
+
+export const IconCategory = Object.freeze({
+    'actions':     IconGroup.ACTIONS,
+    'apps':        IconGroup.APPS,
+    'categories':  IconGroup.CATEGORIES,
+    'devices':     IconGroup.DEVICES,
+    'emblems':     IconGroup.EMBLEMS,
+    'emotes':      IconGroup.EMOTES,
+    'mimetypes':   IconGroup.MIMETYPES,
+    'other':       IconGroup.OTHER,
+    'places':      IconGroup.PLACES,
+    'scalable':    IconGroup.SCALABLE,
+    'status':      IconGroup.STATUS,
+});
 
 export class SwitchRow extends Adw.ActionRow {
     static [GObject.properties] = {
@@ -54,6 +85,277 @@ export const DialogWindow = GObject.registerClass({
         this.page.add(this.pageGroup);
     }
 });
+
+export const HeaderBarDialog = GObject.registerClass({
+    Signals: {
+        'response': {param_types: [GObject.TYPE_INT]},
+    },
+}, class ArcMenuHeaderBarDialog extends Adw.Window {
+    _init(title, actionButtonLabel, parent) {
+        super._init({
+            title,
+            transient_for: parent.get_root(),
+            modal: true,
+        });
+
+        const sidebarToolBarView = new Adw.ToolbarView({
+            top_bar_style: Adw.ToolbarStyle.RAISED,
+        });
+        this.set_content(sidebarToolBarView);
+
+        this._headerBar = new Adw.HeaderBar({
+            show_end_title_buttons: false,
+            show_start_title_buttons: true,
+        });
+        sidebarToolBarView.add_top_bar(this._headerBar);
+
+        this._actionButton = new Gtk.Button({
+            label: actionButtonLabel ?? _('Apply'),
+            halign: Gtk.Align.END,
+            hexpand: false,
+            css_classes: ['suggested-action'],
+            sensitive: false,
+        });
+        this._actionButton.connect('clicked', () => {
+            this._onActionClicked();
+        });
+        this._headerBar.pack_end(this._actionButton);
+
+        const cancelButton = new Gtk.Button({
+            label: _('Cancel'),
+            halign: Gtk.Align.START,
+            hexpand: false,
+        });
+        cancelButton.connect('clicked', () => this.close());
+        this._headerBar.pack_start(cancelButton);
+
+        this.page = new Adw.PreferencesPage();
+        sidebarToolBarView.set_content(this.page);
+
+        this.pageGroup = new Adw.PreferencesGroup();
+        this.page.add(this.pageGroup);
+    }
+
+    _setActionButtonSensitive(bool) {
+        this._actionButton.sensitive = bool;
+    }
+
+    _onActionClicked() {
+        this.emit('response', Gtk.ResponseType.APPLY);
+    }
+});
+
+export class IconChooserDialog extends HeaderBarDialog {
+    static {
+        GObject.registerClass(this);
+    }
+
+    constructor(settings, parent) {
+        super(_('Select an Icon'), _('Select'), parent);
+        this._settings = settings;
+        this.set_default_size(420, 620);
+        this.iconString = '';
+        this._currentGroup = IconGroup.ALL;
+        this._searchQuery = '';
+
+        const iconTypes = new Gtk.StringList();
+        iconTypes.append(_('All'));
+        iconTypes.append(_('Custom'));
+        iconTypes.append(_('Distros'));
+        iconTypes.append(_('Actions'));
+        iconTypes.append(_('Applications'));
+        iconTypes.append(_('Categories'));
+        iconTypes.append(_('Devices'));
+        iconTypes.append(_('Emblems'));
+        iconTypes.append(_('Emotes'));
+        iconTypes.append(_('Mimetypes'));
+        iconTypes.append(_('Other'));
+        iconTypes.append(_('Places'));
+        iconTypes.append(_('Scalable'));
+        iconTypes.append(_('Status'));
+
+        const topBox = new Gtk.Box({
+            css_classes: ['linked'],
+            margin_bottom: 12,
+        });
+
+        const searchEntry = new Gtk.SearchEntry({
+            placeholder_text: _('Search icons…'),
+            search_delay: 300,
+            hexpand: true,
+        });
+        topBox.append(searchEntry);
+
+        const iconMenuButton = new Gtk.DropDown({
+            model: iconTypes,
+            selected: this._currentGroup,
+            halign: Gtk.Align.END,
+            valign: Gtk.Align.CENTER,
+        });
+        topBox.append(iconMenuButton);
+
+        this.pageGroup.add(topBox);
+
+        this._listStore = new Gio.ListStore();
+        this._filter = new Gtk.CustomFilter();
+
+        const filterModel = new Gtk.FilterListModel({
+            model: this._listStore,
+            filter: this._filter,
+        });
+
+        const selection = new Gtk.SingleSelection({
+            model: filterModel,
+            autoselect: false,
+            can_unselect: true,
+        });
+
+        const factory = new Gtk.SignalListItemFactory();
+        factory.connect('setup', this._setupItem.bind(this));
+        factory.connect('bind', this._bindItem.bind(this));
+
+        this._iconGridView = new Gtk.GridView({
+            model: selection,
+            factory,
+            max_columns: 9,
+            min_columns: 4,
+            css_classes: ['card'],
+        });
+
+        const scrolled = new Gtk.ScrolledWindow({
+            child: this._iconGridView,
+            vexpand: true,
+            hscrollbar_policy: Gtk.PolicyType.NEVER,
+        });
+        this.pageGroup.add(scrolled);
+
+        const fileChooserButton = new Gtk.Button({
+            label: _('Browse Files...'),
+            valign: Gtk.Align.CENTER,
+            margin_top: 12,
+        });
+        fileChooserButton.connect('clicked', () => this._launchFileChooser());
+        this.pageGroup.add(fileChooserButton);
+
+        const updateFilter = () => {
+            const query = this._searchQuery;
+            const currentGroup = this._currentGroup;
+
+            this._filter.set_filter_func(item => {
+                const {name, group} = item;
+
+                // Group filter
+                if (currentGroup !== IconGroup.ALL && group !== currentGroup)
+                    return false;
+
+                // Search filter
+                if (query && !name.toLowerCase().includes(query))
+                    return false;
+
+                return true;
+            });
+
+            this._filter.changed(Gtk.FilterChange.DIFFERENT);
+        };
+
+        iconMenuButton.connect('notify::selected', () => {
+            this._currentGroup = iconMenuButton.selected;
+            updateFilter();
+        });
+
+        searchEntry.connect('search-changed', () => {
+            this._searchQuery = searchEntry.text.trim().toLowerCase();
+            updateFilter();
+        });
+
+        updateFilter();
+
+        // Add some padding inbetween the gridview children
+        const provider = new Gtk.CssProvider();
+        provider.load_from_string(`
+            gridview.icon-grid > child { margin: 2px; }
+            gridview.icon-grid { padding: 2px; }
+        `);
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(),
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        );
+        this._iconGridView.add_css_class('icon-grid');
+
+        selection.selected = Gtk.INVALID_LIST_POSITION;
+        selection.connect('notify::selected-item', () => this._setActionButtonSensitive(true));
+
+        const extension = ExtensionPreferences.lookupByURL(import.meta.url);
+        GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+            extension.getSystemIcons().then(allIcons => {
+                this._listStore.splice(0, 0, allIcons);
+            }).catch(e => console.log(e));
+            return GLib.SOURCE_REMOVE;
+        });
+    }
+
+    _setupItem(_factory, listItem) {
+        const box = new Gtk.Box({
+            orientation: Gtk.Orientation.VERTICAL,
+            spacing: 8,
+            margin_top: 12,
+            margin_bottom: 12,
+            margin_start: 8,
+            margin_end: 8,
+        });
+
+        const image = new Gtk.Image({pixel_size: 32});
+        box.append(image);
+
+        listItem._image = image;
+        listItem.set_child(box);
+    }
+
+    _bindItem(_factory, listItem) {
+        const item = listItem.get_item();
+        const {name, icon, group} = item;
+
+        listItem.child.tooltip_text = name;
+
+        if (group === IconGroup.SYSTEM)
+            listItem._image.icon_name = icon;
+        else
+            listItem._image.gicon = Gio.Icon.new_for_string(icon);
+    }
+
+    _launchFileChooser() {
+        const fileFilter = new Gtk.FileFilter();
+        fileFilter.add_pixbuf_formats();
+        const dialog = new Gtk.FileChooserDialog({
+            title: _('Select an Icon'),
+            transient_for: this.get_root(),
+            modal: true,
+            action: Gtk.FileChooserAction.OPEN,
+        });
+        dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+        dialog.add_button(_('Select'), Gtk.ResponseType.ACCEPT);
+
+        dialog.set_filter(fileFilter);
+
+        dialog.connect('response', (self, response) => {
+            if (response === Gtk.ResponseType.ACCEPT) {
+                this.iconString = dialog.get_file().get_path();
+                this.emit('response', Gtk.ResponseType.APPLY);
+            }
+            dialog.destroy();
+        });
+        dialog.show();
+    }
+
+    _onActionClicked() {
+        const selected = this._iconGridView.model.selected_item;
+        if (selected)
+            this.iconString = selected.icon;
+
+        super._onActionClicked();
+    }
+}
 
 export const SettingRow = GObject.registerClass(
 class ArcMenuSettingRow extends Adw.ActionRow {
@@ -371,149 +673,5 @@ export const EditEntriesBox = GObject.registerClass({
         parent.show();
 
         this.emit('entry-modified', startIndex, newIndex);
-    }
-});
-
-export const IconGrid = GObject.registerClass(class ArcMenuIconGrid extends Gtk.FlowBox {
-    _init(spacing = 4) {
-        super._init({
-            max_children_per_line: 15,
-            row_spacing: spacing,
-            column_spacing: spacing,
-            valign: Gtk.Align.START,
-            halign: Gtk.Align.CENTER,
-            homogeneous: true,
-            selection_mode: Gtk.SelectionMode.SINGLE,
-        });
-        this._spacing = spacing;
-        this.childrenCount = 0;
-        this.connect('child-activated', (_self, child) => {
-            this.setActiveChild(child);
-        });
-    }
-
-    setActiveChild(child) {
-        if (this._previousSelectedChild)
-            this._previousSelectedChild.setActive(false);
-
-        child.setActive(true);
-        this._previousSelectedChild = child;
-    }
-
-    unselect_all() {
-        if (this._previousSelectedChild)
-            this._previousSelectedChild.setActive(false);
-        super.unselect_all();
-    }
-
-    select_child(child) {
-        this.setActiveChild(child);
-        super.select_child(child);
-    }
-
-    add(widget) {
-        widget.margin_top = widget.margin_bottom =
-                widget.margin_start = widget.margin_end = this._spacing;
-
-        this.append(widget);
-        this.childrenCount++;
-    }
-});
-
-export const MenuButtonIconTile = GObject.registerClass(class ArcMenuMenuButtonIconTile extends Gtk.FlowBoxChild {
-    _init(icon, name) {
-        super._init({
-            css_classes: ['card', 'activatable'],
-        });
-
-        const box = new Gtk.Box({
-            orientation: Gtk.Orientation.VERTICAL,
-            spacing: 4,
-            margin_top: 4,
-            margin_bottom: 4,
-            margin_start: 4,
-            margin_end: 4,
-        });
-        this.set_child(box);
-
-        const ICON_SIZE = 32;
-        this._image = new Gtk.Image({
-            gicon: Gio.Icon.new_for_string(icon),
-            pixel_size: ICON_SIZE,
-        });
-
-        this._label = new Gtk.Label({
-            label: name ? _(name) : '',
-            hexpand: true,
-            css_classes: ['caption'],
-            visible: !!name,
-        });
-
-        box.append(this._image);
-        box.append(this._label);
-    }
-
-    setIcon(icon) {
-        this._image.gicon = Gio.Icon.new_for_string(icon);
-    }
-
-    setActive(active) {
-        if (active) {
-            this._image.css_classes = ['accent'];
-            this._label.css_classes = ['caption', 'accent'];
-        } else {
-            this._image.css_classes = [];
-            this._label.css_classes = ['caption'];
-        }
-    }
-});
-
-export const MenuLayoutTile = GObject.registerClass(class ArcMenuMenuLayoutTile extends Gtk.FlowBoxChild {
-    _init(styleInfo) {
-        super._init({
-            css_classes: ['card', 'activatable'],
-            margin_top: 4,
-            margin_bottom: 4,
-            margin_start: 4,
-            margin_end: 4,
-            halign: Gtk.Align.FILL,
-            hexpand: true,
-        });
-
-        const box = new Gtk.Box({
-            orientation: Gtk.Orientation.VERTICAL,
-            margin_top: 4,
-            margin_bottom: 4,
-            margin_start: 8,
-            margin_end: 8,
-        });
-        this.set_child(box);
-
-        this.name = styleInfo.TITLE;
-        this.layout = styleInfo.LAYOUT;
-
-        this._image = new Gtk.Image({
-            gicon: Gio.Icon.new_for_string(styleInfo.IMAGE),
-            pixel_size: 145,
-        });
-
-        this._label = new Gtk.Label({
-            label: _(this.name),
-            hexpand: true,
-            css_classes: ['caption'],
-        });
-
-        box.append(this._image);
-        box.append(this._label);
-    }
-
-    setActive(active) {
-        if (active) {
-            this._image.css_classes = ['accent'];
-            this._label.css_classes = ['caption', 'accent'];
-        } else {
-            this._image.css_classes = [];
-            this._label.css_classes = ['caption'];
-        }
     }
 });

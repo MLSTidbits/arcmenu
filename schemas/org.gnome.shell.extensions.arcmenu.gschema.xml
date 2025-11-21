@@ -62,11 +62,6 @@
         <value value="0" nick="Round"/>
         <value value="1" nick="Square"/>
     </enum>
-    <enum id='org.gnome.shell.extensions.arcmenu.menu-button-icon'>
-        <value value="0" nick="Menu_Icon"/>
-        <value value="1" nick="Distro_Icon"/>
-        <value value="2" nick="Custom_Icon"/>
-    </enum>
     <enum id='org.gnome.shell.extensions.arcmenu.default-menu-view'>
         <value value="0" nick="Pinned_Apps"/>
         <value value="1" nick="Categories_List"/>
@@ -599,31 +594,19 @@
       <default>false</default>
       <summary>Activate existing window instead of opening new one on application launch.</summary>
     </key>
-    <key type="s" name="custom-menu-button-text">
+    <key type="s" name="menu-button-text">
       <default>'Apps'</default>
       <summary>Text of the menu button.</summary>
     </key>
-    <key name="menu-button-icon" enum="org.gnome.shell.extensions.arcmenu.menu-button-icon">
-      <default>'Menu_Icon'</default>
-      <summary>Icon type for the menu button.</summary>
+    <key type="s" name="menu-button-icon">
+      <default>'resource:///org/gnome/shell/extensions/arcmenu/icons/scalable/actions/icon-arcmenu-logo-symbolic.svg'</default>
+      <summary>File path, file uri, or icon name, of the ArcMenu button icon.</summary>
     </key>
-    <key name="arc-menu-icon" type="i">
-      <default>0</default>
-      <summary>Icon integer value for the menu button.</summary>
-    </key>
-    <key name="distro-icon" type="i">
-      <default>0</default>
-      <summary>Distro icon integer value for the menu button.</summary>
-    </key>
-    <key type="s" name="custom-menu-button-icon">
-      <default>''</default>
-      <summary>File path of the custom icon for the menu button.</summary>
-    </key>
-    <key type="d" name="custom-menu-button-icon-size">
+    <key type="i" name="menu-button-size">
       <default>20</default>
       <summary>Size of the menu buton icon.</summary>
     </key>
-    <key type="i" name="button-padding">
+    <key type="i" name="menu-button-padding">
       <default>-1</default>
       <summary>Menu Button Padding.</summary>
     </key>

@@ -1,6 +1,8 @@
 import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
 
 import * as Constants from './constants.js';
 
@@ -10,12 +12,25 @@ import {GeneralPage} from './settings/generalPage.js';
 import {MenuButtonPage} from './settings/menuButtonPage.js';
 import {MenuPage} from './settings/menuPage.js';
 
+import {IconCategory, IconGroup} from './prefsWidgets.js';
+
 import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+
+const IconDataItem = GObject.registerClass({
+    Properties: {
+        'name': GObject.ParamSpec.string('name', 'Name', 'Name', GObject.ParamFlags.READWRITE, ''),
+        'icon': GObject.ParamSpec.string('icon', 'Icon', 'Icon', GObject.ParamFlags.READWRITE, ''),
+        'group': GObject.ParamSpec.int('group', 'Group', 'Group', GObject.ParamFlags.READWRITE, 0, 15, 0),
+    },
+}, class Item extends GObject.Object {});
 
 export default class ArcMenuPrefs extends ExtensionPreferences {
     constructor(metadata) {
         super(metadata);
 
+        this._startTime = Date.now();
+        this._systemIconsPromise = null;
+        this._cachedSystemIcons = null;
         const resourcePath = '/org/gnome/shell/extensions/arcmenu/icons';
         const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
         if (!iconTheme.get_resource_path().includes(resourcePath))
@@ -63,10 +78,30 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
                 settings.disconnect(pinnedAppsChangedId);
                 pinnedAppsChangedId = null;
             }
+
+            if (this._idleAddId) {
+                GLib.source_remove(this._idleAddId);
+                this._idleAddId = null;
+            }
+
+            if (this._timeoutAddId) {
+                GLib.source_remove(this._timeoutAddId);
+                this._timeoutAddId = null;
+            }
+
+            this._cachedSystemIcons = null;
+            this._systemIconsPromise = null;
         });
 
-
         this._populateWindow(window, settings);
+        window.connect('realize', () => {
+            console.log(`Window Creation Time: ${Date.now() - this._startTime}ms`);
+        });
+        this._timeoutAddId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+            this.getSystemIcons();
+            this._timeoutAddId = null;
+            return GLib.SOURCE_REMOVE;
+        });
     }
 
     _populateWindow(window, settings) {
@@ -133,5 +168,94 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
         }
 
         settings.set_int('prefs-visible-page', Constants.SettingsPage.MAIN);
+    }
+
+    getSystemIcons() {
+        if (this._cachedSystemIcons)
+            return Promise.resolve(this._cachedSystemIcons);
+
+        if (this._systemIconsPromise)
+            return this._systemIconsPromise;
+
+        this._startSystemIconsPromise();
+        return this._systemIconsPromise;
+    }
+
+    _startSystemIconsPromise() {
+        this._systemIconsPromise = new Promise(resolve => {
+            const startTime = Date.now();
+            const iconsData = [];
+            const iconThemeDefault = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
+            const resourcePaths = [...iconThemeDefault.resource_path];
+            const searchPaths = [...iconThemeDefault.get_search_path()];
+
+            // Remove ArcMenu's own icons from theme resource
+            const myResourcePath = '/org/gnome/shell/extensions/arcmenu/icons';
+            const arcMenuIndex = resourcePaths.indexOf(myResourcePath);
+            if (arcMenuIndex !== -1)
+                resourcePaths.splice(arcMenuIndex, 1);
+
+            const iconTheme = new Gtk.IconTheme({
+                resource_path: resourcePaths,
+                search_path: searchPaths,
+                theme_name: iconThemeDefault.theme_name,
+            });
+
+            const names = iconTheme.get_icon_names();
+            const CHUNK_SIZE = 400;
+            let i = 0;
+            this._idleAddId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+                if (i === 0) {
+                    const prefix = `${myResourcePath}/scalable/actions`;
+                    try {
+                        const entries = Gio.resources_enumerate_children(prefix, 0);
+                        for (const entry of entries) {
+                            if (!entry.endsWith('.svg'))
+                                continue;
+
+                            const name = entry.slice(0, -4);
+                            const iconData = new IconDataItem({
+                                name,
+                                icon: `${Constants.RESOURCE_PATH}/actions/${entry}`,
+                                group: entry.startsWith('distro') ? IconGroup.DISTRO : IconGroup.CUSTOM,
+                            });
+                            iconsData.push(iconData);
+                        }
+                    } catch (e) {
+                        console.log(e, 'No custom action icons found or path wrong');
+                    }
+                }
+                const end = Math.min(i + CHUNK_SIZE, names.length);
+                for (; i < end; i++) {
+                    const iconInfo = iconTheme.lookup_icon(
+                        names[i],
+                        null,
+                        48, 1,
+                        Gtk.TextDirection.NONE,
+                        Gtk.IconLookupFlags.FORCE_SIZE
+                    );
+                    const file = iconInfo.get_file();
+                    const filename = file.get_uri();
+                    const match = filename.match(/[/](actions|apps|categories|devices|emblems|emotes|mimetypes|places|scalable|status)[/]?(?:[\dx]+|scalable)?[/]/i);
+                    const category = match ? match[1].toLowerCase() : 'other';
+                    const iconData = new IconDataItem({
+                        name: names[i],
+                        icon: names[i],
+                        group: IconCategory[category] ?? IconGroup.OTHER,
+                    });
+                    iconsData.push(iconData);
+                }
+
+                if (i < names.length)
+                    return GLib.SOURCE_CONTINUE;
+
+                this._cachedSystemIcons = iconsData.sort((a, b) => a.name.localeCompare(b.name));
+                console.log(`Build icon cache time: ${Date.now() - startTime}ms`);
+                console.log(`Total icons gathered: ${this._cachedSystemIcons.length}`);
+                resolve(this._cachedSystemIcons);
+                this._idleAddId = null;
+                return GLib.SOURCE_REMOVE;
+            });
+        });
     }
 }
