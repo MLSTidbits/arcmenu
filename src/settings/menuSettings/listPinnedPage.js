@@ -5,6 +5,7 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
 import * as Constants from '../../constants.js';
+import {IconChooserDialog} from '../iconChooserDialog.js';
 import * as PW from '../../prefsWidgets.js';
 import * as SettingsUtils from '../settingsUtils.js';
 import {SubPage} from './subPage.js';
@@ -683,7 +684,7 @@ class ArcMenuAddCustomLinkDialogWindow extends PW.HeaderBarDialog {
     }
 
     _launchIconChooser() {
-        const dialog = new PW.IconChooserDialog(this._settings, this.get_root());
+        const dialog = new IconChooserDialog(this._settings, this.get_root());
         dialog.connect('response', (_self, response) => {
             if (response === Gtk.ResponseType.APPLY) {
                 this._clearIconButton.sensitive = true;

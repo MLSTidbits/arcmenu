@@ -12,15 +12,15 @@ import {GeneralPage} from './settings/generalPage.js';
 import {MenuButtonPage} from './settings/menuButtonPage.js';
 import {MenuPage} from './settings/menuPage.js';
 
-import {IconCategory, IconGroup} from './prefsWidgets.js';
+import {IconGroup} from './settings/iconChooserDialog.js';
 
 import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 const IconDataItem = GObject.registerClass({
     Properties: {
-        'name': GObject.ParamSpec.string('name', 'Name', 'Name', GObject.ParamFlags.READWRITE, ''),
-        'icon': GObject.ParamSpec.string('icon', 'Icon', 'Icon', GObject.ParamFlags.READWRITE, ''),
-        'group': GObject.ParamSpec.int('group', 'Group', 'Group', GObject.ParamFlags.READWRITE, 0, 15, 0),
+        'display-name': GObject.ParamSpec.string('display-name', 'Display Name', 'Display Name', GObject.ParamFlags.READWRITE, ''),
+        'icon-string': GObject.ParamSpec.string('icon-string', 'Icon String', 'Icon String', GObject.ParamFlags.READWRITE, ''),
+        'group': GObject.ParamSpec.int('group', 'Group', 'Group', GObject.ParamFlags.READWRITE, 0, 3, IconGroup.ALL),
     },
 }, class Item extends GObject.Object {});
 
@@ -84,22 +84,14 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
                 this._idleAddId = null;
             }
 
-            if (this._timeoutAddId) {
-                GLib.source_remove(this._timeoutAddId);
-                this._timeoutAddId = null;
-            }
-
             this._cachedSystemIcons = null;
             this._systemIconsPromise = null;
         });
 
         this._populateWindow(window, settings);
-        window.connect('realize', () => {
-            console.log(`Window Creation Time: ${Date.now() - this._startTime}ms`);
-        });
-        this._timeoutAddId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+        this._idleAddId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
             this.getSystemIcons();
-            this._timeoutAddId = null;
+            this._idleAddId = null;
             return GLib.SOURCE_REMOVE;
         });
     }
@@ -185,77 +177,62 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
         this._systemIconsPromise = new Promise(resolve => {
             const startTime = Date.now();
             const iconsData = [];
-            const iconThemeDefault = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-            const resourcePaths = [...iconThemeDefault.resource_path];
-            const searchPaths = [...iconThemeDefault.get_search_path()];
+            const distroIcons = [];
+            const extensionIcons = [];
 
-            // Remove ArcMenu's own icons from theme resource
             const myResourcePath = '/org/gnome/shell/extensions/arcmenu/icons';
-            const arcMenuIndex = resourcePaths.indexOf(myResourcePath);
-            if (arcMenuIndex !== -1)
-                resourcePaths.splice(arcMenuIndex, 1);
+            const bundledIconsPath = `${myResourcePath}/scalable/actions`;
+
+            try {
+                const entries = Gio.resources_enumerate_children(bundledIconsPath, 0);
+                for (const entry of entries) {
+                    if (!entry.endsWith('.svg'))
+                        continue;
+
+                    const group = entry.startsWith('distro-') ? IconGroup.DISTRO : IconGroup.EXTENSION;
+                    const name = entry.slice(0, -4);
+
+                    const item = new IconDataItem({
+                        display_name: name,
+                        icon_string: `${Constants.RESOURCE_PATH}/actions/${entry}`,
+                        group,
+                    });
+
+                    if (group === IconGroup.DISTRO)
+                        distroIcons.push(item);
+                    else
+                        extensionIcons.push(item);
+                }
+            } catch {
+                console.log('ArcMenu Error: Error gathering ArcMenu icons.');
+            }
+
+            distroIcons.sort((a, b) => a.display_name.localeCompare(b.display_name));
+            extensionIcons.sort((a, b) => a.display_name.localeCompare(b.display_name));
+            iconsData.push(...extensionIcons, ...distroIcons);
+
+            // IconTheme without ArcMenu's own icons
+            const iconThemeDefault = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
+            const resourcePaths = iconThemeDefault.resource_path.filter(p => p !== myResourcePath);
 
             const iconTheme = new Gtk.IconTheme({
                 resource_path: resourcePaths,
-                search_path: searchPaths,
+                search_path: iconThemeDefault.get_search_path(),
                 theme_name: iconThemeDefault.theme_name,
             });
 
-            const names = iconTheme.get_icon_names();
-            const CHUNK_SIZE = 400;
-            let i = 0;
-            this._idleAddId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
-                if (i === 0) {
-                    const prefix = `${myResourcePath}/scalable/actions`;
-                    try {
-                        const entries = Gio.resources_enumerate_children(prefix, 0);
-                        for (const entry of entries) {
-                            if (!entry.endsWith('.svg'))
-                                continue;
-
-                            const name = entry.slice(0, -4);
-                            const iconData = new IconDataItem({
-                                name,
-                                icon: `${Constants.RESOURCE_PATH}/actions/${entry}`,
-                                group: entry.startsWith('distro') ? IconGroup.DISTRO : IconGroup.CUSTOM,
-                            });
-                            iconsData.push(iconData);
-                        }
-                    } catch (e) {
-                        console.log(e, 'No custom action icons found or path wrong');
-                    }
-                }
-                const end = Math.min(i + CHUNK_SIZE, names.length);
-                for (; i < end; i++) {
-                    const iconInfo = iconTheme.lookup_icon(
-                        names[i],
-                        null,
-                        48, 1,
-                        Gtk.TextDirection.NONE,
-                        Gtk.IconLookupFlags.FORCE_SIZE
-                    );
-                    const file = iconInfo.get_file();
-                    const filename = file.get_uri();
-                    const match = filename.match(/[/](actions|apps|categories|devices|emblems|emotes|mimetypes|places|scalable|status)[/]?(?:[\dx]+|scalable)?[/]/i);
-                    const category = match ? match[1].toLowerCase() : 'other';
-                    const iconData = new IconDataItem({
-                        name: names[i],
-                        icon: names[i],
-                        group: IconCategory[category] ?? IconGroup.OTHER,
-                    });
-                    iconsData.push(iconData);
-                }
-
-                if (i < names.length)
-                    return GLib.SOURCE_CONTINUE;
-
-                this._cachedSystemIcons = iconsData.sort((a, b) => a.name.localeCompare(b.name));
-                console.log(`Build icon cache time: ${Date.now() - startTime}ms`);
-                console.log(`Total icons gathered: ${this._cachedSystemIcons.length}`);
-                resolve(this._cachedSystemIcons);
-                this._idleAddId = null;
-                return GLib.SOURCE_REMOVE;
-            });
+            const iconNames = iconTheme.get_icon_names().sort((a, b) => a.localeCompare(b));
+            for (const name of iconNames) {
+                iconsData.push(new IconDataItem({
+                    display_name: name,
+                    icon_string: name,
+                    group: IconGroup.SYSTEM,
+                }));
+            }
+            this._cachedSystemIcons = iconsData;
+            console.log(`ArcMenu: Build icon cache time: ${Date.now() - startTime}ms. Icons found: ${this._cachedSystemIcons.length}`);
+            resolve(this._cachedSystemIcons);
+            this._systemIconsPromise = null;
         });
     }
 }

@@ -4,7 +4,7 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
 import * as Constants from '../constants.js';
-import * as PW from '../prefsWidgets.js';
+import {IconChooserDialog} from './iconChooserDialog.js';
 import * as SettingsUtils from './settingsUtils.js';
 
 import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
@@ -157,7 +157,7 @@ class ArcMenuMenuButtonPage extends Adw.PreferencesPage {
             valign: Gtk.Align.CENTER,
         });
         menuButtonIconButton.connect('clicked', () => {
-            const dialog = new PW.IconChooserDialog(this._settings, this);
+            const dialog = new IconChooserDialog(this._settings, this);
             dialog.show();
             dialog.connect('response', (_self, response) => {
                 if (response === Gtk.ResponseType.APPLY)
