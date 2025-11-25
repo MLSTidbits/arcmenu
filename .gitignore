@@ -4,4 +4,4 @@
 gschemas.compiled
 *.mo
 node_modules/
-resources.gresource*
+resources.gresource

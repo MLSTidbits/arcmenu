@@ -1,4 +1,4 @@
-.PHONY: all clean extension potfile mergepo install prefs enable disable reset info show zip-file
+.PHONY: all clean extension potfile install prefs enable disable reset info show updatepo zip-file
 
 GETTEXT_DOMAIN = arcmenu
 NAME = ArcMenu
@@ -36,9 +36,9 @@ endif
 define CLEAN_UP
 @echo 'Cleaning up...'
 @-rm -fR _build
+@-rm -fR _po
 @-rm -f ./schemas/gschemas.compiled
 @-rm -f ./data/resources.gresource
-@-rm -f ./data/resources.gresource.xml
 @-rm -f ./po/*.po~
 @-rm -f ./po/*.mo
 @echo "Done."
@@ -55,7 +55,9 @@ _compile-resources:
 	@mkdir -p data/
 	@if find data/ -mindepth 2 -type f -name "*.svg" | grep -q .; then \
 		echo "Creating resources.gresource.xml..."; \
-		FILES=$$(find data/ -mindepth 2 -type f -name "*.svg" -printf '    <file compressed="true" preprocess="xml-stripblanks">%P</file>\n'); \
+		FILES=$$(find data/ -mindepth 2 -type f -name "*.svg" \
+		          -printf '    <file compressed="true" preprocess="xml-stripblanks">%P</file>\n' | \
+		          sort -V); \
 		printf "<?xml version='1.0' encoding='UTF-8'?>\n<gresources>\n  <gresource prefix='$(RESOURCES_PATH)'>\n$$FILES\n  </gresource>\n</gresources>" \
 			> data/resources.gresource.xml; \
 		echo "Done."; \
@@ -70,13 +72,26 @@ _compile-resources:
 _compile-schemas: ./schemas/$(SETTINGS_SCHEMA).gschema.xml
 	@command -v glib-compile-schemas >/dev/null 2>&1 || { echo "Error: glib-compile-schemas not found. Install 'glib2-devel' or 'libglib2.0-dev'."; exit 1; }
 	@echo "Compiling $(SETTINGS_SCHEMA).gschema.xml..."
-	@glib-compile-schemas ./schemas/
+	@glib-compile-schemas --strict ./schemas/ || { echo "Error: glib-compile-schemas failed!."; exit 1; }
 	@echo "Done."
 
-_compile-translations:
+# Prep .po files for compilation into .mo files.
+# Omits untranslated messages, fuzzy messages (except the header entry), and obsolete messages from the output.
+_buildpo:
+	@command -v msgmerge >/dev/null 2>&1 || { echo "Error: msgmerge not found. Install 'gettext' package."; exit 1; }
+	@-rm -fR ./_po
+	@mkdir -p _po
+	@echo "Updating po files..."
+	@for PO_FILE in po/*.po; do \
+		LANG=$$(basename "$$PO_FILE" .po); \
+		msgmerge --for-msgfmt --no-location -q $$PO_FILE ./po/$(GETTEXT_DOMAIN).pot > _po/$$LANG.po; \
+	done;
+	@echo "Done."
+
+_compile-translations: _buildpo
 	@command -v msgfmt >/dev/null 2>&1 || { echo "Error: msgfmt not found. Install 'gettext' package."; exit 1; }
 	@echo "Compiling translations..."
-	@for PO_FILE in po/*.po; do \
+	@for PO_FILE in _po/*.po; do \
 		LANG=$$(basename "$$PO_FILE" .po); \
 		msgfmt -c "$$PO_FILE" -o "po/$$LANG.mo"; \
 	done;
@@ -95,7 +110,8 @@ potfile:
 		--package-name "$(NAME)"
 	@echo "Done."
 
-mergepo: potfile
+updatepo: potfile
+	@command -v msgmerge >/dev/null 2>&1 || { echo "Error: msgmerge not found. Install 'gettext' package."; exit 1; }
 	@echo "Updating po files..."
 	@for PO_FILE in po/*.po; do \
 		msgmerge -NU $$PO_FILE ./po/$(GETTEXT_DOMAIN).pot; \
