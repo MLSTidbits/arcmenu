@@ -200,10 +200,10 @@ export class IconChooserDialog extends HeaderBarDialog {
         popover.set_offset(0, 6);
 
         const filterButton = new Gtk.MenuButton({
-            always_show_arrow: true,
+            always_show_arrow: false,
             popover,
             direction: Gtk.ArrowType.DOWN,
-            icon_name: 'view-filter-symbolic',
+            icon_name: 'open-menu-symbolic',
             tooltip_text: _('Filter'),
         });
 
@@ -216,16 +216,12 @@ export class IconChooserDialog extends HeaderBarDialog {
         };
 
         const iconTypeAction = this._createAction('icontype', 'all',
-            ['all', 'symbolic', 'fullcolor'],
-            () => applyFilters()
-        );
+            ['all', 'symbolic', 'fullcolor'], () => applyFilters());
 
         const groupTypeAction = this._createAction('grouptype', 'all',
-            ['all', 'extension', 'distros', 'system'],
-            () => applyFilters()
-        );
-        const actionGroup = new Gio.SimpleActionGroup();
+            ['all', 'extension', 'distros', 'system'], () => applyFilters());
 
+        const actionGroup = new Gio.SimpleActionGroup();
         actionGroup.add_action(iconTypeAction);
         actionGroup.add_action(groupTypeAction);
         this.insert_action_group('win', actionGroup);
