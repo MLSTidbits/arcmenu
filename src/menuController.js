@@ -141,7 +141,7 @@ export const MenuController = class {
         Utils.connectSettings(['menu-button-icon'], this._setButtonIcon.bind(this), this);
         Utils.connectSettings(['menu-button-appearance'], this._setButtonAppearance.bind(this), this);
         Utils.connectSettings(['menu-button-text'], this._setButtonText.bind(this), this);
-        Utils.connectSettings(['menu-button-size'], this._setButtonIconSize.bind(this), this);
+        Utils.connectSettings(['menu-button-icon-size'], this._setButtonIconSize.bind(this), this);
         Utils.connectSettings(['menu-button-padding'], this._setButtonIconPadding.bind(this), this);
         Utils.connectSettings(['menu-height'], this._updateMenuHeight.bind(this), this);
         Utils.connectSettings(['menu-layout'], this._changeMenuLayout.bind(this), this);
@@ -357,7 +357,7 @@ export const MenuController = class {
     }
 
     _setButtonIconSize() {
-        const iconSize = ArcMenuManager.settings.get_int('menu-button-size');
+        const iconSize = ArcMenuManager.settings.get_int('menu-button-icon-size');
 
         const {menuButtonWidget} = this._menuButton;
         const paneIcon = menuButtonWidget.getPanelIcon();

@@ -594,15 +594,48 @@
       <default>false</default>
       <summary>Activate existing window instead of opening new one on application launch.</summary>
     </key>
+
+    <!--Deprecated-->
+    <!--Use new settings 'menu-button-text', 'menu-button-icon', 'menu-button-icon-size', 'menu-button-padding'-->
+    <key name="arc-menu-icon" type="i">
+      <default>0</default>
+      <summary>Icon integer value for the menu button.</summary>
+    </key>
+    <key name="distro-icon" type="i">
+      <default>0</default>
+      <summary>Distro icon integer value for the menu button.</summary>
+    </key>
+    <key type="s" name="custom-menu-button-text">
+      <default>'Apps'</default>
+      <summary>Text of the menu button.</summary>
+    </key>
+    <key type="s" name="custom-menu-button-icon">
+      <default>''</default>
+      <summary>File path of the custom icon for the menu button.</summary>
+    </key>
+    <key type="d" name="custom-menu-button-icon-size">
+      <default>20</default>
+      <summary>Size of the menu buton icon.</summary>
+    </key>
+    <key type="i" name="button-padding">
+      <default>-1</default>
+      <summary>Menu Button Padding.</summary>
+    </key>
+    <!--End Deprecated-->
+
     <key type="s" name="menu-button-text">
       <default>'Apps'</default>
       <summary>Text of the menu button.</summary>
     </key>
     <key type="s" name="menu-button-icon">
       <default>'resource:///org/gnome/shell/extensions/arcmenu/icons/scalable/actions/icon-arcmenu-logo-symbolic.svg'</default>
-      <summary>File path, file uri, or icon name, of the ArcMenu button icon.</summary>
+      <summary>ArcMenu button icon</summary>
+      <description>
+        Can be a file path, a resource:/// URI (for bundled icons), or a symbolic icon name.
+        Bundled icons can be referenced via resource:/// - see data/resources.gresource.xml
+      </description>
     </key>
-    <key type="i" name="menu-button-size">
+    <key type="i" name="menu-button-icon-size">
       <default>20</default>
       <summary>Size of the menu buton icon.</summary>
     </key>

@@ -185,9 +185,9 @@ class ArcMenuMenuButtonPage extends Adw.PreferencesPage {
             digits: 0,
             valign: Gtk.Align.CENTER,
         });
-        menuButtonIconSizeScale.set_value(this._settings.get_int('menu-button-size'));
+        menuButtonIconSizeScale.set_value(this._settings.get_int('menu-button-icon-size'));
         menuButtonIconSizeScale.connect('value-changed', () => {
-            this._settings.set_int('menu-button-size', menuButtonIconSizeScale.get_value());
+            this._settings.set_int('menu-button-icon-size', menuButtonIconSizeScale.get_value());
         });
         const menuButtonIconSizeRow = new Adw.ActionRow({
             title: _('Icon Size'),
