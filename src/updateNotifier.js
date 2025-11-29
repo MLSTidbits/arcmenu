@@ -9,7 +9,7 @@ import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js'
 import {RESOURCE_PATH, SettingsPage} from './constants.js';
 
 const PROJECT_NAME = 'ArcMenu';
-const PROJECT_ICON = 'settings-arcmenu-logo.svg';
+const PROJECT_ICON = 'emblems/settings-arcmenu-logo.svg';
 
 const [ShellVersion] = Config.PACKAGE_VERSION.split('.').map(s => Number(s));
 

@@ -55,6 +55,65 @@ export const DialogWindow = GObject.registerClass({
     }
 });
 
+export const HeaderBarDialog = GObject.registerClass({
+    Signals: {
+        'response': {param_types: [GObject.TYPE_INT]},
+    },
+}, class ArcMenuHeaderBarDialog extends Adw.Window {
+    _init(title, actionButtonLabel, parent) {
+        super._init({
+            title,
+            transient_for: parent.get_root(),
+            modal: true,
+        });
+
+        const sidebarToolBarView = new Adw.ToolbarView({
+            top_bar_style: Adw.ToolbarStyle.RAISED,
+        });
+        this.set_content(sidebarToolBarView);
+
+        this._headerBar = new Adw.HeaderBar({
+            show_end_title_buttons: false,
+            show_start_title_buttons: true,
+        });
+        sidebarToolBarView.add_top_bar(this._headerBar);
+
+        this._actionButton = new Gtk.Button({
+            label: actionButtonLabel ?? _('Apply'),
+            halign: Gtk.Align.END,
+            hexpand: false,
+            css_classes: ['suggested-action'],
+            sensitive: false,
+        });
+        this._actionButton.connect('clicked', () => {
+            this._onActionClicked();
+        });
+        this._headerBar.pack_end(this._actionButton);
+
+        const cancelButton = new Gtk.Button({
+            label: _('Cancel'),
+            halign: Gtk.Align.START,
+            hexpand: false,
+        });
+        cancelButton.connect('clicked', () => this.close());
+        this._headerBar.pack_start(cancelButton);
+
+        this.page = new Adw.PreferencesPage();
+        sidebarToolBarView.set_content(this.page);
+
+        this.pageGroup = new Adw.PreferencesGroup();
+        this.page.add(this.pageGroup);
+    }
+
+    _setActionButtonSensitive(bool) {
+        this._actionButton.sensitive = bool;
+    }
+
+    _onActionClicked() {
+        this.emit('response', Gtk.ResponseType.APPLY);
+    }
+});
+
 export const SettingRow = GObject.registerClass(
 class ArcMenuSettingRow extends Adw.ActionRow {
     _init(params) {
@@ -371,149 +430,5 @@ export const EditEntriesBox = GObject.registerClass({
         parent.show();
 
         this.emit('entry-modified', startIndex, newIndex);
-    }
-});
-
-export const IconGrid = GObject.registerClass(class ArcMenuIconGrid extends Gtk.FlowBox {
-    _init(spacing = 4) {
-        super._init({
-            max_children_per_line: 15,
-            row_spacing: spacing,
-            column_spacing: spacing,
-            valign: Gtk.Align.START,
-            halign: Gtk.Align.CENTER,
-            homogeneous: true,
-            selection_mode: Gtk.SelectionMode.SINGLE,
-        });
-        this._spacing = spacing;
-        this.childrenCount = 0;
-        this.connect('child-activated', (_self, child) => {
-            this.setActiveChild(child);
-        });
-    }
-
-    setActiveChild(child) {
-        if (this._previousSelectedChild)
-            this._previousSelectedChild.setActive(false);
-
-        child.setActive(true);
-        this._previousSelectedChild = child;
-    }
-
-    unselect_all() {
-        if (this._previousSelectedChild)
-            this._previousSelectedChild.setActive(false);
-        super.unselect_all();
-    }
-
-    select_child(child) {
-        this.setActiveChild(child);
-        super.select_child(child);
-    }
-
-    add(widget) {
-        widget.margin_top = widget.margin_bottom =
-                widget.margin_start = widget.margin_end = this._spacing;
-
-        this.append(widget);
-        this.childrenCount++;
-    }
-});
-
-export const MenuButtonIconTile = GObject.registerClass(class ArcMenuMenuButtonIconTile extends Gtk.FlowBoxChild {
-    _init(icon, name) {
-        super._init({
-            css_classes: ['card', 'activatable'],
-        });
-
-        const box = new Gtk.Box({
-            orientation: Gtk.Orientation.VERTICAL,
-            spacing: 4,
-            margin_top: 4,
-            margin_bottom: 4,
-            margin_start: 4,
-            margin_end: 4,
-        });
-        this.set_child(box);
-
-        const ICON_SIZE = 32;
-        this._image = new Gtk.Image({
-            gicon: Gio.Icon.new_for_string(icon),
-            pixel_size: ICON_SIZE,
-        });
-
-        this._label = new Gtk.Label({
-            label: name ? _(name) : '',
-            hexpand: true,
-            css_classes: ['caption'],
-            visible: !!name,
-        });
-
-        box.append(this._image);
-        box.append(this._label);
-    }
-
-    setIcon(icon) {
-        this._image.gicon = Gio.Icon.new_for_string(icon);
-    }
-
-    setActive(active) {
-        if (active) {
-            this._image.css_classes = ['accent'];
-            this._label.css_classes = ['caption', 'accent'];
-        } else {
-            this._image.css_classes = [];
-            this._label.css_classes = ['caption'];
-        }
-    }
-});
-
-export const MenuLayoutTile = GObject.registerClass(class ArcMenuMenuLayoutTile extends Gtk.FlowBoxChild {
-    _init(styleInfo) {
-        super._init({
-            css_classes: ['card', 'activatable'],
-            margin_top: 4,
-            margin_bottom: 4,
-            margin_start: 4,
-            margin_end: 4,
-            halign: Gtk.Align.FILL,
-            hexpand: true,
-        });
-
-        const box = new Gtk.Box({
-            orientation: Gtk.Orientation.VERTICAL,
-            margin_top: 4,
-            margin_bottom: 4,
-            margin_start: 8,
-            margin_end: 8,
-        });
-        this.set_child(box);
-
-        this.name = styleInfo.TITLE;
-        this.layout = styleInfo.LAYOUT;
-
-        this._image = new Gtk.Image({
-            gicon: Gio.Icon.new_for_string(styleInfo.IMAGE),
-            pixel_size: 145,
-        });
-
-        this._label = new Gtk.Label({
-            label: _(this.name),
-            hexpand: true,
-            css_classes: ['caption'],
-        });
-
-        box.append(this._image);
-        box.append(this._label);
-    }
-
-    setActive(active) {
-        if (active) {
-            this._image.css_classes = ['accent'];
-            this._label.css_classes = ['caption', 'accent'];
-        } else {
-            this._image.css_classes = [];
-            this._label.css_classes = ['caption'];
-        }
     }
 });

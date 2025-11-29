@@ -371,7 +371,7 @@ class ArcMenuHotkeyDialog extends Adw.Window {
         content.append(keyLabel);
 
         const keyboardImage = new Gtk.Picture({
-            file: Gio.File.new_for_uri(`${Constants.RESOURCE_PATH}settings-keyboard.svg`),
+            file: Gio.File.new_for_uri(`${Constants.RESOURCE_PATH}/emblems/settings-keyboard.svg`),
             halign: Gtk.Align.CENTER,
             valign: Gtk.Align.CENTER,
             can_shrink: false,

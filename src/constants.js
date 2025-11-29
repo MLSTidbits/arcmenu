@@ -3,7 +3,7 @@ const {gettext: _} = domain('arcmenu');
 
 export const DASH_TO_PANEL_UUID = 'dash-to-panel@jderose9.github.com';
 export const AZTASKBAR_UUID = 'aztaskbar@aztaskbar.gitlab.com';
-export const RESOURCE_PATH = 'resource:///org/gnome/shell/extensions/arcmenu/icons/scalable/actions/';
+export const RESOURCE_PATH = 'resource:///org/gnome/shell/extensions/arcmenu/icons/scalable';
 
 export const ClutterAction = {
     CLICK: 0,
@@ -280,16 +280,7 @@ export const PowerOptions = [
     {TYPE: PowerType.SWITCH_USER, IMAGE: 'system-switch-user-symbolic', NAME: _('Switch User')},
 ];
 
-// Icon type for the menu button
-// set 'menu-button-icon' enum setting to value of desired icon type.
-export const MenuIconType = {
-    MENU_ICON: 0,
-    DISTRO_ICON: 1,
-    CUSTOM: 2,
-};
-
-// Object order in MenuIcons array corresponds to the integer value of 'arc-menu-icon' setting
-// i.e 'arc-menu-icon' value of 0 is arcmenu-logo-symbolic.
+// Deprecated - icons are now packaged in GResource.
 export const MenuIcons = [
     {IMAGE: 'icon-arcmenu-logo-symbolic'},
     {IMAGE: 'icon-arcmenu-logo-alt-symbolic'},
@@ -364,34 +355,32 @@ export const MenuIcons = [
     {IMAGE: 'icon-round-symbolic'},
     {IMAGE: 'view-app-grid-symbolic'},
 ];
-
-// Object order in DistroIcons array corresponds to the integer value of 'distro-icon' setting
-// i.e 'distro-icon' value of 3 is manjaro-logo.
+// Deprecated - icons are now packaged in GResource.
 export const DistroIcons = [
-    {IMAGE: 'distro-gnome-symbolic', NAME: 'GNOME'},
-    {IMAGE: 'distro-debian-symbolic', NAME: 'Debian'},
-    {IMAGE: 'distro-fedora-symbolic', NAME: 'Fedora'},
-    {IMAGE: 'distro-manjaro-symbolic', NAME: 'Manjaro'},
-    {IMAGE: 'distro-pop-os-symbolic', NAME: 'Pop!_OS'},
-    {IMAGE: 'distro-ubuntu-symbolic', NAME: 'Ubuntu'},
-    {IMAGE: 'distro-arch-symbolic', NAME: 'Arch'},
-    {IMAGE: 'distro-opensuse-symbolic', NAME: 'OpenSUSE'},
-    {IMAGE: 'distro-raspbian-symbolic', NAME: 'Raspbian'},
-    {IMAGE: 'distro-kali-linux-symbolic', NAME: 'Kali Linux'},
-    {IMAGE: 'distro-pureos-symbolic', NAME: 'PureOS'},
-    {IMAGE: 'distro-solus-symbolic', NAME: 'Solus'},
-    {IMAGE: 'distro-budgie-symbolic', NAME: 'Budgie'},
-    {IMAGE: 'distro-gentoo-symbolic', NAME: 'Gentoo'},
-    {IMAGE: 'distro-mx-symbolic', NAME: 'MX Linux'},
-    {IMAGE: 'distro-redhat-symbolic', NAME: 'Redhat'},
-    {IMAGE: 'distro-voyager-symbolic', NAME: 'Voyager'},
-    {IMAGE: 'distro-zorin-symbolic', NAME: 'Zorin OS'},
-    {IMAGE: 'distro-endeavour-symbolic', NAME: 'Endeavour'},
-    {IMAGE: 'distro-nobara-symbolic', NAME: 'Nobara'},
-    {IMAGE: 'distro-pardus-symbolic', NAME: 'Pardus'},
-    {IMAGE: 'distro-cachyos-symbolic', NAME: 'CachyOS'},
-    {IMAGE: 'distro-nixos-symbolic', NAME: 'NixOS'},
-    {IMAGE: 'distro-oreon-symbolic', NAME: 'Oreon OS'},
+    {IMAGE: 'distro-gnome-symbolic'},
+    {IMAGE: 'distro-debian-symbolic'},
+    {IMAGE: 'distro-fedora-symbolic'},
+    {IMAGE: 'distro-manjaro-symbolic'},
+    {IMAGE: 'distro-pop-os-symbolic'},
+    {IMAGE: 'distro-ubuntu-symbolic'},
+    {IMAGE: 'distro-arch-symbolic'},
+    {IMAGE: 'distro-opensuse-symbolic'},
+    {IMAGE: 'distro-raspbian-symbolic'},
+    {IMAGE: 'distro-kali-linux-symbolic'},
+    {IMAGE: 'distro-pureos-symbolic'},
+    {IMAGE: 'distro-solus-symbolic'},
+    {IMAGE: 'distro-budgie-symbolic'},
+    {IMAGE: 'distro-gentoo-symbolic'},
+    {IMAGE: 'distro-mx-symbolic'},
+    {IMAGE: 'distro-redhat-symbolic'},
+    {IMAGE: 'distro-voyager-symbolic'},
+    {IMAGE: 'distro-zorin-symbolic'},
+    {IMAGE: 'distro-endeavour-symbolic'},
+    {IMAGE: 'distro-nobara-symbolic'},
+    {IMAGE: 'distro-pardus-symbolic'},
+    {IMAGE: 'distro-cachyos-symbolic'},
+    {IMAGE: 'distro-nixos-symbolic'},
+    {IMAGE: 'distro-oreon-symbolic'},
 ];
 
 export const MenuLayout = {
@@ -620,32 +609,3 @@ export const ShortcutCommands = {
     PANEL_EXTENSION_SETTINGS: 'ArcMenu_PanelExtensionSettings',
     ARCMENU_ICON: 'ArcMenu_ArcMenuIcon',
 };
-
-export const DistroIconsDisclaimer = '<i>All brand icons are trademarks of their respective owners.' +
-            ' The use of these trademarks does not indicate endorsement of the trademark holder ' +
-            'by ArcMenu project, nor vice versa.' +
-            ' Please do not use brand logos for any purpose except to represent the company, ' +
-            'product, or service to which they refer.</i>' +
-    '\n\n•   <b>GNOME®</b> - The GNOME name and logo are trademarks of the GNOME Foundation.' +
-    '\n\n•   <b>Ubuntu®</b> - Ubuntu name and Ubuntu logo are trademarks of Canonical© Ltd.' +
-    '\n\n•   <b>Fedora®</b> - Fedora and the Infinity design logo are trademarks of Red Hat, Inc.' +
-    '\n\n•   <b>Debian®</b> - is a registered trademark owned by Software in the Public Interest.' +
-    '\n\n•   <b>Manjaro®</b> - logo and name are trademarks of Manjaro GmbH &amp; Co. KG' +
-    '\n\n•   <b>Pop_OS!®</b> - logo and name are trademarks of system 76© Inc.' +
-    '\n\n•   <b>Arch Linux™</b> - The stylized Arch Linux logo is a recognized trademark of Arch Linux, ' +
-                'copyright 2002–2017 Judd Vinet and Aaron Griffin.' +
-    '\n\n•   <b>openSUSE®</b> - logo and name 2001–2020 SUSE LLC, © 2005–2020 openSUSE Contributors &amp; others.' +
-    '\n\n•   <b>Raspberry Pi®</b> - logo and name are part of Raspberry Pi Foundation UK Registered Charity 1129409' +
-    '\n\n•   <b>Kali Linux™</b> - logo and name are part of © OffSec Services Limited 2020' +
-    '\n\n•   <b>PureOS</b> - logo and name are developed by members of the Purism community' +
-    '\n\n•   <b>Solus</b> - logo and name are copyright © 2014–2018 by Solus Project' +
-    '\n\n•   <b>Gentoo Authors©</b> - 2001–2020 Gentoo is a trademark of the Gentoo Foundation, Inc.' +
-    '\n\n•   <b>Voyager© Linux</b> - name and logo' +
-    '\n\n•   <b>MX Linux©</b> - 2020 - Linux - is the registered trademark of Linus Torvalds ' +
-                'in the U.S. and other countries.' +
-    '\n\n•   <b>Red Hat, Inc.©</b> - Copyright 2020 name and logo' +
-    '\n\n•   <b>Pardus</b> - name and logo are copyright © 2003-2023 by TUBITAK ULAKBIM' +
-    '\n\n•   <b>ZORIN OS</b> - The "Z" logomark is a registered trademark of Zorin Technology Group Ltd. ' +
-                'Copyright © 2019 - 2021 Zorin Technology Group Ltd' +
-    '\n\n•   <b>NixOS</b> - The logo is made available under a <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY license</a>. ' +
-                'Logo designed by Tim Cuthbertson (@timbertson)';

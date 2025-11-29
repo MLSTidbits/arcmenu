@@ -113,12 +113,6 @@ export const MenuController = class {
         );
 
         Utils.connectSettings(
-            ['menu-button-icon', 'distro-icon', 'arc-menu-icon', 'custom-menu-button-icon'],
-            this._setButtonIcon.bind(this),
-            this
-        );
-
-        Utils.connectSettings(
             ['directory-shortcuts', 'application-shortcuts', 'extra-categories', 'custom-grid-icon-size',
                 'power-options', 'show-external-devices', 'show-bookmarks', 'show-user-avatar', 'runner-search-display-style',
                 'avatar-style', 'enable-activities-shortcut', 'enable-horizontal-flip', 'power-display-style',
@@ -144,10 +138,11 @@ export const MenuController = class {
 
         Utils.connectSettings(['pinned-apps'], this._updatePinnedApps.bind(this), this);
         Utils.connectSettings(['menu-position-alignment'], this._setMenuPositionAlignment.bind(this), this);
+        Utils.connectSettings(['menu-button-icon'], this._setButtonIcon.bind(this), this);
         Utils.connectSettings(['menu-button-appearance'], this._setButtonAppearance.bind(this), this);
-        Utils.connectSettings(['custom-menu-button-text'], this._setButtonText.bind(this), this);
-        Utils.connectSettings(['custom-menu-button-icon-size'], this._setButtonIconSize.bind(this), this);
-        Utils.connectSettings(['button-padding'], this._setButtonIconPadding.bind(this), this);
+        Utils.connectSettings(['menu-button-text'], this._setButtonText.bind(this), this);
+        Utils.connectSettings(['menu-button-icon-size'], this._setButtonIconSize.bind(this), this);
+        Utils.connectSettings(['menu-button-padding'], this._setButtonIconPadding.bind(this), this);
         Utils.connectSettings(['menu-height'], this._updateMenuHeight.bind(this), this);
         Utils.connectSettings(['menu-layout'], this._changeMenuLayout.bind(this), this);
         Utils.connectSettings(['runner-position'], this._updateLocation.bind(this), this);
@@ -343,58 +338,34 @@ export const MenuController = class {
         const {menuButtonWidget} = this._menuButton;
         const label = menuButtonWidget.getPanelLabel();
 
-        const customTextLabel = ArcMenuManager.settings.get_string('custom-menu-button-text');
+        const customTextLabel = ArcMenuManager.settings.get_string('menu-button-text');
         label.set_text(customTextLabel);
     }
 
     _setButtonIcon() {
         const {menuButtonWidget} = this._menuButton;
-        const stIcon = menuButtonWidget.getPanelIcon();
-        stIcon.gicon = this._getButtonIcon();
+        const paneIcon = menuButtonWidget.getPanelIcon();
+        paneIcon.gicon = this._getButtonIcon();
     }
 
     _getButtonIcon() {
-        const customIconPath = ArcMenuManager.settings.get_string('custom-menu-button-icon');
-        const menuIconType = ArcMenuManager.settings.get_enum('menu-button-icon');
-
-        switch (menuIconType) {
-        case Constants.MenuIconType.CUSTOM: {
-            if (customIconPath)
-                return Gio.Icon.new_for_string(customIconPath);
-            else
-                return Gio.Icon.new_for_string('start-here-symbolic');
-        }
-        case Constants.MenuIconType.DISTRO_ICON: {
-            const iconEnum = ArcMenuManager.settings.get_int('distro-icon');
-            const iconName = Constants.DistroIcons[iconEnum].IMAGE;
-            const uri = `${Constants.RESOURCE_PATH}${iconName}.svg`;
-            return Gio.Icon.new_for_string(uri);
-        }
-        case Constants.MenuIconType.MENU_ICON: {
-            const iconEnum = ArcMenuManager.settings.get_int('arc-menu-icon');
-            const iconName = Constants.MenuIcons[iconEnum].IMAGE;
-            if (iconName === 'view-app-grid-symbolic') {
-                return Gio.Icon.new_for_string('view-app-grid-symbolic');
-            } else {
-                const uri = `${Constants.RESOURCE_PATH}${iconName}.svg`;
-                return Gio.Icon.new_for_string(uri);
-            }
-        }
-        default:
+        const iconPath = ArcMenuManager.settings.get_string('menu-button-icon');
+        if (iconPath)
+            return Gio.Icon.new_for_string(iconPath);
+        else
             return Gio.Icon.new_for_string('start-here-symbolic');
-        }
     }
 
     _setButtonIconSize() {
+        const iconSize = ArcMenuManager.settings.get_int('menu-button-icon-size');
+
         const {menuButtonWidget} = this._menuButton;
-        const stIcon = menuButtonWidget.getPanelIcon();
-        const iconSize = ArcMenuManager.settings.get_double('custom-menu-button-icon-size');
-        const size = iconSize;
-        stIcon.icon_size = size;
+        const paneIcon = menuButtonWidget.getPanelIcon();
+        paneIcon.icon_size = iconSize;
     }
 
     _setButtonIconPadding() {
-        const padding = ArcMenuManager.settings.get_int('button-padding');
+        const padding = ArcMenuManager.settings.get_int('menu-button-padding');
         if (padding > -1)
             this._menuButton.style = `-natural-hpadding: ${padding  * 2}px; -minimum-hpadding: ${padding}px;`;
         else

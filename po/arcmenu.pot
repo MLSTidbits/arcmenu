@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-16 08:05-0500\n"
+"POT-Creation-Date: 2025-11-22 12:03-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,187 +71,187 @@ msgid "Recent Files"
 msgstr ""
 
 #: src/constants.js:273 src/menuButton.js:841
-#: src/settings/menuSettings/listPinnedPage.js:398
+#: src/settings/menuSettings/listPinnedPage.js:399
 msgid "Log Out..."
 msgstr ""
 
 #: src/constants.js:274 src/menuButton.js:840
-#: src/settings/menuSettings/listPinnedPage.js:397
+#: src/settings/menuSettings/listPinnedPage.js:398
 msgid "Lock"
 msgstr ""
 
 #: src/constants.js:275 src/menuButton.js:835
-#: src/settings/menuSettings/listPinnedPage.js:400
+#: src/settings/menuSettings/listPinnedPage.js:401
 msgid "Restart..."
 msgstr ""
 
 #: src/constants.js:276 src/menuButton.js:836
-#: src/settings/menuSettings/listPinnedPage.js:399
+#: src/settings/menuSettings/listPinnedPage.js:400
 msgid "Power Off..."
 msgstr ""
 
 #: src/constants.js:277 src/menuButton.js:832
-#: src/settings/menuSettings/listPinnedPage.js:401
+#: src/settings/menuSettings/listPinnedPage.js:402
 msgid "Suspend"
 msgstr ""
 
-#: src/constants.js:278 src/settings/menuSettings/listPinnedPage.js:402
+#: src/constants.js:278 src/settings/menuSettings/listPinnedPage.js:403
 msgid "Hybrid Sleep"
 msgstr ""
 
-#: src/constants.js:279 src/settings/menuSettings/listPinnedPage.js:404
+#: src/constants.js:279 src/settings/menuSettings/listPinnedPage.js:405
 msgid "Hibernate"
 msgstr ""
 
 #: src/constants.js:280 src/menuButton.js:842
-#: src/settings/menuSettings/listPinnedPage.js:405
+#: src/settings/menuSettings/listPinnedPage.js:406
 msgid "Switch User"
 msgstr ""
 
-#: src/constants.js:426 src/settings/aboutPage.js:33
+#: src/constants.js:312 src/settings/aboutPage.js:33
 #: src/settings/donatePage.js:17 src/settings/generalPage.js:623
 #: src/settings/menuButtonPage.js:211
 msgid "ArcMenu"
 msgstr ""
 
-#: src/constants.js:431
+#: src/constants.js:317
 msgid "Brisk"
 msgstr ""
 
-#: src/constants.js:436
+#: src/constants.js:322
 msgid "Whisker"
 msgstr ""
 
-#: src/constants.js:441
+#: src/constants.js:327
 msgid "GNOME Menu"
 msgstr ""
 
-#: src/constants.js:446
+#: src/constants.js:332
 msgid "Mint"
 msgstr ""
 
-#: src/constants.js:451
+#: src/constants.js:337
 msgid "Budgie"
 msgstr ""
 
-#: src/constants.js:459
+#: src/constants.js:345
 msgid "Unity"
 msgstr ""
 
-#: src/constants.js:464
+#: src/constants.js:350
 msgid "Plasma"
 msgstr ""
 
-#: src/constants.js:469
+#: src/constants.js:355
 msgid "tognee"
 msgstr ""
 
-#: src/constants.js:474
+#: src/constants.js:360
 msgid "Insider"
 msgstr ""
 
-#: src/constants.js:479
+#: src/constants.js:365
 msgid "Redmond"
 msgstr ""
 
-#: src/constants.js:484
+#: src/constants.js:370
 msgid "Windows"
 msgstr ""
 
-#: src/constants.js:489
+#: src/constants.js:375
 msgid "11"
 msgstr ""
 
-#: src/constants.js:494
+#: src/constants.js:380
 msgid "a.z."
 msgstr ""
 
-#: src/constants.js:499
+#: src/constants.js:385
 msgid "Enterprise"
 msgstr ""
 
-#: src/constants.js:504
+#: src/constants.js:390
 msgid "Pop"
 msgstr ""
 
-#: src/constants.js:509
+#: src/constants.js:395
 msgid "Sleek"
 msgstr ""
 
-#: src/constants.js:514
+#: src/constants.js:400
 msgid "Zest"
 msgstr ""
 
-#: src/constants.js:522
+#: src/constants.js:408
 msgid "Elementary"
 msgstr ""
 
-#: src/constants.js:527
+#: src/constants.js:413
 msgid "Chromebook"
 msgstr ""
 
-#: src/constants.js:535
+#: src/constants.js:421
 msgid "Runner"
 msgstr ""
 
-#: src/constants.js:540
+#: src/constants.js:426
 msgid "GNOME Overview"
 msgstr ""
 
-#: src/constants.js:548
+#: src/constants.js:434
 msgid "Raven"
 msgstr ""
 
-#: src/constants.js:556
+#: src/constants.js:442
 msgid "Traditional"
 msgstr ""
 
-#: src/constants.js:561
+#: src/constants.js:447
 msgid "Modern"
 msgstr ""
 
-#: src/constants.js:566
+#: src/constants.js:452
 msgid "Touch"
 msgstr ""
 
-#: src/constants.js:571
+#: src/constants.js:457
 msgid "Launcher"
 msgstr ""
 
-#: src/constants.js:576
+#: src/constants.js:462
 msgid "Alternative"
 msgstr ""
 
-#: src/constants.js:583
+#: src/constants.js:469
 msgid "Settings"
 msgstr ""
 
-#: src/constants.js:583
+#: src/constants.js:469
 msgid "Software"
 msgstr ""
 
-#: src/constants.js:583
+#: src/constants.js:469
 msgid "Terminal"
 msgstr ""
 
-#: src/constants.js:583
+#: src/constants.js:469
 msgid "Tweaks"
 msgstr ""
 
-#: src/constants.js:584 src/menuButton.js:785 src/menuWidgets.js:573
-#: src/settings/menuSettings/listPinnedPage.js:365
-#: src/settings/menuSettings/listPinnedPage.js:387
+#: src/constants.js:470 src/menuButton.js:785 src/menuWidgets.js:573
+#: src/settings/menuSettings/listPinnedPage.js:366
+#: src/settings/menuSettings/listPinnedPage.js:388
 msgid "Activities Overview"
 msgstr ""
 
-#: src/constants.js:584 src/menuButton.js:771
-#: src/settings/menuSettings/listPinnedPage.js:351
-#: src/settings/menuSettings/listPinnedPage.js:362
-#: src/settings/menuSettings/listPinnedPage.js:374
+#: src/constants.js:470 src/menuButton.js:771
+#: src/settings/menuSettings/listPinnedPage.js:352
+#: src/settings/menuSettings/listPinnedPage.js:363
+#: src/settings/menuSettings/listPinnedPage.js:375
 msgid "ArcMenu Settings"
 msgstr ""
 
-#: src/constants.js:584
+#: src/constants.js:470
 msgid "Files"
 msgstr ""
 
@@ -264,7 +264,7 @@ msgstr ""
 msgid "Loading Menu Layout..."
 msgstr ""
 
-#: src/menuButton.js:816 src/settings/menuSettings/listPinnedPage.js:390
+#: src/menuButton.js:816 src/settings/menuSettings/listPinnedPage.js:391
 msgid "Show Desktop"
 msgstr ""
 
@@ -285,6 +285,7 @@ msgid "Session"
 msgstr ""
 
 #: src/menuWidgets.js:928 src/menulayouts/plasma.js:332
+#: src/settings/iconChooserDialog.js:192
 msgid "System"
 msgstr ""
 
@@ -338,7 +339,7 @@ msgid "More Recent Files..."
 msgstr ""
 
 #: src/menulayouts/plasma.js:132 src/placeDisplay.js:133
-#: src/placeDisplay.js:156 src/settings/menuSettings/listPinnedPage.js:421
+#: src/placeDisplay.js:156 src/settings/menuSettings/listPinnedPage.js:422
 msgid "Computer"
 msgstr ""
 
@@ -366,7 +367,7 @@ msgid "Devices"
 msgstr ""
 
 #: src/menulayouts/plasma.js:300 src/menulayouts/windows.js:212
-#: src/settings/menuSettings/listPinnedPage.js:422
+#: src/settings/menuSettings/listPinnedPage.js:423
 msgid "Network"
 msgstr ""
 
@@ -405,15 +406,16 @@ msgstr ""
 msgid "Rename %s folder"
 msgstr ""
 
-#: src/menulayouts/pop.js:894 src/settings/aboutPage.js:404
-#: src/settings/generalPage.js:300 src/settings/menuButtonPage.js:532
-#: src/settings/menuSettings/listPinnedPage.js:626
+#: src/menulayouts/pop.js:894 src/prefsWidgets.js:94
+#: src/settings/aboutPage.js:404 src/settings/generalPage.js:300
+#: src/settings/iconChooserDialog.js:269
 #: src/settings/menuSettings/themingDialog.js:269
 msgid "Cancel"
 msgstr ""
 
-#: src/menulayouts/pop.js:902 src/settings/generalPage.js:286
-#: src/settings/menuSettings/listPinnedPage.js:663
+#: src/menulayouts/pop.js:902 src/prefsWidgets.js:82
+#: src/settings/generalPage.js:286
+#: src/settings/menuSettings/listPinnedPage.js:583
 #: src/settings/menuSettings/visualSettings.js:372
 msgid "Apply"
 msgstr ""
@@ -459,7 +461,7 @@ msgstr ""
 #: src/placeDisplay.js:119 src/placeDisplay.js:340
 #: src/settings/menuSettings/layoutTweaksPage.js:631
 #: src/settings/menuSettings/layoutTweaksPage.js:658
-#: src/settings/menuSettings/listPinnedPage.js:413 src/utils.js:289
+#: src/settings/menuSettings/listPinnedPage.js:414 src/utils.js:304
 msgid "Home"
 msgstr ""
 
@@ -468,19 +470,19 @@ msgstr ""
 msgid "Ejecting drive “%s” failed:"
 msgstr ""
 
-#: src/prefsWidgets.js:293
+#: src/prefsWidgets.js:352
 msgid "Modify"
 msgstr ""
 
-#: src/prefsWidgets.js:308
+#: src/prefsWidgets.js:367
 msgid "Move Up"
 msgstr ""
 
-#: src/prefsWidgets.js:315
+#: src/prefsWidgets.js:374
 msgid "Move Down"
 msgstr ""
 
-#: src/prefsWidgets.js:322
+#: src/prefsWidgets.js:381
 msgid "Remove"
 msgstr ""
 
@@ -515,7 +517,7 @@ msgstr ""
 msgid "Failed to open “%s”"
 msgstr ""
 
-#: src/settings/aboutPage.js:28 src/settings/menuSettings/listPinnedPage.js:384
+#: src/settings/aboutPage.js:28 src/settings/menuSettings/listPinnedPage.js:385
 msgid "About"
 msgstr ""
 
@@ -589,9 +591,7 @@ msgstr ""
 msgid "Load Settings"
 msgstr ""
 
-#: src/settings/aboutPage.js:214
-#: src/settings/menuSettings/listPinnedPage.js:627
-#: src/settings/menuSettings/themingDialog.js:77
+#: src/settings/aboutPage.js:214 src/settings/menuSettings/themingDialog.js:77
 msgid "Open"
 msgstr ""
 
@@ -713,7 +713,7 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: src/settings/generalPage.js:65 src/settings/menuButtonPage.js:126
+#: src/settings/generalPage.js:65 src/settings/menuButtonPage.js:123
 msgid "Position in Panel"
 msgstr ""
 
@@ -802,67 +802,117 @@ msgstr ""
 msgid "Standlone Runner"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:18
+#: src/settings/iconChooserDialog.js:43 src/settings/iconChooserDialog.js:270
+msgid "Select"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:43 src/settings/iconChooserDialog.js:264
+msgid "Select an Icon"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:57
+msgid "Search icons…"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:101
+msgid "Browse Files..."
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:183 src/settings/iconChooserDialog.js:189
+msgid "All"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:184
+#: src/settings/menuSettings/fineTunePage.js:84
+msgid "Symbolic"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:185
+#: src/settings/menuSettings/fineTunePage.js:83
+msgid "Full Color"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:186
+msgid "Type"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:190
+msgid "Extension"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:191
+msgid "Distros"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:193
+msgid "Category"
+msgstr ""
+
+#: src/settings/iconChooserDialog.js:207
+msgid "Filter"
+msgstr ""
+
+#: src/settings/menuButtonPage.js:16
 msgid "Menu Button"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:29 src/settings/menuSettings/subPage.js:44
+#: src/settings/menuButtonPage.js:26 src/settings/menuSettings/subPage.js:44
 msgid "Reset settings"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:37 src/settings/menuSettings/subPage.js:49
+#: src/settings/menuButtonPage.js:34 src/settings/menuSettings/subPage.js:49
 #, javascript-format
 msgid "Reset all %s settings?"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:38 src/settings/menuSettings/subPage.js:50
+#: src/settings/menuButtonPage.js:35 src/settings/menuSettings/subPage.js:50
 #, javascript-format
 msgid "All %s settings will be reset to the default value."
 msgstr ""
 
-#: src/settings/menuButtonPage.js:54
+#: src/settings/menuButtonPage.js:51
 msgid "Appearance"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:59 src/settings/menuButtonPage.js:156
-#: src/settings/menuSettings/listPinnedPage.js:602
+#: src/settings/menuButtonPage.js:56 src/settings/menuButtonPage.js:153
+#: src/settings/menuSettings/listPinnedPage.js:601
 msgid "Icon"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:60 src/settings/menuButtonPage.js:143
+#: src/settings/menuButtonPage.js:57 src/settings/menuButtonPage.js:140
 msgid "Text"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:61
+#: src/settings/menuButtonPage.js:58
 msgid "Icon and Text"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:62
+#: src/settings/menuButtonPage.js:59
 msgid "Text and Icon"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:63
+#: src/settings/menuButtonPage.js:60
 #: src/settings/menuSettings/visualSettings.js:286
 msgid "Hidden"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:65
+#: src/settings/menuButtonPage.js:62
 #: src/settings/menuSettings/listOtherPage.js:38
 msgid "Display Style"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:102
+#: src/settings/menuButtonPage.js:99
 msgid "Padding"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:103
+#: src/settings/menuButtonPage.js:100
 #: src/settings/menuSettings/layoutTweaksPage.js:603
 #, javascript-format
 msgid "%d Default Theme Value"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:159
-#: src/settings/menuSettings/listPinnedPage.js:615
+#: src/settings/menuButtonPage.js:156
+#: src/settings/menuSettings/listPinnedPage.js:608
 msgid "Browse..."
 msgstr ""
 
@@ -954,60 +1004,6 @@ msgstr ""
 msgid "Border Color"
 msgstr ""
 
-#: src/settings/menuButtonPage.js:424
-msgid "Menu Button Icons"
-msgstr ""
-
-#: src/settings/menuButtonPage.js:428
-msgid "Icons"
-msgstr ""
-
-#: src/settings/menuButtonPage.js:448
-msgid "Distros"
-msgstr ""
-
-#: src/settings/menuButtonPage.js:454
-msgid "Legal Disclaimer"
-msgstr ""
-
-#: src/settings/menuButtonPage.js:486
-#: src/settings/menuSettings/visualSettings.js:191
-msgid "Custom"
-msgstr ""
-
-#: src/settings/menuButtonPage.js:520
-msgid "Browse Files..."
-msgstr ""
-
-#: src/settings/menuButtonPage.js:525
-msgid "Select an Image File"
-msgstr ""
-
-#: src/settings/menuButtonPage.js:533 src/settings/menuButtonPage.js:715
-msgid "Select"
-msgstr ""
-
-#: src/settings/menuButtonPage.js:552
-msgid "Browse Icons..."
-msgstr ""
-
-#: src/settings/menuButtonPage.js:617
-#: src/settings/menuSettings/listPinnedPage.js:621
-msgid "Select an Icon"
-msgstr ""
-
-#: src/settings/menuButtonPage.js:622
-msgid "System Icons"
-msgstr ""
-
-#: src/settings/menuButtonPage.js:626
-msgid "Search..."
-msgstr ""
-
-#: src/settings/menuButtonPage.js:735
-msgid "Legal Disclaimer for Distro Icons"
-msgstr ""
-
 #: src/settings/menuPage.js:24
 msgid "Menu"
 msgstr ""
@@ -1071,7 +1067,7 @@ msgstr ""
 msgid "Search Options"
 msgstr ""
 
-#: src/settings/menuPage.js:144 src/settings/menuSettings/listPinnedPage.js:389
+#: src/settings/menuPage.js:144 src/settings/menuSettings/listPinnedPage.js:390
 msgid "Power Options"
 msgstr ""
 
@@ -1161,14 +1157,6 @@ msgstr ""
 
 #: src/settings/menuSettings/fineTunePage.js:78
 msgid "Icon Style"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:83
-msgid "Full Color"
-msgstr ""
-
-#: src/settings/menuSettings/fineTunePage.js:84
-msgid "Symbolic"
 msgstr ""
 
 #: src/settings/menuSettings/fineTunePage.js:86
@@ -1391,15 +1379,15 @@ msgstr ""
 msgid "Enable Clock Widget"
 msgstr ""
 
-#: src/settings/menuSettings/layoutsPage.js:24
+#: src/settings/menuSettings/layoutsPage.js:23
 msgid "Current Menu Layout"
 msgstr ""
 
-#: src/settings/menuSettings/layoutsPage.js:38
+#: src/settings/menuSettings/layoutsPage.js:37
 msgid "Choose a new menu layout?"
 msgstr ""
 
-#: src/settings/menuSettings/layoutsPage.js:44
+#: src/settings/menuSettings/layoutsPage.js:43
 #, javascript-format
 msgid "%s Menu Layouts"
 msgstr ""
@@ -1427,153 +1415,157 @@ msgstr ""
 msgid "Override Display Style"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:77
-#: src/settings/menuSettings/listPinnedPage.js:80
-#: src/settings/menuSettings/listPinnedPage.js:86
-#: src/settings/menuSettings/listPinnedPage.js:91
+#: src/settings/menuSettings/listPinnedPage.js:78
+#: src/settings/menuSettings/listPinnedPage.js:81
+#: src/settings/menuSettings/listPinnedPage.js:87
+#: src/settings/menuSettings/listPinnedPage.js:92
 msgid "Add More Apps"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:83
+#: src/settings/menuSettings/listPinnedPage.js:84
 msgid "Add Default User Directories"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:89
+#: src/settings/menuSettings/listPinnedPage.js:90
 msgid "Add More Shortcuts"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:155
+#: src/settings/menuSettings/listPinnedPage.js:156
 msgid "Add Custom Shortcut"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:245
+#: src/settings/menuSettings/listPinnedPage.js:246
 msgid "Invalid Shortcut"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:337
+#: src/settings/menuSettings/listPinnedPage.js:338
 msgid "Add to your Pinned Apps"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:339
+#: src/settings/menuSettings/listPinnedPage.js:340
 msgid "Add to your Extra Shortcuts"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:341
+#: src/settings/menuSettings/listPinnedPage.js:342
 msgid "Select Application Shortcuts"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:343
+#: src/settings/menuSettings/listPinnedPage.js:344
 msgid "Select Directory Shortcuts"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:345
+#: src/settings/menuSettings/listPinnedPage.js:346
 msgid "Add to the Context Menu"
-msgstr ""
-
-#: src/settings/menuSettings/listPinnedPage.js:357
-#: src/settings/menuSettings/listPinnedPage.js:368
-#: src/settings/menuSettings/listPinnedPage.js:391
-#: src/settings/menuSettings/listPinnedPage.js:396
-msgid "Separator"
 msgstr ""
 
 #: src/settings/menuSettings/listPinnedPage.js:358
 #: src/settings/menuSettings/listPinnedPage.js:369
+#: src/settings/menuSettings/listPinnedPage.js:392
+#: src/settings/menuSettings/listPinnedPage.js:397
+msgid "Separator"
+msgstr ""
+
+#: src/settings/menuSettings/listPinnedPage.js:359
+#: src/settings/menuSettings/listPinnedPage.js:370
 msgid "Spacer"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:364
+#: src/settings/menuSettings/listPinnedPage.js:365
 msgid "Run Command..."
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:367
+#: src/settings/menuSettings/listPinnedPage.js:368
 msgid "Show All Apps"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:376
+#: src/settings/menuSettings/listPinnedPage.js:377
 msgid "Menu Settings"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:378
+#: src/settings/menuSettings/listPinnedPage.js:379
 msgid "Menu Theming"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:380
+#: src/settings/menuSettings/listPinnedPage.js:381
 msgid "Change Menu Layout"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:382
+#: src/settings/menuSettings/listPinnedPage.js:383
 msgid "Menu Button Settings"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:385
+#: src/settings/menuSettings/listPinnedPage.js:386
 msgid "Panel Extension Settings"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:414
+#: src/settings/menuSettings/listPinnedPage.js:415
 msgid "Documents"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:416
+#: src/settings/menuSettings/listPinnedPage.js:417
 msgid "Downloads"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:418
+#: src/settings/menuSettings/listPinnedPage.js:419
 msgid "Music"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:419
+#: src/settings/menuSettings/listPinnedPage.js:420
 msgid "Pictures"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:420
+#: src/settings/menuSettings/listPinnedPage.js:421
 msgid "Videos"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:423
+#: src/settings/menuSettings/listPinnedPage.js:424
 msgid "Recent"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:450
+#: src/settings/menuSettings/listPinnedPage.js:451
 msgid "Dash to Panel or App Icons Taskbar"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:531
+#: src/settings/menuSettings/listPinnedPage.js:532
 #, javascript-format
 msgid "%s has been added"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:542
+#: src/settings/menuSettings/listPinnedPage.js:543
 #, javascript-format
 msgid "%s has been removed"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:566
+#: src/settings/menuSettings/listPinnedPage.js:567
 msgid "Add a Custom Shortcut"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:576
+#: src/settings/menuSettings/listPinnedPage.js:577
 msgid "Edit Pinned App"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:578
+#: src/settings/menuSettings/listPinnedPage.js:579
 msgid "Edit Shortcut"
+msgstr ""
+
+#: src/settings/menuSettings/listPinnedPage.js:583
+msgid "Add"
 msgstr ""
 
 #: src/settings/menuSettings/listPinnedPage.js:590
 msgid "Title"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:650
+#: src/settings/menuSettings/listPinnedPage.js:618
+msgid "Clear Icon"
+msgstr ""
+
+#: src/settings/menuSettings/listPinnedPage.js:635
 msgid "Command"
 msgstr ""
 
-#: src/settings/menuSettings/listPinnedPage.js:650
+#: src/settings/menuSettings/listPinnedPage.js:635
 msgid "Directory"
-msgstr ""
-
-#: src/settings/menuSettings/listPinnedPage.js:663
-msgid "Add"
 msgstr ""
 
 #: src/settings/menuSettings/searchOptionsPage.js:27
@@ -1785,6 +1777,10 @@ msgstr ""
 #: src/settings/menuSettings/visualSettings.js:189
 #: src/settings/menuSettings/visualSettings.js:190
 msgid "Wide"
+msgstr ""
+
+#: src/settings/menuSettings/visualSettings.js:191
+msgid "Custom"
 msgstr ""
 
 #: src/settings/menuSettings/visualSettings.js:193
