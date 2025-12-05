@@ -645,6 +645,9 @@ class ArcMenuMenuButton extends PanelMenu.Button {
     }
 
     _panelChildHasGrab() {
+        if (this._panelBox.appIconsTaskbar?.menuManager?.activeMenu)
+            return true;
+
         const grabActor = global.stage.get_grab_actor();
         if (!grabActor)
             return false;
