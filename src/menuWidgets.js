@@ -282,7 +282,7 @@ export class BaseMenuItem extends St.BoxLayout {
     _onPressed() {
         if (this._clickAction.pressed)
             this.add_style_pseudo_class('active');
-        else
+        else if (!this.isActiveCategory)
             this.remove_style_pseudo_class('active');
     }
 
@@ -1576,6 +1576,9 @@ export class DraggableMenuItem extends BaseMenuItem {
 
     _onDragMotion(dragEvent) {
         const parent = this.get_parent();
+        if (!parent)
+            return DND.DragMotionResult.NO_DROP;
+
         const layoutManager = parent.layout_manager;
 
         const [success, x, y] = parent.transform_stage_point(dragEvent.x, dragEvent.y);
@@ -1696,7 +1699,8 @@ export class DraggableMenuItem extends BaseMenuItem {
             this._dragMonitor = null;
         }
 
-        if (!this.movedToFolder)
+        // Pop Layout - if drag drop was accepted, this item will be destroyed
+        if (!this.dragDropAccepted)
             this.undoScaleAndFade();
     }
 
