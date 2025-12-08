@@ -620,6 +620,20 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         frequentAppsRow.add_suffix(frequentAppsSwitch);
         tweaksGroup.add(frequentAppsRow);
 
+        const searchbarLocations = new Gtk.StringList();
+        searchbarLocations.append(_('Bottom'));
+        searchbarLocations.append(_('Top'));
+
+        const searchbarLocationRow = new Adw.ComboRow({
+            title: _('Searchbar Location'),
+            model: searchbarLocations,
+            selected: this._settings.get_enum('runner-searchbar-location'),
+        });
+
+        searchbarLocationRow.connect('notify::selected', widget => {
+            this._settings.set_enum('runner-searchbar-location', widget.selected);
+        });
+        tweaksGroup.add(searchbarLocationRow);
         this.add(tweaksGroup);
     }
 

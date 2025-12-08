@@ -458,6 +458,10 @@
       <default>0</default>
       <summary>Runner layout - font size</summary>
     </key>
+    <key enum="org.gnome.shell.extensions.arcmenu.searchbar-location" name="runner-searchbar-location">
+      <default>'Top'</default>
+      <summary>Searchbar location for runner layout</summary>
+    </key>
     <key type="b" name="eleven-show-frequent-apps">
       <default>true</default>
       <summary>Eleven Layout - show frequent apps</summary>
