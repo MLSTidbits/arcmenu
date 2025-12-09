@@ -508,6 +508,7 @@ class ArcMenuLayoutTweaksPage extends SubPage {
 
     _loadRunnerMenuTweaks() {
         const tweaksGroup = new Adw.PreferencesGroup();
+        this.add(tweaksGroup);
         const runnerPositions = new Gtk.StringList();
         runnerPositions.append(_('Top'));
         runnerPositions.append(_('Centered'));
@@ -536,6 +537,24 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         });
         tweaksGroup.add(runnerSearchStyleRow);
 
+        const searchbarLocations = new Gtk.StringList();
+        searchbarLocations.append(_('Bottom'));
+        searchbarLocations.append(_('Top'));
+
+        const searchbarLocationRow = new Adw.ComboRow({
+            title: _('Searchbar Location'),
+            model: searchbarLocations,
+            selected: this._settings.get_enum('runner-searchbar-location'),
+        });
+
+        searchbarLocationRow.connect('notify::selected', widget => {
+            this._settings.set_enum('runner-searchbar-location', widget.selected);
+        });
+        tweaksGroup.add(searchbarLocationRow);
+
+        const sizeGroup = new Adw.PreferencesGroup();
+        this.add(sizeGroup);
+
         const runnerWidthScale = new Gtk.SpinButton({
             orientation: Gtk.Orientation.HORIZONTAL,
             adjustment: new Gtk.Adjustment({
@@ -557,7 +576,7 @@ class ArcMenuLayoutTweaksPage extends SubPage {
             activatable_widget: runnerWidthScale,
         });
         runnerWidthRow.add_suffix(runnerWidthScale);
-        tweaksGroup.add(runnerWidthRow);
+        sizeGroup.add(runnerWidthRow);
 
         const runnerHeightScale = new Gtk.SpinButton({
             orientation: Gtk.Orientation.HORIZONTAL,
@@ -580,13 +599,13 @@ class ArcMenuLayoutTweaksPage extends SubPage {
             activatable_widget: runnerHeightScale,
         });
         runnerHeightRow.add_suffix(runnerHeightScale);
-        tweaksGroup.add(runnerHeightRow);
+        sizeGroup.add(runnerHeightRow);
 
         const staticHeightSwitch = new PW.SwitchRow(this._settings, {
             setting_name: 'runner-menu-height-static',
             title: _('Static Height'),
         });
-        tweaksGroup.add(staticHeightSwitch);
+        sizeGroup.add(staticHeightSwitch);
 
         const runnerFontSizeScale = new Gtk.SpinButton({
             orientation: Gtk.Orientation.HORIZONTAL,
@@ -610,7 +629,10 @@ class ArcMenuLayoutTweaksPage extends SubPage {
             activatable_widget: runnerFontSizeScale,
         });
         runnerFontSizeRow.add_suffix(runnerFontSizeScale);
-        tweaksGroup.add(runnerFontSizeRow);
+        sizeGroup.add(runnerFontSizeRow);
+
+        const miscGroup = new Adw.PreferencesGroup();
+        this.add(miscGroup);
 
         const frequentAppsSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
@@ -624,29 +646,13 @@ class ArcMenuLayoutTweaksPage extends SubPage {
             activatable_widget: frequentAppsSwitch,
         });
         frequentAppsRow.add_suffix(frequentAppsSwitch);
-        tweaksGroup.add(frequentAppsRow);
-
-        const searchbarLocations = new Gtk.StringList();
-        searchbarLocations.append(_('Bottom'));
-        searchbarLocations.append(_('Top'));
-
-        const searchbarLocationRow = new Adw.ComboRow({
-            title: _('Searchbar Location'),
-            model: searchbarLocations,
-            selected: this._settings.get_enum('runner-searchbar-location'),
-        });
-
-        searchbarLocationRow.connect('notify::selected', widget => {
-            this._settings.set_enum('runner-searchbar-location', widget.selected);
-        });
-        tweaksGroup.add(searchbarLocationRow);
+        miscGroup.add(frequentAppsRow);
 
         const showSettingsSwitch = new PW.SwitchRow(this._settings, {
             setting_name: 'runner-show-settings-button',
             title: _('Show Configure Runner Button'),
         });
-        tweaksGroup.add(showSettingsSwitch);
-        this.add(tweaksGroup);
+        miscGroup.add(showSettingsSwitch);
     }
 
     _loadUnityTweaks() {
