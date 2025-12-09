@@ -1,4 +1,5 @@
 import Clutter from 'gi://Clutter';
+import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
@@ -87,6 +88,7 @@ export class Layout extends BaseMenuLayout {
         });
         this.topBox.add_child(this.searchEntry);
         this.topBox.add_child(this.runnerTweaksButton);
+        ArcMenuManager.settings.bind('runner-show-settings-button', this.runnerTweaksButton, 'visible', Gio.SettingsBindFlags.DEFAULT);
 
         this.applicationsScrollBox = this._createScrollView({
             x_expand: true,

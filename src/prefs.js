@@ -102,7 +102,7 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
 
         window.pages = [];
 
-        const generalPage = new GeneralPage(settings);
+        const generalPage = new GeneralPage(settings, window);
         window.add(generalPage);
         window.pages.push(generalPage);
 

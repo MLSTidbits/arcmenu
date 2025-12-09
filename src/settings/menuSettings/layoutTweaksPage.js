@@ -634,6 +634,12 @@ class ArcMenuLayoutTweaksPage extends SubPage {
             this._settings.set_enum('runner-searchbar-location', widget.selected);
         });
         tweaksGroup.add(searchbarLocationRow);
+
+        const showSettingsSwitch = new PW.SwitchRow(this._settings, {
+            setting_name: 'runner-show-settings-button',
+            title: _('Show Configure Runner Button'),
+        });
+        tweaksGroup.add(showSettingsSwitch);
         this.add(tweaksGroup);
     }
 

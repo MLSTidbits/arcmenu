@@ -6,6 +6,7 @@ import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 
 import * as Constants from '../constants.js';
+import {LayoutTweaksPage} from './menuSettings/layoutTweaksPage.js';
 
 import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
@@ -27,13 +28,14 @@ const forbiddenKeyvals = [
 
 export const GeneralPage = GObject.registerClass(
 class ArcMenuGeneralPage extends Adw.PreferencesPage {
-    _init(settings) {
+    _init(settings, window) {
         super._init({
             title: _('General'),
             icon_name: 'go-home-symbolic',
             name: 'GeneralPage',
         });
         this._settings = settings;
+        this._window = window;
 
         const menuDisplayGroup = new Adw.PreferencesGroup({
             title: _('Panel Display Options'),
@@ -185,13 +187,15 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
         const hotkeySetting = isMenuHotkey ? 'arcmenu-hotkey' : 'runner-hotkey';
         const accelerator = this._settings.get_strv(hotkeySetting);
         const hotkeyString = this.acceleratorToLabel(accelerator);
-        const hotkeyLabel = new Gtk.Label({
-            label: hotkeyString,
-            css_classes: ['dim-label'],
-        });
+
         const customHotkeyRow = new Adw.ActionRow({
             title: _(title),
             activatable: true,
+        });
+
+        const hotkeyLabel = new Gtk.Label({
+            label: hotkeyString,
+            css_classes: ['dim-label'],
         });
         customHotkeyRow.add_suffix(hotkeyLabel);
 
@@ -218,6 +222,22 @@ class ArcMenuGeneralPage extends Adw.PreferencesPage {
             margin_start: 12,
         });
         customHotkeyRow.add_suffix(editButton);
+
+        if (!isMenuHotkey) {
+            const configureButton = new Gtk.Button({
+                icon_name: 'applications-system-symbolic',
+                valign: Gtk.Align.CENTER,
+            });
+            configureButton.connect('clicked', () => {
+                const runnerTweaksPage = new LayoutTweaksPage(this._settings, {
+                    title: _('%s Layout Tweaks').format(_('Runner')),
+                });
+                this._window.push_subpage(runnerTweaksPage);
+                runnerTweaksPage.setActiveLayout(Constants.MenuLayout.RUNNER);
+                runnerTweaksPage.resetScrollAdjustment();
+            });
+            customHotkeyRow.add_prefix(configureButton);
+        }
 
         return customHotkeyRow;
     }

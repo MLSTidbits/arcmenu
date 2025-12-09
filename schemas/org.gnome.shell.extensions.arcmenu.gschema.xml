@@ -442,6 +442,10 @@
       <default>true</default>
       <summary>Plasma Menu Hover to activate item</summary>
     </key>
+    <key type="b" name="runner-show-settings-button">
+      <default>true</default>
+      <summary>Runner layout - show settings button</summary>
+    </key>
     <key type="b" name="runner-show-frequent-apps">
       <default>false</default>
       <summary>Runner layout - show frequent apps</summary>
