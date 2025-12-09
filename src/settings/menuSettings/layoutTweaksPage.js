@@ -582,6 +582,12 @@ class ArcMenuLayoutTweaksPage extends SubPage {
         runnerHeightRow.add_suffix(runnerHeightScale);
         tweaksGroup.add(runnerHeightRow);
 
+        const staticHeightSwitch = new PW.SwitchRow(this._settings, {
+            setting_name: 'runner-menu-height-static',
+            title: _('Static Height'),
+        });
+        tweaksGroup.add(staticHeightSwitch);
+
         const runnerFontSizeScale = new Gtk.SpinButton({
             orientation: Gtk.Orientation.HORIZONTAL,
             adjustment: new Gtk.Adjustment({

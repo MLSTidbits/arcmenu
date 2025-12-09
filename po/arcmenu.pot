@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ArcMenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-09 07:38-0500\n"
+"POT-Creation-Date: 2025-12-09 11:19-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,10 +41,10 @@ msgstr ""
 msgid "Favorites"
 msgstr ""
 
-#: src/constants.js:99 src/menulayouts/runner.js:148
+#: src/constants.js:99 src/menulayouts/runner.js:158
 #: src/menulayouts/windows.js:340
 #: src/settings/menuSettings/layoutTweaksPage.js:338
-#: src/settings/menuSettings/layoutTweaksPage.js:900
+#: src/settings/menuSettings/layoutTweaksPage.js:906
 msgid "Frequent Apps"
 msgstr ""
 
@@ -59,8 +59,8 @@ msgstr ""
 #: src/constants.js:101 src/menulayouts/insider.js:290
 #: src/settings/menuPage.js:101
 #: src/settings/menuSettings/layoutTweaksPage.js:337
-#: src/settings/menuSettings/layoutTweaksPage.js:786
-#: src/settings/menuSettings/layoutTweaksPage.js:898
+#: src/settings/menuSettings/layoutTweaksPage.js:792
+#: src/settings/menuSettings/layoutTweaksPage.js:904
 msgid "Pinned Apps"
 msgstr ""
 
@@ -357,8 +357,8 @@ msgid "Places"
 msgstr ""
 
 #: src/menulayouts/plasma.js:296 src/menulayouts/windows.js:208
-#: src/settings/menuSettings/layoutTweaksPage.js:833
-#: src/settings/menuSettings/layoutTweaksPage.js:987
+#: src/settings/menuSettings/layoutTweaksPage.js:839
+#: src/settings/menuSettings/layoutTweaksPage.js:993
 msgid "Bookmarks"
 msgstr ""
 
@@ -421,12 +421,12 @@ msgstr ""
 
 #: src/menulayouts/raven.js:62 src/menulayouts/raven.js:239
 #: src/menulayouts/unity.js:41 src/menulayouts/unity.js:276
-#: src/settings/menuSettings/layoutTweaksPage.js:652
-#: src/settings/menuSettings/layoutTweaksPage.js:679
-#: src/settings/menuSettings/layoutTweaksPage.js:785
-#: src/settings/menuSettings/layoutTweaksPage.js:876
-#: src/settings/menuSettings/layoutTweaksPage.js:901
-#: src/settings/menuSettings/layoutTweaksPage.js:941
+#: src/settings/menuSettings/layoutTweaksPage.js:658
+#: src/settings/menuSettings/layoutTweaksPage.js:685
+#: src/settings/menuSettings/layoutTweaksPage.js:791
+#: src/settings/menuSettings/layoutTweaksPage.js:882
+#: src/settings/menuSettings/layoutTweaksPage.js:907
+#: src/settings/menuSettings/layoutTweaksPage.js:947
 msgid "All Programs"
 msgstr ""
 
@@ -435,7 +435,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: src/menulayouts/runner.js:254
+#: src/menulayouts/runner.js:265
 msgid "Configure Runner"
 msgstr ""
 
@@ -458,9 +458,9 @@ msgid "Failed to mount volume for “%s”"
 msgstr ""
 
 #: src/placeDisplay.js:119 src/placeDisplay.js:340
-#: src/settings/menuSettings/layoutTweaksPage.js:651
-#: src/settings/menuSettings/layoutTweaksPage.js:678
-#: src/settings/menuSettings/listPinnedPage.js:414 src/utils.js:304
+#: src/settings/menuSettings/layoutTweaksPage.js:657
+#: src/settings/menuSettings/layoutTweaksPage.js:684
+#: src/settings/menuSettings/listPinnedPage.js:414 src/utils.js:307
 msgid "Home"
 msgstr ""
 
@@ -699,7 +699,7 @@ msgid "Dash to Panel may conflict with this setting"
 msgstr ""
 
 #: src/settings/generalPage.js:63 src/settings/generalPage.js:89
-#: src/settings/menuSettings/layoutTweaksPage.js:706
+#: src/settings/menuSettings/layoutTweaksPage.js:712
 msgid "Left"
 msgstr ""
 
@@ -708,7 +708,7 @@ msgid "Center"
 msgstr ""
 
 #: src/settings/generalPage.js:65 src/settings/generalPage.js:91
-#: src/settings/menuSettings/layoutTweaksPage.js:707
+#: src/settings/menuSettings/layoutTweaksPage.js:713
 msgid "Right"
 msgstr ""
 
@@ -911,7 +911,7 @@ msgid "Padding"
 msgstr ""
 
 #: src/settings/menuButtonPage.js:100
-#: src/settings/menuSettings/layoutTweaksPage.js:603
+#: src/settings/menuSettings/layoutTweaksPage.js:609
 #, javascript-format
 msgid "%d Default Theme Value"
 msgstr ""
@@ -1185,8 +1185,8 @@ msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:116
 #: src/settings/menuSettings/layoutTweaksPage.js:121
-#: src/settings/menuSettings/layoutTweaksPage.js:807
-#: src/settings/menuSettings/layoutTweaksPage.js:962
+#: src/settings/menuSettings/layoutTweaksPage.js:813
+#: src/settings/menuSettings/layoutTweaksPage.js:968
 msgid "Extra Shortcuts"
 msgstr ""
 
@@ -1222,20 +1222,20 @@ msgid "Avatar Icon Shape"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:196
-#: src/settings/menuSettings/layoutTweaksPage.js:624
-#: src/settings/menuSettings/layoutTweaksPage.js:1008
+#: src/settings/menuSettings/layoutTweaksPage.js:630
+#: src/settings/menuSettings/layoutTweaksPage.js:1014
 msgid "Bottom"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:197
 #: src/settings/menuSettings/layoutTweaksPage.js:512
-#: src/settings/menuSettings/layoutTweaksPage.js:625
-#: src/settings/menuSettings/layoutTweaksPage.js:1009
+#: src/settings/menuSettings/layoutTweaksPage.js:631
+#: src/settings/menuSettings/layoutTweaksPage.js:1015
 msgid "Top"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:200
-#: src/settings/menuSettings/layoutTweaksPage.js:628
+#: src/settings/menuSettings/layoutTweaksPage.js:634
 msgid "Searchbar Location"
 msgstr ""
 
@@ -1249,17 +1249,17 @@ msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:277
 #: src/settings/menuSettings/layoutTweaksPage.js:341
-#: src/settings/menuSettings/layoutTweaksPage.js:654
-#: src/settings/menuSettings/layoutTweaksPage.js:681
-#: src/settings/menuSettings/layoutTweaksPage.js:789
-#: src/settings/menuSettings/layoutTweaksPage.js:878
-#: src/settings/menuSettings/layoutTweaksPage.js:904
+#: src/settings/menuSettings/layoutTweaksPage.js:660
+#: src/settings/menuSettings/layoutTweaksPage.js:687
+#: src/settings/menuSettings/layoutTweaksPage.js:795
+#: src/settings/menuSettings/layoutTweaksPage.js:884
+#: src/settings/menuSettings/layoutTweaksPage.js:910
 msgid "Default View"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:304
 #: src/settings/menuSettings/layoutTweaksPage.js:410
-#: src/settings/menuSettings/layoutTweaksPage.js:617
+#: src/settings/menuSettings/layoutTweaksPage.js:623
 msgid "Show Frequent Apps"
 msgstr ""
 
@@ -1268,7 +1268,7 @@ msgid "Merge Top and Bottom Panels"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:368
-#: src/settings/menuSettings/layoutTweaksPage.js:931
+#: src/settings/menuSettings/layoutTweaksPage.js:937
 msgid "Max Frequent Apps"
 msgstr ""
 
@@ -1297,17 +1297,17 @@ msgid "Position"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:526
-#: src/settings/menuSettings/layoutTweaksPage.js:692
+#: src/settings/menuSettings/layoutTweaksPage.js:698
 msgid "List"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:527
-#: src/settings/menuSettings/layoutTweaksPage.js:693
+#: src/settings/menuSettings/layoutTweaksPage.js:699
 msgid "Grid"
 msgstr ""
 
 #: src/settings/menuSettings/layoutTweaksPage.js:529
-#: src/settings/menuSettings/layoutTweaksPage.js:695
+#: src/settings/menuSettings/layoutTweaksPage.js:701
 msgid "Search Results Display Style"
 msgstr ""
 
@@ -1322,66 +1322,70 @@ msgstr ""
 msgid "Height"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:602
+#: src/settings/menuSettings/layoutTweaksPage.js:587
+msgid "Static Height"
+msgstr ""
+
+#: src/settings/menuSettings/layoutTweaksPage.js:608
 #: src/settings/menuSettings/themePage.js:197
 msgid "Font Size"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:640
+#: src/settings/menuSettings/layoutTweaksPage.js:646
 msgid "Show Configure Runner Button"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:709
+#: src/settings/menuSettings/layoutTweaksPage.js:715
 msgid "Position on Monitor"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:771
-#: src/settings/menuSettings/layoutTweaksPage.js:1048
+#: src/settings/menuSettings/layoutTweaksPage.js:777
+#: src/settings/menuSettings/layoutTweaksPage.js:1054
 msgid "Extra Shortcuts Panel Width"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:819
-#: src/settings/menuSettings/layoutTweaksPage.js:973
+#: src/settings/menuSettings/layoutTweaksPage.js:825
+#: src/settings/menuSettings/layoutTweaksPage.js:979
 msgid "External Devices"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:865
+#: src/settings/menuSettings/layoutTweaksPage.js:871
 msgid "Nothing Yet!"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:875
-#: src/settings/menuSettings/layoutTweaksPage.js:899
-#: src/settings/menuSettings/layoutTweaksPage.js:940
+#: src/settings/menuSettings/layoutTweaksPage.js:881
+#: src/settings/menuSettings/layoutTweaksPage.js:905
+#: src/settings/menuSettings/layoutTweaksPage.js:946
 msgid "Categories List"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:902
+#: src/settings/menuSettings/layoutTweaksPage.js:908
 msgid "Pinned and Frequent Apps"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:944
+#: src/settings/menuSettings/layoutTweaksPage.js:950
 msgid "'All Apps' Button Action"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:995
+#: src/settings/menuSettings/layoutTweaksPage.js:1001
 msgid "Category Quick Links"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:996
+#: src/settings/menuSettings/layoutTweaksPage.js:1002
 msgid ""
 "Display quick links of extra categories on the home page\n"
 "Must also be enabled in 'Menu -> Extra Categories' section"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:1011
+#: src/settings/menuSettings/layoutTweaksPage.js:1017
 msgid "Quick Links Location"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:1079
+#: src/settings/menuSettings/layoutTweaksPage.js:1085
 msgid "Enable Weather Widget"
 msgstr ""
 
-#: src/settings/menuSettings/layoutTweaksPage.js:1093
+#: src/settings/menuSettings/layoutTweaksPage.js:1099
 msgid "Enable Clock Widget"
 msgstr ""
 

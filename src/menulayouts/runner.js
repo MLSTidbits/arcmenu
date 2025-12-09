@@ -75,7 +75,8 @@ export class Layout extends BaseMenuLayout {
 
         this.topBox = new St.BoxLayout({
             x_expand: true,
-            y_expand: true,
+            y_expand: false,
+            y_align: Clutter.ActorAlign.START,
             ...getOrientationProp(false),
             style: `spacing: ${Spacing}px;`,
         });
@@ -92,7 +93,7 @@ export class Layout extends BaseMenuLayout {
 
         this.applicationsScrollBox = this._createScrollView({
             x_expand: true,
-            y_expand: false,
+            y_expand: true,
             y_align: Clutter.ActorAlign.START,
             x_align: Clutter.ActorAlign.FILL,
             style_class: this._disableFadeEffect ? '' : 'small-vfade',
@@ -105,6 +106,7 @@ export class Layout extends BaseMenuLayout {
         this._addChildToParent(this.applicationsScrollBox, this.applicationsBox);
 
         ArcMenuManager.settings.connectObject('changed::runner-searchbar-location', () => this._setSearchbarLocation(), this);
+        ArcMenuManager.settings.connectObject('changed::runner-menu-height-static', () => this.updateLocation(), this);
         this._setSearchbarLocation();
 
         this.setDefaultMenuView();
@@ -118,9 +120,17 @@ export class Layout extends BaseMenuLayout {
         if (searchbarLocation === Constants.SearchbarLocation.TOP) {
             this.add_child(this.topBox);
             this.add_child(this.applicationsScrollBox);
+            this.topBox.set({
+                y_align: Clutter.ActorAlign.START,
+                y_expand: false,
+            });
         } else if (searchbarLocation === Constants.SearchbarLocation.BOTTOM) {
             this.add_child(this.applicationsScrollBox);
             this.add_child(this.topBox);
+            this.topBox.set({
+                y_align: Clutter.ActorAlign.END,
+                y_expand: true,
+            });
         }
     }
 
@@ -199,6 +209,7 @@ export class Layout extends BaseMenuLayout {
         this.arcMenu._boxPointer.setSourceAlignment(0.5);
         this.arcMenu._arrowAlignment = 0.5;
 
+        const staticHeight = ArcMenuManager.settings.get_boolean('runner-menu-height-static');
         const runnerHeight = ArcMenuManager.settings.get_int('runner-menu-height');
         const runnerWidth = ArcMenuManager.settings.get_int('runner-menu-width');
         const runnerFontSize = ArcMenuManager.settings.get_int('runner-font-size');
@@ -214,8 +225,8 @@ export class Layout extends BaseMenuLayout {
 
         if (!this.topBox)
             return;
-
-        this.style = `max-height: ${runnerHeight}px; padding: ${Spacing}px; spacing: ${Spacing}px; width: ${runnerWidth}px;`;
+        const height = staticHeight ? 'height' : 'max-height';
+        this.style = `${height}: ${runnerHeight}px; padding: ${Spacing}px; spacing: ${Spacing}px; width: ${runnerWidth}px;`;
         if (runnerFontSize > 0) {
             this.style += `font-size: ${runnerFontSize}pt;`;
             this.searchEntry.style += `font-size: ${runnerFontSize}pt;`;
