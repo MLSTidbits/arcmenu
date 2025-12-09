@@ -21,12 +21,16 @@ export const MenuController = class {
         this.isPrimaryPanel = panelInfo.isPrimaryPanel;
         this._debouncer = new Utils.Debouncer();
 
-        // Allow other extensions and DBus command to open/close ArcMenu
+        // Allow other extensions and DBus command to open/close ArcMenu and Standalone Runner
         if (!global.toggleArcMenu && this.isPrimaryPanel) {
             global.toggleArcMenu = () => this._toggleArcMenu();
             this._service = new Utils.DBusService();
             this._service.ToggleArcMenu = () => {
                 this._toggleArcMenu();
+            };
+            this._service.ToggleStandaloneRunner = () => {
+                if (this._runnerMenu)
+                    this._toggleRunnerMenu();
             };
         }
 

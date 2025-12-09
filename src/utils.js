@@ -20,6 +20,7 @@ const [ShellVersion] = Config.PACKAGE_VERSION.split('.').map(s => Number(s));
 const InterfaceXml = `<node>
   <interface name="com.Extensions.ArcMenu">
     <method name="ToggleArcMenu"/>
+    <method name="ToggleStandaloneRunner"/>
   </interface>
 </node>`;
 
@@ -27,6 +28,7 @@ export const DBusService = class {
     constructor() {
         this._exported = false;
         this.ToggleArcMenu = () => {};
+        this.ToggleStandaloneRunner = () => {};
 
         this._dbusExportedObject = Gio.DBusExportedObject.wrapJSObject(InterfaceXml, this);
 
@@ -59,6 +61,7 @@ export const DBusService = class {
         this._dbusExportedObject = null;
         this._exported = null;
         this.ToggleArcMenu = null;
+        this.ToggleStandaloneRunner  = null;
     }
 };
 
