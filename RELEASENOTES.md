@@ -4,6 +4,7 @@
 - Add option to enable/disable overlay scrollbars.
 - Add option to hide GNOME Overview when ArcMenu opens.
 - Add more distro icons.
+- Add DBus method ToggleStandaloneRunner to open/close the standalone runner.
 - App Context Menu
     - Fix desktop shortcut menu item visibility bug.
 - Pop layout
@@ -13,6 +14,7 @@
 - Runner layout
     - Add option to change search bar location.
     - Add option to toggle Configure Runner button.
+    - Add option to toggle Static Height mode.
     - Improve spacing/padding consistency.
 - Settings
     - Reorganize Fine Tune page in settings.
