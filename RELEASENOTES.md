@@ -3,8 +3,19 @@
 - Add option to show/hide scrollbars.
 - Add option to enable/disable overlay scrollbars.
 - Add option to hide GNOME Overview when ArcMenu opens.
-- App Context Menu: fix desktop shortcut menu item visibility bug.
-- Settings: Reorganize Fine Tune page in settings.
-- Settings: Implement new Icon Chooser dialog for Menu Button and Pinned Apps.
 - Add more distro icons.
+- App Context Menu
+    - Fix desktop shortcut menu item visibility bug.
+- Pop layout
+    - Make Library Home folder hide automatically when empty
+    - Fix active style pseudo class not persisting on folder items
+    - Fix bugs when dragging to the Home folder, existing folders, or the New Folder
+- Runner layout
+    - Add option to change search bar location.
+    - Add option to toggle Configure Runner button.
+    - Improve spacing/padding consistency.
+- Settings
+    - Reorganize Fine Tune page in settings.
+    - Implement new Icon Chooser dialog for Menu Button and Pinned Apps.
+    - Add Configure Runner button next to Standalone Runner section.
 - Use GResource file to bundle all custom icons.
