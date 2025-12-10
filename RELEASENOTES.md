@@ -21,3 +21,4 @@
     - Implement new Icon Chooser dialog for Menu Button and Pinned Apps.
     - Add Configure Runner button next to Standalone Runner section.
 - Use GResource file to bundle all custom icons.
+- Fix bug causing scrollbars to jump back to the previously selected menu item.
