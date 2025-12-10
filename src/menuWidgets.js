@@ -403,9 +403,12 @@ export class BaseMenuItem extends St.BoxLayout {
         super.vfunc_key_focus_in();
         this.active = true;
 
-        // Ensure the new activeMenuItem is visible in scroll view
-        if (!this.hover)
-            Utils.ensureActorVisibleInScrollView(this);
+        const event = Clutter.get_current_event();
+        if (event?.type() !== Clutter.EventType.KEY_PRESS)
+            return;
+
+        // Ensure the item is visible in scroll view when using keyboard navigation
+        Utils.ensureActorVisibleInScrollView(this);
     }
 
     vfunc_key_focus_out() {
