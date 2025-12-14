@@ -44,7 +44,7 @@ define CLEAN_UP
 @echo "Done."
 endef
 
-all: extension
+all: _build
 
 clean:
 	$(CLEAN_UP)
@@ -144,7 +144,7 @@ zip-file: _build
 	@echo "Done."
 	$(CLEAN_UP)
 
-_build: all
+_build: extension
 	@echo "Building extension..."
 	@-rm -fR ./_build
 	@mkdir -p _build
