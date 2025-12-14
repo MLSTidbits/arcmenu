@@ -34,7 +34,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
         const PROJECT_DESCRIPTION = _('Application Menu Extension for GNOME');
         const PROJECT_IMAGE = 'settings-arcmenu-logo';
         const SCHEMA_PATH = '/org/gnome/shell/extensions/arcmenu/';
-        const VERSION = metadata['version-name'] ? metadata['version-name'] : metadata.version.toString();
+        const VERSION = GLib.file_get_contents(`/usr/share/doc/arcmenu/version`)[1].toString().trim();
 
         // Project Logo, title, description-------------------------------------
         const projectHeaderGroup = new Adw.PreferencesGroup();
@@ -95,7 +95,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
 
         let releaseNotes = '';
         try {
-            const fileContent = GLib.file_get_contents(`${path}/RELEASENOTES.md`)[1];
+            const fileContent = GLib.file_get_contents(`/usr/share/doc/arcmenu/RELEASENOTES.md`)[1];
             const decoder = new TextDecoder('utf-8');
             releaseNotes = decoder.decode(fileContent);
             releaseNotes = releaseNotes.replace(/^(?:(\t| {4}))?- /gm,
@@ -188,10 +188,10 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
 
         // Links -----------------------------------------------------------------
         /* TRANSLATORS: 'PROJECT_NAME' on GitLab*/
-        const gitlabRow = this._createLinkRow(_('%s on GitLab').format(PROJECT_NAME), `${metadata.url}`);
+        const gitlabRow = this._createLinkRow(_('%s on GitHub').format(PROJECT_NAME), `${metadata.url}`);
         infoGroup.add(gitlabRow);
 
-        const reportIssueRow = this._createLinkRow(_('Report an Issue'), `${metadata.url}/-/issues`);
+        const reportIssueRow = this._createLinkRow(_('Report an Issue'), `${metadata.url}/issues`);
         infoGroup.add(reportIssueRow);
         // -----------------------------------------------------------------------
 

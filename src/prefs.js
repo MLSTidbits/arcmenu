@@ -31,7 +31,7 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
         this._startTime = Date.now();
         this._systemIconsPromise = null;
         this._cachedSystemIcons = null;
-        const resourcePath = '/org/gnome/shell/extensions/arcmenu/icons';
+        const resourcePath = '/usr/share/icons/hicolor/scalable';
         const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
         if (!iconTheme.get_resource_path().includes(resourcePath))
             iconTheme.add_resource_path(resourcePath);
@@ -180,7 +180,7 @@ export default class ArcMenuPrefs extends ExtensionPreferences {
             const distroIcons = [];
             const extensionIcons = [];
 
-            const myResourcePath = '/org/gnome/shell/extensions/arcmenu/icons';
+            const myResourcePath = '/usr/share/icons/hicolor';
             const bundledIconsPath = `${myResourcePath}/scalable/actions`;
 
             try {
