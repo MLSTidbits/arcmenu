@@ -1,0 +1,26 @@
+Source: arcmenu
+Section: gnome
+Priority: optional
+Maintainer: Michael Schaecher <michaelschaecher@mlstidbits.com>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://github.com/MLSTidbits/arcmenu
+#Vcs-Browser: https://salsa.debian.org/debian/arcmenu
+Vcs-Git: https://gitlab.com/arcmenu/ArcMenu
+
+Package: arcmenu
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ gnome-shell, gnome-shell-extensions, gnome-desktop
+Suggests:
+ gnome-tweaks, gnome-extensions-manager
+Description: ArcMenu - A customizable application menu for GNOME Shell
+ ArcMenu is a highly customizable application menu extension for GNOME Shell.
+ .
+ It provides a traditional application menu layout, similar to the classic
+ "Start Menu" found in other desktop environments, while integrating seamlessly
+ with the GNOME Shell interface.
+ .
