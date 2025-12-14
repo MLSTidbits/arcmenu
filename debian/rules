@@ -23,8 +23,10 @@
 %:
 	dh $@
 
+override_dh_auto_build:
+	dh_auto_build -- _build
+
 build: build-stamp
-	make -j$(nproc) _build
 
 build-stamp:
 	dh_auto_build

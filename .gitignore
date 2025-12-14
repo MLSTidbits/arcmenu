@@ -16,8 +16,8 @@ debian/files
 debian/*.ex
 debian/*.debhelper
 debian/*.substvars
-debian/ddnsd/
+debian/arcmenu/
 
 doc/version
-man/ddnsd.1
-man/ddnsd.conf.5
+man/arcmenu.1
+man/arcmenu.conf.5
