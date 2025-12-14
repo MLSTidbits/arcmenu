@@ -1,0 +1,14 @@
+_build/locale/* usr/share/locale/
+
+_build/*.js usr/share/gnome-shell/extensions/arcmenu@arcmenu.com/
+_build/metadata.json usr/share/gnome-shell/extensions/arcmenu@arcmenu.com/
+
+_build/data usr/share/gnome-shell/extensions/arcmenu@arcmenu.com/
+_build/stylesheet.css usr/share/gnome-shell/extensions/arcmenu@arcmenu.com/
+_build/menulayouts usr/share/gnome-shell/extensions/arcmenu@arcmenu.com/
+_build/searchProviders usr/share/gnome-shell/extensions/arcmenu@arcmenu.com/
+_build/settings usr/share/gnome-shell/extensions/arcmenu@arcmenu.com/
+
+_build/schemas/*.xml usr/share/glib-2.0/schemas/
+
+data/icons/* usr/share/icons/hicolor/

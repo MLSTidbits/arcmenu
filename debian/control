@@ -14,7 +14,7 @@ Package: arcmenu
 Architecture: any
 Multi-Arch: foreign
 Depends:
- gnome-shell, gnome-shell-extensions, gnome-desktop
+ gnome-shell (>= 45)
 Suggests:
  gnome-tweaks, gnome-extensions-manager
 Description: ArcMenu - A customizable application menu for GNOME Shell
