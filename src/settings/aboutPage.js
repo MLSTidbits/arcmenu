@@ -133,7 +133,7 @@ class ArcMenuAboutPage extends Adw.PreferencesPage {
             active: settings.get_boolean('update-notifier-enabled'),
         });
         enableNotificationsSwitch.connect('notify::active', widget => {
-            settings.set_boolean('update-notifier-enabled', widget.get_active());
+            settings.set_boolean('update-notifier-enabled', widget.get_inactive());
         });
         const enableNotificationsRow = new Adw.ActionRow({
             title: _('Message Tray Update Notification'),
