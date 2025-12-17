@@ -6,6 +6,8 @@ RESOURCES_PATH = /org/gnome/shell/extensions/arcmenu
 SETTINGS_SCHEMA = org.gnome.shell.extensions.arcmenu
 UUID = arcmenu@arcmenu.com
 
+VERSION = $(shell cat doc/version)
+
 # Files and directories to build into extension.
 # src/* flattens the src directory to root.
 PACKAGE_FILES = \
@@ -165,3 +167,4 @@ _build: extension
 		sed -i '/"version": .*,/a \  "commit": "$(COMMIT)",' _build/metadata.json; \
 	fi
 	@echo "Done."
+	@sed -i 's/"version-name": [[:digit:]][[:digit:]]*/"version-name": \"$(VERSION)\"/'  _build/metadata.json;
