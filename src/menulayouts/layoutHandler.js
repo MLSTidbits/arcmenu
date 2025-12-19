@@ -58,7 +58,7 @@ export function createMenuLayout(menuButton, layoutEnum, isStandaloneRunner) {
         [MenuLayout.ZEST]: ZestLayout,
     };
 
-    const LayoutClass = layoutMap[layoutEnum] || ArcMenuLayout; // Default to ArcMenu if layout isn't found
+    const LayoutClass = layoutMap[layoutEnum] || EnterpriseLayout; // Default to EnterpriseLayout if layout isn't found
 
     try {
         return new LayoutClass(menuButton, isStandaloneRunner);

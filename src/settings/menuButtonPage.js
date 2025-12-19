@@ -14,7 +14,7 @@ class ArcMenuMenuButtonPage extends Adw.PreferencesPage {
     _init(settings) {
         super._init({
             title: _('Menu Button'),
-            icon_name: 'icon-arcmenu-logo-symbolic',
+            icon_name: 'distro-gnome-symbolic',
             name: 'MenuButtonPage',
         });
         this._settings = settings;
